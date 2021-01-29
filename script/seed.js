@@ -1,21 +1,15 @@
 'use strict'
 
 const db = require('../server/db')
-const boardSeed = require('./boardSeed')
+const boardSeed = require('./seed-data/board-seed')
 const {User, Board} = require('../server/db/models')
+//need to add below to index.js
+const {boards} = require('../script/seed-data')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const boards = await Promise.all(
-    boardSeed.map(board => {
-      Board.create({
-        name: board.name,
-        type: board.type
-      })
-    })
-  )
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
@@ -25,13 +19,14 @@ async function seed() {
   console.log(`seeded successfully`)
 }
 
+const seedBoards = require('./seed-data/board-seed')
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
-    await seed()
+    await seedBoards()
   } catch (err) {
     console.error(err)
     process.exitCode = 1

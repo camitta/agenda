@@ -1,3 +1,5 @@
+const {Board} = require('../../server/db/models')
+
 const boardData = [
   {
     name: 'Zathin',
@@ -197,4 +199,14 @@ const boardData = [
   }
 ]
 
-module.exports = boardData
+const seedBoards = async () => {
+  await Promise.all(
+    boardData.map(board => {
+      Board.create({
+        name: board.name,
+        type: board.type
+      })
+    })
+  )
+}
+module.exports = seedBoards
