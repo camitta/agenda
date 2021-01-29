@@ -19,7 +19,7 @@ const Task = require('./Task')
  */
 module.exports = {
   User,
-  Board
+  Board,
   ChecklistItem,
   Mantra,
   Task
