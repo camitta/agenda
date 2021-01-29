@@ -11,6 +11,18 @@ const Task = require('./Task')
  *    BlogPost.belongsTo(User)
  */
 
+User.belongsToMany(Board, {through: 'userBoard'})
+Board.belongsToMany(User, {through: 'userBoard'})
+
+User.hasMany(ChecklistItem)
+ChecklistItem.belongsTo(User)
+
+Board.hasMany(Task)
+Task.belongsTo(Board)
+
+User.belongsToMany(Task, {through: 'userTask'})
+Task.belongsToMany(User, {through: 'userTask'})
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
