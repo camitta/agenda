@@ -1,12 +1,21 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const boardSeed = require('./boardSeed')
+const {User, Board} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  const boards = await Promise.all(
+    boardSeed.map(board => {
+      Board.create({
+        name: board.name,
+        type: board.type
+      })
+    })
+  )
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
