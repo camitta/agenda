@@ -26,7 +26,8 @@ async function seed() {
 }
 
 const seedTasks = require('./taskSeed')
-
+const seedChecklistItems = require('./seed-data/checklist-item-seed')
+const seedMantra = require('./seed-data/mantra-seed')
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
@@ -36,6 +37,8 @@ async function runSeed() {
   console.log('seeding...')
   try {
     await seedTasks()
+    await seedChecklistItems()
+    await seedMantra()
   } catch (err) {
     console.error(err)
     process.exitCode = 1
