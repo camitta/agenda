@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {seedUsers, seedTasks, seedBoards} = require('../script/seed-data')
+const {
+  seedUsers,
+  seedTasks,
+  seedBoards,
+  seedChecklistItems,
+  seedMantra
+} = require('../script/seed-data')
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
@@ -13,6 +19,8 @@ async function runSeed() {
     await seedUsers()
     await seedBoards()
     await seedTasks()
+    await seedChecklistItems()
+    await seedMantra()
   } catch (err) {
     console.error(err)
     process.exitCode = 1
