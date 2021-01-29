@@ -27,6 +27,11 @@ const User = db.define('user', {
       notEmpty: true
     }
   },
+  image: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
+  },
   password: {
     type: Sequelize.STRING,
     validate: {
