@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
+
 const {User} = require('../server/db/models')
 const {users} = require('../script/seed-data')
 
@@ -24,13 +25,17 @@ async function seed() {
   console.log(`seeded successfully`)
 }
 
+const seedTasks = require('./taskSeed')
+
+
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
 async function runSeed() {
+  await db.sync({force: true})
   console.log('seeding...')
   try {
-    await seed()
+    await seedTasks()
   } catch (err) {
     console.error(err)
     process.exitCode = 1
@@ -49,4 +54,4 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+// module.exports = seed
