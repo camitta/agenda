@@ -5,5 +5,3 @@ module.exports = router
 //GET /boards
 
 //GET /boards/:boardId
-
-module.exports = router
