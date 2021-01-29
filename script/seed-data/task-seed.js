@@ -1,4 +1,4 @@
-const {Task} = require('../server/db/models')
+const {Task} = require('../../server/db/models')
 const txtgen = require('txtgen')
 
 const personVerb = [

@@ -25,8 +25,7 @@ async function seed() {
   console.log(`seeded successfully`)
 }
 
-const seedTasks = require('./taskSeed')
-
+const seedTasks = require('./seed-data/task-seed')
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
