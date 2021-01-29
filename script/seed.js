@@ -1,6 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
+
 const {User, Board} = require('../server/db/models')
 //need to add below to index.js
 const {boards} = require('../script/seed-data')
@@ -28,6 +29,7 @@ async function seed() {
 }
 
 
+const {seedUsers} = require('../script/seed-data')
 const seedBoards = require('./seed-data/board-seed')
 const seedTasks = require('./seed-data/task-seed')
 
@@ -38,7 +40,11 @@ async function runSeed() {
   await db.sync({force: true})
   console.log('seeding...')
   try {
+
+    await seedUsers()
+
     await seedBoards()
+
     await seedTasks()
 
   } catch (err) {

@@ -1,5 +1,5 @@
-const users = require('./user-seeds')
+const seedUsers = require('./user-seed')
 
 module.exports = {
-  users
+  seedUsers
 }
