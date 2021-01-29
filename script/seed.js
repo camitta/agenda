@@ -1,37 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-
-const {User, Board} = require('../server/db/models')
-//need to add below to index.js
-const {boards} = require('../script/seed-data')
-const {users} = require('../script/seed-data')
-
-
-async function seed() {
-  await db.sync({force: true})
-  console.log('db synced!')
-
-  const user = await Promise.all([
-    User.create({
-      email: 'cody@email.com',
-      firstName: 'Cody',
-      lastName: 'the Pug',
-      password: '123456'
-    })
-  ])
-
-  const randomUsers = await User.bulkCreate(users)
-
-  console.log(`seeded ${user.length} users`)
-  console.log(`seeded ${randomUsers.length} random users`)
-  console.log(`seeded successfully`)
-}
-
-
-const {seedUsers} = require('../script/seed-data')
-const seedBoards = require('./seed-data/board-seed')
-const seedTasks = require('./seed-data/task-seed')
+const {seedUsers, seedTasks, seedBoards} = require('../script/seed-data')
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
@@ -40,13 +10,9 @@ async function runSeed() {
   await db.sync({force: true})
   console.log('seeding...')
   try {
-
     await seedUsers()
-
     await seedBoards()
-
     await seedTasks()
-
   } catch (err) {
     console.error(err)
     process.exitCode = 1
