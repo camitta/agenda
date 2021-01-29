@@ -3,10 +3,13 @@
 const db = require('../server/db')
 const {seedUsers} = require('../script/seed-data')
 
+
 // async function seed() {
 //   await db.sync({force: true})
 //   console.log('db synced!')
 // }
+
+const seedTasks = require('./seed-data/task-seed')
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
@@ -16,6 +19,7 @@ async function runSeed() {
   console.log('seeding...')
   try {
     await seedUsers()
+    await seedTasks()
   } catch (err) {
     console.error(err)
     process.exitCode = 1
