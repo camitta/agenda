@@ -1,8 +1,8 @@
 const User = require('./user')
+const Board = require('./board')
 const ChecklistItem = require('./checklistItem')
 const Mantra = require('./mantra')
 const Task = require('./Task')
-
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -19,6 +19,7 @@ const Task = require('./Task')
  */
 module.exports = {
   User,
+  Board
   ChecklistItem,
   Mantra,
   Task
