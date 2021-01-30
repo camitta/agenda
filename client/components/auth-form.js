@@ -6,17 +6,18 @@ import {login, signup} from '../store'
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
-  const inputColumn = columnNames => {
-    return columnNames.map(columnName => {
+  const inputColumn = arrOfColumns => {
+    return arrOfColumns.map(columnName => {
       let nameType = columnName.replace(/\s+/g, '')
       nameType = nameType[0].toLowerCase() + nameType.slice(1)
+      const type = nameType === 'password' ? 'password' : 'text'
 
       return (
-        <div key={columnName}>
+        <div key={nameType}>
           <label htmlFor={nameType}>
             <small>{columnName}</small>
           </label>
-          <input name={nameType} type="text" />
+          <input name={nameType} type={type} />
         </div>
       )
     })
