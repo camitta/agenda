@@ -1,18 +1,22 @@
 const router = require('express').Router()
-const {Board, User} = require('./db/models')
+const {Board, User, Task} = require('../db/models')
 module.exports = router
 
 //GET /boards
+//board has tasks
+//user has tasks
+//get user tasks that have the board id
 
 //GET api/boards/:boardId
 router.get('/:boardId', async (req, res, next) => {
+  console.log('!!!!!!!!', req.params)
   try {
     if (req.user) {
-      const board = await Board.findOne({
+      const user = await User.findByPk(req.params.userId)
+      const tasks = await Task.findAll({
         where: {
-          userId: req.user.id
-        },
-        include: {model: Task}
+          taskId: req.params.userId
+        }
       })
       if (board) {
         const task = await Task.findAll({
@@ -20,7 +24,7 @@ router.get('/:boardId', async (req, res, next) => {
             boardId: board.id
           }
         })
-        res.json(task)
+        res.json(tasks)
       }
     } else if (!req.user) {
       res.send(401)
