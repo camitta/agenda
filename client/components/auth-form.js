@@ -1,29 +1,47 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {login, signup} from '../store'
 
-/**
- * COMPONENT
- */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+
+  const inputColumn = arrOfColumns => {
+    return arrOfColumns.map(columnName => {
+      let nameType = columnName.replace(/\s+/g, '')
+      nameType = nameType[0].toLowerCase() + nameType.slice(1)
+      const type = nameType === 'password' ? 'password' : 'text'
+
+      return (
+        <div key={nameType}>
+          <label htmlFor={nameType}>
+            <small>{columnName}</small>
+          </label>
+          <input name={nameType} type={type} />
+        </div>
+      )
+    })
+  }
+
+  if (name === 'login') {
+    return (
+      <div>
+        <form onSubmit={handleSubmit} name={name}>
+          {inputColumn(['Email', 'Password'])}
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+        <a href="/auth/google">{displayName} with Google</a>
+      </div>
+    )
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
+        {inputColumn(['First Name', 'Last Name', 'Email', 'Password'])}
         <div>
           <button type="submit">{displayName}</button>
         </div>
@@ -61,10 +79,14 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      if (evt.target.name === 'signup') {
+        const firstName = evt.target.firstName.value
+        const lastName = evt.target.lastName.value
+        dispatch(signup(email, password, firstName, lastName))
+      }
+      dispatch(login(email, password))
     }
   }
 }
