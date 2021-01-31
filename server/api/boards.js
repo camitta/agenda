@@ -6,12 +6,25 @@ const {Board, User} = require('../db/models')
 //GET api/boards/:boardId
 router.get('/:boardId', async (req, res, next) => {
   try {
-    if (req.user) {
-      const board = await Board.findByPk(req.params.boardId)
-      res.json(board)
-    } else if (!req.user) {
-      res.send(401)
-    }
+    const userId = req.user.id
+    const {boardId} = req.params
+    const board = await Board.findOne({
+      where: {
+        id: boardId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          }
+        }
+      ]
+    })
+    res.send(board)
   } catch (err) {
     next(err)
   }
@@ -21,17 +34,12 @@ router.get('/:boardId', async (req, res, next) => {
 // api/boards/
 router.post('/', async (req, res, next) => {
   try {
-    const currentUser = await User.findOne({
-      where: {
-        id: req.user.id
-      }
-    })
-    const newBoard = await Board.create({
-      name: req.body.name,
-      type: req.body.type
-    })
-    await newBoard.setUser(currentUser)
-    res.json(newBoard)
+    const {name, type} = req.body
+    const userId = req.user.id
+    const currentUser = await User.findByPk(userId)
+    const newBoard = await Board.create({name, type})
+    await newBoard.addUser(currentUser)
+    res.send(newBoard)
   } catch (err) {
     next(err)
   }
@@ -41,9 +49,30 @@ router.post('/', async (req, res, next) => {
 // api/boards/edit/:boardId
 router.put('/edit/:boardId', async (req, res, next) => {
   try {
-    const currentBoard = await Board.findByPk(req.params.boardId)
-    await currentBoard.update(req.body)
-    res.send(204).end()
+    const userId = req.user.id
+    const {boardId} = req.params
+    const updated = await Board.update(req.body, {
+      returning: true,
+      where: {
+        id: boardId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          }
+        }
+      ]
+    })
+    if (updated.length !== 2) {
+      return res.sendStatus(404)
+    }
+    const [numUpdated, [updatedBoard]] = updated
+    res.send(updatedBoard)
   } catch (err) {
     next(err)
   }
@@ -53,12 +82,26 @@ router.put('/edit/:boardId', async (req, res, next) => {
 // api/boards/delete/:boardId
 router.delete('/delete/:boardId', async (req, res, next) => {
   try {
+    const userId = req.user.id
+    const {boardId} = req.params
+    console.log('boardId: ', req.params.boardId)
     await Board.destroy({
       where: {
-        id: req.params.boardId
-      }
+        id: boardId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          }
+        }
+      ]
     })
-    res.send(204).end()
+    res.status(204).end()
   } catch (err) {
     next(err)
   }
