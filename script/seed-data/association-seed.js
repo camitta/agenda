@@ -51,7 +51,9 @@ const seedAssociations = async () => {
     const callingMom = await Task.create(taskOne)
     const grocery = await Task.create(taskTwo)
     await callingMom.setUsers([snoopy, charlie])
-    await grocery.setUsers([snoopy, charlie])
+    await grocery.addUser(charlie)
+
+    await board.setTasks([callingMom, grocery])
 
     const waterPlant = await ChecklistItem.create(checkListOne)
     const callMichael = await ChecklistItem.create(checkListTwo)

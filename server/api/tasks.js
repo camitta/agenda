@@ -1,43 +1,40 @@
 const router = require('express').Router()
-const {Task, Board} = require('../db/models/task')
+const {Task, Board, User} = require('../db/models')
 
-//called by List component
-//api/tasks/:type
-router.get('/:type', async (req, res, next) => {
+//get new single task
+//api/tasks/:taskId
+router.get('/:taskId', async (req, res, next) => {
   try {
-    if (req.board) {
-      const tasks = await Task.findAll({
-        where: {
-          type: req.params.type,
-          boardId: req.board.id
-        }
-      })
-      res.json(tasks)
-    } else if (!req.board) {
-      res.status(100)
-    }
+    const {taskId} = req.params
+    const {boardId} = req.body
+    const task = await Task.findOne({
+      where: {
+        id: taskId,
+        boardId
+      }
+    })
+    res.json(task)
   } catch (err) {
     next(err)
   }
 })
 
 //create new task
-// api/tasks/
-router.post('/', async (req, res, next) => {
+// api/tasks/boards/:boardId
+router.post('/boards/:boardId', async (req, res, next) => {
   try {
-    const currentBoard = await Board.findOne({
-      where: {
-        id: req.board.id
-      }
-    })
+    const {boardId} = req.params
+    const {name, description, dueDate, type, label} = req.body
+    console.log(req.body)
     const newTask = await Task.create({
-      name: req.body.name,
-      description: req.body.description,
-      dueDate: req.body.dueDate,
-      label: req.body.label
+      name,
+      description,
+      dueDate,
+      type,
+      label,
+      boardId
     })
-    await newTask.setBoard(currentBoard)
-    res.json(newTask)
+    res.send(newTask)
   } catch (err) {
     next(err)
   }
@@ -47,9 +44,32 @@ router.post('/', async (req, res, next) => {
 // api/tasks/edit/:taskId
 router.put('/edit/:taskId', async (req, res, next) => {
   try {
-    const currentTask = await Task.findByPk(req.params.taskId)
-    await currentTask.update(req.body)
-    res.send(204).end()
+    const userId = req.user.id
+    const {taskId} = req.params
+
+    const updated = await Task.update(req.body, {
+      returning: true,
+      where: {
+        id: taskId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          },
+          required: true
+        }
+      ]
+    })
+    if (updated.length !== 2) {
+      return res.sendStatus(404)
+    }
+    const [numUpdated, [updatedTask]] = updated
+    res.send(updatedTask)
   } catch (err) {
     next(err)
   }
@@ -59,12 +79,26 @@ router.put('/edit/:taskId', async (req, res, next) => {
 // api/tasks/delete/:taskId
 router.delete('/delete/:taskId', async (req, res, next) => {
   try {
+    const userId = req.user.id
+    const {taskId} = req.params
     await Task.destroy({
       where: {
-        id: req.params.itemId
-      }
+        id: taskId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          },
+          required: true
+        }
+      ]
     })
-    res.send(204).end()
+    res.status(204).end()
   } catch (err) {
     next(err)
   }
