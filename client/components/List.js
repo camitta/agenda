@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 
-//create List
 //need task.type to figure out what list to add to
 const ListContainer = styled.div`
   background-color: #dfe3e6;
@@ -34,14 +33,13 @@ class List extends Component {
   // }
 
   render() {
-    console.log('PROPS IN LIST', this.props)
-    console.log('IN LIST RENDER', this.props.list.type)
-    //not sure if below it correct syntax
+    console.log('LIST THIS.PROPS', this.props)
+    //this.props = {tasks: undefined}
     return <ListContainer />
   }
 }
 const mapState = state => ({
-  lists: state.lists
+  tasks: state.tasks
 })
 const mapDispatch = dispatch => ({})
 

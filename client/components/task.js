@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import Icon from '@material-ui/core/Icon'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
-//below does not exist yet
-//also, do we fetch tasks here?
 import {deleteSingleTask, getSingleTask} from '../store/tasks'
 
 const CardContainer = styled.div`
@@ -15,20 +12,6 @@ const CardContainer = styled.div`
   max-width: 100%;
   word-wrap: break-word;
 `
-const DeleteButton = styled(Icon)`
-  position: absolute;
-  display: none;
-  right: 5px;
-  bottom: 5px;
-  opacity: 0.5;
-  ${CardContainer}:hover & {
-    display: block;
-    cursor: pointer;
-  }
-  &:hover {
-    opacity: 0.8;
-  }
-`
 class Task extends Component {
   constructor(props) {
     super(props)
@@ -36,14 +19,14 @@ class Task extends Component {
   }
   componentDidMount() {
     try {
-      this.props.getSingleTask(this.props.match.params.taskId)
+      this.props.fetchSingleTask(this.props.match.params.taskId)
     } catch (error) {
       console.log(error)
     }
   }
 
   handleDelete(id) {
-    this.props.deleteSingleTask(id)
+    this.props.removeSingleTask(id)
   }
 
   render() {
@@ -51,12 +34,7 @@ class Task extends Component {
     return (
       <CardContainer>
         <Card>
-          <DeleteButton
-            fontSize="small"
-            onClick={() => this.handleDelete(task.id)}
-          >
-            delete
-          </DeleteButton>
+          <Button onClick={() => this.handleDelete(task.id)}>delete</Button>
           <CardContent>
             <Typography>{task.description}</Typography>
           </CardContent>
@@ -74,8 +52,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getSingleTask: id => dispatch(getSingleTask(id)),
-    deleteSingleTask: id => dispatch(deleteSingleTask(id))
+    fetchSingleTask: id => dispatch(getSingleTask(id)),
+    removeSingleTask: id => dispatch(deleteSingleTask(id))
   }
 }
 
