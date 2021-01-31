@@ -1,57 +1,83 @@
 import React, {Component} from 'react'
-import Box from '@material-ui/core/Box'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Icon from '@material-ui/core/Icon'
+import Typography from '@material-ui/core/Typography'
+import styled from 'styled-components'
+import {connect} from 'react-redux'
+//below does not exist yet
+//also, do we fetch tasks here?
+import {deleteTask, fetchSingleTask} from '../store/task'
 
-class Task extends React.Component {
-  constructor() {
-    super()
+const CardContainer = styled.div`
+  margin: 0 0 8px 0;
+  position: relative;
+  max-width: 100%;
+  word-wrap: break-word;
+`
+
+const DeleteButton = styled(Icon)`
+  position: absolute;
+  display: none;
+  right: 5px;
+  bottom: 5px;
+  opacity: 0.5;
+  ${CardContainer}:hover & {
+    display: block;
+    cursor: pointer;
   }
-
+  &:hover {
+    opacity: 0.8;
+  }
+`
+class Task extends Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
   componentDidMount() {
     try {
-      this.props.fetchTasks(this.props.match.params.songId)
+      this.props.fetchSingleTask(this.props.match.params.taskId)
     } catch (error) {
       console.log(error)
     }
   }
 
-  // handleClick(songId) {
-  // 	const currentMixtape = this.props.cart[0];
-  // 	if (currentMixtape) {
-  // 		this.props.addSongToCart(songId, currentMixtape.id);
-  // 		toast.notify('Added to cart!', {
-  // 			position: 'top-right'
-  // 		});
-  // 	} else {
-  // 		this.props.createOrder();
-  // 		this.props.addSongToCart(songId, currentMixtape.id);
-  // 	}
-  // }
+  handleDelete(id) {
+    this.props.deleteTask(id)
+  }
 
   render() {
     const task = this.props.task
     return (
-      <Box bgcolor="primary.main" color="primary.contrastText" p={2}>
-        primary.main
-      </Box>
+      <CardContainer>
+        <Card>
+          <DeleteButton
+            fontSize="small"
+            onClick={() => this.handleDelete(task.id)}
+          >
+            delete
+          </DeleteButton>
+          <CardContent>
+            <Typography>{task.description}</Typography>
+          </CardContent>
+        </Card>
+      </CardContainer>
     )
   }
 }
 
-// const mapStateToProps = state => {
-// 	return {
-// 		song: state.single_song,
-// 		cart: state.cartReducer
-// 	};
-// };
+const mapState = state => {
+  return {
+    task: state.singleTask
+  }
+}
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		fetchSingleSong: id => dispatch(fetchSingleSong(id)),
-// 		loadCart: () => dispatch(fetchCart()),
-// 		addSongToCart: (songId, mixtapeId) => dispatch(addSongToCart(songId, mixtapeId)),
-// 		createOrder: () => dispatch(createNewOrder())
-// 	};
-// };
+const mapDispatch = dispatch => {
+  return {
+    fetchSingleTask: id => dispatch(fetchSingleTask(id)),
+    deleteTask: id => dispatch(deleteTask(id))
+  }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Single_Song);
-export default Task
+export default connect(mapState, mapDispatch)(Task)
