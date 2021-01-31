@@ -1,7 +1,7 @@
 const router = require('express').Router()
-module.exports = router
-
 router.use('/users', require('./users'))
+router.use('/boards', require('./boards'))
+router.use('/tasks', require('./tasks'))
 router.use('/checklist', require('./checklist-items'))
 
 router.use((req, res, next) => {
@@ -9,3 +9,5 @@ router.use((req, res, next) => {
   error.status = 404
   next(error)
 })
+
+module.exports = router
