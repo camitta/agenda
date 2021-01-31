@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import {connect} from 'react-redux'
 import {deleteSingleTask, getSingleTask} from '../store/tasks'
 
-const CardContainer = styled.div`
+const TaskContainer = styled.div`
   margin: 0 0 8px 0;
   position: relative;
   max-width: 100%;
@@ -32,14 +32,14 @@ class Task extends Component {
   render() {
     const task = this.props.task
     return (
-      <CardContainer>
+      <TaskContainer>
         <Card>
           <Button onClick={() => this.handleDelete(task.id)}>delete</Button>
           <CardContent>
             <Typography>{task.description}</Typography>
           </CardContent>
         </Card>
-      </CardContainer>
+      </TaskContainer>
     )
   }
 }

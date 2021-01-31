@@ -13,12 +13,6 @@ const ListContainer = styled.div`
   height: 100%;
   margin: 0 8px 0 0;
 `
-const StyledInput = styled.input`
-  width: 100%;
-  border-radius: 3px;
-  margin-bottom: 3px;
-  padding: 5px;
-`
 class List extends Component {
   constructor(props) {
     super(props)
