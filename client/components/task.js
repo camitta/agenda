@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import {connect} from 'react-redux'
 //below does not exist yet
 //also, do we fetch tasks here?
-import {deleteTask, fetchSingleTask} from '../store/task'
+import {deleteSingleTask, getSingleTask} from '../store/tasks'
 
 const CardContainer = styled.div`
   margin: 0 0 8px 0;
@@ -15,7 +15,6 @@ const CardContainer = styled.div`
   max-width: 100%;
   word-wrap: break-word;
 `
-
 const DeleteButton = styled(Icon)`
   position: absolute;
   display: none;
@@ -37,14 +36,14 @@ class Task extends Component {
   }
   componentDidMount() {
     try {
-      this.props.fetchSingleTask(this.props.match.params.taskId)
+      this.props.getSingleTask(this.props.match.params.taskId)
     } catch (error) {
       console.log(error)
     }
   }
 
   handleDelete(id) {
-    this.props.deleteTask(id)
+    this.props.deleteSingleTask(id)
   }
 
   render() {
@@ -75,8 +74,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSingleTask: id => dispatch(fetchSingleTask(id)),
-    deleteTask: id => dispatch(deleteTask(id))
+    getSingleTask: id => dispatch(getSingleTask(id)),
+    deleteSingleTask: id => dispatch(deleteSingleTask(id))
   }
 }
 

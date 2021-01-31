@@ -218,5 +218,6 @@ const seedBoards = async () => {
       }
     })
   )
+  console.log('Boards seeded successfully!')
 }
 module.exports = seedBoards
