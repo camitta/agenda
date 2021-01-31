@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Board, User} = require('../db/models')
+const {Board, User, Task} = require('../db/models')
 
 //GET /boards
 
@@ -14,16 +14,24 @@ router.get('/:boardId', async (req, res, next) => {
       },
       include: [
         {
+          model: Task,
+          where: {
+            boardId
+          }
+        },
+        {
           model: User,
           attributes: [],
           through: {
             where: {
               userId
             }
-          }
+          },
+          required: true
         }
       ]
     })
+    if (!board) return res.sendStatus(404)
     res.send(board)
   } catch (err) {
     next(err)
@@ -64,7 +72,8 @@ router.put('/edit/:boardId', async (req, res, next) => {
             where: {
               userId
             }
-          }
+          },
+          required: true
         }
       ]
     })
@@ -84,7 +93,6 @@ router.delete('/delete/:boardId', async (req, res, next) => {
   try {
     const userId = req.user.id
     const {boardId} = req.params
-    console.log('boardId: ', req.params.boardId)
     await Board.destroy({
       where: {
         id: boardId
@@ -97,7 +105,8 @@ router.delete('/delete/:boardId', async (req, res, next) => {
             where: {
               userId
             }
-          }
+          },
+          required: true
         }
       ]
     })

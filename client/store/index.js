@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import singleBoard from './single-board'
+import singleTask from './tasks'
 
 const reducer = combineReducers({
   user,
-  singleBoard
+  singleBoard,
+  singleTask
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
