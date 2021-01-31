@@ -1,20 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {fetchMantras} from '../store/mantras'
 
 class UserHome extends React.Component {
+  componentDidMount() {
+    this.props.getMantras()
+  }
+
   render() {
-    return (
-      <div>
-        <div />
-      </div>
-    )
+    return <h3>{this.props.mantras[0].mantra}</h3>
   }
 }
 
 const mapState = state => {
   return {
-    email: state.user.email
+    mantras: state.mantras
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    getMantras: () => dispatch(fetchMantras())
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
