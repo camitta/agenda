@@ -5,15 +5,21 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import singleBoard from './single-board'
 import singleTask from './tasks'
+import allBoards from './all-boards'
+import mantras from './mantras'
 
 const reducer = combineReducers({
   user,
   singleBoard,
-  singleTask
+  singleTask,
+  allBoards,
+  mantras
 })
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
+
 const store = createStore(reducer, middleware)
 
 export default store

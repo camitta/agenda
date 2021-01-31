@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Board, User, Task} = require('../db/models')
+const {Board, User, Task, Mantra} = require('../db/models')
 
 //GET /boards
 router.get('/', async (req, res, next) => {
@@ -9,11 +9,12 @@ router.get('/', async (req, res, next) => {
       include: {
         model: User,
         where: {
-          userId
+          id: userId
         }
       }
     })
-    res.send(boards)
+    const mantras = await Mantra.findAll()
+    res.send({boards, mantras})
   } catch (err) {
     next(err)
   }
