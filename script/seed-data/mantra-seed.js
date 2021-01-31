@@ -29,7 +29,7 @@ const seedMantra = async () => {
       })
     )
   )
-  console.log('Mantra seeded successfully')
+  console.log('Mantra seeded successfully!')
 }
 
 module.exports = seedMantra

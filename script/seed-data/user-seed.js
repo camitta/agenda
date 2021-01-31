@@ -184,6 +184,7 @@ const seedUsers = async () => {
   } catch (err) {
     console.log(err)
   }
+  console.log('Users seeded successfully!')
 }
 
 module.exports = seedUsers

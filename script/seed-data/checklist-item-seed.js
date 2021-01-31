@@ -69,7 +69,7 @@ const seedChecklistItems = async () => {
       await item.setUser(users[index])
     })
   )
-  console.log('CheckList Items seeded successfully')
+  console.log('CheckList Items seeded successfully!')
 }
 
 module.exports = seedChecklistItems
