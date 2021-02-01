@@ -31,10 +31,7 @@ router.get('/:boardId', async (req, res, next) => {
       },
       include: [
         {
-          model: Task,
-          where: {
-            boardId
-          }
+          model: Task
         },
         {
           model: User,

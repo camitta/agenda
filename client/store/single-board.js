@@ -7,6 +7,7 @@ const GET_SINGLE_BOARD = 'GET_SINGLE_BOARD'
 const REMOVE_SINGLE_BOARD = 'REMOVE_SINGLE_BOARD'
 const ADD_SINGLE_BOARD = 'ADD_SINGLE_BOARD'
 const EDIT_SINGLE_BOARD = 'EDIT_SINGLE_BOARD'
+const ADD_USER_TO_BOARD = 'ADD_USER_TO_BOARD '
 /**
  * INITIAL STATE
  */
@@ -19,6 +20,7 @@ const fetchSingleBoard = board => ({type: GET_SINGLE_BOARD, board})
 const removeSingleBoard = () => ({type: REMOVE_SINGLE_BOARD})
 const addedSingleBoard = board => ({type: ADD_SINGLE_BOARD, board})
 const editedSingleBoard = board => ({type: EDIT_SINGLE_BOARD, board})
+const addedUsersSingleBoard = board => ({type: ADD_USER_TO_BOARD, board})
 /**
  * THUNK CREATORS
  */
@@ -63,6 +65,18 @@ export const editSingleBoard = (id, board) => {
     }
   }
 }
+
+export const addUserSingleBoard = (id, userEmail) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/boards/${id}/add/user`, {email: userEmail})
+      const {data} = await axios.get(`/api/boards/${id}`)
+      dispatch(addedUsersSingleBoard(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -76,6 +90,8 @@ export default function(state = initialState, action) {
       return action.board
     case EDIT_SINGLE_BOARD:
       return action.board
+    case ADD_USER_TO_BOARD:
+      return {...action.board}
     default:
       return state
   }
