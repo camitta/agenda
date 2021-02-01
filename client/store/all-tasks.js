@@ -23,8 +23,7 @@ const fetchAllTasks = tasks => ({type: GET_TASKS, tasks})
 
 export const getAllTasks = boardId => async dispatch => {
   try {
-    console.log('boardId from all task thunk', boardId)
-    const {data} = await axios.get(`/api/tasks/boards/${boardId}`)
+    const {data} = await axios.get(`/api/tasks/allTasks/${boardId}`)
     dispatch(fetchAllTasks(data))
   } catch (err) {
     console.log(err)

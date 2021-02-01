@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import List from './List'
 //import thunk creator
 import {getSingleBoard} from '../store/single-board'
+import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
 import Container from '@material-ui/core/Container'
@@ -13,18 +14,17 @@ const ListsContainer = styled.div`
 //Need to figure out how to render 3 separate lists that specify the type
 class SingleBoard extends Component {
   componentDidMount() {
-    const {boardId} = this.props.match.params
     try {
+      const boardId = this.props.match.params.boardId
       this.props.fetchSingleBoard(boardId)
+      this.props.getAllTasks(boardId)
     } catch (error) {
       console.log(error)
     }
   }
   render() {
-    console.log('this.props from SingleBoard', this.props)
-    const boardId = this.props.singleBoard.id
-    const {tasks} = this.props.singleBoard
-    console.log('tasks from SingleBoard', tasks)
+    const boardId = this.props.match.params.boardId
+    const tasks = this.props.tasks
 
     let todoTasks, progressTasks, doneTasks
     if (tasks && tasks.length) {
@@ -44,12 +44,14 @@ class SingleBoard extends Component {
 }
 
 const mapState = state => ({
-  singleBoard: state.singleBoard
+  singleBoard: state.singleBoard,
+  tasks: state.allTasks
 })
 
 const mapDispatch = dispatch => {
   return {
-    fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId))
+    fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
+    getAllTasks: boardId => dispatch(getAllTasks(boardId))
   }
 }
 
