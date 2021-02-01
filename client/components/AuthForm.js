@@ -85,8 +85,9 @@ const mapDispatch = dispatch => {
         const firstName = evt.target.firstName.value
         const lastName = evt.target.lastName.value
         dispatch(signup(email, password, firstName, lastName))
+      } else {
+        dispatch(login(email, password))
       }
-      dispatch(login(email, password))
     }
   }
 }
