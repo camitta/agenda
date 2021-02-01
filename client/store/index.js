@@ -7,13 +7,15 @@ import singleBoard from './single-board'
 import singleTask from './tasks'
 import allBoards from './all-boards'
 import mantras from './mantras'
+import allTasks from './all-tasks'
 
 const reducer = combineReducers({
   user,
   singleBoard,
   singleTask,
   allBoards,
-  mantras
+  mantras,
+  allTasks
 })
 
 const middleware = composeWithDevTools(

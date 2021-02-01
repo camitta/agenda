@@ -1,6 +1,17 @@
 const router = require('express').Router()
 const {Task, Board, User} = require('../db/models')
 
+//get tasks by boardId
+//api/tasks/:boardId
+router.get('/:boardId', async (req, res, next) => {
+  try {
+    // console.log(req.params);
+    console.log(req.body)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //get new single task
 //api/tasks/:taskId
 router.get('/:taskId', async (req, res, next) => {

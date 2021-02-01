@@ -3,9 +3,10 @@ import {Task} from './Task'
 import Container from '@material-ui/core/Container'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
+import {getAllTasks} from '../store/all-tasks'
 
 //need task.type to figure out what list to add to
-const ListContainer = styled.div`
+const TaskContainer = styled.div`
   background-color: #dfe3e6;
   border-radius: 3px;
   width: 300px;
@@ -15,27 +16,31 @@ const ListContainer = styled.div`
 `
 class List extends Component {
   constructor(props) {
-    console.log(props)
+    console.log('CONSTRUCTOR PROPS', props)
     super(props)
   }
-
-  // componentDidMount() {
-  //   try {
-  //     this.props.fetchTasks(this.props.match.params.type)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  componentDidMount() {
+    try {
+      console.log('LIST COMPONENT MOUNT PROPS', this.props)
+      this.props.fetchTasks(this.props.status)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   render() {
-    console.log('LIST THIS.PROPS', this.props)
-    //this.props = {tasks: undefined}
-    return <ListContainer />
+    console.log('STATUS HERE', this.props.status)
+    const {status} = this.props
+    return <TaskContainer />
   }
 }
 const mapState = state => ({
   tasks: state.tasks
 })
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => {
+  return {
+    fetchTasks: status => dispatch(getAllTasks(status))
+  }
+}
 
 export default connect(mapState, mapDispatch)(List)

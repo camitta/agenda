@@ -26,9 +26,9 @@ class SingleBoard extends Component {
   render() {
     return (
       <ListsContainer>
-        <List name="todo" />
-        <List name="inprogress" />
-        <List name="done" />
+        <List status="todo" />
+        <List status="inprogress" />
+        <List status="done" />
       </ListsContainer>
     )
   }
