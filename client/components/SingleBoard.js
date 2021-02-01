@@ -24,7 +24,13 @@ class SingleBoard extends Component {
     }
   }
   render() {
-    return <ListsContainer />
+    return (
+      <ListsContainer>
+        <List name="todo" />
+        <List name="inprogress" />
+        <List name="done" />
+      </ListsContainer>
+    )
   }
 }
 
