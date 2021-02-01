@@ -21,7 +21,7 @@ const List = props => {
     <TaskContainer>
       {tasks &&
         tasks.length &&
-        tasks.map(task => <Task key={task.id} taskId={task.id} />)}
+        tasks.map(task => <Task key={task.id} task={task} />)}
     </TaskContainer>
   )
 }

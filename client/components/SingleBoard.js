@@ -12,9 +12,6 @@ const ListsContainer = styled.div`
 `
 //Need to figure out how to render 3 separate lists that specify the type
 class SingleBoard extends Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     const {boardId} = this.props.match.params
     try {
