@@ -15,6 +15,7 @@ const ListContainer = styled.div`
 `
 class List extends Component {
   constructor(props) {
+    console.log(props)
     super(props)
   }
 
