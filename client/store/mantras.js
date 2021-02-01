@@ -7,7 +7,7 @@ const getMantras = mantras => ({
   mantras
 })
 
-const defaultState = {}
+const defaultState = []
 
 export const fetchMantras = () => async dispatch => {
   try {
