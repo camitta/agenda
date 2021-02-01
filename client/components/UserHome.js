@@ -4,11 +4,13 @@ import {fetchMantras} from '../store/mantras'
 
 class UserHome extends React.Component {
   componentDidMount() {
-    this.props.getMantras()
+    // this.props.getMantras()
   }
 
   render() {
-    return <h3>{this.props.mantras[0].mantra}</h3>
+    console.log('this.props from UserHome: ', this.props)
+    return <div>Hello World</div>
+    // return <h3>{this.props.mantras[0].mantra}</h3>
   }
 }
 

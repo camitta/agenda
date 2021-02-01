@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Card from '@material-ui/core/Card'
+import Button from '@material-ui/core/Button'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
@@ -15,11 +16,12 @@ const TaskContainer = styled.div`
 class Task extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
   componentDidMount() {
     try {
-      this.props.fetchSingleTask(this.props.match.params.taskId)
+      const {taskId} = this.props
+      taskId && this.props.fetchSingleTask(taskId)
     } catch (error) {
       console.log(error)
     }
@@ -31,6 +33,7 @@ class Task extends Component {
 
   render() {
     const task = this.props.task
+    console.log('this.props from task: ', this.props)
     return (
       <TaskContainer>
         <Card>
