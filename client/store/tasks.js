@@ -25,9 +25,9 @@ const editedSingleTask = singleTask => ({type: EDIT_SINGLE_TASK, singleTask})
  * THUNK CREATORS
  */
 
-export const getSingleTask = (taskId, boardId) => async dispatch => {
+export const getSingleTask = taskId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/tasks/${taskId}`, boardId)
+    const {data} = await axios.get(`/api/tasks/${taskId}`)
     dispatch(fetchSingleTask(data))
   } catch (err) {
     console.error(err)

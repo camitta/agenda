@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Task} from './Task'
+import React from 'react'
+import Task from './Task'
 import Container from '@material-ui/core/Container'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
@@ -14,33 +14,16 @@ const TaskContainer = styled.div`
   height: 100%;
   margin: 0 8px 0 0;
 `
-class List extends Component {
-  constructor(props) {
-    console.log('CONSTRUCTOR PROPS', props)
-    super(props)
-  }
-  componentDidMount() {
-    try {
-      console.log('LIST COMPONENT MOUNT PROPS', this.props)
-      this.props.fetchTasks(this.props.status)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  render() {
-    console.log('STATUS HERE', this.props.status)
-    const {status} = this.props
-    return <TaskContainer />
-  }
-}
-const mapState = state => ({
-  tasks: state.tasks
-})
-const mapDispatch = dispatch => {
-  return {
-    fetchTasks: status => dispatch(getAllTasks(status))
-  }
+const List = props => {
+  console.log('this.props from List', props)
+  const {tasks} = props
+  return (
+    <TaskContainer>
+      {tasks &&
+        tasks.length &&
+        tasks.map(task => <Task key={task.id} task={task} />)}
+    </TaskContainer>
+  )
 }
 
-export default connect(mapState, mapDispatch)(List)
+export default List

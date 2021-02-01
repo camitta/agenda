@@ -12,9 +12,6 @@ const ListsContainer = styled.div`
 `
 //Need to figure out how to render 3 separate lists that specify the type
 class SingleBoard extends Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     const {boardId} = this.props.match.params
     try {
@@ -24,22 +21,31 @@ class SingleBoard extends Component {
     }
   }
   render() {
+    console.log('this.props from SingleBoard', this.props)
+    const boardId = this.props.singleBoard.id
+    const {tasks} = this.props.singleBoard
+    console.log('tasks from SingleBoard', tasks)
+
+    let todoTasks, progressTasks, doneTasks
+    if (tasks && tasks.length) {
+      todoTasks = tasks.filter(task => task.type === 'todo')
+      progressTasks = tasks.filter(task => task.type === 'inprogress')
+      doneTasks = tasks.filter(task => task.type === 'done')
+    }
+
     return (
       <ListsContainer>
-        <List status="todo" />
-        <List status="inprogress" />
-        <List status="done" />
+        <List status="todo" boardId={boardId} tasks={todoTasks} />
+        <List status="inprogress" boardId={boardId} tasks={progressTasks} />
+        <List status="done" boardId={boardId} tasks={doneTasks} />
       </ListsContainer>
     )
   }
 }
 
 const mapState = state => ({
-  tasks: state.tasks
+  singleBoard: state.singleBoard
 })
-// const mapState = function(state) {
-//   console.log('STATE', state);
-// }
 
 const mapDispatch = dispatch => {
   return {

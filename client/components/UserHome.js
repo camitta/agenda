@@ -4,6 +4,7 @@ import {fetchMantras} from '../store/mantras'
 import {fetchBoards} from '../store/all-boards'
 
 class UserHome extends React.Component {
+
   async componentDidMount() {
     try {
       await this.props.getBoards()

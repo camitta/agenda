@@ -9,7 +9,7 @@ const GET_TASKS = 'GET_TASKS'
 /**
  * INITIAL STATE
  */
-const initialState = {}
+const initialState = []
 
 /**
  * ACTION CREATORS
@@ -23,7 +23,8 @@ const fetchAllTasks = tasks => ({type: GET_TASKS, tasks})
 
 export const getAllTasks = boardId => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/tasks/${boardId}`)
+    console.log('boardId from all task thunk', boardId)
+    const {data} = await axios.get(`/api/tasks/boards/${boardId}`)
     dispatch(fetchAllTasks(data))
   } catch (err) {
     console.log(err)

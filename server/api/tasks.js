@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Task, Board, User} = require('../db/models')
 
+
 //get all tasks for a specific board
 router.get('boards/:boardId', async (req, res, next) => {
   try {
@@ -21,17 +22,12 @@ router.get('boards/:boardId', async (req, res, next) => {
 
 //get new single task
 //api/tasks/:taskId
+
 router.get('/:taskId', async (req, res, next) => {
   try {
     const {taskId} = req.params
-    const {boardId} = req.body
-    const task = await Task.findOne({
-      where: {
-        id: taskId,
-        boardId
-      }
-    })
-    res.json(task)
+    const tasks = await Task.findByPk(taskId)
+    res.send(tasks)
   } catch (err) {
     next(err)
   }
