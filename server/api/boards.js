@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Board, User, Task, Mantra} = require('../db/models')
 
-//GET /boards
+//GET all boards AND mantras to display
 router.get('/', async (req, res, next) => {
   try {
     const userId = req.user.id

@@ -7,12 +7,12 @@ const getBoards = boards => ({
   boards
 })
 
-const defaultState = {}
+const defaultState = []
 
 export const fetchBoards = () => async dispatch => {
   try {
-    const {boards} = await axios.get('/api/boards')
-    dispatch(getBoards(boards))
+    const {data} = await axios.get('/api/boards')
+    dispatch(getBoards(data.boards))
   } catch (err) {
     console.error(err)
   }
