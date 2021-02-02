@@ -23,7 +23,7 @@ export const StyledButton = withStyles({
   }
 })(Button)
 
-const navStyles = makeStyles(theme => ({
+export const navStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
