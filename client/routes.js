@@ -34,9 +34,9 @@ class Routes extends Component {
           {isLoggedIn && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
-              <Route path="/" component={SideMenu} />
-              <Route path="/home" component={UserHome} />
               <Route path="/boards/:boardId" component={SingleBoard} />
+              <Route path="/home" component={UserHome} />
+              <Route path="/" component={SideMenu} />
             </Switch>
           )}
           {/* Displays our Login component as a fallback */}
