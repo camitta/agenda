@@ -4,14 +4,15 @@ import List from './List'
 import {getSingleBoard} from '../store/single-board'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
-import Container from '@material-ui/core/Container'
 import AddUserToBoard from './AddUserToBoard'
+
 
 const ListsContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space around;
+  text-align: center;
 `
-//Need to figure out how to render 3 separate lists that specify the type
 class SingleBoard extends Component {
   componentDidMount() {
     const {boardId} = this.props.match.params
@@ -22,10 +23,8 @@ class SingleBoard extends Component {
     }
   }
   render() {
-    console.log('this.props from SingleBoard', this.props)
     const boardId = this.props.singleBoard.id
     const {tasks} = this.props.singleBoard
-    console.log('tasks from SingleBoard', tasks)
 
     let todoTasks, progressTasks, doneTasks
     if (tasks && tasks.length) {

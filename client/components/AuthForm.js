@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {login, signup} from '../store'
+import Button from '@material-ui/core/Button'
 
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
@@ -29,7 +30,7 @@ const AuthForm = props => {
         <form onSubmit={handleSubmit} name={name}>
           {inputColumn(['Email', 'Password'])}
           <div>
-            <button type="submit">{displayName}</button>
+            <Button type="submit">{displayName}</Button>
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
