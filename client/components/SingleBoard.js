@@ -6,8 +6,8 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 
 const ListsContainer = styled.div`
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-direction: row;
   justify-content: space around;
   text-align: center;
 `
