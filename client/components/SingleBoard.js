@@ -5,13 +5,15 @@ import {getSingleBoard} from '../store/single-board'
 import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
-import Container from '@material-ui/core/Container'
+import AddUserToBoard from './AddUserToBoard'
+
 
 const ListsContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space around;
+  text-align: center;
 `
-//Need to figure out how to render 3 separate lists that specify the type
 class SingleBoard extends Component {
   componentDidMount() {
     try {
@@ -34,11 +36,14 @@ class SingleBoard extends Component {
     }
 
     return (
-      <ListsContainer>
-        <List status="todo" boardId={boardId} tasks={todoTasks} />
-        <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-        <List status="done" boardId={boardId} tasks={doneTasks} />
-      </ListsContainer>
+      <div>
+        <ListsContainer>
+          <List status="todo" boardId={boardId} tasks={todoTasks} />
+          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
+          <List status="done" boardId={boardId} tasks={doneTasks} />
+        </ListsContainer>
+        {/* <AddUserToBoard currentBoard={this.props.singleBoard} /> */}
+      </div>
     )
   }
 }

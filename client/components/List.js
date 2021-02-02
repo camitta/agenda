@@ -1,11 +1,10 @@
 import React from 'react'
 import Task from './Task'
-import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 
-//need task.type to figure out what list to add to
-const TaskContainer = styled.div`
+const ListContainer = styled.div`
   background-color: #dfe3e6;
   border-radius: 3px;
   width: 300px;
@@ -13,17 +12,16 @@ const TaskContainer = styled.div`
   height: 100%;
   margin: 0 8px 0 0;
 `
+
 const List = props => {
   const {tasks} = props
   return (
-    <TaskContainer>
-      <h3>{props.status}</h3>
+    <ListContainer>
+      <Typography>{props.type}</Typography>
       {tasks &&
         tasks.length &&
-        tasks.map(task => (
-          <Task key={task.id} task={task} boardId={props.boardId} />
-        ))}
-    </TaskContainer>
+        tasks.map(task => <Task key={task.id} task={task} boardId={props.boardId}  />)}
+    </ListContainer>
   )
 }
 
