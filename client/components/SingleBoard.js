@@ -7,7 +7,6 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import AddUserToBoard from './AddUserToBoard'
 
-
 const ListsContainer = styled.div`
   display: flex;
   flex-direction: row;

@@ -14,6 +14,7 @@ import DoneIcon from '@material-ui/icons/Done'
 import styled from 'styled-components'
 import {deleteSingleTask, editSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
+import AddUserToTask from './AddUserToTask'
 
 const TaskContainer = styled.div`
   position: center;
@@ -39,7 +40,6 @@ const Task = props => {
   const handleTypeChange = event => {
     setType(event.target.value)
   }
-
   const handleDelete = async id => {
     await props.removeSingleTask(id)
     await props.getAllTasks(props.boardId)
@@ -102,6 +102,7 @@ const Task = props => {
           <DoneIcon />
         </IconButton>
       )}
+      <AddUserToTask task={task.id} board={props.task.board} />
     </TaskContainer>
   )
 }

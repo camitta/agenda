@@ -82,7 +82,6 @@ router.delete('/:taskId', async (req, res, next) => {
   }
 })
 
-
 //assign user to task
 // api/tasks/assignUser/:taskId
 router.put('/assignUser/:taskId', async (req, res, next) => {
@@ -104,7 +103,7 @@ router.put('/assignUser/:taskId', async (req, res, next) => {
     })
     await task.addUser(user)
     res.send(204).end()
-      } catch (err) {
+  } catch (err) {
     next(err)
   }
 })
@@ -140,7 +139,8 @@ router.get('/allTasks/:boardId', async (req, res, next) => {
           model: Board,
           where: {
             id: boardId
-          }
+          },
+          include: User
         },
         {model: User}
       ]
