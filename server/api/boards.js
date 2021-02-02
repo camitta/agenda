@@ -35,12 +35,12 @@ router.get('/:boardId', async (req, res, next) => {
         },
         {
           model: User,
-          attributes: [],
-          through: {
-            where: {
-              userId
-            }
-          },
+          // attributes: [],
+          // through: {
+          //   where: {
+          //     userId
+          //   }
+          // },
           required: true
         }
       ]
