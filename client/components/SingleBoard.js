@@ -7,8 +7,9 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import AddUserToBoard from './AddUserToBoard'
 
-
 const ListsContainer = styled.div`
+  justify-content: space-around;
+  padding: 4em;
   display: flex;
   flex-direction: row;
   justify-content: space around;
