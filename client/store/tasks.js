@@ -8,6 +8,7 @@ const GET_SINGLE_TASK = 'GET_SINGLE_TASK'
 const REMOVE_SINGLE_TASK = 'REMOVE_SINGLE_TASK'
 const ADD_SINGLE_TASK = 'ADD_SINGLE_TASK'
 const EDIT_SINGLE_TASK = 'EDIT_SINGLE_TASK'
+const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK'
 /**
  * INITIAL STATE
  */
@@ -21,6 +22,7 @@ const fetchSingleTask = singleTask => ({type: GET_SINGLE_TASK, singleTask})
 const removeSingleTask = () => ({type: REMOVE_SINGLE_TASK})
 const addedSingleTask = singleTask => ({type: ADD_SINGLE_TASK, singleTask})
 const editedSingleTask = singleTask => ({type: EDIT_SINGLE_TASK, singleTask})
+const addedUserToTask = singleTask => ({type: ADD_USER_TO_TASK, singleTask})
 /**
  * THUNK CREATORS
  */
@@ -66,6 +68,18 @@ export const editSingleTask = (id, task) => {
     }
   }
 }
+
+export const assignUserToTask = (taskId, userId) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/tasks/assignUser/${taskId}`, {id: userId})
+      const {data} = await axios.get(`/api/tasks/${taskId}`)
+      dispatch(addedUserToTask(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -79,6 +93,8 @@ export default function(state = initialState, action) {
       return action.singleTask
     case EDIT_SINGLE_TASK:
       return action.singleTask
+    case ADD_USER_TO_TASK:
+      return {...action.singleTask}
     default:
       return state
   }
