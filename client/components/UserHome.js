@@ -2,9 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchMantras} from '../store/mantras'
 import {fetchBoards} from '../store/all-boards'
+import {StyledButton} from './navbar'
+import {makeStyles} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 
 class UserHome extends React.Component {
-
   async componentDidMount() {
     try {
       await this.props.getBoards()
@@ -21,9 +23,8 @@ class UserHome extends React.Component {
     const personalBoards =
       this.props.boards.filter(item => item.type === 'personal') || []
     const mantras = this.props.mantras || []
-
     return (
-      <div>
+      <Grid>
         {/* get a random mantra */}
         {mantras.length ? (
           <h3>{mantras[Math.floor(Math.random() * mantras.length)].mantra}</h3>
@@ -34,9 +35,11 @@ class UserHome extends React.Component {
         {/* load all team boards */}
         <div>
           {teamBoards.length ? (
-            teamBoards.map(item => (
+            teamBoards.filter(item => item.type === 'team').map(item => (
               <div key={item.id}>
-                <h3>{item.name}</h3>
+                <StyledButton href={`/boards/${item.id}`}>
+                  {item.name}
+                </StyledButton>
               </div>
             ))
           ) : (
@@ -47,7 +50,7 @@ class UserHome extends React.Component {
         {/* load all personal boards */}
         <div>
           {personalBoards.length ? (
-            teamBoards.map(item => (
+            teamBoards.filter(item => item.type === 'personal').map(item => (
               <div key={item.id}>
                 <h3>{item.name}</h3>
               </div>
@@ -56,7 +59,7 @@ class UserHome extends React.Component {
             <div />
           )}
         </div>
-      </div>
+      </Grid>
     )
   }
 }
