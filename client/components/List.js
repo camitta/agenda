@@ -1,16 +1,36 @@
 import React from 'react'
 import Task from './Task'
-import Paper from '@material-ui/core/Paper'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import {makeStyles} from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    margin: 'auto'
+  },
+  cardHeader: {
+    padding: theme.spacing(1, 2)
+  },
+  list: {
+    width: 200,
+    height: 230,
+    overflow: 'auto'
+  },
+  button: {
+    margin: theme.spacing(0.5, 0)
+  }
+}))
 
 const List = props => {
-  console.log('this.props from List', props)
+  const classes = useStyles()
   const {tasks} = props
   return (
-    <Paper>
+    <Card className={classes.root}>
+      <CardHeader className={classes.cardHeader} title={props.type} />
       {tasks &&
         tasks.length &&
         tasks.map(task => <Task key={task.id} task={task} />)}
-    </Paper>
+    </Card>
   )
 }
 

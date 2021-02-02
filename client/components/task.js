@@ -6,9 +6,8 @@ import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 
 const TaskContainer = styled.div`
-  margin: 0 0 8px 0;
-  position: relative;
-  max-width: 100%;
+  position: center;
+  max-width: 33%;
   word-wrap: break-word;
 `
 const Task = props => {

@@ -3,9 +3,14 @@ import List from './List'
 //import thunk creator
 import {getSingleBoard} from '../store/single-board'
 import {connect} from 'react-redux'
-import Box from '@material-ui/core/Box'
+import styled from 'styled-components'
 
-//Need to figure out how to render 3 separate lists that specify the type
+const ListsContainer = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space around;
+  text-align: center;
+`
 class SingleBoard extends Component {
   componentDidMount() {
     const {boardId} = this.props.match.params
@@ -16,10 +21,8 @@ class SingleBoard extends Component {
     }
   }
   render() {
-    console.log('this.props from SingleBoard', this.props)
     const boardId = this.props.singleBoard.id
     const {tasks} = this.props.singleBoard
-    console.log('tasks from SingleBoard', tasks)
 
     let todoTasks, progressTasks, doneTasks
     if (tasks && tasks.length) {
@@ -29,11 +32,11 @@ class SingleBoard extends Component {
     }
 
     return (
-      <Box>
+      <ListsContainer>
         <List status="todo" boardId={boardId} tasks={todoTasks} />
         <List status="inprogress" boardId={boardId} tasks={progressTasks} />
         <List status="done" boardId={boardId} tasks={doneTasks} />
-      </Box>
+      </ListsContainer>
     )
   }
 }

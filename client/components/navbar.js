@@ -62,7 +62,7 @@ const Navbar = function({handleClick, isLoggedIn}) {
         {isLoggedIn ? (
           <div>
             <Button className={classes.menuButton} href="/home">
-              Home
+              HOME
             </Button>
             <Button
               className={classes.menuButton}
