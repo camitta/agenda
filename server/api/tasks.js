@@ -18,30 +18,9 @@ router.get('/:taskId', async (req, res, next) => {
   }
 })
 
-//create new task
-// api/tasks/boards/:boardId
-router.post('/boards/:boardId', async (req, res, next) => {
-  try {
-    const {boardId} = req.params
-    const {name, description, dueDate, type, label} = req.body
-    console.log(req.body)
-    const newTask = await Task.create({
-      name,
-      description,
-      dueDate,
-      type,
-      label,
-      boardId
-    })
-    res.send(newTask)
-  } catch (err) {
-    next(err)
-  }
-})
-
 //update task
-// api/tasks/edit/:taskId
-router.put('/edit/:taskId', async (req, res, next) => {
+// api/tasks/:taskId
+router.put('/:taskId', async (req, res, next) => {
   try {
     const userId = req.user.id
     const {taskId} = req.params
@@ -75,8 +54,8 @@ router.put('/edit/:taskId', async (req, res, next) => {
 })
 
 //delete task
-// api/tasks/delete/:taskId
-router.delete('/delete/:taskId', async (req, res, next) => {
+// api/tasks/:taskId
+router.delete('/:taskId', async (req, res, next) => {
   try {
     const userId = req.user.id
     const {taskId} = req.params
@@ -103,6 +82,7 @@ router.delete('/delete/:taskId', async (req, res, next) => {
   }
 })
 
+
 //assign user to task
 // api/tasks/assignUser/:taskId
 router.put('/assignUser/:taskId', async (req, res, next) => {
@@ -123,8 +103,28 @@ router.put('/assignUser/:taskId', async (req, res, next) => {
       }
     })
     await task.addUser(user)
-
     res.send(204).end()
+      } catch (err) {
+    next(err)
+  }
+})
+
+//create new task
+// api/tasks/boards/:boardId
+router.post('/boards/:boardId', async (req, res, next) => {
+  try {
+    const {boardId} = req.params
+    const {name, description, dueDate, type, label} = req.body
+    console.log(req.body)
+    const newTask = await Task.create({
+      name,
+      description,
+      dueDate,
+      type,
+      label,
+      boardId
+    })
+    res.send(newTask)
   } catch (err) {
     next(err)
   }
