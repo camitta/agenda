@@ -7,7 +7,11 @@ const {Task, Board, User} = require('../db/models')
 router.get('/:taskId', async (req, res, next) => {
   try {
     const {taskId} = req.params
-    const tasks = await Task.findByPk(taskId)
+    const tasks = await Task.findByPk(taskId, {
+      include: {
+        model: User
+      }
+    })
     res.send(tasks)
   } catch (err) {
     next(err)
@@ -78,6 +82,33 @@ router.delete('/:taskId', async (req, res, next) => {
   }
 })
 
+
+//assign user to task
+// api/tasks/assignUser/:taskId
+router.put('/assignUser/:taskId', async (req, res, next) => {
+  try {
+    const {taskId} = req.params
+    const task = await Task.findOne({
+      where: {
+        id: taskId
+      },
+      include: {
+        model: User
+      }
+    })
+    const userToBeAssignedId = req.body.id
+    const user = await User.findOne({
+      where: {
+        id: userToBeAssignedId
+      }
+    })
+    await task.addUser(user)
+    res.send(204).end()
+      } catch (err) {
+    next(err)
+  }
+})
+
 //create new task
 // api/tasks/boards/:boardId
 router.post('/boards/:boardId', async (req, res, next) => {
@@ -104,12 +135,15 @@ router.get('/allTasks/:boardId', async (req, res, next) => {
   try {
     const {boardId} = req.params
     const tasks = await Task.findAll({
-      include: {
-        model: Board,
-        where: {
-          id: boardId
-        }
-      }
+      include: [
+        {
+          model: Board,
+          where: {
+            id: boardId
+          }
+        },
+        {model: User}
+      ]
     })
     res.send(tasks)
   } catch (err) {
