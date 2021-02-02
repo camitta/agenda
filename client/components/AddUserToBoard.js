@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import List from './List'
-//import thunk creator
 import {addUserSingleBoard} from '../store/single-board'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
@@ -13,14 +11,6 @@ class AddUserToBoard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
-  // componentDidMount() {
-  //   const { boardId } = this.props.match.params
-  //   try {
-  //     this.props.fetchSingleBoard(boardId)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   async handleSubmit(event) {
     try {
@@ -35,12 +25,10 @@ class AddUserToBoard extends Component {
   }
 
   handleChange(event) {
-    console.log('EMAIL-!!>', event.target.value)
     this.setState({email: event.target.value})
   }
 
   render() {
-    // console.log("STATE WORKED--->", this.state)
     const users = this.props.currentBoard.users || []
     return (
       <div>
@@ -70,13 +58,6 @@ class AddUserToBoard extends Component {
   }
 }
 
-const mapState = state => ({
-  // singleBoard: state.singleBoard
-})
-// const mapState = function(state) {
-//   console.log('STATE', state);
-// }
-
 const mapDispatch = dispatch => {
   return {
     addUserToBoard: (id, userEmail) =>
@@ -84,4 +65,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(AddUserToBoard)
+export default connect(mapDispatch)(AddUserToBoard)

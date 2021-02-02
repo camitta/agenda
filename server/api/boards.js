@@ -35,6 +35,8 @@ router.get('/:boardId', async (req, res, next) => {
         },
         {
           model: User,
+          //commenting this out as it was preventing us from seeing the user associations
+          //tied to a single board
           // attributes: [],
           // through: {
           //   where: {
