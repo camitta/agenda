@@ -8,6 +8,7 @@ import singleTask from './tasks'
 import allBoards from './all-boards'
 import mantras from './mantras'
 import allTasks from './all-tasks'
+import checklist from './checklist'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   singleTask,
   allBoards,
   mantras,
-  allTasks
+  allTasks,
+  checklist
 })
 
 const middleware = composeWithDevTools(
