@@ -2,7 +2,7 @@ const User = require('./user')
 const Board = require('./board')
 const ChecklistItem = require('./checklist-item')
 const Mantra = require('./mantra')
-const Task = require('./Task')
+const Task = require('./task')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
