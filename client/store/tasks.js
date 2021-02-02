@@ -37,7 +37,7 @@ export const getSingleTask = taskId => async dispatch => {
 export const deleteSingleTask = id => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/tasks/delete/${id}`)
+      await axios.delete(`/api/tasks/${id}`)
       dispatch(removeSingleTask())
     } catch (err) {
       console.error(err)
@@ -59,7 +59,7 @@ export const addSingleTask = (task, boardId) => {
 export const editSingleTask = (id, task) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/tasks/edit/${id}`, task)
+      const {data} = await axios.put(`/api/tasks/${id}`, task)
       dispatch(editedSingleTask(data))
     } catch (err) {
       console.error(err)
