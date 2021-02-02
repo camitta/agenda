@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import List from './List'
 //import thunk creator
 import {getSingleBoard} from '../store/single-board'
+import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
 import AddUserToBoard from './AddUserToBoard'
@@ -15,16 +16,17 @@ const ListsContainer = styled.div`
 `
 class SingleBoard extends Component {
   componentDidMount() {
-    const {boardId} = this.props.match.params
     try {
+      const boardId = this.props.match.params.boardId
       this.props.fetchSingleBoard(boardId)
+      this.props.getAllTasks(boardId)
     } catch (error) {
       console.log(error)
     }
   }
   render() {
-    const boardId = this.props.singleBoard.id
-    const {tasks} = this.props.singleBoard
+    const boardId = this.props.match.params.boardId
+    const tasks = this.props.tasks
 
     let todoTasks, progressTasks, doneTasks
     if (tasks && tasks.length) {
@@ -47,12 +49,14 @@ class SingleBoard extends Component {
 }
 
 const mapState = state => ({
-  singleBoard: state.singleBoard
+  singleBoard: state.singleBoard,
+  tasks: state.allTasks
 })
 
 const mapDispatch = dispatch => {
   return {
-    fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId))
+    fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
+    getAllTasks: boardId => dispatch(getAllTasks(boardId))
   }
 }
 
