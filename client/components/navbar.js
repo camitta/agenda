@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
 import {makeStyles, withStyles} from '@material-ui/core/styles'
 
 export const StyledButton = withStyles({
@@ -13,9 +14,11 @@ export const StyledButton = withStyles({
     background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
     borderRadius: 3,
     border: 0,
+    zIndex: 1,
     color: 'white',
-    height: 48,
-    padding: '0 15px',
+    height: 40,
+    padding: '1em',
+    margin: '10px',
     boxShadow: '2px 2px 4px 2px #ff6987'
   },
   label: {
@@ -31,8 +34,8 @@ export const navStyles = makeStyles(theme => ({
     borderRadius: 3,
     border: 0,
     color: 'white',
-    height: 48,
-    padding: '0 15px'
+    height: 40,
+    padding: '1em'
   },
   toolbar: {
     minHeight: 128,
@@ -46,6 +49,7 @@ export const navStyles = makeStyles(theme => ({
     alignSelf: 'flex-end',
     fontFamily: 'Roboto Mono',
     fontWeight: 500,
+    padding: '.5em',
     fontSize: 'xx-large'
   }
 }))
@@ -56,7 +60,9 @@ const Navbar = function({handleClick, isLoggedIn}) {
     <AppBar position="static">
       <Toolbar className={classes.toolbar}>
         <Typography className={classes.title} variant="h5" noWrap>
-          agenda
+          <Link href={isLoggedIn ? '/home' : '/login'} color="inherit">
+            agenda
+          </Link>
         </Typography>
 
         {isLoggedIn ? (
