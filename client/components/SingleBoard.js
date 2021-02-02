@@ -4,6 +4,8 @@ import List from './List'
 import {getSingleBoard} from '../store/single-board'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
+import AddUserToBoard from './AddUserToBoard'
+
 
 const ListsContainer = styled.div`
   display: flex;
@@ -32,11 +34,14 @@ class SingleBoard extends Component {
     }
 
     return (
-      <ListsContainer>
-        <List status="todo" boardId={boardId} tasks={todoTasks} />
-        <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-        <List status="done" boardId={boardId} tasks={doneTasks} />
-      </ListsContainer>
+      <div>
+        <ListsContainer>
+          <List status="todo" boardId={boardId} tasks={todoTasks} />
+          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
+          <List status="done" boardId={boardId} tasks={doneTasks} />
+        </ListsContainer>
+        {/* <AddUserToBoard currentBoard={this.props.singleBoard} /> */}
+      </div>
     )
   }
 }
