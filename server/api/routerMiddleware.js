@@ -1,5 +1,3 @@
-const express = require('express')
-
 //checks if current in user logged in and is same user making request
 const isLoggedInUser = (req, res, next) => {
   if (req.user && req.user.id === Number(req.params.userId)) {
