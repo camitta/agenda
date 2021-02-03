@@ -4,6 +4,14 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import Container from '@material-ui/core/Container'
 
+//Material UI
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import ListItemText from '@material-ui/core/ListItemText'
+
 class AddUserToBoard extends Component {
   constructor(props) {
     super(props)
@@ -35,17 +43,22 @@ class AddUserToBoard extends Component {
     return (
       <div>
         <h2>Current Team:</h2>
-        <ul>
+        <List>
           {users.length ? (
             users.map(user => (
-              <li key={user.id}>
-                {user.firstName} {user.lastName}
-              </li>
+              <ListItem key={user.id}>
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  {user.firstName} {user.lastName}
+                </ListItemText>
+              </ListItem>
             ))
           ) : (
-            <li>No current members</li>
+            <ListItem>No current members</ListItem>
           )}
-        </ul>
+        </List>
         <form className="addUserForm" onSubmit={this.handleSubmit}>
           <div>
             <label className="label" htmlFor="email">
