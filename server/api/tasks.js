@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const {Task, Board, User} = require('../db/models')
+const {isLoggedInUser} = require('./routerMiddleware')
 
 //get new single task
 //api/tasks/:taskId
-
-router.get('/:taskId', async (req, res, next) => {
+router.get('/:taskId', isLoggedInUser, async (req, res, next) => {
   try {
     const {taskId} = req.params
     const tasks = await Task.findByPk(taskId, {

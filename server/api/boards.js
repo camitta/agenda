@@ -1,15 +1,17 @@
 const router = require('express').Router()
 const {Board, User, Task, Mantra} = require('../db/models')
+const {isLoggedInUser} = require('./routerMiddleware')
 
-//GET all boards AND mantras to display
+//GET api/boards/
+//all boards and mantra
 router.get('/', async (req, res, next) => {
   try {
-    const userId = req.user.id
+    const {id} = req.user
     const boards = await Board.findAll({
       include: {
         model: User,
         where: {
-          id: userId
+          id
         }
       }
     })
@@ -21,9 +23,8 @@ router.get('/', async (req, res, next) => {
 })
 
 //GET api/boards/:boardId
-router.get('/:boardId', async (req, res, next) => {
+router.get('/:boardId', isLoggedInUser, async (req, res, next) => {
   try {
-    const userId = req.user.id
     const {boardId} = req.params
     const board = await Board.findOne({
       where: {
@@ -35,14 +36,7 @@ router.get('/:boardId', async (req, res, next) => {
         },
         {
           model: User,
-          //commenting this out as it was preventing us from seeing the user associations
-          //tied to a single board
-          // attributes: [],
-          // through: {
-          //   where: {
-          //     userId
-          //   }
-          // },
+          attributes: [],
           required: true
         }
       ]
