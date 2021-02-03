@@ -42,7 +42,6 @@ const PostTask = props => {
   }
 
   const handleDate = date => {
-    console.log('due: ', date)
     setDueDate(date)
   }
 
