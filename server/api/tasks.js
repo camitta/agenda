@@ -143,7 +143,8 @@ router.get('/allTasks/:boardId', async (req, res, next) => {
           model: Board,
           where: {
             id: boardId
-          }
+          },
+          include: User
         },
         {model: User}
       ]

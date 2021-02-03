@@ -1,24 +1,24 @@
 const {Mantra} = require('../../server/db/models')
 
 const mantraData = [
-  {mantra: 'To make small steps towards big goals, is progress'},
-  {mantra: 'I will achieve great things, through small steps'},
-  {mantra: 'If it was easy, it would not be worth it'},
-  {mantra: 'Go slowly. Take the time to do things right'},
-  {mantra: 'Great things are achieved thru small steps'},
-  {mantra: 'It will get done'},
-  {mantra: 'Morning sets the day'},
-  {mantra: 'Every day is a new beginning'},
-  {mantra: 'Look back at the past. Marvel at how far you have come'},
-  {mantra: 'Stay focused and do one task at a time'},
-  {mantra: "I can't do everything today, but I will take one small step"},
-  {mantra: 'You can do anything, but you can’t do everything'},
-  {mantra: 'Today I will make progress towards my goals'},
-  {mantra: 'Understand and overcome procrastination'},
-  {mantra: 'Achieve small goals every day'},
-  {mantra: 'Making the time to organize yourself will save you time'},
-  {mantra: 'Don’t try to do everything, or you may accomplish very little'},
-  {mantra: 'More is not indicative of better'}
+  {mantra: 'Small steps towards big goals is progress.'},
+  {mantra: 'Achieve great things with small steps.'},
+  {mantra: "If it was easy, it wouldn't be worth it."},
+  {mantra: 'Take the time to do things right'},
+  {mantra: 'Life is short. Do things that matter.'},
+  {mantra: 'It will get done.'},
+  {mantra: "It always seems impossible until it's done."},
+  {mantra: 'Productivity is never an accident.'},
+  {mantra: "Look back at the past & marvel at how far you've come."},
+  {mantra: 'Your mind is for having ideas, not holding them.'},
+  {mantra: 'The secret of getting things done is to act.'},
+  {mantra: 'You can do anything, but you can’t do everything.'},
+  {mantra: 'Today you will make progress towards your goals.'},
+  {mantra: 'Alone we can do so little. Together we can do so much.'},
+  {mantra: 'Meet small goals every day.'},
+  {mantra: 'Make time for yourself.'},
+  {mantra: 'You got this.'},
+  {mantra: "If the plan doesn't work, change the plan, not the goal."}
 ]
 
 const seedMantra = async () => {

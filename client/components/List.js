@@ -13,6 +13,8 @@ import AccordionDetails from '@material-ui/core/AccordionDetails'
 const ListContainer = styled.div`
   background-color: #dfe3e6;
   border-radius: 3px;
+  align-content: center;
+  justify-content: center;
   width: 300px;
   padding: 8px;
   height: 100%;
