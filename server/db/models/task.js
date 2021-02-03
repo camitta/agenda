@@ -4,11 +4,17 @@ const db = require('../db')
 const Task = db.define('task', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   dueDate: {
     type: Sequelize.DATE

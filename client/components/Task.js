@@ -45,7 +45,7 @@ const Task = props => {
     await props.getAllTasks(props.boardId)
   }
 
-  const handleSubmit = async event => {
+  const handleSubmit = async () => {
     await props.updateSingleTask(task.id, {name, description, type})
     await props.getAllTasks(props.boardId)
     setEdit(!edit)

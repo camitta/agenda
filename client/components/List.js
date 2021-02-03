@@ -1,8 +1,14 @@
 import React from 'react'
 import Task from './Task'
+import PostTask from './PostTask'
+
+// Material UI components
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
-import {connect} from 'react-redux'
+import AddIcon from '@material-ui/icons/Add'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
 
 const ListContainer = styled.div`
   background-color: #dfe3e6;
@@ -14,13 +20,28 @@ const ListContainer = styled.div`
 `
 
 const List = props => {
-  const {tasks} = props
+  const {tasks, boardId, status} = props
   return (
     <ListContainer>
-      <Typography>{props.type}</Typography>
-      {tasks &&
-        tasks.length &&
-        tasks.map(task => <Task key={task.id} task={task} boardId={props.boardId}  />)}
+      <Typography>{status}</Typography>
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<AddIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          />
+          <AccordionDetails>
+            <PostTask type={status} boardId={boardId} />
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      {tasks && tasks.length
+        ? tasks.map(task => (
+            <Task key={task.id} task={task} boardId={boardId} />
+          ))
+        : null}
     </ListContainer>
   )
 }

@@ -47,13 +47,13 @@ export const deleteSingleTask = id => {
   }
 }
 
-export const addSingleTask = (task, boardId) => {
+export const addSingleTask = (boardId, task) => {
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/tasks/boards/${boardId}`, task)
       dispatch(addedSingleTask(data))
     } catch (err) {
-      console.error(err)
+      dispatch(addedSingleTask({error: err}))
     }
   }
 }

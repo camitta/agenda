@@ -82,7 +82,6 @@ router.delete('/:taskId', async (req, res, next) => {
   }
 })
 
-
 //assign user to task
 // api/tasks/assignUser/:taskId
 router.put('/assignUser/:taskId', async (req, res, next) => {
@@ -104,7 +103,7 @@ router.put('/assignUser/:taskId', async (req, res, next) => {
     })
     await task.addUser(user)
     res.send(204).end()
-      } catch (err) {
+  } catch (err) {
     next(err)
   }
 })
@@ -126,7 +125,11 @@ router.post('/boards/:boardId', async (req, res, next) => {
     })
     res.send(newTask)
   } catch (err) {
-    next(err)
+    if (err.name === 'SequelizeValidationError') {
+      res.status(401).send(err.errors[0].message)
+    } else {
+      next(err)
+    }
   }
 })
 
