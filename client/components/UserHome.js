@@ -1,35 +1,16 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import Checklist from './Checklist'
+import {Checklist, CreateBoard} from './index'
 import {fetchMantras} from '../store/mantras'
 import {fetchBoards} from '../store/all-boards'
 import Grid from '@material-ui/core/Grid'
 import {StyledButton} from './Navbar'
 import Container from '@material-ui/core/Container'
-import {makeStyles} from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-
-const homeStyles = makeStyles(() => ({
-  boardItem: {
-    height: '150px',
-    width: '100%',
-    background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
-    boxShadow: '2px 2px 4px 2px #ff6987',
-    borderRadius: 3,
-    fontStyle: 'italic',
-    alignSelf: 'flex-end',
-    fontWeight: 500,
-    fontSize: 'xx-large'
-  },
-  gridItem: {
-    margin: '10px',
-    width: '20%'
-  },
-  title: {
-    marginTop: '20px'
-  }
-}))
+import {homeStyles} from './UserHomeMUI'
+import AddIcon from '@material-ui/icons/Add'
+import Button from '@material-ui/core/Button'
 
 const UserHome = props => {
   useEffect(() => {
@@ -47,6 +28,12 @@ const UserHome = props => {
     }
   }
 
+  const [open, setOpen] = useState(false)
+
+  function handleOpen() {
+    setOpen(true)
+  }
+
   // filter out different board types
   const teamBoards = props.boards.filter(item => item.type === 'team') || []
   const personalBoards =
@@ -54,7 +41,7 @@ const UserHome = props => {
   const mantras = props.mantras || []
   return (
     <div>
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid container className={classes.mantra}>
         {/* get a random mantra */}
         {mantras.length ? (
           <Typography variant="h6">
@@ -65,6 +52,13 @@ const UserHome = props => {
         )}
       </Grid>
 
+      <Button type="button" className={classes.addBoard} onClick={handleOpen}>
+        <AddIcon />
+        <Typography variant="button">New Board</Typography>
+      </Button>
+
+      <CreateBoard getBoards={props.getBoards} open={open} setOpen={setOpen} />
+
       <Box display="flex">
         <Checklist />
 
@@ -73,7 +67,7 @@ const UserHome = props => {
           <Typography className={classes.title} variant="h4">
             Team Boards
           </Typography>
-          <Grid container>
+          <Grid container className={classes.container}>
             {teamBoards.length ? (
               teamBoards.filter(item => item.type === 'team').map(item => (
                 <Grid item className={classes.gridItem} key={item.id}>
@@ -94,7 +88,7 @@ const UserHome = props => {
           <Typography variant="h4" className={classes.title}>
             Personal Boards
           </Typography>
-          <Grid container>
+          <Grid container className={classes.container}>
             {personalBoards.length ? (
               personalBoards
                 .filter(item => item.type === 'personal')
