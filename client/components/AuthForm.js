@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {login, signup} from '../store'
 import Button from '@material-ui/core/Button'
+import {generateErrorMessage} from '../functions'
 
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
@@ -32,7 +33,10 @@ const AuthForm = props => {
           <div>
             <Button type="submit">{displayName}</Button>
           </div>
-          {error && error.response && <div> {error.response.data} </div>}
+          {error &&
+            error.response && (
+              <div> {generateErrorMessage(error.response.data)} </div>
+            )}
         </form>
         <a href="/auth/google">{displayName} with Google</a>
       </div>
@@ -46,7 +50,10 @@ const AuthForm = props => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        {error &&
+          error.response && (
+            <div> {generateErrorMessage(error.response.data)} </div>
+          )}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
     </div>

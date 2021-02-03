@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {addSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
+import {generateErrorMessage} from '../functions'
 
 // Material UI components
 import styled from 'styled-components'
@@ -52,6 +53,7 @@ const PostTask = props => {
     setDescription('')
     setDueDate(new Date())
   }
+  error && console.log(error.response.data)
   return (
     <PostContainer>
       <form>
@@ -109,7 +111,10 @@ const PostTask = props => {
           <MenuItem value="purple">Purple</MenuItem>
         </Select>
       </form>
-      {error && error.response && <div>{error.response.data}</div>}
+      {error &&
+        error.response && (
+          <div>{generateErrorMessage(error.response.data)}</div>
+        )}
       <IconButton aria-label="submit" onClick={handleSubmit}>
         <DoneIcon />
       </IconButton>
