@@ -125,7 +125,11 @@ router.post('/boards/:boardId', async (req, res, next) => {
     })
     res.send(newTask)
   } catch (err) {
-    next(err)
+    if (err.name === 'SequelizeValidationError') {
+      res.status(401).send(err.errors[0].message)
+    } else {
+      next(err)
+    }
   }
 })
 
