@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './Task'
-import PostTask from './PostTask'
+import PostTask from './AddTask'
 
 // Material UI components
 import Typography from '@material-ui/core/Typography'
@@ -15,7 +15,7 @@ const ListContainer = styled.div`
   border-radius: 3px;
   align-content: center;
   justify-content: center;
-  width: 300px;
+  width: 33%;
   padding: 8px;
   height: 100%;
   margin: 0 8px 0 0;

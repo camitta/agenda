@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addSingleBoard} from '../store/single-board'
+
+// Material UI
 import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
@@ -8,7 +9,12 @@ import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+
+// Custom MUI
 import {modalStyles} from './UserHomeMUI'
+
+// Redux
+import {addSingleBoard} from '../store/single-board'
 
 export const CreateBoard = props => {
   const classes = modalStyles()
