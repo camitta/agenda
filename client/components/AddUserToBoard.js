@@ -16,8 +16,8 @@ class AddUserToBoard extends Component {
     try {
       event.preventDefault()
       const boardId = this.props.currentBoard.id
-      this.props.addUserToBoard(boardId, this.state.email)
-      event.target.reset()
+      await this.props.addUserToBoard(boardId, this.state.email)
+      // event.target.reset()
       this.state = {email: ''}
     } catch (error) {
       console.log(error)
@@ -29,10 +29,12 @@ class AddUserToBoard extends Component {
   }
 
   render() {
+    console.log('OUR PROPS', this.props)
+    console.log('OUR SINGLEBOARD', this.props.currentBoard.id)
     const users = this.props.currentBoard.users || []
     return (
       <div>
-        <h2>Current Board Members:</h2>
+        <h2>Current Team:</h2>
         <ul>
           {users.length ? (
             users.map(user => (
@@ -65,4 +67,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapDispatch)(AddUserToBoard)
+export default connect(null, mapDispatch)(AddUserToBoard)
