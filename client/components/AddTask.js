@@ -22,7 +22,7 @@ const PostContainer = styled.div`
   word-wrap: break-word;
 `
 
-const PostTask = props => {
+const AddTask = props => {
   const {boardId, type, error} = props
 
   const [name, setName] = useState('')
@@ -62,7 +62,6 @@ const PostTask = props => {
           id="filled-required"
           label="Name"
           variant="filled"
-          placeholder="Name ..."
           value={name}
           onChange={handleName}
         />
@@ -71,7 +70,6 @@ const PostTask = props => {
           multiline
           id="filled-required"
           label="Description"
-          placeholder="Description ..."
           variant="filled"
           value={description}
           onChange={handleDescription}
@@ -133,4 +131,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(PostTask)
+export default connect(mapState, mapDispatch)(AddTask)

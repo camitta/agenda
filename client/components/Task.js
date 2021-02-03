@@ -1,20 +1,30 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
+
+// Material UI
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/Button'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import Select from '@material-ui/core/Select'
 import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import DoneIcon from '@material-ui/icons/Done'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+
+// Custom MUI
+import {taskStyles} from './TaskMUI'
 import styled from 'styled-components'
+
+// Redux
 import {deleteSingleTask, editSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
-import AddUserToTask from './AddUserToTask'
+
+// Components
+import {AddUserToTask, TaskForm} from './index'
 
 const TaskContainer = styled.div`
   position: center;
@@ -24,10 +34,14 @@ const TaskContainer = styled.div`
 const Task = props => {
   const task = props.task
 
+  const classes = taskStyles()
+
   const [edit, setEdit] = useState(false)
   const [description, setDescription] = useState(task.description)
   const [name, setName] = useState(task.name)
   const [type, setType] = useState(task.type)
+  const [dueDate, setDueDate] = useState(task.dueDate)
+  const [label, setLabel] = useState(task.label)
 
   const handleNameChange = event => {
     setName(event.target.value)
@@ -40,6 +54,15 @@ const Task = props => {
   const handleTypeChange = event => {
     setType(event.target.value)
   }
+
+  const handleLabelChange = event => {
+    setLabel(event.target.value)
+  }
+
+  const handleDateChange = date => {
+    setDueDate(date)
+  }
+
   const handleDelete = async id => {
     await props.removeSingleTask(id)
     await props.getAllTasks(props.boardId)
@@ -51,39 +74,57 @@ const Task = props => {
     setEdit(!edit)
   }
 
+  const taskFormProps = {
+    handleDescriptionChange,
+    handleNameChange,
+    handleTypeChange,
+    handleDateChange,
+    handleLabelChange,
+    name,
+    setName,
+    description,
+    setDescription,
+    type,
+    setType,
+    dueDate,
+    setDueDate,
+    label,
+    setLabel
+  }
+
   return (
     <TaskContainer>
       <Card>
         <CardContent>
           {edit === false ? (
             <div>
-              <Typography variant="h6">{task.name}</Typography>
+              <Accordion style={{boxShadow: 'none', margin: '0'}}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div>
+                    <Typography variant="h6" style={{textAlign: 'left'}}>
+                      {task.name}
+                    </Typography>
+                    <Typography variant="subtitle1" className={classes.dueDate}>
+                      Due Date: {moment(task.dueDate).format('LL')}
+                    </Typography>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body2">{task.description}</Typography>
+                </AccordionDetails>
+              </Accordion>
+              {/* <Typography variant="h6">{task.name}</Typography>
               <Typography variant="body2">{task.description}</Typography>
+              <Typography variant="subtitle1" className={classes.dueDate}>
+                Due Date: {moment(task.dueDate).format('LL')}
+              </Typography> */}
             </div>
           ) : (
-            <form>
-              <TextField
-                id="filled-basic"
-                label="Name"
-                variant="filled"
-                value={name}
-                onChange={handleNameChange}
-              />
-              <TextField
-                multiline
-                id="filled-textarea"
-                label="Description"
-                variant="filled"
-                value={description}
-                onChange={handleDescriptionChange}
-              />
-              <InputLabel>Status</InputLabel>
-              <Select value={type} onChange={handleTypeChange}>
-                <MenuItem value="todo">Todo</MenuItem>
-                <MenuItem value="inprogress">In Progress</MenuItem>
-                <MenuItem value="done">Done</MenuItem>
-              </Select>
-            </form>
+            <TaskForm {...taskFormProps} />
           )}
         </CardContent>
       </Card>
@@ -99,7 +140,7 @@ const Task = props => {
           aria-label="submit"
           onClick={() => handleSubmit(task.id, description)}
         >
-          <DoneIcon />
+          <DoneIcon color="primary" />
         </IconButton>
       )}
       <AddUserToTask task={task.id} board={props.task.board} />

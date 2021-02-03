@@ -1,16 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {Checklist, CreateBoard} from './index'
-import {fetchMantras} from '../store/mantras'
-import {fetchBoards} from '../store/all-boards'
+
+// Material UI
 import Grid from '@material-ui/core/Grid'
-import {StyledButton} from './Navbar'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-import {homeStyles} from './UserHomeMUI'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
+
+// Custom MUI
+import {homeStyles} from './UserHomeMUI'
+import {StyledButton} from './Navbar'
+
+// Redux
+import {fetchMantras} from '../store/mantras'
+import {fetchBoards} from '../store/all-boards'
+
+// Components
+import {Checklist, CreateBoard} from './index'
 
 const UserHome = props => {
   useEffect(() => {
