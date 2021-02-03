@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
 
 // Material UI
 import Card from '@material-ui/core/Card'
@@ -10,6 +11,9 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import DoneIcon from '@material-ui/icons/Done'
 import styled from 'styled-components'
+
+// Custom MUI
+import {taskStyles} from './TaskMUI'
 
 // Redux
 import {deleteSingleTask, editSingleTask} from '../store/tasks'
@@ -25,6 +29,8 @@ const TaskContainer = styled.div`
 `
 const Task = props => {
   const task = props.task
+
+  const classes = taskStyles()
 
   const [edit, setEdit] = useState(false)
   const [description, setDescription] = useState(task.description)
@@ -90,6 +96,9 @@ const Task = props => {
             <div>
               <Typography variant="h6">{task.name}</Typography>
               <Typography variant="body2">{task.description}</Typography>
+              <Typography variant="subtitle1" className={classes.dueDate}>
+                Due Date: {moment(task.dueDate).format('LL')}
+              </Typography>
             </div>
           ) : (
             <TaskForm {...taskFormProps} />

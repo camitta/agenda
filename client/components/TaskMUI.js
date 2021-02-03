@@ -10,5 +10,8 @@ export const taskStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  dueDate: {
+    color: '#3f51b5'
   }
 }))
