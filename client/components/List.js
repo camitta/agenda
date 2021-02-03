@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './Task'
-import PostTask from './PostTask'
+import PostTask from './AddTask'
 
 // Material UI components
 import Typography from '@material-ui/core/Typography'
