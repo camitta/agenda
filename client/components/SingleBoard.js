@@ -47,11 +47,6 @@ class SingleBoard extends Component {
 
     return (
       <div>
-        <ListsContainer>
-          <List status="todo" boardId={boardId} tasks={todoTasks} />
-          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-          <List status="done" boardId={boardId} tasks={doneTasks} />
-        </ListsContainer>
         <Accordion>
           <AccordionSummary
             expandIcon={<GroupIcon />}
@@ -64,6 +59,11 @@ class SingleBoard extends Component {
             <AddUserToBoard currentBoard={this.props.singleBoard} />
           </AccordionDetails>
         </Accordion>
+        <ListsContainer>
+          <List status="todo" boardId={boardId} tasks={todoTasks} />
+          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
+          <List status="done" boardId={boardId} tasks={doneTasks} />
+        </ListsContainer>
       </div>
     )
   }
