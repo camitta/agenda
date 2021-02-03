@@ -1,15 +1,17 @@
 const router = require('express').Router()
 const {Board, User, Task, Mantra} = require('../db/models')
+const {isLoggedInUser} = require('./routerMiddleware')
 
-//GET all boards AND mantras to display
+//GET api/boards/
+//all boards and mantra
 router.get('/', async (req, res, next) => {
   try {
-    const userId = req.user.id
+    const {id} = req.user
     const boards = await Board.findAll({
       include: {
         model: User,
         where: {
-          id: userId
+          id
         }
       }
     })
