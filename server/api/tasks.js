@@ -1,12 +1,8 @@
 const router = require('express').Router()
 const {Task, Board, User} = require('../db/models')
 
-const isLoggedIn = (req, res, next) =>
-  req.user.isLoggedIn ? next() : res.send('None shall pass!')
-
 //get new single task
 //api/tasks/:taskId
-
 router.get('/:taskId', async (req, res, next) => {
   try {
     const {taskId} = req.params
