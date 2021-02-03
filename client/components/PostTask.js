@@ -53,7 +53,6 @@ const PostTask = props => {
     setDescription('')
     setDueDate(new Date())
   }
-  console.log('props from PostTask: ', props)
   return (
     <PostContainer>
       <form>
