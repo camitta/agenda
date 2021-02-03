@@ -18,6 +18,7 @@ export const TaskForm = props => {
   return (
     <form className={classes.taskCard}>
       <TextField
+        style={{width: '100%'}}
         id="filled-basic"
         label="Name"
         variant="filled"
@@ -26,6 +27,7 @@ export const TaskForm = props => {
       />
       <TextField
         multiline
+        style={{width: '100%'}}
         id="filled-textarea"
         label="Description"
         variant="filled"

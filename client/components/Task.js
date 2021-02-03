@@ -10,10 +10,14 @@ import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import DoneIcon from '@material-ui/icons/Done'
-import styled from 'styled-components'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 // Custom MUI
 import {taskStyles} from './TaskMUI'
+import styled from 'styled-components'
 
 // Redux
 import {deleteSingleTask, editSingleTask} from '../store/tasks'
@@ -94,11 +98,30 @@ const Task = props => {
         <CardContent>
           {edit === false ? (
             <div>
-              <Typography variant="h6">{task.name}</Typography>
+              <Accordion style={{boxShadow: 'none', margin: '0'}}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <div>
+                    <Typography variant="h6" style={{textAlign: 'left'}}>
+                      {task.name}
+                    </Typography>
+                    <Typography variant="subtitle1" className={classes.dueDate}>
+                      Due Date: {moment(task.dueDate).format('LL')}
+                    </Typography>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography variant="body2">{task.description}</Typography>
+                </AccordionDetails>
+              </Accordion>
+              {/* <Typography variant="h6">{task.name}</Typography>
               <Typography variant="body2">{task.description}</Typography>
               <Typography variant="subtitle1" className={classes.dueDate}>
                 Due Date: {moment(task.dueDate).format('LL')}
-              </Typography>
+              </Typography> */}
             </div>
           ) : (
             <TaskForm {...taskFormProps} />
