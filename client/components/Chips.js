@@ -10,22 +10,16 @@ import CancelIcon from '@material-ui/icons/Cancel'
 const Chips = props => {
   const {label, fetchTasks, boardId, taskId, removeChips} = props
 
-  const labelColor = () => {
-    if (label === 'green') return 'secondary'
-    else if (label === 'blue') return 'primary'
-  }
-
   const handleDelete = async () => {
     await removeChips(taskId)
     await fetchTasks(boardId)
   }
 
-  console.log('props from Chips: ', props)
   return (
     <Chip
       label={label}
+      style={{backgroundColor: label}}
       size="small"
-      color={labelColor()}
       onDelete={handleDelete}
       deleteIcon={<CancelIcon />}
     />
