@@ -26,12 +26,12 @@ const AddUserToBoard = props => {
   const [email, setEmail] = useState('')
 
   const handleEmail = event => {
-    // event.preventDefault()
     setEmail(event.target.value)
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async event => {
     try {
+      event.preventDefault()
       await props.addUserToBoard(boardId, email)
       setEmail('')
     } catch (error) {
@@ -60,7 +60,7 @@ const AddUserToBoard = props => {
           <ListItem>No current members</ListItem>
         )}
       </List>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextField
           id="filled-disabled"
           size="small"
