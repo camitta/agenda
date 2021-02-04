@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {assignUserToTask} from '../store/tasks'
+import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import IconButton from '@material-ui/core/Button'
@@ -19,7 +20,10 @@ const AddUserToTask = props => {
   }
 
   const handleClose = async userId => {
+    // return async (event) => {
+    //   event.preventDefault()
     await props.addUserToTask(taskId, userId)
+    await props.fetchTasks(board.id)
     setAnchorEl(null)
   }
 
@@ -46,13 +50,14 @@ const AddUserToTask = props => {
           } ${user.lastName}`}</MenuItem>
         ))}
       </Menu>
-      <UserAvatar />
+      <UserAvatar task={props.task.users} />
     </>
   )
 }
 
 const mapDispatch = dispatch => {
   return {
+    fetchTasks: boardId => dispatch(getAllTasks(boardId)),
     addUserToTask: (taskId, userId) =>
       dispatch(assignUserToTask(taskId, userId))
   }

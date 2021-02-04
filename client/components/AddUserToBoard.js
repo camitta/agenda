@@ -39,8 +39,6 @@ const AddUserToBoard = props => {
     }
   }
 
-  // render() {
-  //   const users = this.props.currentBoard.users || []
   return (
     <div>
       <Typography>Current Team:</Typography>
@@ -77,6 +75,7 @@ const AddUserToBoard = props => {
     </div>
   )
 }
+const mapState = state => ({error: state.singleBoard.error})
 
 const mapDispatch = dispatch => {
   return {
@@ -85,4 +84,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(null, mapDispatch)(AddUserToBoard)
+export default connect(mapState, mapDispatch)(AddUserToBoard)

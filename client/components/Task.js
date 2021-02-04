@@ -96,11 +96,6 @@ const Task = props => {
   return (
     <TaskContainer>
       <Card>
-        {/* <CardHeader
-          avatar={
-            <UserAvatar task={task.users} />
-          }
-        /> */}
         <CardContent>
           {edit === false ? (
             <div>
@@ -129,7 +124,7 @@ const Task = props => {
                 </AccordionDetails>
                 <AccordionDetails>
                   <AddUserToTask task={task} board={props.task.board} />
-                  <UserAvatar task={task.users} />
+                  {/* <UserAvatar task={task.users} /> */}
                 </AccordionDetails>
               </Accordion>
               {/* <Typography variant="h6">{task.name}</Typography>

@@ -77,6 +77,7 @@ export const addUserSingleBoard = (id, userEmail) => {
     }
   }
 }
+
 /**
  * REDUCER
  */
@@ -91,7 +92,7 @@ export default function(state = initialState, action) {
     case EDIT_SINGLE_BOARD:
       return action.board
     case ADD_USER_TO_BOARD:
-      return {...action.board}
+      return action.board
     default:
       return state
   }
