@@ -154,4 +154,32 @@ router.get('/allTasks/:boardId', async (req, res, next) => {
   }
 })
 
+//remove an assigned chip from taskId
+router.put('/:taskId/chips/remove', async (req, res, next) => {
+  try {
+    const {taskId} = req.params
+    const userId = req.user.id
+    await Task.update(req.body, {
+      where: {
+        id: taskId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          },
+          required: true
+        }
+      ]
+    })
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router
