@@ -35,9 +35,9 @@ router.get('/:boardId', isLoggedInUser, async (req, res, next) => {
           model: Task
         },
         {
-          model: User,
-          attributes: [],
-          required: true
+          model: User
+          // attributes: [],
+          // required: true
         }
       ]
     })
@@ -145,8 +145,8 @@ router.put('/:boardId/add/user', async (req, res, next) => {
       await board.addUser(user)
       res.send(204).end()
     } else if (!user) {
-      // for now if the person's email entered is not signed up on our site, send a 404 'Not found' error. We will need to add this in the front end component so the user inviting their friend knows why the invite is not working
-      res.send(404)
+      // console.log("USER EMAIL ERROR")
+      res.status(404).send({data: {error: 'error from add user'}})
     }
   } catch (err) {
     next(err)

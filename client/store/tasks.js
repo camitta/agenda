@@ -94,7 +94,7 @@ export default function(state = initialState, action) {
     case EDIT_SINGLE_TASK:
       return action.singleTask
     case ADD_USER_TO_TASK:
-      return {...action.singleTask}
+      return action.singleTask
     default:
       return state
   }
