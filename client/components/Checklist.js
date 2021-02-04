@@ -1,22 +1,45 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {fetchChecklist} from '../store/checklist'
+
+// Material UI
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import {makeStyles} from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import AddIcon from '@material-ui/icons/Add'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
+
+// Redux
+import {
+  fetchChecklist,
+  addChecklistItem,
+  editChecklist,
+  deleteItem
+} from '../store/checklist'
 
 const ChecklistClasses = makeStyles(() => ({
-  container: {
+  checklist: {
     display: 'flex',
     flexDirection: 'column',
     margin: '20px',
-    height: '100%',
-    width: '25%',
-    background: '#faf1d4'
+    height: '75%',
+    width: '30%',
+    background: '#faf1d4',
+    boxShadow: '2px 2px 4px 2px #9c9c9c'
   },
   formItem: {
     padding: '10px'
+  },
+  title: {
+    textAlign: 'center'
+  },
+  add: {
+    display: 'flex',
+    marginRight: '10%',
+    width: '100%'
   }
 }))
 
@@ -27,23 +50,77 @@ const Checklist = props => {
 
   const classes = ChecklistClasses()
 
+  const [state, setState] = useState({
+    addItem: ''
+  })
+
   async function loadChecklist() {
     await props.getChecklist()
+  }
+
+  function handleChange(event) {
+    setState({...state, [event.target.name]: event.target.value})
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    await props.addItem({description: state.addItem, completed: false})
+    setState({...state, addItem: ''})
+  }
+
+  async function handleCheck(event) {
+    let completed
+    if (event.target.value == 'true') {
+      completed = false
+    } else {
+      completed = true
+    }
+    await props.editItem({
+      id: parseInt(event.target.name),
+      completed: {completed: completed}
+    })
+  }
+
+  async function handleDelete(event) {
+    await props.deleteItem(event.target.parentNode.id)
   }
 
   const tasks = props.checklist || []
 
   return (
-    <Box className={classes.container}>
+    <Box className={classes.checklist}>
+      <Typography variant="h6" className={classes.title}>
+        To-Do List
+      </Typography>
+      <form className={classes.add} onSubmit={handleSubmit}>
+        <IconButton type="submit">
+          <AddIcon />
+        </IconButton>
+        <TextField
+          name="addItem"
+          onChange={handleChange}
+          value={state.addItem}
+        />
+      </form>
+
+      {/* all nodes MUST have the item's ID or delete will not work properly */}
       {tasks.length ? (
         tasks.map(item => {
           return (
-            <FormControlLabel
-              control={<Checkbox color="primary" />}
-              label={item.description}
-              className={classes.formItem}
-              key={item.id}
-            />
+            <div key={item.id} id={item.id}>
+              <FormControlLabel
+                control={<Checkbox color="primary" />}
+                label={item.description}
+                className={classes.formItem}
+                checked={Boolean(item.completed)}
+                value={item.completed}
+                name={item.id.toString()}
+                onChange={handleCheck}
+              />
+              <IconButton onClick={handleDelete} type="button" id={item.id}>
+                <DeleteIcon id={item.id} />
+              </IconButton>
+            </div>
           )
         })
       ) : (
@@ -58,7 +135,10 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  getChecklist: () => dispatch(fetchChecklist())
+  getChecklist: () => dispatch(fetchChecklist()),
+  addItem: item => dispatch(addChecklistItem(item)),
+  editItem: item => dispatch(editChecklist(item)),
+  deleteItem: itemId => dispatch(deleteItem(itemId))
 })
 
 export default connect(mapState, mapDispatch)(Checklist)

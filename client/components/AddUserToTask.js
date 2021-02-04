@@ -20,8 +20,6 @@ const AddUserToTask = props => {
   }
 
   const handleClose = async userId => {
-    // return async (event) => {
-    //   event.preventDefault()
     await props.addUserToTask(taskId, userId)
     await props.fetchTasks(board.id)
     setAnchorEl(null)
