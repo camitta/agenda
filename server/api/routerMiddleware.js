@@ -1,26 +1,30 @@
 const Board = require('../db/models/board')
 const Task = require('../db/models/task')
+const User = require('../db/models/user')
 
 //checks if current in user logged in
 //checks if current user is the same one making the http request
 const isLoggedInUser = async (req, res, next) => {
   if (req.user) {
-    const userId = req.user.id
-    // console.log(Object.keys(Task.prototype));
+    const {id: userId} = req.user
     const {boardId, taskId} = req.params
     if (boardId) {
       const board = await Board.findByPk(boardId)
-      if (board.hasUser(userId)) {
+      const bool = await board.hasUser(userId)
+      if (bool) {
         next()
+      } else {
+        const err = new Error('Access Denied.')
+        err.status = 401
+        next(err)
       }
-    } else if (taskId) {
-      const task = await Task.findByPk(taskId)
-      if (task.hasUser(userId)) {
-        next()
-      }
+    } else {
+      const err = new Error('Board does not exist.')
+      err.status = 401
+      next(err)
     }
   } else {
-    const err = new Error('Access Denied.')
+    const err = new Error('Please log in.')
     err.status = 401
     next(err)
   }
@@ -32,7 +36,7 @@ const isAdmin = (req, res, next) => {
   if (currentUser && currentUser.isAdmin) {
     next()
   } else {
-    const err = new Error('Credentials Denied.')
+    const err = new Error('Unauthorized credentials.')
     err.status = 403
     next(err)
   }
