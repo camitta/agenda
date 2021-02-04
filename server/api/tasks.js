@@ -24,7 +24,6 @@ router.put('/:taskId', async (req, res, next) => {
   try {
     const userId = req.user.id
     const {taskId} = req.params
-
     const updated = await Task.update(req.body, {
       returning: true,
       where: {

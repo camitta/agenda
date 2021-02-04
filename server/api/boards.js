@@ -22,13 +22,12 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//GET api/boards/:boardId
 router.get('/:boardId', isLoggedInUser, async (req, res, next) => {
   try {
-    const {boardId} = req.params
+    const {boardId: id} = req.params
     const board = await Board.findOne({
       where: {
-        id: boardId
+        id
       },
       include: [
         {
