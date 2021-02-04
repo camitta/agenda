@@ -113,7 +113,6 @@ router.post('/boards/:boardId', async (req, res, next) => {
   try {
     const {boardId} = req.params
     const {name, description, dueDate, type, label} = req.body
-    console.log(req.body)
     const newTask = await Task.create({
       name,
       description,
