@@ -24,7 +24,6 @@ router.put('/:taskId', async (req, res, next) => {
   try {
     const userId = req.user.id
     const {taskId} = req.params
-
     const updated = await Task.update(req.body, {
       returning: true,
       where: {
@@ -114,7 +113,6 @@ router.post('/boards/:boardId', async (req, res, next) => {
   try {
     const {boardId} = req.params
     const {name, description, dueDate, type, label} = req.body
-    console.log(req.body)
     const newTask = await Task.create({
       name,
       description,
@@ -150,6 +148,34 @@ router.get('/allTasks/:boardId', async (req, res, next) => {
       ]
     })
     res.send(tasks)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//remove an assigned chip from taskId
+router.put('/:taskId/chips/remove', async (req, res, next) => {
+  try {
+    const {taskId} = req.params
+    const userId = req.user.id
+    await Task.update(req.body, {
+      where: {
+        id: taskId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          },
+          required: true
+        }
+      ]
+    })
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }

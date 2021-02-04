@@ -1,14 +1,16 @@
 import React, {useState} from 'react'
 import {assignUserToTask} from '../store/tasks'
+import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import IconButton from '@material-ui/core/Button'
 import styled from 'styled-components'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import {UserAvatar} from './index'
 
 const AddUserToTask = props => {
-  const taskId = props.task
+  const taskId = props.task.id
   const board = props.board
   const boardUsers = board.users
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -19,6 +21,7 @@ const AddUserToTask = props => {
 
   const handleClose = async userId => {
     await props.addUserToTask(taskId, userId)
+    await props.fetchTasks(board.id)
     setAnchorEl(null)
   }
 
@@ -42,15 +45,17 @@ const AddUserToTask = props => {
         {boardUsers.map(user => (
           <MenuItem key={user.id} onClick={() => handleClose(user.id)}>{`${
             user.firstName
-          }`}</MenuItem>
+          } ${user.lastName}`}</MenuItem>
         ))}
       </Menu>
+      <UserAvatar task={props.task.users} />
     </>
   )
 }
 
 const mapDispatch = dispatch => {
   return {
+    fetchTasks: boardId => dispatch(getAllTasks(boardId)),
     addUserToTask: (taskId, userId) =>
       dispatch(assignUserToTask(taskId, userId))
   }

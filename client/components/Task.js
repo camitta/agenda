@@ -14,6 +14,7 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import CardHeader from '@material-ui/core/CardHeader'
 
 // Custom MUI
 import {taskStyles} from './TaskMUI'
@@ -24,7 +25,7 @@ import {deleteSingleTask, editSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 
 // Components
-import {AddUserToTask, TaskForm} from './index'
+import {AddUserToTask, TaskForm, UserAvatar, Chips} from './index'
 
 const TaskContainer = styled.div`
   position: center;
@@ -32,7 +33,7 @@ const TaskContainer = styled.div`
   word-wrap: break-word;
 `
 const Task = props => {
-  const task = props.task
+  const {task, boardId} = props
 
   const classes = taskStyles()
 
@@ -69,7 +70,13 @@ const Task = props => {
   }
 
   const handleSubmit = async () => {
-    await props.updateSingleTask(task.id, {name, description, type})
+    await props.updateSingleTask(task.id, {
+      name,
+      description,
+      type,
+      dueDate,
+      label
+    })
     await props.getAllTasks(props.boardId)
     setEdit(!edit)
   }
@@ -91,7 +98,6 @@ const Task = props => {
     label,
     setLabel
   }
-
   return (
     <TaskContainer>
       <Card>
@@ -105,6 +111,14 @@ const Task = props => {
                   id="panel1a-header"
                 >
                   <div>
+                    {task.label &&
+                      task.label.length && (
+                        <Chips
+                          label={task.label}
+                          boardId={boardId}
+                          taskId={task.id}
+                        />
+                      )}
                     <Typography variant="h6" style={{textAlign: 'left'}}>
                       {task.name}
                     </Typography>
@@ -115,6 +129,15 @@ const Task = props => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography variant="body2">{task.description}</Typography>
+                </AccordionDetails>
+                <AccordionDetails>
+                  <Typography variant="subtitle1" style={{textAlign: 'left'}}>
+                    Assign user to task:
+                  </Typography>
+                </AccordionDetails>
+                <AccordionDetails>
+                  <AddUserToTask task={task} board={task.board} />
+                  {/* <UserAvatar task={task.users} /> */}
                 </AccordionDetails>
               </Accordion>
               {/* <Typography variant="h6">{task.name}</Typography>
@@ -136,14 +159,11 @@ const Task = props => {
           <EditIcon />
         </IconButton>
       ) : (
-        <IconButton
-          aria-label="submit"
-          onClick={() => handleSubmit(task.id, description)}
-        >
+        <IconButton aria-label="submit" onClick={() => handleSubmit()}>
           <DoneIcon color="primary" />
         </IconButton>
       )}
-      <AddUserToTask task={task.id} board={props.task.board} />
+      {/* <AddUserToTask task={task.id} board={props.task.board} /> */}
     </TaskContainer>
   )
 }
