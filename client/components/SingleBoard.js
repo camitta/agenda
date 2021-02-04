@@ -10,6 +10,7 @@ import {getAllTasks} from '../store/all-tasks'
 
 //Material-UI items
 import styled from 'styled-components'
+import {withStyles} from '@material-ui/core/styles'
 import GroupIcon from '@material-ui/icons/Group'
 import Typography from '@material-ui/core/Typography'
 import Accordion from '@material-ui/core/Accordion'
@@ -18,12 +19,19 @@ import AccordionDetails from '@material-ui/core/AccordionDetails'
 
 const ListsContainer = styled.div`
   justify-content: space-around;
-  padding: 4em;
+  padding: 1em 4em 4em 4em;
   display: flex;
   flex-direction: row;
   justify-content: space around;
   text-align: center;
 `
+const Title = withStyles({
+  root: {
+    textAlign: 'center',
+    marginTop: '1rem'
+  }
+})(Typography)
+
 class SingleBoard extends Component {
   componentDidMount() {
     try {
@@ -59,6 +67,7 @@ class SingleBoard extends Component {
             <AddUserToBoard currentBoard={this.props.singleBoard} />
           </AccordionDetails>
         </Accordion>
+        <Title variant="h3">{this.props.singleBoard.name}</Title>
         <ListsContainer>
           <List status="todo" boardId={boardId} tasks={todoTasks} />
           <List status="inprogress" boardId={boardId} tasks={progressTasks} />
