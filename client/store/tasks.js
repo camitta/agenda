@@ -1,3 +1,4 @@
+import {SignalCellularNull} from '@material-ui/icons'
 import axios from 'axios'
 
 /**
@@ -9,6 +10,7 @@ const REMOVE_SINGLE_TASK = 'REMOVE_SINGLE_TASK'
 const ADD_SINGLE_TASK = 'ADD_SINGLE_TASK'
 const EDIT_SINGLE_TASK = 'EDIT_SINGLE_TASK'
 const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK'
+const REMOVE_CHIPS_FROM_TASK = 'REMOVE_CHIPS_FROM_TASK'
 /**
  * INITIAL STATE
  */
@@ -23,6 +25,10 @@ const removeSingleTask = () => ({type: REMOVE_SINGLE_TASK})
 const addedSingleTask = singleTask => ({type: ADD_SINGLE_TASK, singleTask})
 const editedSingleTask = singleTask => ({type: EDIT_SINGLE_TASK, singleTask})
 const addedUserToTask = singleTask => ({type: ADD_USER_TO_TASK, singleTask})
+const removedChipsFromTask = label => ({
+  type: REMOVE_CHIPS_FROM_TASK,
+  label
+})
 /**
  * THUNK CREATORS
  */
@@ -80,6 +86,18 @@ export const assignUserToTask = (taskId, userId) => {
     }
   }
 }
+
+export const removeChipsFromSingleTask = taskId => {
+  return async dispatch => {
+    try {
+      const label = {label: ''}
+      await axios.put(`/api/tasks/${taskId}/chips/remove`, label)
+      dispatch(removedChipsFromTask(taskId, {label}))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -95,6 +113,8 @@ export default function(state = initialState, action) {
       return action.singleTask
     case ADD_USER_TO_TASK:
       return action.singleTask
+    case REMOVE_CHIPS_FROM_TASK:
+      return {...state, label: action.label}
     default:
       return state
   }
