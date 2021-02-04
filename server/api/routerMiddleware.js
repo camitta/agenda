@@ -1,25 +1,17 @@
 const Board = require('../db/models/board')
-const Task = require('../db/models/task')
-const User = require('../db/models/user')
 
 //checks if current in user logged in
 //checks if current user is the same one making the http request
 const isLoggedInUser = async (req, res, next) => {
-  if (req.user) {
-    const {id: userId} = req.user
-    const {boardId, taskId} = req.params
-    if (boardId) {
-      const board = await Board.findByPk(boardId)
-      const bool = await board.hasUser(userId)
-      if (bool) {
-        next()
-      } else {
-        const err = new Error('Access Denied.')
-        err.status = 401
-        next(err)
-      }
+  const {id: userId} = req.user
+  const {boardId} = req.params
+  if (userId && boardId) {
+    const board = await Board.findByPk(boardId)
+    const userHasAccess = await board.hasUser(userId)
+    if (userHasAccess) {
+      next()
     } else {
-      const err = new Error('Board does not exist.')
+      const err = new Error('Uh oh.')
       err.status = 401
       next(err)
     }
