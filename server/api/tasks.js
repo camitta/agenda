@@ -6,7 +6,6 @@ const {isLoggedInUser} = require('./routerMiddleware')
 //api/tasks/:taskId
 router.get('/:taskId', isLoggedInUser, async (req, res, next) => {
   try {
-    console.log('TASK REQ PARAMS', req.params)
     const {taskId} = req.params
     const tasks = await Task.findByPk(taskId, {
       include: {
@@ -25,7 +24,6 @@ router.put('/:taskId', async (req, res, next) => {
   try {
     const userId = req.user.id
     const {taskId} = req.params
-
     const updated = await Task.update(req.body, {
       returning: true,
       where: {
