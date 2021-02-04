@@ -1,4 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles, createMuiTheme} from '@material-ui/core/styles'
+
+export const fontTheme = createMuiTheme()
 
 export const homeStyles = makeStyles(() => ({
   mantra: {
