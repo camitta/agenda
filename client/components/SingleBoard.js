@@ -1,11 +1,20 @@
+//React components
 import React, {Component} from 'react'
 import List from './List'
-//import thunk creator
+import AddUserToBoard from './AddUserToBoard'
+
+//Redux store items
+import {connect} from 'react-redux'
 import {getSingleBoard} from '../store/single-board'
 import {getAllTasks} from '../store/all-tasks'
-import {connect} from 'react-redux'
+
+//Material-UI items
 import styled from 'styled-components'
-import AddUserToBoard from './AddUserToBoard'
+import GroupIcon from '@material-ui/icons/Group'
+import Typography from '@material-ui/core/Typography'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
 
 const ListsContainer = styled.div`
   justify-content: space-around;
@@ -38,12 +47,23 @@ class SingleBoard extends Component {
 
     return (
       <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<GroupIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Team Members</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <AddUserToBoard currentBoard={this.props.singleBoard} />
+          </AccordionDetails>
+        </Accordion>
         <ListsContainer>
           <List status="todo" boardId={boardId} tasks={todoTasks} />
           <List status="inprogress" boardId={boardId} tasks={progressTasks} />
           <List status="done" boardId={boardId} tasks={doneTasks} />
         </ListsContainer>
-        {/* <AddUserToBoard currentBoard={this.props.singleBoard} /> */}
       </div>
     )
   }

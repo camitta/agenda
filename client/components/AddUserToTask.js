@@ -18,7 +18,6 @@ const AddUserToTask = props => {
   }
 
   const handleClose = async userId => {
-    console.log('USER ID', userId, 'taskID', props.task)
     await props.addUserToTask(taskId, userId)
     setAnchorEl(null)
   }
