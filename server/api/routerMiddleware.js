@@ -10,13 +10,27 @@ const isLoggedInUser = async (req, res, next) => {
     const {boardId, taskId} = req.params
     if (boardId) {
       const board = await Board.findByPk(boardId)
-      if (board.hasUser(userId)) {
+      const bool = await board.hasUser(userId)
+      if (bool) {
         next()
+      } else {
+        const err = new Error('Access Denied.')
+        err.status = 401
+        next(err)
       }
-    } else if (taskId) {
+    } else {
+      const err = new Error("Doesn't exist.")
+      err.status = 401
+      next(err)
+    }
+    if (taskId) {
       const task = await Task.findByPk(taskId)
       if (task.hasUser(userId)) {
         next()
+      } else {
+        const err = new Error("Doesn't exist.")
+        err.status = 401
+        next(err)
       }
     }
   } else {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Task from './Task'
-import PostTask from './AddTask'
+import AddTask from './AddTask'
 
 // Material UI components
 import Typography from '@material-ui/core/Typography'
@@ -34,7 +34,7 @@ const List = props => {
             id="panel1a-header"
           />
           <AccordionDetails>
-            <PostTask type={status} boardId={boardId} />
+            <AddTask type={status} boardId={boardId} />
           </AccordionDetails>
         </Accordion>
       </div>

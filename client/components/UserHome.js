@@ -70,28 +70,7 @@ const UserHome = props => {
       <Box display="flex">
         <Checklist />
 
-        {/* load all team boards */}
-        <Container>
-          <Typography className={classes.title} variant="h4">
-            Team Boards
-          </Typography>
-          <Grid container className={classes.container}>
-            {teamBoards.length ? (
-              teamBoards.filter(item => item.type === 'team').map(item => (
-                <Grid item className={classes.gridItem} key={item.id}>
-                  <StyledButton
-                    className={classes.boardItem}
-                    href={`/boards/${item.id}`}
-                  >
-                    {item.name}
-                  </StyledButton>
-                </Grid>
-              ))
-            ) : (
-              <div />
-            )}
-          </Grid>
-
+        <Container className={classes.boards}>
           {/* load all personal boards */}
           <Typography variant="h4" className={classes.title}>
             Personal Boards
@@ -110,6 +89,27 @@ const UserHome = props => {
                     </StyledButton>
                   </Grid>
                 ))
+            ) : (
+              <div />
+            )}
+          </Grid>
+
+          {/* load all team boards */}
+          <Typography className={classes.title} variant="h4">
+            Team Boards
+          </Typography>
+          <Grid container className={classes.container}>
+            {teamBoards.length ? (
+              teamBoards.filter(item => item.type === 'team').map(item => (
+                <Grid item className={classes.gridItem} key={item.id}>
+                  <StyledButton
+                    className={classes.boardItem}
+                    href={`/boards/${item.id}`}
+                  >
+                    {item.name}
+                  </StyledButton>
+                </Grid>
+              ))
             ) : (
               <div />
             )}

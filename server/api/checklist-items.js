@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// api/checklist  --adds new item to checklist
+// api/checklist  --adds new item to checklist & returns new checklist
 router.post('/', async (req, res, next) => {
   try {
     const userId = req.user.id
@@ -37,27 +37,27 @@ router.post('/', async (req, res, next) => {
 })
 
 // api/checklist/:itemId  --update item in checklist
-router.put('/:itemId', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    const currentItemId = req.params.itemId
+    const currentItemId = req.body.id
     const updatedItem = await ChecklistItem.findByPk(currentItemId)
-    await updatedItem.update(req.body)
-    res.send(204).end()
+    await updatedItem.update(req.body.completed)
+    res.sendStatus(204).end()
   } catch (err) {
     next(err)
   }
 })
 
 // api/checklist/:itemId/delete  --delete item in checklist
-router.delete('/:itemId/delete', async (req, res, next) => {
+router.delete('/', async (req, res, next) => {
   try {
-    const currentItemId = req.params.itemId
+    const currentItemId = req.body.id
     await ChecklistItem.destroy({
       where: {
         id: currentItemId
       }
     })
-    res.send(204).end()
+    res.sendStatus(204).end()
   } catch (err) {
     next(err)
   }

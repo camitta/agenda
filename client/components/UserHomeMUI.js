@@ -40,6 +40,9 @@ export const homeStyles = makeStyles(() => ({
     boxShadow: '2px 2px 4px 2px #ff6987',
     color: 'white',
     border: 'none'
+  },
+  boards: {
+    marginLeft: '20px'
   }
 }))
 
