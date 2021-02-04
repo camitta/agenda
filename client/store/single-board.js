@@ -74,6 +74,8 @@ export const addUserSingleBoard = (id, userEmail) => {
       dispatch(addedUsersSingleBoard(data))
     } catch (err) {
       console.error(err)
+      const {data} = await axios.get(`/api/boards/${id}`)
+      return dispatch(fetchSingleBoard({...data, error: err}))
     }
   }
 }
