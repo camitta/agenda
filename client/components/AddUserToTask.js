@@ -6,9 +6,10 @@ import IconButton from '@material-ui/core/Button'
 import styled from 'styled-components'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import {UserAvatar} from './index'
 
 const AddUserToTask = props => {
-  const taskId = props.task
+  const taskId = props.task.id
   const board = props.board
   const boardUsers = board.users
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -42,9 +43,10 @@ const AddUserToTask = props => {
         {boardUsers.map(user => (
           <MenuItem key={user.id} onClick={() => handleClose(user.id)}>{`${
             user.firstName
-          }`}</MenuItem>
+          } ${user.lastName}`}</MenuItem>
         ))}
       </Menu>
+      <UserAvatar />
     </>
   )
 }

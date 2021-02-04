@@ -14,6 +14,7 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import CardHeader from '@material-ui/core/CardHeader'
 
 // Custom MUI
 import {taskStyles} from './TaskMUI'
@@ -24,7 +25,7 @@ import {deleteSingleTask, editSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 
 // Components
-import {AddUserToTask, TaskForm} from './index'
+import {AddUserToTask, TaskForm, UserAvatar} from './index'
 
 const TaskContainer = styled.div`
   position: center;
@@ -95,6 +96,11 @@ const Task = props => {
   return (
     <TaskContainer>
       <Card>
+        {/* <CardHeader
+          avatar={
+            <UserAvatar task={task.users} />
+          }
+        /> */}
         <CardContent>
           {edit === false ? (
             <div>
@@ -115,6 +121,15 @@ const Task = props => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography variant="body2">{task.description}</Typography>
+                </AccordionDetails>
+                <AccordionDetails>
+                  <Typography variant="subtitle1" style={{textAlign: 'left'}}>
+                    Assign user to task:
+                  </Typography>
+                </AccordionDetails>
+                <AccordionDetails>
+                  <AddUserToTask task={task} board={props.task.board} />
+                  <UserAvatar task={task.users} />
                 </AccordionDetails>
               </Accordion>
               {/* <Typography variant="h6">{task.name}</Typography>
@@ -143,7 +158,7 @@ const Task = props => {
           <DoneIcon color="primary" />
         </IconButton>
       )}
-      <AddUserToTask task={task.id} board={props.task.board} />
+      {/* <AddUserToTask task={task.id} board={props.task.board} /> */}
     </TaskContainer>
   )
 }
