@@ -83,7 +83,7 @@ const UserHome = props => {
                     className={classes.boardItem}
                     href={`/boards/${item.id}`}
                   >
-                    {item.name}
+                    <Typography>{item.name}</Typography>
                   </StyledButton>
                 </Grid>
               ))

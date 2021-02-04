@@ -18,8 +18,7 @@ export const homeStyles = makeStyles(() => ({
     borderRadius: 3,
     fontStyle: 'italic',
     alignSelf: 'flex-end',
-    fontWeight: 500,
-    fontSize: 'xx-large'
+    fontWeight: 500
   },
   gridItem: {
     margin: '10px',
