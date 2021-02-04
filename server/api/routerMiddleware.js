@@ -3,9 +3,24 @@ const Task = require('../db/models/task')
 
 //checks if current in user logged in
 //checks if current user is the same one making the http request
+
+// const isLoggedInUser = (req, res, next) => {
+// 	console.log('REC PARAMS', req.params);
+// 	console.log('REC USER', req.user);
+// 	const { id } = req.params;
+// 	if (req.user && req.user.id === Number(req.params.id)) {
+// 		next();
+// 	} else {
+// 		const err = new Error('Access Denied.');
+// 		err.status = 401;
+// 		next(err);
+// 	}
+// };
+
 const isLoggedInUser = async (req, res, next) => {
+  console.log('req user', req.user)
   if (req.user) {
-    const userId = req.user.id
+    const {id: userId} = req.user
     // console.log(Object.keys(Task.prototype));
     const {boardId, taskId} = req.params
     if (boardId) {
