@@ -22,26 +22,12 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//GET api/boards/:boardId
-// router.get('/boards/:boardId', isLoggedInUser, async (req, res, next) => {
-//   try {
-//     const [order] = await Order.findOrCreate({
-//       where: {userId: req.params.userId, fulfilled: false},
-//       include: [OrderItem]
-//     })
-//     const items = await order.getItems()
-//     res.send({items, order})
-//   } catch (error) {
-//     next(error)
-//   }
-// })
-
 router.get('/:boardId', isLoggedInUser, async (req, res, next) => {
   try {
-    const {id: boardId} = req.params
+    const {boardId: id} = req.params
     const board = await Board.findOne({
       where: {
-        id: boardId
+        id
       },
       include: [
         {
