@@ -145,8 +145,7 @@ router.put('/:boardId/add/user', async (req, res, next) => {
       await board.addUser(user)
       res.send(204).end()
     } else if (!user) {
-      const response = {data: {error: 'error from add user'}}
-      res.status(404).send(response)
+      res.status(404).send({error: 'error from add user'})
     }
   } catch (err) {
     next(err)
