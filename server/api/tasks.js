@@ -4,7 +4,7 @@ const {isLoggedInUser} = require('./routerMiddleware')
 
 //get new single task
 //api/tasks/:taskId
-router.get('/:taskId', isLoggedInUser, async (req, res, next) => {
+router.get('/:taskId', async (req, res, next) => {
   try {
     const {taskId} = req.params
     const tasks = await Task.findByPk(taskId, {
@@ -82,9 +82,10 @@ router.delete('/:taskId', async (req, res, next) => {
 })
 
 //assign user to task
-// api/tasks/boards/:boardId
+// api/tasks/assignUser/boards/:boardId
+// isLoggedInUser func must be included to avoid error.
 router.put(
-  '/:taskId/boards/:boardId',
+  '/:taskId/assignUser/boards/:boardId',
   isLoggedInUser,
   async (req, res, next) => {
     try {
@@ -105,6 +106,25 @@ router.put(
         }
       })
       await task.addUser(user)
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
+//assign user to task
+// api/tasks/assignUser/boards/:boardId
+// isLoggedInUser func must be included to avoid error.
+router.put(
+  '/:taskId/unassignUser/boards/:boardId',
+  isLoggedInUser,
+  async (req, res, next) => {
+    try {
+      const userId = req.body.id
+      const {taskId} = req.params
+      const task = await Task.findByPk(taskId)
+      await task.removeUser(userId)
       res.sendStatus(204)
     } catch (err) {
       next(err)

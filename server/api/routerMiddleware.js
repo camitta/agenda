@@ -1,4 +1,4 @@
-const {Board, Task, User} = require('../db/models')
+const {Board, Task} = require('../db/models')
 
 //checks if current in user logged in
 //checks if current user is the same one making the http request
