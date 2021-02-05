@@ -10,8 +10,18 @@ import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 
 // Custom MUI
-import {homeStyles} from './UserHomeMUI'
 import {StyledButton} from './Navbar'
+import {ThemeProvider} from '@material-ui/core/styles'
+import {homeStyles, fontTheme} from './UserHomeMUI'
+fontTheme.typography.h3 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem'
+  },
+  [fontTheme.breakpoints.up('md')]: {
+    fontSize: '2.4rem'
+  }
+}
 
 // Redux
 import {fetchMantras} from '../store/mantras'
@@ -48,7 +58,7 @@ const UserHome = props => {
     props.boards.filter(item => item.type === 'personal') || []
   const mantras = props.mantras || []
   return (
-    <div>
+    <ThemeProvider theme={fontTheme}>
       <Grid container className={classes.mantra}>
         {/* get a random mantra */}
         {mantras.length ? (
@@ -71,6 +81,7 @@ const UserHome = props => {
         <Checklist />
 
         <Container className={classes.boards}>
+          
           {/* load all personal boards */}
           <Typography variant="h4" className={classes.title}>
             Personal Boards
@@ -116,7 +127,7 @@ const UserHome = props => {
           </Grid>
         </Container>
       </Box>
-    </div>
+    </ThemeProvider>
   )
 }
 
