@@ -79,6 +79,7 @@ export const addUserSingleBoard = (id, userEmail) => {
     }
   }
 }
+
 /**
  * REDUCER
  */
