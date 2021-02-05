@@ -17,7 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CardHeader from '@material-ui/core/CardHeader'
 
 // Custom MUI
-import {taskStyles} from './TaskMUI'
+import {taskStyles} from './CustomMUI/TaskMUI'
 import styled from 'styled-components'
 
 // Redux
@@ -37,31 +37,22 @@ const Task = props => {
 
   const classes = taskStyles()
 
-  const [edit, setEdit] = useState(false)
-  const [description, setDescription] = useState(task.description)
-  const [name, setName] = useState(task.name)
-  const [type, setType] = useState(task.type)
-  const [dueDate, setDueDate] = useState(task.dueDate)
-  const [label, setLabel] = useState(task.label)
+  const [state, setState] = useState({
+    edit: false,
+    name: task.name,
+    description: task.description,
+    type: task.type,
+    dueDate: task.dueDate,
+    label: task.label
+  })
 
-  const handleNameChange = event => {
-    setName(event.target.value)
-  }
-
-  const handleDescriptionChange = event => {
-    setDescription(event.target.value)
-  }
-
-  const handleTypeChange = event => {
-    setType(event.target.value)
-  }
-
-  const handleLabelChange = event => {
-    setLabel(event.target.value)
-  }
-
+  // date picker event returns only the date - this extra function is required
   const handleDateChange = date => {
-    setDueDate(date)
+    setState({...state, dueDate: date})
+  }
+
+  const handleChange = event => {
+    setState({...state, [event.target.name]: event.target.value})
   }
 
   const handleDelete = async id => {
@@ -71,38 +62,21 @@ const Task = props => {
 
   const handleSubmit = async () => {
     await props.updateSingleTask(task.id, {
-      name,
-      description,
-      type,
-      dueDate,
-      label
+      name: state.name,
+      description: state.description,
+      type: state.type,
+      dueDate: state.dueDate,
+      label: state.label
     })
     await props.getAllTasks(props.boardId)
-    setEdit(!edit)
+    setState({...state, edit: !state.edit})
   }
 
-  const taskFormProps = {
-    handleDescriptionChange,
-    handleNameChange,
-    handleTypeChange,
-    handleDateChange,
-    handleLabelChange,
-    name,
-    setName,
-    description,
-    setDescription,
-    type,
-    setType,
-    dueDate,
-    setDueDate,
-    label,
-    setLabel
-  }
   return (
     <TaskContainer>
       <Card>
         <CardContent>
-          {edit === false ? (
+          {state.edit === false ? (
             <div>
               <Accordion style={{boxShadow: 'none', margin: '0'}}>
                 <AccordionSummary
@@ -139,22 +113,24 @@ const Task = props => {
                   <AddUserToTask task={task} board={props.task.board} />
                 </AccordionDetails>
               </Accordion>
-              {/* <Typography variant="h6">{task.name}</Typography>
-              <Typography variant="body2">{task.description}</Typography>
-              <Typography variant="subtitle1" className={classes.dueDate}>
-                Due Date: {moment(task.dueDate).format('LL')}
-              </Typography> */}
             </div>
           ) : (
-            <TaskForm {...taskFormProps} />
+            <TaskForm
+              handleChange={handleChange}
+              state={state}
+              handleDateChange={handleDateChange}
+            />
           )}
         </CardContent>
       </Card>
       <IconButton aria-label="delete" onClick={() => handleDelete(task.id)}>
         <DeleteIcon />
       </IconButton>
-      {edit === false ? (
-        <IconButton aria-label="edit" onClick={() => setEdit(!edit)}>
+      {state.edit === false ? (
+        <IconButton
+          aria-label="edit"
+          onClick={() => setState({...state, edit: !state.edit})}
+        >
           <EditIcon />
         </IconButton>
       ) : (

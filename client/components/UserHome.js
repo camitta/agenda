@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button'
 // Custom MUI
 import {StyledButton} from './Navbar'
 import {ThemeProvider} from '@material-ui/core/styles'
-import {homeStyles, fontTheme} from './UserHomeMUI'
+import {homeStyles, fontTheme} from './CustomMUI/UserHomeMUI'
 fontTheme.typography.h3 = {
   fontSize: '1.2rem',
   '@media (min-width:600px)': {
@@ -81,7 +81,6 @@ const UserHome = props => {
         <Checklist />
 
         <Container className={classes.boards}>
-          
           {/* load all personal boards */}
           <Typography variant="h4" className={classes.title}>
             Personal Boards
