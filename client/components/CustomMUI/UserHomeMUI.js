@@ -74,7 +74,7 @@ export const modalStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'center',
     margin: '0 auto',
-    height: '25%',
+    height: '40%',
     width: '25%',
     border: '2px solid #000',
     padding: '20px',
