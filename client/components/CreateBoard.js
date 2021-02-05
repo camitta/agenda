@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 // Custom MUI
-import {modalStyles} from './UserHomeMUI'
+import {modalStyles} from './CustomMUI/UserHomeMUI'
 
 // Redux
 import {addSingleBoard} from '../store/single-board'

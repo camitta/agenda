@@ -30,6 +30,9 @@ const theme = createMuiTheme({
     button: {
       fontFamily: 'Roboto Mono',
       border: 2
+    },
+    '@media (min-width:600px)': {
+      fontSize: '1.5rem'
     }
   },
   shape: {
