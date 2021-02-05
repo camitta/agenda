@@ -10,7 +10,6 @@ import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 
 // Custom MUI
-import {StyledButton} from './Navbar'
 import {homeStyles} from './CustomMUI/UserHomeMUI'
 
 // Redux
@@ -80,13 +79,18 @@ const UserHome = props => {
               personalBoards
                 .filter(item => item.type === 'personal')
                 .map(item => (
-                  <Grid item className={classes.gridItem} key={item.id}>
-                    <StyledButton
+                  <Grid
+                    width={1}
+                    item
+                    className={classes.gridItem}
+                    key={item.id}
+                  >
+                    <Button
                       className={classes.boardItem}
                       href={`/boards/${item.id}`}
                     >
                       {item.name}
-                    </StyledButton>
+                    </Button>
                   </Grid>
                 ))
             ) : (
@@ -102,12 +106,12 @@ const UserHome = props => {
             {teamBoards.length ? (
               teamBoards.filter(item => item.type === 'team').map(item => (
                 <Grid item className={classes.gridItem} key={item.id}>
-                  <StyledButton
+                  <Button
                     className={classes.boardItem}
                     href={`/boards/${item.id}`}
                   >
                     {item.name}
-                  </StyledButton>
+                  </Button>
                 </Grid>
               ))
             ) : (
