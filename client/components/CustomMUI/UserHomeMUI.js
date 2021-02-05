@@ -29,11 +29,12 @@ export const homeStyles = makeStyles(theme => ({
     minHeight: '150px'
   },
   boardItem: {
-    minHeight: '150px',
-    minWidth: '150px',
-    width: '100%',
+    padding: '5px 9px 5px 5px',
+    minHeight: '100px',
+    minWidth: '100px',
     background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
     boxShadow: '2px 2px 4px 2px #ff6987',
+    color: 'white',
     borderRadius: 3,
     fontStyle: 'italic',
     alignSelf: 'flex-end',
