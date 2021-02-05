@@ -48,7 +48,7 @@ const AddUserToTask = props => {
           </MenuItem>
         ))}
       </Menu>
-      <UserAvatar task={props.task.users} />
+      <UserAvatar users={props.task.users} taskId={taskId} boardId={board.id} />
     </>
   )
 }
