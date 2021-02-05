@@ -8,6 +8,7 @@ const REMOVE_SINGLE_BOARD = 'REMOVE_SINGLE_BOARD'
 const ADD_SINGLE_BOARD = 'ADD_SINGLE_BOARD'
 const EDIT_SINGLE_BOARD = 'EDIT_SINGLE_BOARD'
 const ADD_USER_TO_BOARD = 'ADD_USER_TO_BOARD '
+const REMOVE_USER_FROM_BOARD = 'REMOVE_USER_FROM_BOARD'
 /**
  * INITIAL STATE
  */
@@ -21,6 +22,7 @@ const removeSingleBoard = () => ({type: REMOVE_SINGLE_BOARD})
 const addedSingleBoard = board => ({type: ADD_SINGLE_BOARD, board})
 const editedSingleBoard = board => ({type: EDIT_SINGLE_BOARD, board})
 const addedUsersSingleBoard = board => ({type: ADD_USER_TO_BOARD, board})
+const removedUserSingleBoard = board => ({type: REMOVE_USER_FROM_BOARD, board})
 /**
  * THUNK CREATORS
  */
@@ -79,6 +81,18 @@ export const addUserSingleBoard = (id, userEmail) => {
     }
   }
 }
+
+export const removeUserSingleBoard = (boardId, userId) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/boards/${boardId}/delete/user`)
+      const {data} = await axios.get(`/api/boards/${boardId}`, {id: userId})
+      dispatch(removedUserSingleBoard(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -93,7 +107,9 @@ export default function(state = initialState, action) {
     case EDIT_SINGLE_BOARD:
       return action.board
     case ADD_USER_TO_BOARD:
-      return {...action.board}
+      return action.board
+    case REMOVE_USER_FROM_BOARD:
+      return action.board
     default:
       return state
   }
