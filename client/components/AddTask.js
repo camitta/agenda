@@ -53,7 +53,6 @@ const AddTask = props => {
     setDescription('')
     setDueDate(new Date())
   }
-  error && console.log(error.response.data)
   return (
     <PostContainer>
       <form>
