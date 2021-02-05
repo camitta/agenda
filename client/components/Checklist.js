@@ -25,6 +25,7 @@ const ChecklistClasses = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     margin: '20px',
+    minWidth: '150px',
     height: '75%',
     width: '30%',
     background: '#faf1d4',

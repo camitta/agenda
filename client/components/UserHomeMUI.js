@@ -12,6 +12,7 @@ export const homeStyles = makeStyles(() => ({
   },
   boardItem: {
     minHeight: '150px',
+    minWidth: '150px',
     width: '100%',
     background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
     boxShadow: '2px 2px 4px 2px #ff6987',
