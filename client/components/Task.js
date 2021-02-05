@@ -136,8 +136,7 @@ const Task = props => {
                   </Typography>
                 </AccordionDetails>
                 <AccordionDetails>
-                  <AddUserToTask task={task} board={task.board} />
-                  {/* <UserAvatar task={task.users} /> */}
+                  <AddUserToTask task={task} board={props.task.board} />
                 </AccordionDetails>
               </Accordion>
               {/* <Typography variant="h6">{task.name}</Typography>
@@ -163,7 +162,6 @@ const Task = props => {
           <DoneIcon color="primary" />
         </IconButton>
       )}
-      {/* <AddUserToTask task={task.id} board={props.task.board} /> */}
     </TaskContainer>
   )
 }

@@ -6,10 +6,7 @@ import {addUserSingleBoard} from '../store/single-board'
 import {connect} from 'react-redux'
 
 //Material UI
-import styled from 'styled-components'
-import Container from '@material-ui/core/Container'
 import TextField from '@material-ui/core/TextField'
-import InputLabel from '@material-ui/core/InputLabel'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -71,11 +68,18 @@ const AddUserToBoard = props => {
         <IconButton aria-label="submit" onClick={handleSubmit}>
           <PersonAddIcon style={{fontSize: 40}} color="action" />
         </IconButton>
+        <>
+          {props.boardState.error ? (
+            <div>User not registered with Agenda</div>
+          ) : (
+            <></>
+          )}
+        </>
       </form>
     </div>
   )
 }
-const mapState = state => ({error: state.singleBoard.error})
+const mapState = state => ({boardState: state.singleBoard})
 
 const mapDispatch = dispatch => {
   return {
