@@ -1,6 +1,24 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const homeStyles = makeStyles(() => ({
+export const homeStyles = makeStyles(theme => ({
+  '@global': {
+    html: {
+      fontSize: 12,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: 14
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: 16
+      },
+      [theme.breakpoints.up('lg')]: {
+        fontSize: 20
+      }
+    }
+  },
+  root: {
+    maxWidth: 650,
+    padding: theme
+  },
   mantra: {
     display: 'flex',
     alignItems: 'center',
