@@ -82,30 +82,35 @@ router.delete('/:taskId', async (req, res, next) => {
 })
 
 //assign user to task
-// api/tasks/assignUser/:taskId
-router.put('/assignUser/:taskId', isLoggedInUser, async (req, res, next) => {
-  try {
-    const {taskId} = req.params
-    const task = await Task.findOne({
-      where: {
-        id: taskId
-      },
-      include: {
-        model: User
-      }
-    })
-    const userToBeAssignedId = req.body.id
-    const user = await User.findOne({
-      where: {
-        id: userToBeAssignedId
-      }
-    })
-    await task.addUser(user)
-    res.send(204).end()
-  } catch (err) {
-    next(err)
+// api/tasks/boards/:boardId
+router.put(
+  '/:taskId/boards/:boardId',
+  isLoggedInUser,
+  async (req, res, next) => {
+    try {
+      const {taskId, boardId} = req.params
+      const task = await Task.findOne({
+        where: {
+          id: taskId,
+          boardId
+        },
+        include: {
+          model: User
+        }
+      })
+      const userToBeAssignedId = req.body.id
+      const user = await User.findOne({
+        where: {
+          id: userToBeAssignedId
+        }
+      })
+      await task.addUser(user)
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 //create new task
 // api/tasks/boards/:boardId

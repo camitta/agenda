@@ -143,7 +143,7 @@ router.put('/:boardId/add/user', async (req, res, next) => {
     })
     if (user) {
       await board.addUser(user)
-      res.send(204).end()
+      res.sendStatus(204)
     } else if (!user) {
       res.status(404).send({error: 'error from add user'})
     }

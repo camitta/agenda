@@ -2,10 +2,10 @@ const {Board, Task, User} = require('../db/models')
 
 //checks if current in user logged in
 //checks if current user is the same one making the http request
+
 const isLoggedInUser = async (req, res, next) => {
   const {id: userId} = req.user
   const {boardId, taskId} = req.params
-  console.log('req.params from LoggedInUser: ', req.params)
   if (!userId) {
     const err = new Error('Please log in.')
     err.status = 401
@@ -17,11 +17,8 @@ const isLoggedInUser = async (req, res, next) => {
       userHasAccess = await board.hasUser(userId)
     } else if (taskId) {
       const task = await Task.findByPk(taskId)
-      const user = await User.findByPk(userId)
-      userHasAccess = await task.hasUser(user)
-      console.log('userHasAccess from task condition', userHasAccess)
+      userHasAccess = await task.hasUser(userId)
     }
-    console.log('userHasAccess', userHasAccess)
     if (userHasAccess) {
       next()
     } else {

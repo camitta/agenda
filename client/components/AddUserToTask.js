@@ -20,7 +20,7 @@ const AddUserToTask = props => {
   }
 
   const handleClose = async userId => {
-    await props.addUserToTask(taskId, userId)
+    await props.addUserToTask(taskId, board.id, userId)
     await props.fetchTasks(board.id)
     setAnchorEl(null)
   }
@@ -56,8 +56,8 @@ const AddUserToTask = props => {
 const mapDispatch = dispatch => {
   return {
     fetchTasks: boardId => dispatch(getAllTasks(boardId)),
-    addUserToTask: (taskId, userId) =>
-      dispatch(assignUserToTask(taskId, userId))
+    addUserToTask: (taskId, boardId, userId) =>
+      dispatch(assignUserToTask(taskId, boardId, userId))
   }
 }
 

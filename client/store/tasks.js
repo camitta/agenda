@@ -75,10 +75,10 @@ export const editSingleTask = (id, task) => {
   }
 }
 
-export const assignUserToTask = (taskId, userId) => {
+export const assignUserToTask = (taskId, boardId, userId) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/tasks/assignUser/${taskId}`, {id: userId})
+      await axios.put(`/api/tasks/${taskId}/boards/${boardId}`, {id: userId})
       const {data} = await axios.get(`/api/tasks/${taskId}`)
       dispatch(addedUserToTask(data))
     } catch (err) {
