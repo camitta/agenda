@@ -90,7 +90,7 @@ const UserHome = props => {
                   </Grid>
                 ))
             ) : (
-              <div />
+              <p>Add a new board!</p>
             )}
           </Grid>
 
@@ -111,7 +111,7 @@ const UserHome = props => {
                 </Grid>
               ))
             ) : (
-              <div />
+              <p>Add a new board!</p>
             )}
           </Grid>
         </Container>

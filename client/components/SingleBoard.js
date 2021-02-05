@@ -1,11 +1,11 @@
 //React components
-import React, {Component} from 'react'
+import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
 
 //Redux store items
 import {connect} from 'react-redux'
-import {getSingleBoard} from '../store/single-board'
+import {getSingleBoard, deleteSingleBoard} from '../store/single-board'
 import {getAllTasks} from '../store/all-tasks'
 
 //Material-UI items
@@ -16,6 +16,11 @@ import Typography from '@material-ui/core/Typography'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
+import Button from '@material-ui/core/Button'
+import Modal from '@material-ui/core/Modal'
+
+// Custom MUI
+import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
 
 const ListsContainer = styled.div`
   justify-content: space-around;
@@ -25,6 +30,7 @@ const ListsContainer = styled.div`
   justify-content: space around;
   text-align: center;
 `
+
 const Title = withStyles({
   root: {
     textAlign: 'center',
@@ -32,50 +38,98 @@ const Title = withStyles({
   }
 })(Typography)
 
-class SingleBoard extends Component {
-  componentDidMount() {
+const SingleBoard = props => {
+  useEffect(() => {
+    loadBoardAndTasks()
+  }, [])
+
+  const [open, setOpen] = useState(false)
+
+  const boardId = props.match.params.boardId
+
+  function loadBoardAndTasks() {
     try {
-      const boardId = this.props.match.params.boardId
-      this.props.fetchSingleBoard(boardId)
-      this.props.getAllTasks(boardId)
+      props.fetchSingleBoard(boardId)
+      props.getAllTasks(boardId)
     } catch (error) {
       console.log(error)
     }
   }
-  render() {
-    const boardId = this.props.match.params.boardId
-    const tasks = this.props.tasks
 
-    let todoTasks, progressTasks, doneTasks
-    if (tasks && tasks.length) {
-      todoTasks = tasks.filter(task => task.type === 'todo')
-      progressTasks = tasks.filter(task => task.type === 'inprogress')
-      doneTasks = tasks.filter(task => task.type === 'done')
-    }
-
-    return (
-      <div>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<GroupIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Team Members</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <AddUserToBoard currentBoard={this.props.singleBoard} />
-          </AccordionDetails>
-        </Accordion>
-        <Title variant="h3">{this.props.singleBoard.name}</Title>
-        <ListsContainer>
-          <List status="todo" boardId={boardId} tasks={todoTasks} />
-          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-          <List status="done" boardId={boardId} tasks={doneTasks} />
-        </ListsContainer>
-      </div>
-    )
+  function handleModal(event) {
+    event.preventDefault()
+    setOpen(true)
   }
+
+  async function handleDelete(event) {
+    event.preventDefault()
+    await props.deleteBoard(boardId)
+    setOpen(false)
+    props.history.push('/home')
+  }
+
+  function handleCancel(event) {
+    event.preventDefault()
+    setOpen(false)
+  }
+
+  const tasks = props.tasks
+
+  let todoTasks, progressTasks, doneTasks
+  if (tasks && tasks.length) {
+    todoTasks = tasks.filter(task => task.type === 'todo')
+    progressTasks = tasks.filter(task => task.type === 'inprogress')
+    doneTasks = tasks.filter(task => task.type === 'done')
+  }
+
+  const classes = singleBoardStyles()
+
+  return (
+    <div>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<GroupIcon />}
+          aria-controls="single-task"
+        >
+          <Typography>Team Members</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <AddUserToBoard currentBoard={props.singleBoard} />
+        </AccordionDetails>
+      </Accordion>
+      <Title variant="h3">{props.singleBoard.name}</Title>
+      <ListsContainer>
+        <List status="todo" boardId={boardId} tasks={todoTasks} />
+        <List status="inprogress" boardId={boardId} tasks={progressTasks} />
+        <List status="done" boardId={boardId} tasks={doneTasks} />
+      </ListsContainer>
+      <div className={classes.deleteContainer}>
+        <Button
+          className={classes.deleteButton}
+          variant="contained"
+          onClick={handleModal}
+        >
+          Delete board
+        </Button>
+        <Modal
+          open={open}
+          aria-labelledby="delete-board-confirmation"
+          aria-describedby="delete-board-modal"
+          onClose={handleCancel}
+        >
+          <div className={classes.modal}>
+            Are you sure you want to delete this board?
+            <Button onClick={handleDelete} style={{color: 'green'}}>
+              Yes
+            </Button>
+            <Button onClick={handleCancel} style={{color: 'red'}}>
+              No
+            </Button>
+          </div>
+        </Modal>
+      </div>
+    </div>
+  )
 }
 
 const mapState = state => ({
@@ -86,7 +140,8 @@ const mapState = state => ({
 const mapDispatch = dispatch => {
   return {
     fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
-    getAllTasks: boardId => dispatch(getAllTasks(boardId))
+    getAllTasks: boardId => dispatch(getAllTasks(boardId)),
+    deleteBoard: boardId => dispatch(deleteSingleBoard(boardId))
   }
 }
 

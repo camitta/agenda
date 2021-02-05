@@ -34,6 +34,10 @@ export const homeStyles = makeStyles(() => ({
     justifyContent: 'center',
     float: 'right',
     background: '#e59b69',
+    '&:hover': {
+      backgroundColor: '#fcb045',
+      color: '#FFF'
+    },
     borderRadius: 3,
     padding: '5px 9px 5px 5px',
     margin: '10px 30px 10px 10px',
