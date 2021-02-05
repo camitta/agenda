@@ -83,7 +83,7 @@ router.delete('/:taskId', async (req, res, next) => {
 
 //assign user to task
 // api/tasks/assignUser/:taskId
-router.put('/assignUser/:taskId', async (req, res, next) => {
+router.put('/assignUser/:taskId', isLoggedInUser, async (req, res, next) => {
   try {
     const {taskId} = req.params
     const task = await Task.findOne({

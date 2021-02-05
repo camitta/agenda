@@ -19,8 +19,6 @@ export const generateErrorMessage = errMessage => {
       } else {
         return `Did you fill out ${nameType} correctly?`
       }
-    } else {
-      console.log(errMessage)
     }
   }
 }

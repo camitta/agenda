@@ -43,9 +43,9 @@ const AddUserToTask = props => {
         onClose={handleClose}
       >
         {boardUsers.map(user => (
-          <MenuItem key={user.id} onClick={() => handleClose(user.id)}>{`${
-            user.firstName
-          } ${user.lastName}`}</MenuItem>
+          <MenuItem key={user.id} onClick={() => handleClose(user.id)}>
+            {`${user.firstName} ${user.lastName}`}
+          </MenuItem>
         ))}
       </Menu>
       <UserAvatar task={props.task.users} />
