@@ -36,7 +36,6 @@ export const homeStyles = makeStyles(theme => ({
     boxShadow: '2px 2px 4px 2px #ff6987',
     color: 'white',
     borderRadius: 3,
-    fontStyle: 'italic',
     alignSelf: 'flex-end',
     fontWeight: 500
   },

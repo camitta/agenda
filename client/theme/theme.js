@@ -40,7 +40,7 @@ const theme = createMuiTheme({
     fontFamily: `${fonts.body}, ${backupFonts.sans}`,
     body1: {
       fontFamily: `${fonts.body}, ${backupFonts.sans}`,
-      fontSize: '1.5rem',
+      fontSize: '1.25rem',
       fontWeight: 400,
       lineHeight: '2.3rem'
     },
@@ -64,36 +64,36 @@ const theme = createMuiTheme({
     },
     h3: {
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
-      fontSize: '1rem',
+      fontSize: '1.4 rem',
       fontWeight: 800,
       lineHeight: '1.4375rem'
     },
     h4: {
-      fontFamily: `${fonts.caption}, ${backupFonts.sans}`,
-      fontSize: '1rem',
+      fontFamily: `${fonts.header}, ${backupFonts.sans}`,
+      fontSize: '1.32rem',
       fontWeight: 400,
       lineHeight: '1.4375rem'
     },
     h5: {
-      fontFamily: `${fonts.variant}, ${backupFonts.sans}`,
-      fontSize: '1.925rem',
+      fontFamily: `${fonts.header}, ${backupFonts.sans}`,
+      fontSize: '1.25rem',
       fontWeight: 400,
       lineHeight: '1.875rem'
     },
     h6: {
-      fontFamily: `${fonts.variant}, ${backupFonts.sans}`,
+      fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       fontSize: '1.13rem',
       fontWeight: 400,
       lineHeight: '2.75rem'
     },
     subtitle1: {
-      fontFamily: `${fonts.subhead}, ${backupFonts.sans}`,
+      fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       fontSize: '1rem',
       fontWeight: 400,
       lineHeight: '1.4375rem'
     },
     caption: {
-      fontFamily: `${fonts.caption}, ${backupFonts.sans}`,
+      fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       fontSize: '0.75rem',
       fontWeight: 400,
       lineHeight: '0.9375rem'

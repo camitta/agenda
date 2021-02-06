@@ -52,12 +52,16 @@ const UserHome = props => {
         {/* get a random mantra */}
         {mantras.length ? (
           <Typography
-            style={{fontSize: 18, fontFamily: 'pinyon script, cursive'}}
+            style={{fontSize: 20, fontFamily: 'pinyon script, cursive'}}
           >
             {mantras[Math.floor(Math.random() * mantras.length)].mantra}
           </Typography>
         ) : (
-          <Typography variant="subtitle2">What's on your agenda?</Typography>
+          <Typography
+            style={{fontSize: 20, fontFamily: 'pinyon script, cursive'}}
+          >
+            What's on your agenda?
+          </Typography>
         )}
       </Grid>
 

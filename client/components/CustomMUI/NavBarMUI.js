@@ -38,7 +38,7 @@ export const navStyles = makeStyles(theme => ({
     alignSelf: 'flex-end',
     fontFamily: 'pinyon script',
     fontWeight: '300',
-    padding: '.5em',
-    fontSize: 'xx-large'
+    padding: '.5em .5em',
+    fontSize: '3rem'
   }
 }))
