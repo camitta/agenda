@@ -15,6 +15,14 @@ const DeleteTask = props => {
   const {taskId, boardId, taskName} = props
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    let isMounted = false
+    if (!isMounted) setOpen(false)
+    return () => {
+      isMounted = true
+    }
+  }, [])
+
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -27,7 +35,6 @@ const DeleteTask = props => {
     try {
       await props.removeSingleTask(taskId)
       await props.getAllTasks(boardId)
-      setOpen(false)
     } catch (err) {
       console.log(err)
     }
