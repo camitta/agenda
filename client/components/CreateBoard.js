@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 // Custom MUI
-import {modalStyles} from './UserHomeMUI'
+import {modalStyles} from './CustomMUI/UserHomeMUI'
 
 // Redux
 import {addSingleBoard} from '../store/single-board'
@@ -23,19 +23,17 @@ export const CreateBoard = props => {
     props.setOpen(false)
   }
 
-  const [name, setName] = React.useState('')
-  const [type, setType] = React.useState('')
+  const [state, setState] = React.useState({
+    name: '',
+    type: ''
+  })
 
-  function handleNameChange(event) {
-    setName(event.target.value)
-  }
-
-  function handleTypeChange(event) {
-    setType(event.target.value)
+  function handleChange(event) {
+    setState({...state, [event.target.name]: event.target.value})
   }
 
   async function handleSubmit() {
-    await props.addBoard({name, type})
+    await props.addBoard(state)
     await props.getBoards()
   }
 
@@ -51,12 +49,13 @@ export const CreateBoard = props => {
         <TextField
           id="filled-basic"
           label="Name"
+          name="name"
           variant="filled"
-          value={name}
-          onChange={handleNameChange}
+          value={state.name}
+          onChange={handleChange}
         />
         <InputLabel>Type</InputLabel>
-        <Select value={type} onChange={handleTypeChange}>
+        <Select value={state.type} name="type" onChange={handleChange}>
           <MenuItem value="personal">Personal</MenuItem>
           <MenuItem value="team">Team</MenuItem>
         </Select>

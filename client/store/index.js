@@ -9,6 +9,7 @@ import allBoards from './all-boards'
 import mantras from './mantras'
 import allTasks from './all-tasks'
 import checklist from './checklist'
+import {removeUserSingleBoard} from './single-board'
 
 const reducer = combineReducers({
   user,
@@ -25,6 +26,7 @@ const middleware = composeWithDevTools(
 )
 
 const store = createStore(reducer, middleware)
+// store.dispatch(removeUserSingleBoard(45, 4))
 
 export default store
 export * from './user'

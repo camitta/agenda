@@ -143,7 +143,7 @@ router.put('/:boardId/add/user', async (req, res, next) => {
     })
     if (user) {
       await board.addUser(user)
-      res.send(204).end()
+      res.sendStatus(204)
     } else if (!user) {
       res.status(404).send({error: 'error from add user'})
     }
@@ -168,7 +168,6 @@ router.put('/:boardId/delete/user', async (req, res, next) => {
     //     id: req.body.id
     //   }
     // })
-    console.log(req.body, '<---HERE')
     await board.removeUser(user)
     res.send(204).end()
   } catch (err) {

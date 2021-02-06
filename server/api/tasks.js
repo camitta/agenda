@@ -4,7 +4,7 @@ const {isLoggedInUser} = require('./routerMiddleware')
 
 //get new single task
 //api/tasks/:taskId
-router.get('/:taskId', isLoggedInUser, async (req, res, next) => {
+router.get('/:taskId', async (req, res, next) => {
   try {
     const {taskId} = req.params
     const tasks = await Task.findByPk(taskId, {
@@ -82,30 +82,55 @@ router.delete('/:taskId', async (req, res, next) => {
 })
 
 //assign user to task
-// api/tasks/assignUser/:taskId
-router.put('/assignUser/:taskId', async (req, res, next) => {
-  try {
-    const {taskId} = req.params
-    const task = await Task.findOne({
-      where: {
-        id: taskId
-      },
-      include: {
-        model: User
-      }
-    })
-    const userToBeAssignedId = req.body.id
-    const user = await User.findOne({
-      where: {
-        id: userToBeAssignedId
-      }
-    })
-    await task.addUser(user)
-    res.send(204).end()
-  } catch (err) {
-    next(err)
+// api/tasks/assignUser/boards/:boardId
+// isLoggedInUser func must be included to avoid error.
+router.put(
+  '/:taskId/assignUser/boards/:boardId',
+  isLoggedInUser,
+  async (req, res, next) => {
+    try {
+      const {taskId, boardId} = req.params
+      const task = await Task.findOne({
+        where: {
+          id: taskId,
+          boardId
+        },
+        include: {
+          model: User
+        }
+      })
+      const userToBeAssignedId = req.body.id
+      const user = await User.findOne({
+        where: {
+          id: userToBeAssignedId
+        }
+      })
+      await task.addUser(user)
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
+
+//assign user to task
+// api/tasks/assignUser/boards/:boardId
+// isLoggedInUser func must be included to avoid error.
+router.put(
+  '/:taskId/unassignUser/boards/:boardId',
+  isLoggedInUser,
+  async (req, res, next) => {
+    try {
+      const userId = req.body.id
+      const {taskId} = req.params
+      const task = await Task.findByPk(taskId)
+      await task.removeUser(userId)
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
+  }
+)
 
 //create new task
 // api/tasks/boards/:boardId
