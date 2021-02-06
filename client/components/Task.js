@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import EditIcon from '@material-ui/icons/Edit'
-// import DeleteIcon from '@material-ui/icons/Delete'
 import DoneIcon from '@material-ui/icons/Done'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
@@ -21,11 +20,11 @@ import {taskStyles} from './CustomMUI/TaskMUI'
 import styled from 'styled-components'
 
 // Redux
-import {deleteSingleTask, editSingleTask} from '../store/tasks'
+import {editSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 
 // Components
-import {AddUserToTask, TaskForm, UserAvatar, DeleteTask, Chips} from './index'
+import {AddUserToTask, TaskForm, DeleteTask, Chips} from './index'
 
 const TaskContainer = styled.div`
   position: center;
@@ -53,11 +52,6 @@ const Task = props => {
 
   const handleChange = event => {
     setState({...state, [event.target.name]: event.target.value})
-  }
-
-  const handleDelete = async id => {
-    await props.removeSingleTask(id)
-    await props.getAllTasks(props.boardId)
   }
 
   const handleSubmit = async () => {
@@ -123,9 +117,6 @@ const Task = props => {
           )}
         </CardContent>
       </Card>
-      {/* <IconButton aria-label="delete" onClick={() => handleDelete(task.id)}>
-        <DeleteIcon />
-      </IconButton> */}
       <DeleteTask taskId={task.id} boardId={boardId} taskName={task.name} />
       {state.edit === false ? (
         <IconButton
@@ -145,7 +136,6 @@ const Task = props => {
 
 const mapDispatch = dispatch => {
   return {
-    // removeSingleTask: id => dispatch(deleteSingleTask(id)),
     getAllTasks: boardId => dispatch(getAllTasks(boardId)),
     updateSingleTask: (id, task) => dispatch(editSingleTask(id, task))
   }

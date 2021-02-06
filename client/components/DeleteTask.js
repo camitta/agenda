@@ -52,7 +52,7 @@ const DeleteTask = props => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove {taskName} from the board?
+            Are you sure you want to remove "{taskName}" from the board?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
