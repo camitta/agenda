@@ -7,14 +7,6 @@ const theme = createMuiTheme({
       '@global': {
         html: {
           WebkitFontSmoothing: 'auto'
-        },
-        '*=.MuiButton-root': {
-          fontFamily: 'Roboto Mono',
-          border: 2,
-          color: '#000000'
-        },
-        '*=.MuiButtonBase-root': {
-          fontFamily: 'Roboto Mono'
         }
       }
     }
@@ -27,10 +19,6 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: 'Roboto Mono',
-    button: {
-      fontFamily: 'Roboto Mono',
-      border: 2
-    },
     '@media (min-width:600px)': {
       fontSize: '1.5rem'
     }
