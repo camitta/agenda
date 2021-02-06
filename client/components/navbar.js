@@ -16,14 +16,14 @@ const Navbar = function({handleClick, isLoggedIn}) {
       <Toolbar className={classes.toolbar}>
         <Typography className={classes.title} variant="h5" noWrap>
           <Link href={isLoggedIn ? '/home' : '/login'} color="inherit">
-            agenda
+            Agenda
           </Link>
         </Typography>
 
         {isLoggedIn ? (
           <div>
             <Button className={classes.menuButton} href="/home">
-              HOME
+              Home
             </Button>
             <Button
               className={classes.menuButton}
@@ -38,7 +38,7 @@ const Navbar = function({handleClick, isLoggedIn}) {
             <Button className={classes.menuButton} href="/login">
               Log In
             </Button>
-            <StyledButton href="/signup">SIGN UP</StyledButton>
+            <StyledButton href="/signup">Sign Up</StyledButton>
           </div>
         )}
       </Toolbar>

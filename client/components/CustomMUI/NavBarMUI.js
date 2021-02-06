@@ -12,9 +12,6 @@ export const StyledButton = withStyles({
     padding: '1em',
     margin: '10px',
     boxShadow: '2px 2px 4px 2px #ff6987'
-  },
-  label: {
-    textTransform: 'capitalize'
   }
 })(Button)
 
@@ -27,7 +24,8 @@ export const navStyles = makeStyles(theme => ({
     border: 0,
     color: 'white',
     height: 40,
-    padding: '1em'
+    padding: '1em',
+    margin: '10px'
   },
   toolbar: {
     minHeight: 128,
@@ -37,10 +35,9 @@ export const navStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
-    fontStyle: 'italic',
     alignSelf: 'flex-end',
-    fontFamily: 'Roboto Mono',
-    fontWeight: 500,
+    fontFamily: 'Inter',
+    fontWeight: '300',
     padding: '.5em',
     fontSize: 'xx-large'
   }

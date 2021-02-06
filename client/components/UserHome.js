@@ -51,7 +51,9 @@ const UserHome = props => {
       <Grid container className={classes.mantra}>
         {/* get a random mantra */}
         {mantras.length ? (
-          <Typography variant="subtitle2">
+          <Typography
+            style={{fontSize: 18, fontFamily: 'pinyon script, cursive'}}
+          >
             {mantras[Math.floor(Math.random() * mantras.length)].mantra}
           </Typography>
         ) : (
