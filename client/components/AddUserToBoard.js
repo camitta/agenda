@@ -40,11 +40,7 @@ const AddUserToBoard = props => {
 
   const handleDelete = async userId => {
     try {
-      // event.preventDefault()
       await props.removeUserFromBoard(boardId, userId)
-      // setEmail('')
-      console.log('user', userId)
-      console.log('BOARD', boardId)
     } catch (error) {
       console.log(error)
     }

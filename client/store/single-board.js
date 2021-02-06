@@ -85,8 +85,8 @@ export const addUserSingleBoard = (id, userEmail) => {
 export const removeUserSingleBoard = (boardId, userId) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/boards/${boardId}/delete/user`)
-      const {data} = await axios.get(`/api/boards/${boardId}`, {id: userId})
+      await axios.put(`/api/boards/${boardId}/delete/user`, {id: userId})
+      const {data} = await axios.get(`/api/boards/${boardId}`)
       dispatch(removedUserSingleBoard(data))
     } catch (err) {
       console.error(err)
