@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 
@@ -44,6 +44,22 @@ const Task = props => {
     dueDate: task.dueDate,
     label: task.label
   })
+
+  useEffect(() => {
+    let isMounted = false
+    if (!isMounted)
+      setState({
+        edit: false,
+        name: task.name,
+        description: task.description,
+        type: task.type,
+        dueDate: task.dueDate,
+        label: task.label
+      })
+    return () => {
+      isMounted = true
+    }
+  }, [])
 
   // date picker event returns only the date - this extra function is required
   const handleDateChange = date => {
