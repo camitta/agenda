@@ -25,9 +25,13 @@ const AddUserToTask = props => {
   }
 
   const handleAdd = async userId => {
-    await props.addUserToTask(taskId, board.id, userId)
-    await props.fetchTasks(board.id)
-    setAnchorEl(null)
+    try {
+      await props.addUserToTask(taskId, board.id, userId)
+      await props.fetchTasks(board.id)
+      setAnchorEl(null)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

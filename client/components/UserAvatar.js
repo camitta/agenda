@@ -28,6 +28,7 @@ const UserAvatar = props => {
     try {
       await props.unassignUser(taskId, boardId, userId)
       await props.fetchTasks(boardId)
+      setOpen(false)
     } catch (err) {
       console.log(err)
     }
@@ -42,7 +43,7 @@ const UserAvatar = props => {
                 {user.firstName[0]}
                 {user.lastName[0]}
               </Avatar>
-              {/* <Dialog
+              <Dialog
                 open={open}
                 onClose={handleClose}
                 aria-describedby="alert-dialog-description"
@@ -65,7 +66,7 @@ const UserAvatar = props => {
                     Yes I Do
                   </Button>
                 </DialogActions>
-              </Dialog> */}
+              </Dialog>
             </div>
           ))
         : null}
