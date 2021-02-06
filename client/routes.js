@@ -7,9 +7,7 @@ import {me} from './store'
 
 //Material UI
 import CircularProgress from '@material-ui/core/CircularProgress'
-/**
- * COMPONENT
- */
+
 class Routes extends Component {
   constructor() {
     super()
@@ -28,11 +26,7 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
     const {loaded} = this.state
     if (!loaded) {
-      return (
-        <div>
-          <CircularProgress />
-        </div>
-      )
+      return <CircularProgress />
     }
     if (!isLoggedIn) {
       return (
@@ -57,9 +51,6 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
@@ -80,9 +71,6 @@ const mapDispatch = dispatch => {
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
 
-/**
- * PROP TYPES
- */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
