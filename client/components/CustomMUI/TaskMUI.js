@@ -12,5 +12,10 @@ export const taskStyles = makeStyles(() => ({
   },
   dueDate: {
     color: '#3f51b5'
+  },
+  cardLayout: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }))
