@@ -77,7 +77,7 @@ const UserHome = props => {
 
         <Container className={classes.boards}>
           {/* load all personal boards */}
-          <Typography variant="h4" className={classes.title}>
+          <Typography variant="h3" className={classes.title}>
             Personal Boards
           </Typography>
           <Grid container className={classes.container}>
@@ -85,12 +85,7 @@ const UserHome = props => {
               personalBoards
                 .filter(item => item.type === 'personal')
                 .map(item => (
-                  <Grid
-                    width={1}
-                    item
-                    className={classes.gridItem}
-                    key={item.id}
-                  >
+                  <Grid item sm={3} className={classes.gridItem} key={item.id}>
                     <Button
                       className={classes.boardItem}
                       href={`/boards/${item.id}`}
@@ -105,13 +100,13 @@ const UserHome = props => {
           </Grid>
 
           {/* load all team boards */}
-          <Typography className={classes.title} variant="h4">
+          <Typography className={classes.title} variant="h3">
             Team Boards
           </Typography>
           <Grid container className={classes.container}>
             {teamBoards.length ? (
               teamBoards.filter(item => item.type === 'team').map(item => (
-                <Grid item className={classes.gridItem} key={item.id}>
+                <Grid item xm={3} className={classes.gridItem} key={item.id}>
                   <Button
                     className={classes.boardItem}
                     href={`/boards/${item.id}`}
