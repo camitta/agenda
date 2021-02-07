@@ -97,16 +97,18 @@ const Task = props => {
                           taskId={task.id}
                         />
                       )}
-                    <Typography variant="h6" style={{textAlign: 'left'}}>
+                    <Typography variant="body2" style={{textAlign: 'left'}}>
                       {task.name}
                     </Typography>
-                    <Typography variant="subtitle1" className={classes.dueDate}>
+                    <Typography variant="caption" className={classes.dueDate}>
                       Due Date: {moment(task.dueDate).format('LL')}
                     </Typography>
                   </div>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography variant="body2">{task.description}</Typography>
+                  <Typography variant="body1" style={{textAlign: 'left'}}>
+                    {task.description}
+                  </Typography>
                 </AccordionDetails>
                 <AccordionDetails>
                   <Typography variant="subtitle1" style={{textAlign: 'left'}}>

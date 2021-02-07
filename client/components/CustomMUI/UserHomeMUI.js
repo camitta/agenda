@@ -19,10 +19,10 @@ export const homeStyles = makeStyles(theme => ({
     padding: theme
   },
   mantra: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '20px'
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 0,
+    padding: '1em'
   },
   container: {
     minHeight: '150px',
@@ -32,10 +32,14 @@ export const homeStyles = makeStyles(theme => ({
     padding: '5px 9px 5px 5px',
     minHeight: '100px',
     minWidth: '100px',
-    background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
-    boxShadow: '2px 2px 4px 2px #ff6987',
-    color: 'white',
-    borderRadius: 3,
+    background: '#fff',
+    '&:hover': {
+      background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
+      color: '#FFF'
+    },
+    boxShadow: '0px 3px #000000',
+    color: 'black',
+    borderRadius: 1,
     alignSelf: 'flex-end',
     fontWeight: 500
   },
@@ -51,20 +55,21 @@ export const homeStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     float: 'right',
-    background: '#e59b69',
-    '&:hover': {
-      backgroundColor: '#fcb045',
-      color: '#FFF'
-    },
-    borderRadius: 3,
     padding: '5px 5px 5px 5px',
     margin: '10px 10px 10px 10px',
-    boxShadow: '2px 2px 4px 2px #ff6987',
-    color: 'white',
-    border: 'none'
+    color: 'black'
   },
   boards: {
-    marginLeft: '0px'
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'column',
+    padding: '5px'
+  },
+  textHover: {
+    color: '#000000',
+    '&:hover': {
+      color: '#FFF'
+    }
   }
 }))
 
@@ -75,7 +80,7 @@ export const modalStyles = makeStyles(() => ({
     justifyContent: 'center',
     margin: '0 auto',
     height: '40%',
-    width: '25%',
+    width: '100%',
     border: '2px solid #000',
     padding: '20px',
     background: 'white',

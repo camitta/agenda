@@ -68,7 +68,7 @@ const List = props => {
 
   return (
     <ListContainer>
-      <Typography>{status}</Typography>
+      <Typography variant="h3">{status}</Typography>
       <div>
         <Accordion>
           <AccordionSummary

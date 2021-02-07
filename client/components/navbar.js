@@ -7,38 +7,48 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
-import {StyledButton, navStyles} from './CustomMUI/NavBarMUI'
+import {navStyles} from './CustomMUI/NavBarMUI'
+import {StyledButton} from './CustomMUI/GradientButton'
 
 const Navbar = function({handleClick, isLoggedIn}) {
   const classes = navStyles()
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{backgroundColor: '#ffff'}}>
       <Toolbar className={classes.toolbar}>
         <Typography className={classes.title} variant="h5" noWrap>
-          <Link href={isLoggedIn ? '/home' : '/login'} color="inherit">
-            Agenda
-          </Link>
+          <Link href={isLoggedIn ? '/home' : '/login'}>Agenda</Link>
         </Typography>
 
         {isLoggedIn ? (
           <div>
-            <Button className={classes.menuButton} href="/home">
+            <StyledButton
+              variant="outlined"
+              className={classes.menuButton}
+              href="/home"
+            >
               Home
-            </Button>
-            <Button
+            </StyledButton>
+            <StyledButton
+              variant="outlined"
               className={classes.menuButton}
               href="#"
               onClick={handleClick}
             >
               Log Out
-            </Button>
+            </StyledButton>
           </div>
         ) : (
           <div>
-            <Button className={classes.menuButton} href="/login">
+            <StyledButton
+              variant="outlined"
+              className={classes.menuButton}
+              href="/login"
+            >
               Log In
-            </Button>
-            <StyledButton href="/signup">Sign Up</StyledButton>
+            </StyledButton>
+            <StyledButton variant="outlined" href="/signup">
+              Sign Up
+            </StyledButton>
           </div>
         )}
       </Toolbar>
