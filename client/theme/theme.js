@@ -1,5 +1,4 @@
 import {createMuiTheme} from '@material-ui/core/styles'
-import indigo from '@material-ui/core/colors/indigo'
 
 const fonts = {
   breakpoints: {
@@ -102,13 +101,45 @@ const theme = createMuiTheme({
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       textTransform: 'lowercase',
       textDecoration: 'none',
-      color: '#ffffff'
+      color: '#000000'
     }
   },
   palette: {
-    primary: indigo,
+    type: 'light',
+    primary: {
+      main: '#000000'
+    },
     secondary: {
-      main: '#00bfa5'
+      main: '#FEF6D3'
+    },
+    brand: {
+      forestGreen: '#003833',
+      seaFoam: '#c3f1cf',
+      sienna: '#87331f',
+      palePink: '#FDE1DE',
+      navy: '#1F396D',
+      lightBlue: '#DAEFF1',
+      plum: '#621244',
+      lavender: '#DED1E1',
+      offWhite: '#FCF8F4',
+      lemon: '#FFE671',
+      orange: '#FABA91',
+      vanilla: '#FEF6D3'
+    },
+    error: {
+      main: '#C10230',
+      dark: '#C10230',
+      contrastText: '#ffffff'
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#000000',
+      disabled: '#A69B95',
+      hint: '#FABA91'
+    },
+    background: {
+      paper: '#ffffff',
+      default: '#ffffff'
     }
   },
   overrides: {
@@ -118,6 +149,9 @@ const theme = createMuiTheme({
         '&:hover': {
           backgroundColor: '#fff'
         }
+      },
+      outlined: {
+        borderColor: 'black'
       }
     },
     MuiFormLabel: {

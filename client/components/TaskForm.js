@@ -15,7 +15,7 @@ export const TaskForm = props => {
   const classes = taskStyles()
 
   return (
-    <form className={classes.taskCard}>
+    <form className={classes.card}>
       <TextField
         style={{width: '100%'}}
         id="filled-basic"

@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const singleBoardStyles = makeStyles(() => ({
   deleteButton: {
+    textAlign: 'center',
     backgroundColor: '#e6766e',
     color: '#FFF',
     '&:hover': {
@@ -10,7 +11,7 @@ export const singleBoardStyles = makeStyles(() => ({
     }
   },
   deleteContainer: {
-    textAlign: 'center'
+    textAlign: 'right'
   },
   modal: {
     display: 'flex',
