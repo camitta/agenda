@@ -44,14 +44,20 @@ const Task = props => {
     label: task.label
   })
 
-  // changes the color of the task title if today is on or past due date
+  // changes color of task title if today is on, approaching, or past due date
   const checkDueDate = () => {
     const taskName = document.getElementById('taskName')
+    const relativeDate = moment(state.dueDate)
+      .startOf('day')
+      .fromNow()
+    const dateRegEx = /(hour|minute|second)s/i
     if (
       moment(state.dueDate).isSame(new Date(), 'day') ||
       moment(state.dueDate).isBefore(new Date(), 'day')
     ) {
       taskName.style.color = 'red'
+    } else if (dateRegEx.test(relativeDate)) {
+      taskName.style.color = 'orange'
     } else {
       taskName.style.color = 'black'
     }
