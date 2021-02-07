@@ -4,13 +4,13 @@ import {connect} from 'react-redux'
 // Material UI
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import {makeStyles} from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import AddIcon from '@material-ui/icons/Add'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
+import {ChecklistClasses} from './CustomMUI/ChecklistMUI'
 
 // Redux
 import {
@@ -19,31 +19,6 @@ import {
   editChecklist,
   deleteItem
 } from '../store/checklist'
-
-const ChecklistClasses = makeStyles(() => ({
-  checklist: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '20px',
-    minWidth: '150px',
-    height: '75%',
-    width: '30%',
-    background: '#faf1d4',
-    boxShadow: '2px 2px 4px 2px #9c9c9c'
-  },
-  formItem: {
-    padding: '10px'
-  },
-  title: {
-    textAlign: 'center',
-    padding: '10px'
-  },
-  add: {
-    display: 'flex',
-    marginRight: '10%',
-    width: '100%'
-  }
-}))
 
 const Checklist = props => {
   useEffect(() => {
@@ -90,7 +65,7 @@ const Checklist = props => {
   const tasks = props.checklist || []
 
   return (
-    <Box className={classes.checklist}>
+    <Grid item xs={12} className={classes.checklist}>
       <Typography variant="h3" className={classes.title}>
         To-Do List
       </Typography>
@@ -128,7 +103,7 @@ const Checklist = props => {
       ) : (
         <p />
       )}
-    </Box>
+    </Grid>
   )
 }
 

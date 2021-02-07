@@ -1,31 +1,16 @@
-import {makeStyles, withStyles} from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-
-export const StyledButton = withStyles({
-  root: {
-    background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
-    borderRadius: 3,
-    border: 0,
-    zIndex: 1,
-    color: 'white',
-    height: 40,
-    padding: '1em',
-    margin: '10px',
-    boxShadow: '2px 2px 4px 2px #ff6987'
-  }
-})(Button)
+import {makeStyles} from '@material-ui/core/styles'
 
 export const navStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
   menuButton: {
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
+    borderRadius: '1px',
+    color: 'black',
     height: 40,
     padding: '1em',
-    margin: '10px'
+    margin: '10px',
+    boxShadow: '0px 3px #000000'
   },
   toolbar: {
     minHeight: 128,
