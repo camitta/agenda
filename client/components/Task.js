@@ -35,14 +35,16 @@ const Task = props => {
 
   const classes = taskStyles()
 
-  const [state, setState] = useState({
+  const defaultState = {
     edit: false,
     name: task.name,
     description: task.description,
     type: task.type,
     dueDate: task.dueDate,
     label: task.label
-  })
+  }
+
+  const [state, setState] = useState(defaultState)
 
   // changes color of task title if today is on, approaching, or past due date
   const checkDueDate = () => {
@@ -65,16 +67,7 @@ const Task = props => {
 
   useEffect(() => {
     let isMounted = false
-    if (!isMounted)
-      setState({
-        edit: false,
-        name: task.name,
-        description: task.description,
-        type: task.type,
-        dueDate: task.dueDate,
-        label: task.label
-      })
-    checkDueDate()
+    if (!isMounted) setState(defaultState)
     return () => {
       isMounted = true
     }
@@ -130,7 +123,7 @@ const Task = props => {
                     >
                       {task.name}
                     </Typography>
-                    <Typography variant="subtitle1" className={classes.dueDate}>
+                    <Typography variant="caption" className={classes.dueDate}>
                       Due Date: {moment(task.dueDate).format('LL')}
                     </Typography>
                   </div>
