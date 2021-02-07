@@ -42,6 +42,7 @@ export const TaskForm = props => {
         margin="normal"
         id="date-picker-inline"
         name="dueDate"
+        disablePast={true}
         onChange={props.handleDateChange}
         label="Due Date"
         value={props.state.dueDate}

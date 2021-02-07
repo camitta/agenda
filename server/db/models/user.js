@@ -35,7 +35,7 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING,
     validate: {
-      len: [6, 12],
+      len: [6, 20],
       notEmpty: true,
       notContains: ['password', 'abc']
     },

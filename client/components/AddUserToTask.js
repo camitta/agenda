@@ -2,27 +2,36 @@ import React, {useState} from 'react'
 import {assignUserToTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
+import {UserAvatar} from './index'
+
+// Material UI
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import IconButton from '@material-ui/core/Button'
-import styled from 'styled-components'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import {UserAvatar} from './index'
 
 const AddUserToTask = props => {
   const taskId = props.task.id
   const board = props.board
   const boardUsers = board.users
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = async userId => {
-    await props.addUserToTask(taskId, board.id, userId)
-    await props.fetchTasks(board.id)
+  const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleAdd = async userId => {
+    try {
+      await props.addUserToTask(taskId, board.id, userId)
+      await props.fetchTasks(board.id)
+      setAnchorEl(null)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -43,7 +52,7 @@ const AddUserToTask = props => {
         onClose={handleClose}
       >
         {boardUsers.map(user => (
-          <MenuItem key={user.id} onClick={() => handleClose(user.id)}>
+          <MenuItem key={user.id} onClick={() => handleAdd(user.id)}>
             {`${user.firstName} ${user.lastName}`}
           </MenuItem>
         ))}
