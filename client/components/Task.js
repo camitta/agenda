@@ -36,26 +36,20 @@ const Task = props => {
 
   const classes = taskStyles()
 
-  const [state, setState] = useState({
+  const defaultState = {
     edit: false,
     name: task.name,
     description: task.description,
     type: task.type,
     dueDate: task.dueDate,
     label: task.label
-  })
+  }
+
+  const [state, setState] = useState(defaultState)
 
   useEffect(() => {
     let isMounted = false
-    if (!isMounted)
-      setState({
-        edit: false,
-        name: task.name,
-        description: task.description,
-        type: task.type,
-        dueDate: task.dueDate,
-        label: task.label
-      })
+    if (!isMounted) setState(defaultState)
     return () => {
       isMounted = true
     }
