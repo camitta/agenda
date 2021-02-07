@@ -64,7 +64,9 @@ export const homeStyles = makeStyles(theme => ({
     border: 'none'
   },
   boards: {
-    marginLeft: '0px'
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'column'
   }
 }))
 
@@ -75,7 +77,7 @@ export const modalStyles = makeStyles(() => ({
     justifyContent: 'center',
     margin: '0 auto',
     height: '40%',
-    width: '25%',
+    width: '100%',
     border: '2px solid #000',
     padding: '20px',
     background: 'white',
