@@ -35,7 +35,8 @@ const ChecklistClasses = makeStyles(() => ({
     padding: '10px'
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: '10px'
   },
   add: {
     display: 'flex',
@@ -90,7 +91,7 @@ const Checklist = props => {
 
   return (
     <Box className={classes.checklist}>
-      <Typography variant="h6" className={classes.title}>
+      <Typography variant="h3" className={classes.title}>
         To-Do List
       </Typography>
       <form className={classes.add} onSubmit={handleSubmit}>
