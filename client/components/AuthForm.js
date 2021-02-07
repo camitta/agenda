@@ -46,7 +46,7 @@ const AuthForm = props => {
       const type = nameType === 'password' ? 'password' : 'text'
 
       return (
-        <Container key={nameType} component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div key={nameType} className={classes.paper}>
             <TextField
