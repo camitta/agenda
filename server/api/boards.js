@@ -152,4 +152,22 @@ router.put('/:boardId/add/user', async (req, res, next) => {
   }
 })
 
+// remove user from board
+// api/boards/:boardId/delete/user
+router.put('/:boardId/delete/user', async (req, res, next) => {
+  try {
+    const board = await Board.findOne({
+      where: {
+        id: req.params.boardId
+      }
+    })
+    //our req.body.id will be the person being deleted
+    const user = await User.findByPk(req.body.id)
+    await board.removeUser(user)
+    res.send(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

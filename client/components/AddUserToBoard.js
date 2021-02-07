@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 
 //Redux
-import {addUserSingleBoard} from '../store/single-board'
+import {addUserSingleBoard, removeUserSingleBoard} from '../store/single-board'
 import {connect} from 'react-redux'
 
 //Material UI
@@ -15,6 +15,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import IconButton from '@material-ui/core/Button'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import CloseIcon from '@material-ui/icons/Close'
 
 const AddUserToBoard = props => {
   const users = props.currentBoard.users || []
@@ -36,6 +38,14 @@ const AddUserToBoard = props => {
     }
   }
 
+  const handleDelete = async userId => {
+    try {
+      await props.removeUserFromBoard(boardId, userId)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <Typography>Current Team:</Typography>
@@ -49,6 +59,17 @@ const AddUserToBoard = props => {
               <ListItemText>
                 {user.firstName} {user.lastName}
               </ListItemText>
+              <>
+                <ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => handleDelete(user.id)}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </>
             </ListItem>
           ))
         ) : (
@@ -84,7 +105,9 @@ const mapState = state => ({boardState: state.singleBoard})
 const mapDispatch = dispatch => {
   return {
     addUserToBoard: (id, userEmail) =>
-      dispatch(addUserSingleBoard(id, userEmail))
+      dispatch(addUserSingleBoard(id, userEmail)),
+    removeUserFromBoard: (boardId, userId) =>
+      dispatch(removeUserSingleBoard(boardId, userId))
   }
 }
 
