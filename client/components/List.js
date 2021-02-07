@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 //import AddTask from './AddTask'
@@ -38,10 +38,18 @@ const List = props => {
     description: '',
     type: status,
     dueDate: new Date(),
-    label: 'red'
+    label: ''
   }
 
   const [state, setState] = useState(defaultState)
+
+  useEffect(() => {
+    let isMounted = false
+    if (!isMounted) setState(defaultState)
+    return () => {
+      isMounted = true
+    }
+  }, [])
 
   // date picker event returns only the date - this extra function is required
   const handleDateChange = date => {

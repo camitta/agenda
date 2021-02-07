@@ -26,7 +26,11 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
     const {loaded} = this.state
     if (!loaded) {
-      return <CircularProgress />
+      return (
+        <div>
+          <CircularProgress />
+        </div>
+      )
     }
     if (!isLoggedIn) {
       return (
