@@ -16,7 +16,6 @@ export const homeStyles = makeStyles(theme => ({
     }
   },
   root: {
-    maxWidth: 650,
     padding: theme
   },
   mantra: {
@@ -26,7 +25,8 @@ export const homeStyles = makeStyles(theme => ({
     margin: '20px'
   },
   container: {
-    minHeight: '150px'
+    minHeight: '150px',
+    spacing: 2
   },
   boardItem: {
     padding: '5px 9px 5px 5px',
@@ -36,16 +36,15 @@ export const homeStyles = makeStyles(theme => ({
     boxShadow: '2px 2px 4px 2px #ff6987',
     color: 'white',
     borderRadius: 3,
-    fontStyle: 'italic',
     alignSelf: 'flex-end',
     fontWeight: 500
   },
   gridItem: {
-    margin: '10px',
-    width: '20%'
+    margin: '10px'
   },
   title: {
-    marginTop: '20px'
+    marginTop: '15px',
+    padding: '5px'
   },
   addBoard: {
     display: 'flex',
@@ -58,14 +57,14 @@ export const homeStyles = makeStyles(theme => ({
       color: '#FFF'
     },
     borderRadius: 3,
-    padding: '5px 9px 5px 5px',
-    margin: '10px 30px 10px 10px',
+    padding: '5px 5px 5px 5px',
+    margin: '10px 10px 10px 10px',
     boxShadow: '2px 2px 4px 2px #ff6987',
     color: 'white',
     border: 'none'
   },
   boards: {
-    marginLeft: '20px'
+    marginLeft: '0px'
   }
 }))
 

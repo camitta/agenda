@@ -7,52 +7,7 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
-import {makeStyles, withStyles} from '@material-ui/core/styles'
-
-export const StyledButton = withStyles({
-  root: {
-    background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
-    borderRadius: 3,
-    border: 0,
-    zIndex: 1,
-    color: 'white',
-    height: 40,
-    padding: '1em',
-    margin: '10px',
-    boxShadow: '2px 2px 4px 2px #ff6987'
-  },
-  label: {
-    textTransform: 'capitalize'
-  }
-})(Button)
-
-export const navStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
-    height: 40,
-    padding: '1em'
-  },
-  toolbar: {
-    minHeight: 128,
-    alignItems: 'flex-start',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1,
-    fontStyle: 'italic',
-    alignSelf: 'flex-end',
-    fontFamily: 'Roboto Mono',
-    fontWeight: 500,
-    padding: '.5em',
-    fontSize: 'xx-large'
-  }
-}))
+import {StyledButton, navStyles} from './CustomMUI/NavBarMUI'
 
 const Navbar = function({handleClick, isLoggedIn}) {
   const classes = navStyles()
@@ -61,14 +16,14 @@ const Navbar = function({handleClick, isLoggedIn}) {
       <Toolbar className={classes.toolbar}>
         <Typography className={classes.title} variant="h5" noWrap>
           <Link href={isLoggedIn ? '/home' : '/login'} color="inherit">
-            agenda
+            Agenda
           </Link>
         </Typography>
 
         {isLoggedIn ? (
           <div>
             <Button className={classes.menuButton} href="/home">
-              HOME
+              Home
             </Button>
             <Button
               className={classes.menuButton}
@@ -83,7 +38,7 @@ const Navbar = function({handleClick, isLoggedIn}) {
             <Button className={classes.menuButton} href="/login">
               Log In
             </Button>
-            <StyledButton href="/signup">SIGN UP</StyledButton>
+            <StyledButton href="/signup">Sign Up</StyledButton>
           </div>
         )}
       </Toolbar>
