@@ -24,7 +24,8 @@ const ListContainer = styled.div`
   border-radius: 3px;
   align-content: center;
   justify-content: center;
-  width: 33%;
+  minWidth: 33%;
+  maxWidth: 33%
   padding: 8px;
   height: 100%;
   margin: 0 8px 0 0;
