@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
+import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 
 //Redux store items
 import {connect} from 'react-redux'
@@ -98,11 +99,13 @@ const SingleBoard = props => {
         </AccordionDetails>
       </Accordion>
       <Title variant="h3">{props.singleBoard.name}</Title>
-      <ListsContainer>
-        <List status="todo" boardId={boardId} tasks={todoTasks} />
-        <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-        <List status="done" boardId={boardId} tasks={doneTasks} />
-      </ListsContainer>
+      <DragDropContext>
+        <ListsContainer>
+          <List status="todo" board={boardId} tasks={todoTasks} />
+          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
+          <List status="done" boardId={boardId} tasks={doneTasks} />
+        </ListsContainer>
+      </DragDropContext>
       <div className={classes.deleteContainer}>
         <Button
           className={classes.deleteButton}

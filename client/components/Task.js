@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
+import {Draggable} from 'react-beautiful-dnd'
 
 // Material UI
 import Card from '@material-ui/core/Card'
@@ -31,7 +32,7 @@ const TaskContainer = styled.div`
   word-wrap: break-word;
 `
 const Task = props => {
-  const {task, boardId} = props
+  const {task, boardId, index} = props
 
   const classes = taskStyles()
 
@@ -96,75 +97,95 @@ const Task = props => {
   }
 
   return (
-    <TaskContainer>
-      <Card>
-        <CardContent>
-          {state.edit === false ? (
-            <div>
-              <Accordion style={{boxShadow: 'none', margin: 'auto'}}>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <div>
-                    {task.label &&
-                      task.label.length && (
-                        <Chips
-                          label={task.label}
-                          boardId={boardId}
-                          taskId={task.id}
-                        />
-                      )}
-                    <Typography
-                      variant="h6"
-                      style={{textAlign: 'left'}}
-                      id="taskName"
-                    >
-                      {task.name}
-                    </Typography>
-                    <Typography variant="caption" className={classes.dueDate}>
-                      Due Date: {moment(task.dueDate).format('LL')}
-                    </Typography>
-                  </div>
-                </AccordionSummary>
-                <AccordionDetails className={classes.cardLayout}>
-                  <Typography
-                    variant="body2"
-                    style={{alignSelf: 'flex-start', paddingBottom: '30px'}}
-                  >
-                    {task.description}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    Assign user to task:
-                  </Typography>
-                  <AddUserToTask task={task} board={props.task.board} />
-                </AccordionDetails>
-              </Accordion>
-            </div>
-          ) : (
-            <TaskForm
-              handleChange={handleChange}
-              state={state}
-              handleDateChange={handleDateChange}
-            />
-          )}
-        </CardContent>
-      </Card>
-      <DeleteTask taskId={task.id} boardId={boardId} taskName={task.name} />
-      {state.edit === false ? (
-        <IconButton
-          aria-label="edit"
-          onClick={() => setState({...state, edit: !state.edit})}
+    <Draggable key={task.id} draggableId={String(task.id)} index={index}>
+      {provided => (
+        <div
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
         >
-          <EditIcon />
-        </IconButton>
-      ) : (
-        <IconButton aria-label="submit" onClick={() => handleSubmit()}>
-          <DoneIcon color="primary" />
-        </IconButton>
+          <TaskContainer>
+            <Card>
+              <CardContent>
+                {state.edit === false ? (
+                  <div>
+                    <Accordion style={{boxShadow: 'none', margin: 'auto'}}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                      >
+                        <div>
+                          {task.label &&
+                            task.label.length && (
+                              <Chips
+                                label={task.label}
+                                boardId={boardId}
+                                taskId={task.id}
+                              />
+                            )}
+                          <Typography
+                            variant="h6"
+                            style={{textAlign: 'left'}}
+                            id="taskName"
+                          >
+                            {task.name}
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            className={classes.dueDate}
+                          >
+                            Due Date: {moment(task.dueDate).format('LL')}
+                          </Typography>
+                        </div>
+                      </AccordionSummary>
+                      <AccordionDetails className={classes.cardLayout}>
+                        <Typography
+                          variant="body2"
+                          style={{
+                            alignSelf: 'flex-start',
+                            paddingBottom: '30px'
+                          }}
+                        >
+                          {task.description}
+                        </Typography>
+                        <Typography variant="subtitle1">
+                          Assign user to task:
+                        </Typography>
+                        <AddUserToTask task={task} board={props.task.board} />
+                      </AccordionDetails>
+                    </Accordion>
+                  </div>
+                ) : (
+                  <TaskForm
+                    handleChange={handleChange}
+                    state={state}
+                    handleDateChange={handleDateChange}
+                  />
+                )}
+              </CardContent>
+            </Card>
+            <DeleteTask
+              taskId={task.id}
+              boardId={boardId}
+              taskName={task.name}
+            />
+            {state.edit === false ? (
+              <IconButton
+                aria-label="edit"
+                onClick={() => setState({...state, edit: !state.edit})}
+              >
+                <EditIcon />
+              </IconButton>
+            ) : (
+              <IconButton aria-label="submit" onClick={() => handleSubmit()}>
+                <DoneIcon color="primary" />
+              </IconButton>
+            )}
+          </TaskContainer>
+        </div>
       )}
-    </TaskContainer>
+    </Draggable>
   )
 }
 
