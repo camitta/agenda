@@ -18,12 +18,26 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import IconButton from '@material-ui/core/Button'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import CloseIcon from '@material-ui/icons/Close'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import Button from '@material-ui/core/Button'
 
 const AddUserToBoard = props => {
   const users = props.currentBoard.users || []
   const boardId = props.currentBoard.id
 
   const [email, setEmail] = useState('')
+  const [open, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleEmail = event => {
     setEmail(event.target.value)
@@ -43,7 +57,6 @@ const AddUserToBoard = props => {
   const handleDelete = async userId => {
     try {
       await props.removeUserFromBoard(boardId, userId)
-      await props.fetchTasks(boardId)
     } catch (error) {
       console.log(error)
     }
@@ -67,7 +80,11 @@ const AddUserToBoard = props => {
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={
+                      user.id === props.userState.id
+                        ? () => handleClickOpen()
+                        : () => handleDelete(user.id)
+                    }
                   >
                     <CloseIcon />
                   </IconButton>
@@ -79,6 +96,30 @@ const AddUserToBoard = props => {
           <ListItem>No current members</ListItem>
         )}
       </List>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to remove yourself from this board?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button
+            onClick={() => handleDelete(props.userState.id)}
+            color="primary"
+            autoFocus
+            href="/home"
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
       <form onSubmit={handleSubmit}>
         <TextField
           id="filled-disabled"
@@ -103,7 +144,10 @@ const AddUserToBoard = props => {
     </div>
   )
 }
-const mapState = state => ({boardState: state.singleBoard})
+const mapState = state => ({
+  boardState: state.singleBoard,
+  userState: state.user
+})
 
 const mapDispatch = dispatch => {
   return {
