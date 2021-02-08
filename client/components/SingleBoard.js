@@ -2,12 +2,13 @@
 import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
-import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+import {DragDropContext} from 'react-beautiful-dnd'
 
 //Redux store items
 import {connect} from 'react-redux'
 import {getSingleBoard, deleteSingleBoard} from '../store/single-board'
 import {getAllTasks} from '../store/all-tasks'
+import {editSingleTask} from '../store/tasks'
 
 //Material-UI items
 import styled from 'styled-components'
@@ -74,6 +75,14 @@ const SingleBoard = props => {
     setOpen(false)
   }
 
+  async function handleDragEnd({destination, draggableId}) {
+    if (!destination) {
+      return
+    }
+    await props.editSingleTask(draggableId, {type: destination.droppableId})
+    await props.getAllTasks(boardId)
+  }
+
   const tasks = props.tasks
 
   let todoTasks, progressTasks, doneTasks
@@ -99,9 +108,9 @@ const SingleBoard = props => {
         </AccordionDetails>
       </Accordion>
       <Title variant="h3">{props.singleBoard.name}</Title>
-      <DragDropContext>
+      <DragDropContext onDragEnd={handleDragEnd}>
         <ListsContainer>
-          <List status="todo" board={boardId} tasks={todoTasks} />
+          <List status="todo" boardId={boardId} tasks={todoTasks} />
           <List status="inprogress" boardId={boardId} tasks={progressTasks} />
           <List status="done" boardId={boardId} tasks={doneTasks} />
         </ListsContainer>
@@ -144,7 +153,8 @@ const mapDispatch = dispatch => {
   return {
     fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
     getAllTasks: boardId => dispatch(getAllTasks(boardId)),
-    deleteBoard: boardId => dispatch(deleteSingleBoard(boardId))
+    deleteBoard: boardId => dispatch(deleteSingleBoard(boardId)),
+    editSingleTask: (id, task) => dispatch(editSingleTask(id, task))
   }
 }
 
