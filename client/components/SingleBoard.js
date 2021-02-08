@@ -2,7 +2,8 @@
 import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
-import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+import {DragDropContext} from 'react-beautiful-dnd'
+import {FilterTasksByLabel} from './index'
 
 //Redux store items
 import {connect} from 'react-redux'
@@ -130,6 +131,9 @@ const SingleBoard = props => {
             </Button>
           </div>
         </Modal>
+      </div>
+      <div>
+        <FilterTasksByLabel />
       </div>
     </div>
   )

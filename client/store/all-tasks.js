@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 
 const GET_TASKS = 'GET_TASKS'
+const FILTER_TASKS = 'FILTER_TASKS'
 
 /**
  * INITIAL STATE
@@ -16,7 +17,7 @@ const initialState = []
  */
 
 const fetchAllTasks = tasks => ({type: GET_TASKS, tasks})
-
+export const filterTasks = label => ({type: FILTER_TASKS, label})
 /**
  * THUNK CREATORS
  */
@@ -37,6 +38,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_TASKS:
       return action.tasks
+    case FILTER_TASKS:
+      return state.tasks.filter(task => task.label === action.label)
     default:
       return state
   }
