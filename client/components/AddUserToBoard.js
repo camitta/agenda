@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 
 //Redux
 import {addUserSingleBoard, removeUserSingleBoard} from '../store/single-board'
+import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 
 //Material UI
@@ -32,6 +33,7 @@ const AddUserToBoard = props => {
     try {
       event.preventDefault()
       await props.addUserToBoard(boardId, email)
+      await props.fetchTasks(boardId)
       setEmail('')
     } catch (error) {
       console.log(error)
@@ -41,6 +43,7 @@ const AddUserToBoard = props => {
   const handleDelete = async userId => {
     try {
       await props.removeUserFromBoard(boardId, userId)
+      await props.fetchTasks(boardId)
     } catch (error) {
       console.log(error)
     }
@@ -107,7 +110,8 @@ const mapDispatch = dispatch => {
     addUserToBoard: (id, userEmail) =>
       dispatch(addUserSingleBoard(id, userEmail)),
     removeUserFromBoard: (boardId, userId) =>
-      dispatch(removeUserSingleBoard(boardId, userId))
+      dispatch(removeUserSingleBoard(boardId, userId)),
+    fetchTasks: boardId => dispatch(getAllTasks(boardId))
   }
 }
 
