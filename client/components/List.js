@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
-//import AddTask from './AddTask'
 import {TaskForm} from './index'
 import {generateErrorMessage} from '../functions'
+import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
 import Typography from '@material-ui/core/Typography'
@@ -67,40 +67,53 @@ const List = props => {
   }
 
   return (
-    <ListContainer>
-      <Typography variant="h3">{status}</Typography>
-      <div>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<AddIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          />
-          <AccordionDetails>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-              <TaskForm
-                state={state}
-                handleChange={handleChange}
-                handleDateChange={handleDateChange}
-              />
-              {props.error &&
-                props.error.response && (
-                  <div>{generateErrorMessage(props.error.response.data)}</div>
-                )}
-              <IconButton aria-label="submit" onClick={handleSubmit}>
-                <DoneIcon />
-              </IconButton>
+    <Droppable droppableId={status}>
+      {provided => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          <ListContainer>
+            <Typography variant="h3">{status}</Typography>
+            <div>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<AddIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                />
+                <AccordionDetails>
+                  <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <TaskForm
+                      state={state}
+                      handleChange={handleChange}
+                      handleDateChange={handleDateChange}
+                    />
+                    {props.error &&
+                      props.error.response && (
+                        <div>
+                          {generateErrorMessage(props.error.response.data)}
+                        </div>
+                      )}
+                    <IconButton aria-label="submit" onClick={handleSubmit}>
+                      <DoneIcon />
+                    </IconButton>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
             </div>
-          </AccordionDetails>
-        </Accordion>
-      </div>
 
-      {tasks && tasks.length
-        ? tasks.map(task => (
-            <Task key={task.id} task={task} boardId={boardId} />
-          ))
-        : null}
-    </ListContainer>
+            {tasks && tasks.length
+              ? tasks.map((task, index) => (
+                  <Task
+                    task={task}
+                    boardId={boardId}
+                    index={index}
+                    key={task.id}
+                  />
+                ))
+              : null}
+          </ListContainer>
+        </div>
+      )}
+    </Droppable>
   )
 }
 
