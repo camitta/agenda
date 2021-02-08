@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateErrorMessage, checkDueDate} from '../functions'
+import {generateErrorMessage} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -24,8 +24,6 @@ const ListContainer = styled.div`
   border-radius: 3px;
   align-content: center;
   justify-content: center;
-  minWidth: 33%;
-  maxWidth: 33%
   padding: 8px;
   height: 100%;
   margin: 0 8px 0 0;
@@ -70,7 +68,11 @@ const List = props => {
   return (
     <Droppable droppableId={status}>
       {provided => (
-        <div {...provided.droppableProps} ref={provided.innerRef}>
+        <div
+          style={{width: '100%'}}
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+        >
           <ListContainer>
             <Typography variant="h3">{status}</Typography>
             <div>
