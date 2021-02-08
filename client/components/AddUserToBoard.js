@@ -57,6 +57,7 @@ const AddUserToBoard = props => {
   const handleDelete = async userId => {
     try {
       await props.removeUserFromBoard(boardId, userId)
+      await props.fetchTasks(boardId)
     } catch (error) {
       console.log(error)
     }
