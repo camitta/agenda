@@ -13,7 +13,6 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import CardHeader from '@material-ui/core/CardHeader'
 
 // Custom MUI
 import {taskStyles} from './CustomMUI/TaskMUI'
@@ -36,26 +35,39 @@ const Task = props => {
 
   const classes = taskStyles()
 
-  const [state, setState] = useState({
+  const defaultState = {
     edit: false,
     name: task.name,
     description: task.description,
     type: task.type,
     dueDate: task.dueDate,
     label: task.label
-  })
+  }
+
+  const [state, setState] = useState(defaultState)
+
+  // changes color of task title if today is on, approaching, or past due date
+  const checkDueDate = () => {
+    const taskName = document.getElementById('taskName')
+    const relativeDate = moment(state.dueDate)
+      .startOf('day')
+      .fromNow()
+    const dateRegEx = /(hour|minute|second)s/i
+    if (
+      moment(state.dueDate).isSame(new Date(), 'day') ||
+      moment(state.dueDate).isBefore(new Date(), 'day')
+    ) {
+      taskName.style.color = 'red'
+    } else if (dateRegEx.test(relativeDate)) {
+      taskName.style.color = 'orange'
+    } else {
+      taskName.style.color = 'black'
+    }
+  }
 
   useEffect(() => {
     let isMounted = false
-    if (!isMounted)
-      setState({
-        edit: false,
-        name: task.name,
-        description: task.description,
-        type: task.type,
-        dueDate: task.dueDate,
-        label: task.label
-      })
+    if (!isMounted) setState(defaultState)
     return () => {
       isMounted = true
     }
@@ -80,6 +92,7 @@ const Task = props => {
     })
     await props.getAllTasks(props.boardId)
     setState({...state, edit: !state.edit})
+    checkDueDate()
   }
 
   return (
@@ -88,7 +101,7 @@ const Task = props => {
         <CardContent>
           {state.edit === false ? (
             <div>
-              <Accordion style={{boxShadow: 'none', margin: '0'}}>
+              <Accordion style={{boxShadow: 'none', margin: 'auto'}}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
@@ -103,7 +116,11 @@ const Task = props => {
                           taskId={task.id}
                         />
                       )}
-                    <Typography variant="body2" style={{textAlign: 'left'}}>
+                    <Typography
+                      variant="h6"
+                      style={{textAlign: 'left'}}
+                      id="taskName"
+                    >
                       {task.name}
                     </Typography>
                     <Typography variant="caption" className={classes.dueDate}>
@@ -111,17 +128,16 @@ const Task = props => {
                     </Typography>
                   </div>
                 </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant="body1" style={{textAlign: 'left'}}>
+                <AccordionDetails className={classes.cardLayout}>
+                  <Typography
+                    variant="body2"
+                    style={{alignSelf: 'flex-start', paddingBottom: '30px'}}
+                  >
                     {task.description}
                   </Typography>
-                </AccordionDetails>
-                <AccordionDetails>
-                  <Typography variant="subtitle1" style={{textAlign: 'left'}}>
+                  <Typography variant="subtitle1">
                     Assign user to task:
                   </Typography>
-                </AccordionDetails>
-                <AccordionDetails>
                   <AddUserToTask task={task} board={props.task.board} />
                 </AccordionDetails>
               </Accordion>
