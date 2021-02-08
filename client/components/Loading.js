@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
   },
   top: {
-    color: '#ab0505',
+    color: '#e6766e',
     animationDuration: '550ms',
     position: 'absolute',
     left: 0
