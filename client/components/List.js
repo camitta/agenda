@@ -111,6 +111,7 @@ const List = props => {
                 ))
               : null}
           </ListContainer>
+          {provided.placeholder}
         </div>
       )}
     </Droppable>
