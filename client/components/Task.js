@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import {Draggable} from 'react-beautiful-dnd'
+import {checkDueDate} from '../functions'
 
 // Material UI
 import Card from '@material-ui/core/Card'
@@ -47,26 +48,8 @@ const Task = props => {
 
   const [state, setState] = useState(defaultState)
 
-  // changes color of task title if today is on, approaching, or past due date
-  const checkDueDate = () => {
-    const taskName = document.getElementById('taskName')
-    const relativeDate = moment(state.dueDate)
-      .startOf('day')
-      .fromNow()
-    const dateRegEx = /(hour|minute|second)s/i
-    if (
-      moment(state.dueDate).isSame(new Date(), 'day') ||
-      moment(state.dueDate).isBefore(new Date(), 'day')
-    ) {
-      taskName.style.color = 'red'
-    } else if (dateRegEx.test(relativeDate)) {
-      taskName.style.color = 'orange'
-    } else {
-      taskName.style.color = 'black'
-    }
-  }
-
   useEffect(() => {
+    checkDueDate(task.dueDate, task.id)
     let isMounted = false
     if (!isMounted) setState(defaultState)
     return () => {
@@ -93,7 +76,7 @@ const Task = props => {
     })
     await props.getAllTasks(props.boardId)
     setState({...state, edit: !state.edit})
-    checkDueDate()
+    checkDueDate(task.dueDate, task.id)
   }
 
   return (
@@ -127,7 +110,7 @@ const Task = props => {
                           <Typography
                             variant="h6"
                             style={{textAlign: 'left'}}
-                            id="taskName"
+                            id={'taskName' + task.id}
                           >
                             {task.name}
                           </Typography>

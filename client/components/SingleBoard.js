@@ -50,6 +50,7 @@ const SingleBoard = props => {
   const [open, setOpen] = useState(false)
 
   const boardId = props.match.params.boardId
+  const tasks = props.tasks
 
   function loadBoardAndTasks() {
     try {
@@ -84,8 +85,6 @@ const SingleBoard = props => {
     await props.editSingleTask(draggableId, {type: destination.droppableId})
     await props.getAllTasks(boardId)
   }
-
-  const tasks = props.tasks
 
   let todoTasks, progressTasks, doneTasks
   if (tasks && tasks.length) {
