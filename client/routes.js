@@ -24,15 +24,15 @@ class Routes extends Component {
         <Navbar />
         <Switch>
           <Route path="/login" component={Login} />
-          <Route exact path="/" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route exact path="/" component={Login} />
           {isLoggedIn && (
-            <div>
+            <Switch>
               <Route path="/boards/:boardId" component={SingleBoard} />
               <Route path="/home" component={UserHome} />
-            </div>
+            </Switch>
           )}
-          <Loading />
+          <Route component={Loading} />
         </Switch>
       </>
     )

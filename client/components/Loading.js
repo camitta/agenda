@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Loading(props) {
+export default function Loading() {
   const classes = useStyles()
 
   return (
@@ -37,7 +37,6 @@ export default function Loading(props) {
           size={40}
           thickness={4}
           value={100}
-          {...props}
         />
         <CircularProgress
           variant="indeterminate"
@@ -48,7 +47,6 @@ export default function Loading(props) {
           }}
           size={40}
           thickness={4}
-          {...props}
         />
       </div>
     </div>

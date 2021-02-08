@@ -101,7 +101,7 @@ const SingleBoard = props => {
       <Title variant="h3">{props.singleBoard.name}</Title>
       <DragDropContext>
         <ListsContainer>
-          <List status="todo" board={boardId} tasks={todoTasks} />
+          <List status="todo" boardId={boardId} tasks={todoTasks} />
           <List status="inprogress" boardId={boardId} tasks={progressTasks} />
           <List status="done" boardId={boardId} tasks={doneTasks} />
         </ListsContainer>
