@@ -39,14 +39,13 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   const inputColumn = arrOfColumns => {
-    return arrOfColumns.map((columnName, index) => {
-      let nameIndex = index
+    return arrOfColumns.map(columnName => {
       let nameType = columnName.replace(/\s+/g, '')
       nameType = nameType[0].toLowerCase() + nameType.slice(1)
       const type = nameType === 'password' ? 'password' : 'text'
 
       return (
-        <Container component="main" maxWidth="xs">
+        <Container key={nameType} component="main" maxWidth="xs">
           <CssBaseline />
           <div key={nameType} className={classes.paper}>
             <TextField
