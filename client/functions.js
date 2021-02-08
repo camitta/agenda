@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const generateErrorMessage = errMessage => {
   const types = [
     'firstName',
@@ -20,5 +22,26 @@ export const generateErrorMessage = errMessage => {
         return `Did you fill out ${nameType} correctly?`
       }
     }
+  }
+}
+
+// changes color of task title if today is on, approaching, or past due date
+export const checkDueDate = (dueDate, id) => {
+  console.log('CHECKING:', dueDate)
+  const taskName = document.getElementById('taskName' + id)
+  const relativeDate = moment(dueDate)
+    .startOf('day')
+    .fromNow()
+  const dateRegEx = /(hour|minute|second)s/i
+  if (
+    moment(dueDate).isSame(new Date(), 'day') ||
+    moment(dueDate).isBefore(new Date(), 'day')
+  ) {
+    console.log('RED', taskName)
+    taskName.style.color = 'red'
+  } else if (dateRegEx.test(relativeDate)) {
+    taskName.style.color = 'orange'
+  } else {
+    taskName.style.color = 'black'
   }
 }

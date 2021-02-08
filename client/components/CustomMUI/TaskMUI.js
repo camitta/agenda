@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 export const taskStyles = makeStyles(() => ({
   card: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center'
   },
   inputs: {

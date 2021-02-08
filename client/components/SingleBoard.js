@@ -9,6 +9,7 @@ import {FilterTasksByLabel} from './index'
 import {connect} from 'react-redux'
 import {getSingleBoard, deleteSingleBoard} from '../store/single-board'
 import {getAllTasks} from '../store/all-tasks'
+import {editSingleTask} from '../store/tasks'
 
 //Material-UI items
 import styled from 'styled-components'
@@ -19,7 +20,9 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
-import Modal from '@material-ui/core/Modal'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogActions from '@material-ui/core/DialogActions'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
@@ -48,6 +51,7 @@ const SingleBoard = props => {
   const [open, setOpen] = useState(false)
 
   const boardId = props.match.params.boardId
+  const tasks = props.tasks
 
   function loadBoardAndTasks() {
     try {
@@ -75,7 +79,13 @@ const SingleBoard = props => {
     setOpen(false)
   }
 
-  const tasks = props.tasks
+  async function handleDragEnd({destination, draggableId}) {
+    if (!destination) {
+      return
+    }
+    await props.editSingleTask(draggableId, {type: destination.droppableId})
+    await props.getAllTasks(boardId)
+  }
 
   let todoTasks, progressTasks, doneTasks
   if (tasks && tasks.length) {
@@ -100,7 +110,7 @@ const SingleBoard = props => {
         </AccordionDetails>
       </Accordion>
       <Title variant="h3">{props.singleBoard.name}</Title>
-      <DragDropContext>
+      <DragDropContext onDragEnd={handleDragEnd}>
         <ListsContainer>
           <List status="todo" boardId={boardId} tasks={todoTasks} />
           <List status="inprogress" boardId={boardId} tasks={progressTasks} />
@@ -115,22 +125,24 @@ const SingleBoard = props => {
         >
           Delete board
         </Button>
-        <Modal
+        <Dialog
           open={open}
           aria-labelledby="delete-board-confirmation"
           aria-describedby="delete-board-modal"
           onClose={handleCancel}
         >
-          <div className={classes.modal}>
+          <DialogTitle style={{padding: '20px 20px 0px 20px'}}>
             Are you sure you want to delete this board?
+          </DialogTitle>
+          <DialogActions style={{textAlign: 'center'}}>
             <Button onClick={handleDelete} style={{color: 'green'}}>
               Yes
             </Button>
             <Button onClick={handleCancel} style={{color: 'red'}}>
               No
             </Button>
-          </div>
-        </Modal>
+          </DialogActions>
+        </Dialog>
       </div>
       <div>
         <FilterTasksByLabel />
@@ -148,7 +160,8 @@ const mapDispatch = dispatch => {
   return {
     fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
     getAllTasks: boardId => dispatch(getAllTasks(boardId)),
-    deleteBoard: boardId => dispatch(deleteSingleBoard(boardId))
+    deleteBoard: boardId => dispatch(deleteSingleBoard(boardId)),
+    editSingleTask: (id, task) => dispatch(editSingleTask(id, task))
   }
 }
 

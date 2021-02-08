@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateErrorMessage} from '../functions'
+import {generateErrorMessage, checkDueDate} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -24,7 +24,8 @@ const ListContainer = styled.div`
   border-radius: 3px;
   align-content: center;
   justify-content: center;
-  width: 33%;
+  minWidth: 33%;
+  maxWidth: 33%
   padding: 8px;
   height: 100%;
   margin: 0 8px 0 0;
@@ -101,16 +102,19 @@ const List = props => {
             </div>
 
             {tasks && tasks.length
-              ? tasks.map((task, index) => (
-                  <Task
-                    task={task}
-                    boardId={boardId}
-                    index={index}
-                    key={task.id}
-                  />
-                ))
+              ? tasks.map((task, index) => {
+                  return (
+                    <Task
+                      task={task}
+                      boardId={boardId}
+                      index={index}
+                      key={task.id}
+                    />
+                  )
+                })
               : null}
           </ListContainer>
+          {provided.placeholder}
         </div>
       )}
     </Droppable>

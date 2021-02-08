@@ -2,25 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import {ThemeProvider} from '@material-ui/core/styles'
+
 import DateFnsUtils from '@date-io/date-fns'
 import {MuiPickersUtilsProvider} from '@material-ui/pickers'
-import theme from './theme/theme'
+
 import history from './history'
 import store from './store'
 import App from './app'
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router history={history}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <App />
-        </MuiPickersUtilsProvider>
-      </Router>
-    </ThemeProvider>
+    <Router history={history}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <App />
+      </MuiPickersUtilsProvider>
+    </Router>
   </Provider>,
   document.getElementById('app')
 )
