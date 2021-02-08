@@ -2,55 +2,38 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, SingleBoard, Navbar} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Loading,
+  SingleBoard,
+  Navbar
+} from './components'
 import {me} from './store'
 
-//Material UI
-import CircularProgress from '@material-ui/core/CircularProgress'
-
 class Routes extends Component {
-  constructor() {
-    super()
-    this.state = {
-      loaded: false
-    }
-  }
   componentDidMount() {
     this.props.loadInitialData()
-    this.setState({
-      loaded: true
-    })
   }
 
   render() {
     const {isLoggedIn} = this.props
-    const {loaded} = this.state
-    if (!loaded) {
-      return (
-        <div>
-          <CircularProgress />
-        </div>
-      )
-    }
-    if (!isLoggedIn) {
-      return (
-        <div>
-          <Navbar />
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        </div>
-      )
-    }
     return (
-      <div>
+      <>
         <Navbar />
         <Switch>
-          <Route path="/boards/:boardId" component={SingleBoard} />
-          <Route path="/home" component={UserHome} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          {isLoggedIn && (
+            <div>
+              <Route path="/boards/:boardId" component={SingleBoard} />
+              <Route path="/home" component={UserHome} />
+            </div>
+          )}
+          <Loading />
         </Switch>
-      </div>
+      </>
     )
   }
 }
