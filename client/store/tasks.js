@@ -11,6 +11,7 @@ const EDIT_SINGLE_TASK = 'EDIT_SINGLE_TASK'
 const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK'
 const REMOVE_USER_FROM_TASK = 'REMOVE_USER_FROM_TASK'
 const REMOVE_CHIPS_FROM_TASK = 'REMOVE_CHIPS_FROM_TASK'
+
 /**
  * INITIAL STATE
  */
@@ -33,6 +34,7 @@ const removedChipsFromTask = label => ({
   type: REMOVE_CHIPS_FROM_TASK,
   label
 })
+
 /**
  * THUNK CREATORS
  */
@@ -118,6 +120,7 @@ export const removeChipsFromSingleTask = taskId => {
     }
   }
 }
+
 /**
  * REDUCER
  */
