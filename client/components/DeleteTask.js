@@ -8,8 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import IconButton from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 const DeleteTask = props => {
   const {taskId, boardId, taskName} = props
@@ -50,16 +49,14 @@ const DeleteTask = props => {
         onClose={handleClose}
         aria-describedby="alert-dialog-description"
       >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove "{taskName}" from the board?
-          </DialogContentText>
-        </DialogContent>
+        <DialogTitle id="alert-dialog-description">
+          Are you sure you want to remove "{taskName}" from the board?
+        </DialogTitle>
         <DialogActions>
-          <IconButton onClick={handleClose} color="primary">
+          <IconButton onClick={handleClose} style={{color: 'red'}}>
             Changed My Mind
           </IconButton>
-          <IconButton onClick={handleDelete} color="primary" autoFocus>
+          <IconButton onClick={handleDelete} style={{color: 'green'}} autoFocus>
             Yes I Do
           </IconButton>
         </DialogActions>
