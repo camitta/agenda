@@ -35,7 +35,7 @@ export default function Loading() {
           className={classes.bottom}
           variant="determinate"
           size={40}
-          thickness={4}
+          thickness={3.6}
           value={100}
         />
         <CircularProgress
@@ -46,7 +46,7 @@ export default function Loading() {
             circle: classes.circle
           }}
           size={40}
-          thickness={4}
+          thickness={3.6}
         />
       </div>
     </div>
