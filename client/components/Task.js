@@ -95,7 +95,6 @@ const Task = props => {
                     <Accordion style={{boxShadow: 'none', margin: 'auto'}}>
                       <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
                         id="panel1a-header"
                       >
                         <div>
@@ -162,13 +161,12 @@ const Task = props => {
             />
             {state.edit === false ? (
               <IconButton
-                aria-label="edit"
                 onClick={() => setState({...state, edit: !state.edit})}
               >
                 <EditIcon />
               </IconButton>
             ) : (
-              <IconButton aria-label="submit" onClick={() => handleSubmit()}>
+              <IconButton onClick={() => handleSubmit()}>
                 <DoneIcon color="primary" />
               </IconButton>
             )}
