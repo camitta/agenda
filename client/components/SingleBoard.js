@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
 import {DragDropContext} from 'react-beautiful-dnd'
-import {FilterTasksByLabel} from './index'
+import {FilterTasksByLabel, DeleteBoard} from './index'
 
 //Redux store items
 import {connect} from 'react-redux'
@@ -20,10 +20,6 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogActions from '@material-ui/core/DialogActions'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
@@ -64,7 +60,7 @@ const SingleBoard = props => {
     }
   }
 
-  function handleModal(event) {
+  function handleOpen(event) {
     event.preventDefault()
     setOpen(true)
   }
@@ -155,25 +151,15 @@ const SingleBoard = props => {
         <Button
           className={classes.deleteButton}
           variant="contained"
-          onClick={handleModal}
+          onClick={handleOpen}
         >
           Delete board
         </Button>
-        <Dialog open={open} onClose={handleCancel}>
-          <DialogContent>
-            <DialogContentText>
-              Are you sure you want to delete this board?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions style={{textAlign: 'center'}}>
-            <Button onClick={handleDelete} style={{color: 'green'}}>
-              Yes
-            </Button>
-            <Button onClick={handleCancel} style={{color: 'red'}}>
-              No
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <DeleteBoard
+          handleCancel={handleCancel}
+          handleDelete={handleDelete}
+          open={open}
+        />
       </div>
     </div>
   )
