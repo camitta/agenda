@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 // Material UI
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import Paper from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import AddIcon from '@material-ui/icons/Add'
@@ -84,13 +84,16 @@ const Checklist = props => {
       {tasks.length ? (
         tasks.map(item => {
           return (
-            <div key={item.id} id={item.id}>
+            <div
+              key={item.id}
+              id={item.id}
+              style={{justifyContent: 'space-between'}}
+            >
               <FormControlLabel
-                control={<Checkbox fontSize="small" color="primary" />}
+                style={{justifyContent: 'space-between'}}
+                control={<Checkbox size="small" color="primary" />}
                 label={
-                  <Typography variant="body1" style={{fontSize: '.8rem'}}>
-                    {item.description}
-                  </Typography>
+                  <Typography variant="body1">{item.description}</Typography>
                 }
                 className={classes.formItem}
                 checked={Boolean(item.completed)}

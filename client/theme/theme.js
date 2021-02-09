@@ -8,15 +8,15 @@ const theme = createMuiTheme({
     fontFamily: `${fonts.body}, ${backupFonts.sans}`,
     body1: {
       fontFamily: `${fonts.body}, ${backupFonts.sans}`,
-      fontSize: '1.25rem',
+      fontSize: '1rem',
       fontWeight: 400,
-      lineHeight: '2.3rem'
+      lineHeight: '1.2rem'
     },
     body2: {
       fontFamily: `${fonts.body2}, ${backupFonts.sans}`,
       fontSize: '1rem',
       fontWeight: 400,
-      lineHeight: '1rem'
+      lineHeight: '1.2rem'
     },
     h1: {
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
