@@ -3,7 +3,7 @@ import {default as StarIcon} from '@material-ui/icons/Star'
 import {default as FlareIcon} from '@material-ui/icons/Flare'
 import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
 import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
-import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
+import {ToggleButtonGroup} from '@material-ui/lab'
 import {CustomToggle} from './CustomMUI/ToggleButtonMUI'
 import dark from '../theme/darkTheme'
 
