@@ -1,5 +1,4 @@
 import {withStyles} from '@material-ui/core/styles'
-import List from '@material-ui/core/List'
 import Box from '@material-ui/core/Box'
 
 export const StyledBox = withStyles(() => ({
@@ -16,11 +15,3 @@ export const StyledBox = withStyles(() => ({
     fontSize: 18
   }
 }))(Box)
-
-export const StyledList = withStyles(() => ({
-  root: {
-    fontFamily: 'FreightTextProBook, sans-serif',
-    color: '#000000',
-    marginTop: 'auto'
-  }
-}))(List)

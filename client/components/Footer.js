@@ -24,47 +24,50 @@ const Footer = props => {
   return (
     <StyledBox>
       <Grid container spacing={0} style={{borderTop: '1px solid black'}}>
-        <Grid item={true} xs={12} />
-        <div>
-          <Grid container>
-            <Grid item={true} xs={12}>
-              <StyledList>
-                <ListItem>
-                  {/* get a random mantra */}
-                  {mantras.length ? (
-                    <Typography
-                      style={{
-                        fontSize: 24,
-                        fontFamily: 'pinyon script, cursive'
-                      }}
-                    >
-                      {
-                        mantras[Math.floor(Math.random() * mantras.length)]
-                          .mantra
-                      }
-                    </Typography>
-                  ) : (
-                    <Typography
-                      style={{
-                        fontSize: 24,
-                        fontFamily: 'pinyon script, cursive'
-                      }}
-                    >
-                      What's on your agenda?
-                    </Typography>
-                  )}
-                </ListItem>
-              </StyledList>
-            </Grid>
+        <Grid container align="left">
+          <Grid item xs={10}>
+            {/* get a random mantra */}
+            {mantras.length ? (
+              <Typography
+                style={{
+                  fontSize: 24,
+                  fontFamily: 'pinyon script, cursive',
+                  padding: '.4em'
+                }}
+              >
+                {mantras[Math.floor(Math.random() * mantras.length)].mantra}
+              </Typography>
+            ) : (
+              <Typography
+                style={{
+                  fontSize: 24,
+                  fontFamily: 'pinyon script, cursive',
+                  padding: '.4em'
+                }}
+              >
+                What's on your agenda?
+              </Typography>
+            )}
           </Grid>
-        </div>
-        {/* <div style={{justifyContent: 'flex-end'}}>
-            <Grid container style={{justifyContent: 'flex-end'}}>
-              <Grid item={true} xs={12}>
-                <ThemeToggle />
+          <Grid
+            item
+            xs
+            align="right"
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center'
+            }}
+          >
+            <div style={{justifyContent: 'flex-end'}}>
+              <Grid container>
+                <Grid item={true} xs={12}>
+                  <ThemeToggle />
+                </Grid>
               </Grid>
-            </Grid>
-          </div> */}
+            </div>
+          </Grid>
+        </Grid>
       </Grid>
     </StyledBox>
   )
