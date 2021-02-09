@@ -17,6 +17,7 @@ import DoneIcon from '@material-ui/icons/Done'
 
 // Custom MUI
 import {listStyles} from './CustomMUI/listMUI'
+import {StyledAccordion} from './CustomMUI/GradientAccordion'
 
 // Redux
 import {addSingleTask} from '../store/tasks'
@@ -82,7 +83,7 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <Accordion>
+              <StyledAccordion>
                 <AccordionSummary
                   expandIcon={<AddIcon />}
                   id="panel1a-header"
@@ -105,7 +106,7 @@ const List = props => {
                     </IconButton>
                   </div>
                 </AccordionDetails>
-              </Accordion>
+              </StyledAccordion>
             </div>
 
             {tasks && tasks.length
