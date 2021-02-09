@@ -3,9 +3,9 @@ import {default as StarIcon} from '@material-ui/icons/Star'
 import {default as FlareIcon} from '@material-ui/icons/Flare'
 import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
 import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
-import ToggleButton from '@material-ui/core/ToggleButton'
-import ToggleButtonGroup from '@material-ui/core/ToggleButtonGroup'
-import {default as dark} from '.theme/darkTheme'
+import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
+
+import dark from '../theme/darkTheme'
 
 const useStyles = makeStyles(theme => ({}))
 
@@ -31,12 +31,15 @@ export const ThemeToggle = props => {
 
   const classes = useStyles()
   const appliedTheme = createMuiTheme(theme ? light : dark)
-
+  const [formats, setFormats] = React.useState(() => ['bold', 'italic'])
+  const handleFormat = (event, newFormats) => {
+    setFormats(newFormats)
+  }
   return (
     <ToggleButtonGroup
-      value={themes}
-      onChange={props.handleChange}
+      onChange={handleFormat}
       aria-label="color mode"
+      style={{justifyContent: 'flex-end'}}
     >
       <ToggleButton aria-label="mode">
         <StarIcon />
@@ -44,7 +47,7 @@ export const ThemeToggle = props => {
       <ToggleButton aria-label="mode">
         <Brightness3Icon />
       </ToggleButton>
-      <ToggleButton aria-label="mode" disabled>
+      <ToggleButton aria-label="mode">
         <FlareIcon />
       </ToggleButton>
     </ToggleButtonGroup>

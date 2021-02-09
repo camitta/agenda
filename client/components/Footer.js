@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import {Container} from '@material-ui/core'
 import {fetchMantras} from '../store/mantras'
 import {StyledBox, StyledList} from './CustomMUI/FooterMUI'
+import {ThemeToggle} from './ThemeToggle'
 
 const Footer = props => {
   useEffect(() => {
@@ -55,6 +56,13 @@ const Footer = props => {
                     )}
                   </ListItem>
                 </StyledList>
+              </Grid>
+            </Grid>
+          </div>
+          <div style={{justifyContent: 'flex-end'}}>
+            <Grid container style={{justifyContent: 'flex-end'}}>
+              <Grid item={true} xs={12}>
+                <ThemeToggle />
               </Grid>
             </Grid>
           </div>
