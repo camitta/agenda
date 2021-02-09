@@ -33,7 +33,7 @@ const TaskContainer = styled.div`
   word-wrap: break-word;
 `
 const Task = props => {
-  const {task, boardId, index} = props
+  const {task, boardId, index, boardType} = props
 
   const classes = taskStyles()
 
@@ -78,6 +78,8 @@ const Task = props => {
     setState({...state, edit: !state.edit})
     checkDueDate(task.dueDate, task.id)
   }
+
+  console.log('PROPS', props)
   return (
     <Draggable key={task.id} draggableId={String(task.id)} index={index}>
       {provided => (
@@ -131,10 +133,17 @@ const Task = props => {
                         >
                           {task.description}
                         </Typography>
-                        <Typography variant="subtitle1">
-                          Assign user to task:
-                        </Typography>
-                        <AddUserToTask task={task} board={props.task.board} />
+                        {boardType === 'team' ? (
+                          <>
+                            <Typography variant="subtitle1">
+                              Assign user to task:
+                            </Typography>
+                            <AddUserToTask
+                              task={task}
+                              board={props.task.board}
+                            />
+                          </>
+                        ) : null}
                       </AccordionDetails>
                     </Accordion>
                   </div>

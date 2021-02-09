@@ -32,7 +32,7 @@ const ListContainer = styled.div`
 `
 
 const List = props => {
-  const {tasks, boardId, status} = props
+  const {tasks, boardId, status, boardType} = props
 
   const defaultState = {
     name: '',
@@ -115,6 +115,7 @@ const List = props => {
                     <Task
                       task={task}
                       boardId={boardId}
+                      boardType={boardType}
                       index={index}
                       key={task.id}
                     />

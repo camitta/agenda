@@ -52,6 +52,7 @@ const SingleBoard = props => {
 
   const boardId = props.match.params.boardId
   const {tasks} = props
+  const boardType = props.singleBoard.type
 
   function loadBoardAndTasks() {
     try {
@@ -113,7 +114,7 @@ const SingleBoard = props => {
 
   return (
     <div className={classes.singleBoardContainer}>
-      {props.singleBoard.type === 'team' ? (
+      {boardType === 'team' ? (
         <Accordion>
           <AccordionSummary
             expandIcon={<GroupIcon />}
@@ -132,9 +133,24 @@ const SingleBoard = props => {
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
         <ListsContainer>
-          <List status="todo" boardId={boardId} tasks={todoTasks} />
-          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-          <List status="done" boardId={boardId} tasks={doneTasks} />
+          <List
+            status="todo"
+            boardId={boardId}
+            boardType={boardType}
+            tasks={todoTasks}
+          />
+          <List
+            status="inprogress"
+            boardId={boardId}
+            boardType={boardType}
+            tasks={progressTasks}
+          />
+          <List
+            status="done"
+            boardId={boardId}
+            boardType={boardType}
+            tasks={doneTasks}
+          />
         </ListsContainer>
       </DragDropContext>
       <div className={classes.deleteContainer}>
