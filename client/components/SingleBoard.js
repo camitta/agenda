@@ -97,7 +97,7 @@ const SingleBoard = props => {
   const classes = singleBoardStyles()
 
   return (
-    <div>
+    <div className={classes.singleBoardContainer}>
       <Accordion>
         <AccordionSummary
           expandIcon={<GroupIcon />}
