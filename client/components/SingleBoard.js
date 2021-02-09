@@ -60,6 +60,7 @@ const SingleBoard = props => {
     }
   }
 
+  // Opens the 'delete board' dialog box.
   function handleOpen(event) {
     event.preventDefault()
     setOpen(true)
@@ -77,6 +78,7 @@ const SingleBoard = props => {
     setOpen(false)
   }
 
+  // Allow a draggable item to be dropped without flickering.
   function handleDragEnd({destination, draggableId}) {
     if (!destination) {
       return
@@ -100,6 +102,7 @@ const SingleBoard = props => {
     await props.getAllTasks(boardId)
   }
 
+  // Separate the tasks based on completion type.
   let todoTasks, progressTasks, doneTasks
   if (tasks && tasks.length) {
     todoTasks = tasks.filter(task => task.type === 'todo')

@@ -1,10 +1,12 @@
 import axios from 'axios'
 
+// Action Types
 const GET_CHECKLIST = 'GET_CHECKLIST'
 const ADD_TO_CHECKLIST = 'ADD_TO_CHECKLIST'
 const EDIT_CHECKLIST_ITEM = 'EDIT_CHECKLIST_ITEM'
 const DELETE_CHECKLIST_ITEM = 'DELETE_CHECKLIST_ITEM'
 
+// Action Creators
 const getChecklist = checklist => ({
   type: GET_CHECKLIST,
   checklist
@@ -27,6 +29,7 @@ const deleteChecklistItem = checklist => ({
 
 const defaultState = []
 
+// Thunks
 export const fetchChecklist = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/checklist')
@@ -60,12 +63,13 @@ export const deleteItem = itemId => async dispatch => {
   try {
     await axios.delete('/api/checklist', {data: {id: itemId}})
     const {data} = await axios.get('/api/checklist')
-    dispatch(editChecklistItem(data))
+    dispatch(deleteChecklistItem(data))
   } catch (err) {
     console.error(err)
   }
 }
 
+// Reducer
 export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_CHECKLIST:

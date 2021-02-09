@@ -34,11 +34,12 @@ const UserHome = props => {
 
   const [open, setOpen] = useState(false)
 
+  // Toggles 'create board' dialog box.
   function handleOpen() {
     setOpen(true)
   }
 
-  // filter out different board types
+  // Filter out boards based on type (personal or team).
   const teamBoards = props.boards.filter(item => item.type === 'team') || []
   const personalBoards =
     props.boards.filter(item => item.type === 'personal') || []
