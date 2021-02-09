@@ -16,7 +16,6 @@ const initialState = []
  */
 
 const fetchAllTasks = tasks => ({type: GET_TASKS, tasks})
-
 /**
  * THUNK CREATORS
  */

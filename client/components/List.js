@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateErrorMessage} from '../functions'
+import {generateErrorMessage, generateListTypeName} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -14,6 +14,9 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
+
+// Custom MUI
+import {listStyles} from './CustomMUI/listMUI'
 
 // Redux
 import {addSingleTask} from '../store/tasks'
@@ -64,6 +67,8 @@ const List = props => {
     setState(defaultState)
   }
 
+  const classes = listStyles()
+
   return (
     <Droppable droppableId={status}>
       {provided => (
@@ -73,7 +78,9 @@ const List = props => {
           ref={provided.innerRef}
         >
           <ListContainer>
-            <Typography variant="h3">{status}</Typography>
+            <Typography variant="h3" className={classes.status}>
+              {generateListTypeName(status)}
+            </Typography>
             <div>
               <Accordion>
                 <AccordionSummary
