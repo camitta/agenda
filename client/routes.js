@@ -8,7 +8,8 @@ import {
   UserHome,
   Loading,
   SingleBoard,
-  Navbar
+  Navbar,
+  Footer
 } from './components'
 import {me} from './store'
 
@@ -34,6 +35,7 @@ class Routes extends Component {
           )}
           <Loading />
         </Switch>
+        <Footer />
       </>
     )
   }

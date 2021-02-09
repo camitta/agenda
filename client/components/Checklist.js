@@ -65,7 +65,12 @@ const Checklist = props => {
   const tasks = props.checklist || []
 
   return (
-    <Grid item xs={12} className={classes.checklist}>
+    <Grid
+      item
+      xs={12}
+      className={classes.checklist}
+      style={{paddingBottom: '60px'}}
+    >
       <Typography variant="h3" className={classes.title}>
         To-Do List
       </Typography>

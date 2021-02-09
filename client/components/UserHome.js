@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-
 // Material UI
 import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 
@@ -14,7 +12,6 @@ import {homeStyles} from './CustomMUI/UserHomeMUI'
 import {StyledButton} from './CustomMUI/GradientButton'
 
 // Redux
-import {fetchMantras} from '../store/mantras'
 import {fetchBoards} from '../store/all-boards'
 
 // Components
@@ -30,7 +27,6 @@ const UserHome = props => {
   async function loadPage() {
     try {
       await props.getBoards()
-      await props.getMantras()
     } catch (err) {
       console.log(err)
     }
@@ -46,7 +42,7 @@ const UserHome = props => {
   const teamBoards = props.boards.filter(item => item.type === 'team') || []
   const personalBoards =
     props.boards.filter(item => item.type === 'personal') || []
-  const mantras = props.mantras || []
+
   return (
     <Container>
       <StyledButton
@@ -131,36 +127,18 @@ const UserHome = props => {
           </Grid>
         </Grid>
       </Grid>
-      <Box className={classes.mantra}>
-        {/* get a random mantra */}
-        {mantras.length ? (
-          <Typography
-            style={{fontSize: 20, fontFamily: 'pinyon script, cursive'}}
-          >
-            {mantras[Math.floor(Math.random() * mantras.length)].mantra}
-          </Typography>
-        ) : (
-          <Typography
-            style={{fontSize: 20, fontFamily: 'pinyon script, cursive'}}
-          >
-            What's on your agenda?
-          </Typography>
-        )}
-      </Box>
     </Container>
   )
 }
 
 const mapState = state => {
   return {
-    mantras: state.mantras,
     boards: state.allBoards
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getMantras: () => dispatch(fetchMantras()),
     getBoards: () => dispatch(fetchBoards())
   }
 }
