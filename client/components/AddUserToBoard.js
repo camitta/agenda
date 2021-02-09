@@ -104,12 +104,12 @@ const AddUserToBoard = props => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <IconButton onClick={handleClose} color="primary">
+          <IconButton onClick={handleClose} style={{color: 'red'}}>
             No
           </IconButton>
           <IconButton
             onClick={() => handleDelete(props.userState.id)}
-            color="primary"
+            style={{color: 'green'}}
             autoFocus
             href="/home"
           >

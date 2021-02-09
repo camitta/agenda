@@ -46,20 +46,20 @@ const UserAvatar = props => {
               <Dialog open={open} onClose={handleClose}>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to remove {user.firstName} from the
+                    Are you sure you want to remove {user.firstName} from this
                     task?
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose} color="primary">
-                    Changed My Mind
+                  <Button onClick={handleClose} style={{color: 'red'}}>
+                    No
                   </Button>
                   <Button
                     onClick={() => handleDelete(user.id)}
-                    color="primary"
+                    style={{color: 'green'}}
                     autoFocus
                   >
-                    Yes I Do
+                    Yes
                   </Button>
                 </DialogActions>
               </Dialog>

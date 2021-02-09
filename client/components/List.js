@@ -52,7 +52,7 @@ const List = props => {
     }
   }, [])
 
-  // date picker event returns only the date - this extra function is required
+  // Date picker event returns only the date - this extra function is required.
   const handleDateChange = date => {
     setState({...state, dueDate: date})
   }

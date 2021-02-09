@@ -1,9 +1,6 @@
 import axios from 'axios'
 
-/**
- * ACTION TYPES
- */
-
+// Action Types
 const GET_SINGLE_TASK = 'GET_SINGLE_TASK'
 const REMOVE_SINGLE_TASK = 'REMOVE_SINGLE_TASK'
 const ADD_SINGLE_TASK = 'ADD_SINGLE_TASK'
@@ -12,15 +9,9 @@ const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK'
 const REMOVE_USER_FROM_TASK = 'REMOVE_USER_FROM_TASK'
 const REMOVE_CHIPS_FROM_TASK = 'REMOVE_CHIPS_FROM_TASK'
 
-/**
- * INITIAL STATE
- */
 const initialState = {}
 
-/**
- * ACTION CREATORS
- */
-
+// Action Creators
 const fetchSingleTask = singleTask => ({type: GET_SINGLE_TASK, singleTask})
 const removeSingleTask = () => ({type: REMOVE_SINGLE_TASK})
 const addedSingleTask = singleTask => ({type: ADD_SINGLE_TASK, singleTask})
@@ -35,10 +26,7 @@ const removedChipsFromTask = label => ({
   label
 })
 
-/**
- * THUNK CREATORS
- */
-
+// Thunks
 export const getSingleTask = taskId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/tasks/${taskId}`)
@@ -121,9 +109,7 @@ export const removeChipsFromSingleTask = taskId => {
   }
 }
 
-/**
- * REDUCER
- */
+// Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_SINGLE_TASK:

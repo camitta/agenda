@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
 import {DragDropContext} from 'react-beautiful-dnd'
-import {FilterTasksByLabel} from './index'
+import {FilterTasksByLabel, DeleteBoard} from './index'
 
 //Redux store items
 import {connect} from 'react-redux'
@@ -20,9 +20,6 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogActions from '@material-ui/core/DialogActions'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
@@ -63,7 +60,8 @@ const SingleBoard = props => {
     }
   }
 
-  function handleModal(event) {
+  // Opens the 'delete board' dialog box.
+  function handleOpen(event) {
     event.preventDefault()
     setOpen(true)
   }
@@ -80,6 +78,7 @@ const SingleBoard = props => {
     setOpen(false)
   }
 
+  // Allow a draggable item to be dropped without flickering.
   function handleDragEnd({destination, draggableId}) {
     if (!destination) {
       return
@@ -103,6 +102,7 @@ const SingleBoard = props => {
     await props.getAllTasks(boardId)
   }
 
+  // Separate the tasks based on completion type.
   let todoTasks, progressTasks, doneTasks
   if (tasks && tasks.length) {
     todoTasks = tasks.filter(task => task.type === 'todo')
@@ -154,23 +154,15 @@ const SingleBoard = props => {
         <Button
           className={classes.deleteButton}
           variant="contained"
-          onClick={handleModal}
+          onClick={handleOpen}
         >
           Delete board
         </Button>
-        <Dialog open={open} onClose={handleCancel}>
-          <DialogTitle style={{padding: '20px 20px 0px 20px'}}>
-            Are you sure you want to delete this board?
-          </DialogTitle>
-          <DialogActions style={{textAlign: 'center'}}>
-            <Button onClick={handleDelete} style={{color: 'green'}}>
-              Yes
-            </Button>
-            <Button onClick={handleCancel} style={{color: 'red'}}>
-              No
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <DeleteBoard
+          handleCancel={handleCancel}
+          handleDelete={handleDelete}
+          open={open}
+        />
       </div>
     </div>
   )
