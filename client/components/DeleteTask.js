@@ -41,14 +41,10 @@ const DeleteTask = props => {
 
   return (
     <>
-      <IconButton aria-label="delete" onClick={handleClickOpen}>
+      <IconButton onClick={handleClickOpen}>
         <DeleteIcon />
       </IconButton>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-describedby="alert-dialog-description"
-      >
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle id="alert-dialog-description">
           Are you sure you want to remove "{taskName}" from the board?
         </DialogTitle>

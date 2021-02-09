@@ -46,9 +46,7 @@ export const TaskForm = props => {
         onChange={props.handleDateChange}
         label="Due Date"
         value={props.state.dueDate}
-        KeyboardButtonProps={{
-          'aria-label': 'change date'
-        }}
+        KeyboardButtonProps={{}}
       />
       <div className={classes.inputs}>
         <div>

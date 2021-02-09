@@ -41,32 +41,19 @@ export const ThemeToggle = props => {
       exclusive
       size="small"
       onChange={handleFormat}
-      aria-label="color mode"
       style={{
         justifyContent: 'flex-end',
         alignItems: 'center',
         paddingRight: '.4em'
       }}
     >
-      <CustomToggle
-        value="light"
-        aria-label="mode"
-        style={{borderRadius: '50%'}}
-      >
+      <CustomToggle value="light" style={{borderRadius: '50%'}}>
         <StarIcon fontSize="small" />
       </CustomToggle>
-      <CustomToggle
-        value="dark"
-        aria-label="mode"
-        style={{borderRadius: '50%'}}
-      >
+      <CustomToggle value="dark" style={{borderRadius: '50%'}}>
         <Brightness3Icon fontSize="small" />
       </CustomToggle>
-      <CustomToggle
-        value="wildcard"
-        aria-label="mode"
-        style={{borderRadius: '50%'}}
-      >
+      <CustomToggle value="wildcard" style={{borderRadius: '50%'}}>
         <FlareIcon fontSize="small" />
       </CustomToggle>
     </ToggleButtonGroup>

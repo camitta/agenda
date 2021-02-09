@@ -116,10 +116,7 @@ const SingleBoard = props => {
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
         <Accordion>
-          <AccordionSummary
-            expandIcon={<GroupIcon />}
-            aria-controls="single-task"
-          >
+          <AccordionSummary expandIcon={<GroupIcon />}>
             <Typography>Team Members</Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -161,12 +158,7 @@ const SingleBoard = props => {
         >
           Delete board
         </Button>
-        <Dialog
-          open={open}
-          aria-labelledby="delete-board-confirmation"
-          aria-describedby="delete-board-modal"
-          onClose={handleCancel}
-        >
+        <Dialog open={open} onClose={handleCancel}>
           <DialogTitle style={{padding: '20px 20px 0px 20px'}}>
             Are you sure you want to delete this board?
           </DialogTitle>
