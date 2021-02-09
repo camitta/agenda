@@ -5,17 +5,13 @@ import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
 import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
 import ToggleButton from '@material-ui/core/ToggleButton'
 import ToggleButtonGroup from '@material-ui/core/ToggleButtonGroup'
+import {default as dark} from '.theme/darkTheme'
 
 const useStyles = makeStyles(theme => ({}))
 
 export const light = {
   palette: {
     type: 'light'
-  }
-}
-export const dark = {
-  palette: {
-    type: 'dark'
   }
 }
 

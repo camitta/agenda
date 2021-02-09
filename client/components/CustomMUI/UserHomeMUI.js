@@ -13,16 +13,14 @@ export const homeStyles = makeStyles(theme => ({
       [theme.breakpoints.up('lg')]: {
         fontSize: 20
       }
-    }
+    },
+    paddingBottom: '80px'
   },
   root: {
-    padding: theme
-  },
-  mantra: {
-    textAlign: 'center',
-    position: 'absolute',
-    bottom: 0,
-    padding: '1em'
+    padding: theme,
+    display: 'flex',
+    flexDirection: 'column',
+    paddingBottom: '80px'
   },
   container: {
     minHeight: '150px',
