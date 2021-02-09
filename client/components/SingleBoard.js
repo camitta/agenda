@@ -110,7 +110,7 @@ const SingleBoard = props => {
         </AccordionDetails>
       </Accordion>
       <Title variant="h3">{props.singleBoard.name}</Title>
-      <div className={classes.deleteContainer}>
+      <div className={classes.filterContainer}>
         <FilterTasksByLabel boardId={boardId} />
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
@@ -152,7 +152,9 @@ const SingleBoard = props => {
 }
 
 const filterFunc = (tasks, label) => {
-  return label === 'all' ? tasks : tasks.filter(task => task.label === label)
+  return label === '' || label === 'all'
+    ? tasks
+    : tasks.filter(task => task.label === label)
 }
 
 const mapState = state => {

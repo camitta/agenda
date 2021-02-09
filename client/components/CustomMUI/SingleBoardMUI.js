@@ -13,6 +13,10 @@ export const singleBoardStyles = makeStyles(() => ({
   deleteContainer: {
     textAlign: 'right'
   },
+  filterContainer: {
+    textAlign: 'right',
+    margin: 'auto 5%'
+  },
   modal: {
     display: 'flex',
     flexDirection: 'column',

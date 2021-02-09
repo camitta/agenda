@@ -43,3 +43,21 @@ export const checkDueDate = (dueDate, id) => {
     taskName.style.color = 'black'
   }
 }
+
+export const generateListTypeName = errMessage => {
+  const types = ['todo', 'inprogress', 'done']
+
+  for (let nameType of types) {
+    if (errMessage.includes('password')) {
+      return `Your password needs to have 6-12 characters!`
+    } else if (errMessage.includes(nameType)) {
+      nameType = nameType.replace(/(\w+)([A-Z]\w+)/g, '$1 $2')
+      nameType = nameType[0].toUpperCase() + nameType.slice(1)
+      if (errMessage.includes('notEmpty')) {
+        return `Did you fill out ${nameType}?`
+      } else {
+        return `Did you fill out ${nameType} correctly?`
+      }
+    }
+  }
+}
