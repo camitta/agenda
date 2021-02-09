@@ -8,7 +8,7 @@ import {FilterTasksByLabel} from './index'
 //Redux store items
 import {connect} from 'react-redux'
 import {getSingleBoard, deleteSingleBoard} from '../store/single-board'
-import {getAllTasks} from '../store/all-tasks'
+import {getAllTasks, getTasksNoDB} from '../store/all-tasks'
 import {editSingleTask} from '../store/tasks'
 
 //Material-UI items
@@ -52,6 +52,7 @@ const SingleBoard = props => {
 
   const boardId = props.match.params.boardId
   const {tasks} = props
+  const boardType = props.singleBoard.type
 
   function loadBoardAndTasks() {
     try {
@@ -79,10 +80,25 @@ const SingleBoard = props => {
     setOpen(false)
   }
 
-  async function handleDragEnd({destination, draggableId}) {
+  function handleDragEnd({destination, draggableId}) {
     if (!destination) {
       return
     }
+    let taskInUse = {}
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === parseInt(draggableId)) {
+        taskInUse = tasks[i]
+        tasks.splice(i, 1)
+      }
+    }
+    props.getTasksNoDB([
+      ...tasks,
+      {...taskInUse, type: destination.droppableId}
+    ])
+    updateDB(draggableId, destination)
+  }
+
+  async function updateDB(draggableId, destination) {
     await props.editSingleTask(draggableId, {type: destination.droppableId})
     await props.getAllTasks(boardId)
   }
@@ -98,26 +114,43 @@ const SingleBoard = props => {
 
   return (
     <div className={classes.singleBoardContainer}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<GroupIcon />}
-          aria-controls="single-task"
-        >
-          <Typography>Team Members</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <AddUserToBoard currentBoard={props.singleBoard} />
-        </AccordionDetails>
-      </Accordion>
+      {boardType === 'team' ? (
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<GroupIcon />}
+            aria-controls="single-task"
+          >
+            <Typography>Team Members</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <AddUserToBoard currentBoard={props.singleBoard} />
+          </AccordionDetails>
+        </Accordion>
+      ) : null}
       <Title variant="h3">{props.singleBoard.name}</Title>
       <div className={classes.filterContainer}>
         <FilterTasksByLabel boardId={boardId} />
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
         <ListsContainer>
-          <List status="todo" boardId={boardId} tasks={todoTasks} />
-          <List status="inprogress" boardId={boardId} tasks={progressTasks} />
-          <List status="done" boardId={boardId} tasks={doneTasks} />
+          <List
+            status="todo"
+            boardId={boardId}
+            boardType={boardType}
+            tasks={todoTasks}
+          />
+          <List
+            status="inprogress"
+            boardId={boardId}
+            boardType={boardType}
+            tasks={progressTasks}
+          />
+          <List
+            status="done"
+            boardId={boardId}
+            boardType={boardType}
+            tasks={doneTasks}
+          />
         </ListsContainer>
       </DragDropContext>
       <div className={classes.deleteContainer}>
@@ -169,7 +202,8 @@ const mapDispatch = dispatch => {
     fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
     getAllTasks: boardId => dispatch(getAllTasks(boardId)),
     deleteBoard: boardId => dispatch(deleteSingleBoard(boardId)),
-    editSingleTask: (id, task) => dispatch(editSingleTask(id, task))
+    editSingleTask: (id, task) => dispatch(editSingleTask(id, task)),
+    getTasksNoDB: tasks => dispatch(getTasksNoDB(tasks))
   }
 }
 

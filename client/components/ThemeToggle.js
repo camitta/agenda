@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {default as StarIcon} from '@material-ui/icons/Star'
 import {default as FlareIcon} from '@material-ui/icons/Flare'
 import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
 import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
-import ToggleButton from '@material-ui/core/ToggleButton'
-import ToggleButtonGroup from '@material-ui/core/ToggleButtonGroup'
-import {default as dark} from '.theme/darkTheme'
+import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
+
+import dark from '../theme/darkTheme'
 
 const useStyles = makeStyles(theme => ({}))
 
@@ -20,23 +20,36 @@ const handleChange = event => {
 }
 
 export const ThemeToggle = props => {
-  const [theme, setTheme] = useState(true)
+  const [theme, setTheme] = useState('light')
+  useEffect(() => {
+    setTheme(localStorage.getItem('theme'))
+  }, [])
+  const handleClick = theme => {
+    localStorage.setItem('theme', theme)
+    setTheme(theme)
+  }
+
   const classes = useStyles()
   const appliedTheme = createMuiTheme(theme ? light : dark)
-
+  const [formats, setFormats] = React.useState(() => ['bold', 'italic'])
+  const handleFormat = (event, newFormats) => {
+    setFormats(newFormats)
+  }
   return (
     <ToggleButtonGroup
-      value={themes}
-      onChange={props.handleChange}
+      value={theme}
+      exclusive
+      onChange={handleFormat}
       aria-label="color mode"
+      style={{justifyContent: 'flex-end'}}
     >
-      <ToggleButton aria-label="mode">
+      <ToggleButton value="light" aria-label="mode">
         <StarIcon />
       </ToggleButton>
-      <ToggleButton aria-label="mode">
+      <ToggleButton value="dark" aria-label="mode">
         <Brightness3Icon />
       </ToggleButton>
-      <ToggleButton aria-label="mode" disabled>
+      <ToggleButton value="wildcard" aria-label="mode">
         <FlareIcon />
       </ToggleButton>
     </ToggleButtonGroup>

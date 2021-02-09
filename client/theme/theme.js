@@ -132,7 +132,8 @@ const theme = createMuiTheme({
     MuiGrid: {
       container: {
         maxWidth: 1600,
-        margin: '0 auto'
+        margin: '0',
+        padding: '0'
       }
     }
   },
