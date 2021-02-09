@@ -79,7 +79,6 @@ const Task = props => {
     checkDueDate(task.dueDate, task.id)
   }
 
-  console.log('PROPS', props)
   return (
     <Draggable key={task.id} draggableId={String(task.id)} index={index}>
       {provided => (
