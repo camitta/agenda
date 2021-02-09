@@ -40,6 +40,7 @@ export const TaskForm = props => {
         margin="normal"
         name="dueDate"
         disablePast={true}
+        minDateMessage="Warning: this date has already passed."
         onChange={props.handleDateChange}
         label="Due Date"
         value={props.state.dueDate}
