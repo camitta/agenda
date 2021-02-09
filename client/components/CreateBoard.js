@@ -41,12 +41,7 @@ export const CreateBoard = props => {
   }
 
   return (
-    <Dialog
-      aria-labelledby="add-board"
-      aria-describedby="add-new-board"
-      open={props.open}
-      onClose={handleClose}
-    >
+    <Dialog open={props.open} onClose={handleClose}>
       <DialogTitle>Create New Board</DialogTitle>
       <DialogContent>
         <form className={classes.paper}>

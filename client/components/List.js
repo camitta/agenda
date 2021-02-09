@@ -85,7 +85,6 @@ const List = props => {
               <Accordion>
                 <AccordionSummary
                   expandIcon={<AddIcon />}
-                  aria-controls="panel1a-content"
                   id="panel1a-header"
                 />
                 <AccordionDetails>
@@ -101,7 +100,7 @@ const List = props => {
                           {generateErrorMessage(props.error.response.data)}
                         </div>
                       )}
-                    <IconButton aria-label="submit" onClick={handleSubmit}>
+                    <IconButton onClick={handleSubmit}>
                       <DoneIcon />
                     </IconButton>
                   </div>

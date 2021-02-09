@@ -80,7 +80,6 @@ const AddUserToBoard = props => {
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
-                    aria-label="delete"
                     onClick={
                       user.id === props.userState.id
                         ? () => handleClickOpen()
@@ -97,11 +96,7 @@ const AddUserToBoard = props => {
           <ListItem>No current members</ListItem>
         )}
       </List>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-describedby="alert-dialog-description"
-      >
+      <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Are you sure you want to remove yourself from this board?
@@ -131,7 +126,7 @@ const AddUserToBoard = props => {
           value={email}
           onChange={handleEmail}
         />
-        <IconButton aria-label="submit" onClick={handleSubmit}>
+        <IconButton onClick={handleSubmit}>
           <PersonAddIcon style={{fontSize: 40}} color="action" />
         </IconButton>
         <>

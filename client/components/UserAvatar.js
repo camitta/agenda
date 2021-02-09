@@ -43,11 +43,7 @@ const UserAvatar = props => {
                 {user.firstName[0]}
                 {user.lastName[0]}
               </Avatar>
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-describedby="alert-dialog-description"
-              >
+              <Dialog open={open} onClose={handleClose}>
                 <DialogContent>
                   <DialogContentText id="alert-dialog-description">
                     Are you sure you want to remove {user.firstName} from the

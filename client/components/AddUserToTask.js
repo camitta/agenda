@@ -36,12 +36,7 @@ const AddUserToTask = props => {
 
   return (
     <>
-      <IconButton
-        aria-label="addUser"
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
+      <IconButton onClick={handleClick}>
         <PersonAddIcon />
       </IconButton>
       <Menu
