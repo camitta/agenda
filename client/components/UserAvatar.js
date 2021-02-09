@@ -1,79 +1,25 @@
-import React, {useState} from 'react'
-import {unassignUserFromTask} from '../store/tasks'
-import {getAllTasks} from '../store/all-tasks'
-import {connect} from 'react-redux'
-
-// Material UI
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
+import React from 'react'
+import DeleteUser from './DeleteUser'
 
 const UserAvatar = props => {
   const {users, taskId, boardId} = props || []
-
-  const [open, setOpen] = useState(false)
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleDelete = async userId => {
-    try {
-      await props.unassignUser(taskId, boardId, userId)
-      await props.fetchTasks(boardId)
-      setOpen(false)
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   return (
     <>
       {users.length
         ? users.map(user => (
-            <div key={user.id}>
-              <Avatar onClick={() => handleClickOpen()}>
-                {user.firstName[0]}
-                {user.lastName[0]}
-              </Avatar>
-              <Dialog open={open} onClose={handleClose}>
-                <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to remove {user.firstName} from this
-                    task?
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose} style={{color: 'red'}}>
-                    No
-                  </Button>
-                  <Button
-                    onClick={() => handleDelete(user.id)}
-                    style={{color: 'green'}}
-                    autoFocus
-                  >
-                    Yes
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </div>
+            <DeleteUser
+              key={user.id}
+              userId={user.id}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              boardId={boardId}
+              taskId={taskId}
+            />
           ))
         : null}
     </>
   )
 }
 
-const mapDispatch = dispatch => ({
-  unassignUser: (taskId, boardId, userId) =>
-    dispatch(unassignUserFromTask(taskId, boardId, userId)),
-  fetchTasks: boardId => dispatch(getAllTasks(boardId))
-})
-
-export default connect(null, mapDispatch)(UserAvatar)
+export default UserAvatar
