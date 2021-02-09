@@ -57,12 +57,11 @@ const UserHome = props => {
         </Typography>
       </StyledButton>
       <CreateBoard getBoards={props.getBoards} open={open} setOpen={setOpen} />
+      <Checklist />
       <Grid container spacing={3}>
         <Grid item xs={3}>
           <Grid container>
-            <Grid item xs={12}>
-              <Checklist />
-            </Grid>
+            <Grid item xs={12} />
             <Grid item xs={12} />
           </Grid>
         </Grid>

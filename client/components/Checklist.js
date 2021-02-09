@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 // Material UI
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import Grid from '@material-ui/core/Grid'
+import Paper from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import AddIcon from '@material-ui/icons/Add'
@@ -65,53 +65,50 @@ const Checklist = props => {
   const tasks = props.checklist || []
 
   return (
-    <Grid container style={{paddingBottom: '60px'}}>
-      <Grid item xs={12} className={classes.checklist}>
-        <Typography variant="h3" className={classes.title}>
-          To-Do List
-        </Typography>
-        <form className={classes.add} onSubmit={handleSubmit}>
-          <IconButton fontSize="small" type="submit">
-            <AddIcon />
-          </IconButton>
-          <TextField
-            name="addItem"
-            onChange={handleChange}
-            value={state.addItem}
-          />
-        </form>
+    <Paper className={classes.checklist}>
+      <Typography variant="h3" className={classes.title}>
+        To-Do List
+      </Typography>
+      <form className={classes.add} onSubmit={handleSubmit}>
+        <IconButton fontSize="small" type="submit">
+          <AddIcon />
+        </IconButton>
+        <TextField
+          name="addItem"
+          onChange={handleChange}
+          value={state.addItem}
+        />
+      </form>
 
-        {/* all nodes MUST have the item's ID or delete will not work properly */}
-        {tasks.length ? (
-          tasks.map(item => {
-            return (
-              <div key={item.id} id={item.id}>
-                <FormControlLabel
-                  control={<Checkbox fontSize="small" color="primary" />}
-                  label={
-                    <Typography variant="body1" style={{fontSize: '.8rem'}}>
-                      {item.description}
-                    </Typography>
-                  }
-                  className={classes.formItem}
-                  checked={Boolean(item.completed)}
-                  value={item.completed}
-                  variant="body2"
-                  name={item.id.toString()}
-                  onChange={handleCheck}
-                />
-                <IconButton onClick={handleDelete} type="button" id={item.id}>
-                  <DeleteIcon id={item.id} fontSize="small" />
-                </IconButton>
-              </div>
-            )
-          })
-        ) : (
-          <p />
-        )}
-      </Grid>
-      <Grid item xs={12} />
-    </Grid>
+      {/* all nodes MUST have the item's ID or delete will not work properly */}
+      {tasks.length ? (
+        tasks.map(item => {
+          return (
+            <div key={item.id} id={item.id}>
+              <FormControlLabel
+                control={<Checkbox fontSize="small" color="primary" />}
+                label={
+                  <Typography variant="body1" style={{fontSize: '.8rem'}}>
+                    {item.description}
+                  </Typography>
+                }
+                className={classes.formItem}
+                checked={Boolean(item.completed)}
+                value={item.completed}
+                variant="body2"
+                name={item.id.toString()}
+                onChange={handleCheck}
+              />
+              <IconButton onClick={handleDelete} type="button" id={item.id}>
+                <DeleteIcon id={item.id} fontSize="small" />
+              </IconButton>
+            </div>
+          )
+        })
+      ) : (
+        <p />
+      )}
+    </Paper>
   )
 }
 

@@ -7,8 +7,7 @@ export const ChecklistClasses = makeStyles(() => ({
     flexDirection: 'column',
     margin: '20px',
     padding: '10px',
-    minWidth: '150px',
-    height: '100%',
+    width: '20vmax',
     background: '#faf1d4',
     boxShadow: '2px 2px 4px 2px #9c9c9c'
   },
