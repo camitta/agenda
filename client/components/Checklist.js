@@ -65,49 +65,47 @@ const Checklist = props => {
   const tasks = props.checklist || []
 
   return (
-    <Grid
-      item
-      xs={12}
-      className={classes.checklist}
-      style={{paddingBottom: '60px'}}
-    >
-      <Typography variant="h3" className={classes.title}>
-        To-Do List
-      </Typography>
-      <form className={classes.add} onSubmit={handleSubmit}>
-        <IconButton type="submit">
-          <AddIcon />
-        </IconButton>
-        <TextField
-          name="addItem"
-          onChange={handleChange}
-          value={state.addItem}
-        />
-      </form>
+    <Grid container style={{paddingBottom: '60px'}}>
+      <Grid item xs={12} className={classes.checklist}>
+        <Typography variant="h3" className={classes.title}>
+          To-Do List
+        </Typography>
+        <form className={classes.add} onSubmit={handleSubmit}>
+          <IconButton type="submit">
+            <AddIcon />
+          </IconButton>
+          <TextField
+            name="addItem"
+            onChange={handleChange}
+            value={state.addItem}
+          />
+        </form>
 
-      {/* all nodes MUST have the item's ID or delete will not work properly */}
-      {tasks.length ? (
-        tasks.map(item => {
-          return (
-            <div key={item.id} id={item.id}>
-              <FormControlLabel
-                control={<Checkbox color="primary" />}
-                label={item.description}
-                className={classes.formItem}
-                checked={Boolean(item.completed)}
-                value={item.completed}
-                name={item.id.toString()}
-                onChange={handleCheck}
-              />
-              <IconButton onClick={handleDelete} type="button" id={item.id}>
-                <DeleteIcon id={item.id} />
-              </IconButton>
-            </div>
-          )
-        })
-      ) : (
-        <p />
-      )}
+        {/* all nodes MUST have the item's ID or delete will not work properly */}
+        {tasks.length ? (
+          tasks.map(item => {
+            return (
+              <div key={item.id} id={item.id}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label={item.description}
+                  className={classes.formItem}
+                  checked={Boolean(item.completed)}
+                  value={item.completed}
+                  name={item.id.toString()}
+                  onChange={handleCheck}
+                />
+                <IconButton onClick={handleDelete} type="button" id={item.id}>
+                  <DeleteIcon id={item.id} />
+                </IconButton>
+              </div>
+            )
+          })
+        ) : (
+          <p />
+        )}
+      </Grid>
+      <Grid item xs={12} />
     </Grid>
   )
 }

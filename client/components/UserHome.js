@@ -63,6 +63,7 @@ const UserHome = props => {
             <Grid item xs={12}>
               <Checklist />
             </Grid>
+            <Grid item xs={12} />
           </Grid>
         </Grid>
         {/* load all personal boards */}
