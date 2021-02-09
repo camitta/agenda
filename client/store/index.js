@@ -9,6 +9,7 @@ import allBoards from './all-boards'
 import mantras from './mantras'
 import allTasks from './all-tasks'
 import checklist from './checklist'
+import filter from './filter'
 
 const reducer = combineReducers({
   user,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   allBoards,
   mantras,
   allTasks,
-  checklist
+  checklist,
+  filter
 })
 
 const middleware = composeWithDevTools(

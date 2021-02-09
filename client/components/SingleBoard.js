@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
 import {DragDropContext} from 'react-beautiful-dnd'
+import {FilterTasksByLabel} from './index'
 
 //Redux store items
 import {connect} from 'react-redux'
@@ -50,7 +51,7 @@ const SingleBoard = props => {
   const [open, setOpen] = useState(false)
 
   const boardId = props.match.params.boardId
-  const tasks = props.tasks
+  const {tasks} = props
 
   function loadBoardAndTasks() {
     try {
@@ -96,7 +97,7 @@ const SingleBoard = props => {
   const classes = singleBoardStyles()
 
   return (
-    <div>
+    <div className={classes.singleBoardContainer}>
       <Accordion>
         <AccordionSummary
           expandIcon={<GroupIcon />}
@@ -109,6 +110,9 @@ const SingleBoard = props => {
         </AccordionDetails>
       </Accordion>
       <Title variant="h3">{props.singleBoard.name}</Title>
+      <div className={classes.filterContainer}>
+        <FilterTasksByLabel boardId={boardId} />
+      </div>
       <DragDropContext onDragEnd={handleDragEnd}>
         <ListsContainer>
           <List status="todo" boardId={boardId} tasks={todoTasks} />
@@ -147,10 +151,18 @@ const SingleBoard = props => {
   )
 }
 
-const mapState = state => ({
-  singleBoard: state.singleBoard,
-  tasks: state.allTasks
-})
+const filterFunc = (tasks, label) => {
+  return label === '' || label === 'all'
+    ? tasks
+    : tasks.filter(task => task.label === label)
+}
+
+const mapState = state => {
+  return {
+    singleBoard: state.singleBoard,
+    tasks: filterFunc(state.allTasks, state.filter)
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
