@@ -25,7 +25,7 @@ const Footer = props => {
     <StyledBox>
       <Grid container spacing={0} style={{borderTop: '1px solid black'}}>
         <Grid container align="left">
-          <Grid item xs>
+          <Grid item xs={10}>
             {/* get a random mantra */}
             {mantras.length ? (
               <Typography
@@ -40,8 +40,9 @@ const Footer = props => {
             ) : (
               <Typography
                 style={{
-                  fontSize: 22,
-                  fontFamily: 'pinyon script, cursive'
+                  fontSize: 24,
+                  fontFamily: 'pinyon script, cursive',
+                  padding: '.4em'
                 }}
               >
                 What's on your agenda?

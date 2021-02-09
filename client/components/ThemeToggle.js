@@ -4,7 +4,7 @@ import {default as FlareIcon} from '@material-ui/icons/Flare'
 import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
 import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
-
+import {CustomToggle} from './CustomMUI/ToggleButtonMUI'
 import dark from '../theme/darkTheme'
 
 const useStyles = makeStyles(theme => ({}))
@@ -42,17 +42,33 @@ export const ThemeToggle = props => {
       size="small"
       onChange={handleFormat}
       aria-label="color mode"
-      style={{justifyContent: 'flex-end', alignItems: 'center'}}
+      style={{
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingRight: '.4em'
+      }}
     >
-      <ToggleButton value="light" aria-label="mode">
+      <CustomToggle
+        value="light"
+        aria-label="mode"
+        style={{borderRadius: '50%'}}
+      >
         <StarIcon fontSize="small" />
-      </ToggleButton>
-      <ToggleButton value="dark" aria-label="mode">
+      </CustomToggle>
+      <CustomToggle
+        value="dark"
+        aria-label="mode"
+        style={{borderRadius: '50%'}}
+      >
         <Brightness3Icon fontSize="small" />
-      </ToggleButton>
-      <ToggleButton value="wildcard" aria-label="mode">
+      </CustomToggle>
+      <CustomToggle
+        value="wildcard"
+        aria-label="mode"
+        style={{borderRadius: '50%'}}
+      >
         <FlareIcon fontSize="small" />
-      </ToggleButton>
+      </CustomToggle>
     </ToggleButtonGroup>
   )
 }
