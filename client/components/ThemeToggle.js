@@ -37,17 +37,19 @@ export const ThemeToggle = props => {
   }
   return (
     <ToggleButtonGroup
+      value={theme}
+      exclusive
       onChange={handleFormat}
       aria-label="color mode"
       style={{justifyContent: 'flex-end'}}
     >
-      <ToggleButton aria-label="mode">
+      <ToggleButton value="light" aria-label="mode">
         <StarIcon />
       </ToggleButton>
-      <ToggleButton aria-label="mode">
+      <ToggleButton value="dark" aria-label="mode">
         <Brightness3Icon />
       </ToggleButton>
-      <ToggleButton aria-label="mode">
+      <ToggleButton value="wildcard" aria-label="mode">
         <FlareIcon />
       </ToggleButton>
     </ToggleButtonGroup>
