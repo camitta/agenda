@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const {Board, User, Task, Mantra} = require('../db/models')
 const {isLoggedInUser} = require('./routerMiddleware')
-const {isAdmin} = require('./routerMiddleware')
 
 //GET api/boards/
 //all boards and mantra
@@ -31,9 +30,9 @@ router.get('/:boardId', isLoggedInUser, async (req, res, next) => {
         id
       },
       include: [
-        {
-          model: Task
-        },
+        // {
+        //   model: Task
+        // },
         {
           model: User
           // attributes: [],
