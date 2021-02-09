@@ -1,18 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import {fonts, backupFonts} from './fonts'
 
-export const light = {
-  palette: {
-    type: 'light'
-  }
-}
-
-export const dark = {
-  palette: {
-    type: 'dark'
-  }
-}
-
 const theme = createMuiTheme({
   typography: {
     htmlFontSize: 16,
@@ -92,20 +80,6 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#FEF6D3'
-    },
-    brand: {
-      forestGreen: '#003833',
-      seaFoam: '#c3f1cf',
-      sienna: '#87331f',
-      palePink: '#FDE1DE',
-      navy: '#1F396D',
-      lightBlue: '#DAEFF1',
-      plum: '#621244',
-      lavender: '#DED1E1',
-      offWhite: '#FCF8F4',
-      lemon: '#FFE671',
-      orange: '#FABA91',
-      vanilla: '#FEF6D3'
     },
     error: {
       main: '#C10230',

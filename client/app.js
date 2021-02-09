@@ -1,9 +1,14 @@
 import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import {ThemeProvider} from '@material-ui/core/styles'
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import theme from './theme/theme'
 import Routes from './routes'
 
+const dark = createMuiTheme({
+  palette: {
+    type: 'dark'
+  }
+})
 export default function App() {
   return (
     <div>
