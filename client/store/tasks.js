@@ -127,17 +127,13 @@ export const removeChipsFromSingleTask = taskId => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_SINGLE_TASK:
+    case REMOVE_USER_FROM_TASK:
+    case EDIT_SINGLE_TASK:
+    case ADD_USER_TO_TASK:
+    case ADD_SINGLE_TASK:
       return action.singleTask
     case REMOVE_SINGLE_TASK:
       return initialState
-    case ADD_SINGLE_TASK:
-      return action.singleTask
-    case EDIT_SINGLE_TASK:
-      return action.singleTask
-    case ADD_USER_TO_TASK:
-      return action.singleTask
-    case REMOVE_USER_FROM_TASK:
-      return action.singleTask
     case REMOVE_CHIPS_FROM_TASK:
       return {...state, label: action.label}
     default:
