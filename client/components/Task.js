@@ -78,7 +78,6 @@ const Task = props => {
     setState({...state, edit: !state.edit})
     checkDueDate(task.dueDate, task.id)
   }
-
   return (
     <Draggable key={task.id} draggableId={String(task.id)} index={index}>
       {provided => (
