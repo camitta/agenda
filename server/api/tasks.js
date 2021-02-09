@@ -206,4 +206,34 @@ router.put('/:taskId/chips/remove', async (req, res, next) => {
   }
 })
 
+//remove a user from all tasks associated with the board id
+router.put('/boards/:boardId/delete/user', async (req, res, next) => {
+  try {
+    const {boardId} = req.params
+    const userId = req.body.id
+    const tasks = await Task.findAll({
+      where: {
+        boardId: boardId
+      },
+      include: [
+        {
+          model: User,
+          attributes: [],
+          through: {
+            where: {
+              userId
+            }
+          },
+          required: true
+        }
+      ]
+    })
+    const user = await User.findByPk(userId)
+    await user.removeTasks(tasks)
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 
 //Redux
 import {addUserSingleBoard, removeUserSingleBoard} from '../store/single-board'
-import {getAllTasks} from '../store/all-tasks'
+import {getAllTasks, removeUserfromBoardTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 
 //Material UI
@@ -22,7 +22,6 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
-import Button from '@material-ui/core/Button'
 
 const AddUserToBoard = props => {
   const users = props.currentBoard.users || []
@@ -57,6 +56,7 @@ const AddUserToBoard = props => {
   const handleDelete = async userId => {
     try {
       await props.removeUserFromBoard(boardId, userId)
+      await props.removeUserfromBoardTasks(boardId, userId)
       await props.fetchTasks(boardId)
     } catch (error) {
       console.log(error)
@@ -108,17 +108,17 @@ const AddUserToBoard = props => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <IconButton onClick={handleClose} color="primary">
             No
-          </Button>
-          <Button
+          </IconButton>
+          <IconButton
             onClick={() => handleDelete(props.userState.id)}
             color="primary"
             autoFocus
             href="/home"
           >
             Yes
-          </Button>
+          </IconButton>
         </DialogActions>
       </Dialog>
       <form onSubmit={handleSubmit}>
@@ -156,7 +156,9 @@ const mapDispatch = dispatch => {
       dispatch(addUserSingleBoard(id, userEmail)),
     removeUserFromBoard: (boardId, userId) =>
       dispatch(removeUserSingleBoard(boardId, userId)),
-    fetchTasks: boardId => dispatch(getAllTasks(boardId))
+    fetchTasks: boardId => dispatch(getAllTasks(boardId)),
+    removeUserfromBoardTasks: (boardId, userId) =>
+      dispatch(removeUserfromBoardTasks(boardId, userId))
   }
 }
 

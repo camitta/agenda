@@ -22,7 +22,10 @@ const removeSingleBoard = () => ({type: REMOVE_SINGLE_BOARD})
 const addedSingleBoard = board => ({type: ADD_SINGLE_BOARD, board})
 const editedSingleBoard = board => ({type: EDIT_SINGLE_BOARD, board})
 const addedUsersSingleBoard = board => ({type: ADD_USER_TO_BOARD, board})
-const removedUserSingleBoard = board => ({type: REMOVE_USER_FROM_BOARD, board})
+const removedUserSingleBoard = board => ({
+  type: REMOVE_USER_FROM_BOARD,
+  board
+})
 /**
  * THUNK CREATORS
  */
