@@ -97,17 +97,19 @@ const SingleBoard = props => {
 
   return (
     <div>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<GroupIcon />}
-          aria-controls="single-task"
-        >
-          <Typography>Team Members</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <AddUserToBoard currentBoard={props.singleBoard} />
-        </AccordionDetails>
-      </Accordion>
+      {props.singleBoard.type === 'team' ? (
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<GroupIcon />}
+            aria-controls="single-task"
+          >
+            <Typography>Team Members</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <AddUserToBoard currentBoard={props.singleBoard} />
+          </AccordionDetails>
+        </Accordion>
+      ) : null}
       <Title variant="h3">{props.singleBoard.name}</Title>
       <DragDropContext onDragEnd={handleDragEnd}>
         <ListsContainer>
