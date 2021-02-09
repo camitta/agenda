@@ -104,7 +104,8 @@ const AddUserToBoard = props => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove yourself from this board?
+            Are you sure you want to remove yourself from this board? You will
+            also be removed from all tasks on this board.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

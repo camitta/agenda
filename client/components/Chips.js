@@ -17,8 +17,7 @@ const Chips = props => {
 
   return (
     <Chip
-      label={label}
-      style={{backgroundColor: label}}
+      style={{backgroundColor: label, width: 100, justifyContent: 'flex-end'}}
       size="small"
       onDelete={handleDelete}
       deleteIcon={<CancelIcon />}
