@@ -71,7 +71,7 @@ const Checklist = props => {
           To-Do List
         </Typography>
         <form className={classes.add} onSubmit={handleSubmit}>
-          <IconButton type="submit">
+          <IconButton fontSize="small" type="submit">
             <AddIcon />
           </IconButton>
           <TextField
@@ -87,16 +87,21 @@ const Checklist = props => {
             return (
               <div key={item.id} id={item.id}>
                 <FormControlLabel
-                  control={<Checkbox color="primary" />}
-                  label={item.description}
+                  control={<Checkbox fontSize="small" color="primary" />}
+                  label={
+                    <Typography variant="body1" style={{fontSize: '.8rem'}}>
+                      {item.description}
+                    </Typography>
+                  }
                   className={classes.formItem}
                   checked={Boolean(item.completed)}
                   value={item.completed}
+                  variant="body2"
                   name={item.id.toString()}
                   onChange={handleCheck}
                 />
                 <IconButton onClick={handleDelete} type="button" id={item.id}>
-                  <DeleteIcon id={item.id} />
+                  <DeleteIcon id={item.id} fontSize="small" />
                 </IconButton>
               </div>
             )
