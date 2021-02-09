@@ -18,7 +18,6 @@ export const TaskForm = props => {
     <form className={classes.card}>
       <TextField
         style={{width: '100%'}}
-        id="filled-basic"
         label="Name"
         name="name"
         variant="filled"
@@ -28,7 +27,6 @@ export const TaskForm = props => {
       <TextField
         multiline
         style={{width: '100%'}}
-        id="filled-textarea"
         label="Description"
         name="description"
         variant="filled"
@@ -40,9 +38,9 @@ export const TaskForm = props => {
         variant="inline"
         format="MM/dd/yyyy"
         margin="normal"
-        id="date-picker-inline"
         name="dueDate"
         disablePast={true}
+        minDateMessage="Warning: this date has already passed."
         onChange={props.handleDateChange}
         label="Due Date"
         value={props.state.dueDate}
