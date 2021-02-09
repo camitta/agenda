@@ -79,7 +79,6 @@ export const modalStyles = makeStyles(() => ({
     margin: '0 auto',
     height: '40%',
     width: '100%',
-    border: '2px solid #000',
     padding: '20px',
     background: 'white',
     outline: 0

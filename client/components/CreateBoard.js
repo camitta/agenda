@@ -2,13 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 // Material UI
-import Modal from '@material-ui/core/Modal'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 
 // Custom MUI
 import {modalStyles} from './CustomMUI/UserHomeMUI'
@@ -25,7 +27,7 @@ export const CreateBoard = props => {
 
   const [state, setState] = React.useState({
     name: '',
-    type: ''
+    type: 'personal'
   })
 
   function handleChange(event) {
@@ -35,33 +37,41 @@ export const CreateBoard = props => {
   async function handleSubmit() {
     await props.addBoard(state)
     await props.getBoards()
+    handleClose()
   }
 
   return (
-    <Modal
+    <Dialog
       aria-labelledby="add-board"
       aria-describedby="add-new-board"
       open={props.open}
       onClose={handleClose}
     >
-      <form className={classes.paper} onSubmit={handleSubmit}>
-        <Typography variant="h6">Add New Board</Typography>
-        <TextField
-          id="filled-basic"
-          label="Name"
-          name="name"
-          variant="filled"
-          value={state.name}
-          onChange={handleChange}
-        />
-        <InputLabel>Type</InputLabel>
-        <Select value={state.type} name="type" onChange={handleChange}>
-          <MenuItem value="personal">Personal</MenuItem>
-          <MenuItem value="team">Team</MenuItem>
-        </Select>
-        <Button type="submit">Add</Button>
-      </form>
-    </Modal>
+      <DialogTitle>Create New Board</DialogTitle>
+      <DialogContent>
+        <form className={classes.paper}>
+          <TextField
+            autoFocus
+            id="filled-basic"
+            label="Name"
+            name="name"
+            variant="filled"
+            value={state.name}
+            onChange={handleChange}
+          />
+          <InputLabel>Type</InputLabel>
+          <Select value={state.type} name="type" onChange={handleChange}>
+            <MenuItem value="personal">Personal</MenuItem>
+            <MenuItem value="team">Team</MenuItem>
+          </Select>
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <Button type="submit" onClick={handleSubmit}>
+          Add
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 }
 
