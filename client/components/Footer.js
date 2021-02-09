@@ -1,37 +1,11 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
-import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
-import {withStyles} from '@material-ui/core/styles'
 import {Container} from '@material-ui/core'
 import {fetchMantras} from '../store/mantras'
-import {homeStyles} from './CustomMUI/UserHomeMUI'
-
-const StyledBox = withStyles(() => ({
-  root: {
-    position: 'fixed',
-    backgroundColor: '#ffff',
-    left: '0',
-    bottom: '0',
-    width: '100%',
-    fontFamily: 'FreightTextProBook, sans-serif',
-    fontWeight: 'normal',
-    color: '#000000',
-    letterSpacing: '1.5px',
-    fontSize: 18
-  }
-}))(Box)
-
-const StyledList = withStyles(() => ({
-  root: {
-    fontFamily: 'FreightTextProBook, sans-serif',
-    color: '#000000',
-    marginTop: 'auto'
-  }
-}))(List)
+import {StyledBox, StyledList} from './CustomMUI/FooterMUI'
 
 const Footer = props => {
   useEffect(() => {
@@ -44,19 +18,18 @@ const Footer = props => {
       console.log(err)
     }
   }
-  // const theme = useTheme();
   const mantras = props.mantras || []
-  const classes = homeStyles()
+
   return (
-    <StyledBox color="secondary">
+    <StyledBox>
       <Container>
         <Grid container spacing={0}>
-          <Grid item={true} xs={12} className="promise" />
-          <div className="footer-main-holder">
-            <Grid container className="footer-main">
-              <Grid item={true} xs={12} className="mantra">
+          <Grid item={true} xs={12} />
+          <div>
+            <Grid container>
+              <Grid item={true} xs={12}>
                 <StyledList>
-                  <ListItem className={classes.mantra}>
+                  <ListItem>
                     {/* get a random mantra */}
                     {mantras.length ? (
                       <Typography

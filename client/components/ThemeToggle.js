@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {default as StarIcon} from '@material-ui/icons/Star'
 import {default as FlareIcon} from '@material-ui/icons/Flare'
 import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
@@ -20,7 +20,15 @@ const handleChange = event => {
 }
 
 export const ThemeToggle = props => {
-  const [theme, setTheme] = useState(true)
+  const [theme, setTheme] = useState('light')
+  useEffect(() => {
+    setTheme(localStorage.getItem('theme'))
+  }, [])
+  const handleClick = theme => {
+    localStorage.setItem('theme', theme)
+    setTheme(theme)
+  }
+
   const classes = useStyles()
   const appliedTheme = createMuiTheme(theme ? light : dark)
 
