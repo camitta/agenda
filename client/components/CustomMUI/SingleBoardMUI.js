@@ -14,7 +14,8 @@ export const singleBoardStyles = makeStyles(() => ({
     }
   },
   deleteContainer: {
-    textAlign: 'right'
+    textAlign: 'right',
+    margin: 'auto 5%'
   },
   filterContainer: {
     textAlign: 'right',
