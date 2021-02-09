@@ -35,7 +35,7 @@ class Routes extends Component {
           )}
           <Route component={Loading} />
         </Switch>
-        <Footer />
+        {isLoggedIn && <Footer />}
       </>
     )
   }
