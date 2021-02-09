@@ -21,7 +21,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 
 // Custom MUI
@@ -159,9 +160,11 @@ const SingleBoard = props => {
           Delete board
         </Button>
         <Dialog open={open} onClose={handleCancel}>
-          <DialogTitle style={{padding: '20px 20px 0px 20px'}}>
-            Are you sure you want to delete this board?
-          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to delete this board?
+            </DialogContentText>
+          </DialogContent>
           <DialogActions style={{textAlign: 'center'}}>
             <Button onClick={handleDelete} style={{color: 'green'}}>
               Yes
