@@ -113,17 +113,19 @@ const SingleBoard = props => {
 
   return (
     <div className={classes.singleBoardContainer}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<GroupIcon />}
-          aria-controls="single-task"
-        >
-          <Typography>Team Members</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <AddUserToBoard currentBoard={props.singleBoard} />
-        </AccordionDetails>
-      </Accordion>
+      {props.singleBoard.type === 'team' ? (
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<GroupIcon />}
+            aria-controls="single-task"
+          >
+            <Typography>Team Members</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <AddUserToBoard currentBoard={props.singleBoard} />
+          </AccordionDetails>
+        </Accordion>
+      ) : null}
       <Title variant="h3">{props.singleBoard.name}</Title>
       <div className={classes.filterContainer}>
         <FilterTasksByLabel boardId={boardId} />
