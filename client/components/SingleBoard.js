@@ -8,7 +8,7 @@ import {FilterTasksByLabel} from './index'
 //Redux store items
 import {connect} from 'react-redux'
 import {getSingleBoard, deleteSingleBoard} from '../store/single-board'
-import {getAllTasks} from '../store/all-tasks'
+import {getAllTasks, getTasksNoDB} from '../store/all-tasks'
 import {editSingleTask} from '../store/tasks'
 
 //Material-UI items
@@ -79,10 +79,25 @@ const SingleBoard = props => {
     setOpen(false)
   }
 
-  async function handleDragEnd({destination, draggableId}) {
+  function handleDragEnd({destination, draggableId}) {
     if (!destination) {
       return
     }
+    let taskInUse = {}
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === parseInt(draggableId)) {
+        taskInUse = tasks[i]
+        tasks.splice(i, 1)
+      }
+    }
+    props.getTasksNoDB([
+      ...tasks,
+      {...taskInUse, type: destination.droppableId}
+    ])
+    updateDB(draggableId, destination)
+  }
+
+  async function updateDB(draggableId, destination) {
     await props.editSingleTask(draggableId, {type: destination.droppableId})
     await props.getAllTasks(boardId)
   }
@@ -169,7 +184,8 @@ const mapDispatch = dispatch => {
     fetchSingleBoard: boardId => dispatch(getSingleBoard(boardId)),
     getAllTasks: boardId => dispatch(getAllTasks(boardId)),
     deleteBoard: boardId => dispatch(deleteSingleBoard(boardId)),
-    editSingleTask: (id, task) => dispatch(editSingleTask(id, task))
+    editSingleTask: (id, task) => dispatch(editSingleTask(id, task)),
+    getTasksNoDB: tasks => dispatch(getTasksNoDB(tasks))
   }
 }
 
