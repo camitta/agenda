@@ -33,6 +33,9 @@ const Task = db.define('task', {
       'purple',
       ''
     )
+  },
+  index: {
+    type: Sequelize.INTEGER
   }
 })
 

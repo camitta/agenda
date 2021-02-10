@@ -79,26 +79,69 @@ const SingleBoard = props => {
   }
 
   // Allow a draggable item to be dropped without flickering.
-  function handleDragEnd({destination, draggableId}) {
+  function handleDragEnd({destination, source}) {
+    // Filter the task state based on which list they are coming from/leaving.
+    const sourceTasks = tasks
+      .filter(item => item.type === source.droppableId)
+      .sort((a, b) => a.index - b.index)
+    const destinationTasks = tasks
+      .filter(item => item.type === destination.droppableId)
+      .sort((a, b) => a.index - b.index)
+    const otherTasks = tasks.filter(
+      item =>
+        item.type !== source.droppableId &&
+        item.type !== destination.droppableId
+    )
+
+    const taskLists = {sourceTasks, destinationTasks, otherTasks}
+
+    const destType = destination.droppableId
+    const sourceType = source.droppableId
+
     if (!destination) {
       return
     }
-    let taskInUse = {}
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === parseInt(draggableId)) {
-        taskInUse = tasks[i]
-        tasks.splice(i, 1)
-      }
+
+    if (destType !== sourceType) {
+      changeLists(taskLists, destination, source)
+    } else {
+      reorderList(taskLists, destination, source)
     }
-    props.getTasksNoDB([
-      ...tasks,
-      {...taskInUse, type: destination.droppableId}
-    ])
-    updateDB(draggableId, destination)
+    updateDB()
   }
 
-  async function updateDB(draggableId, destination) {
-    await props.editSingleTask(draggableId, {type: destination.droppableId})
+  // Reorder tasks within a list.
+  function reorderList(taskLists, destination, source) {
+    const {sourceTasks, otherTasks} = taskLists
+    const taskInUse = sourceTasks.splice(source.index, 1)
+    sourceTasks.splice(destination.index, 0, taskInUse[0])
+    sourceTasks.forEach(function(item, i) {
+      item.index = i
+    })
+    props.getTasksNoDB([...otherTasks, ...sourceTasks])
+  }
+
+  // Reorganize and reorder tasks between lists.
+  function changeLists(taskLists, destination, source) {
+    const {sourceTasks, destinationTasks, otherTasks} = taskLists
+    const taskInUse = sourceTasks.splice(source.index, 1)
+    taskInUse[0].type = destination.droppableId
+    destinationTasks.splice(destination.index, 0, taskInUse[0])
+    sourceTasks.forEach(function(item, i) {
+      item.index = i
+    })
+    destinationTasks.forEach(function(item, i) {
+      item.index = i
+    })
+    props.getTasksNoDB([...otherTasks, ...destinationTasks, ...sourceTasks])
+  }
+
+  // Update the database after organizing/reordering tasks.
+  // This must come after state changes, or else the tasks will flicker.
+  async function updateDB() {
+    for (let i = 0; i < tasks.length; i++) {
+      await props.editSingleTask(tasks[i].id, tasks[i])
+    }
     await props.getAllTasks(boardId)
   }
 

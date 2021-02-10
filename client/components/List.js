@@ -55,7 +55,11 @@ const List = props => {
   }
 
   const handleSubmit = async () => {
-    await props.add(boardId, state)
+    let length = 0
+    if (tasks && tasks.length) {
+      length = tasks.length
+    }
+    await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
   }
@@ -102,7 +106,7 @@ const List = props => {
             </div>
 
             {tasks && tasks.length
-              ? tasks.map((task, index) => {
+              ? tasks.sort((a, b) => a.index - b.index).map((task, index) => {
                   return (
                     <Task
                       task={task}

@@ -134,22 +134,23 @@ router.put(
 
 //create new task
 // api/tasks/boards/:boardId
-router.post('/boards/:boardId', async (req, res, next) => {
+router.post('/boards/:boardId', isLoggedInUser, async (req, res, next) => {
   try {
     const {boardId} = req.params
-    const {name, description, dueDate, type, label} = req.body
+    const {name, description, dueDate, type, label, index} = req.body
     const newTask = await Task.create({
       name,
       description,
       dueDate,
       type,
       label,
-      boardId
+      boardId,
+      index
     })
     res.send(newTask)
   } catch (err) {
     if (err.name === 'SequelizeValidationError') {
-      res.status(401).send(err.errors[0].message)
+      res.status(412).send(err.errors[0].message)
     } else {
       next(err)
     }
