@@ -18,8 +18,10 @@ export const singleBoardStyles = makeStyles(() => ({
     margin: 'auto 5%'
   },
   filterContainer: {
-    textAlign: 'right',
-    margin: 'auto 5%'
+    display: 'flex',
+    justifyContent: 'flex-start',
+    position: 'relative',
+    alignContent: 'center'
   },
   modal: {
     display: 'flex',
@@ -32,5 +34,14 @@ export const singleBoardStyles = makeStyles(() => ({
     padding: '20px',
     background: 'white',
     outline: 0
+  },
+  title: {
+    flex: '0 1 auto',
+    width: '150px',
+    height: '100px',
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    paddingTop: '15px'
   }
 }))

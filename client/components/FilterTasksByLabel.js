@@ -18,7 +18,14 @@ const FilterTasksByLabel = props => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        flex: '0 1 auto',
+        marginLeft: 'auto',
+        marginRight: '5%',
+        paddingTop: '20px'
+      }}
+    >
       <InputLabel>Filter By</InputLabel>
       <Select onChange={handleFilter} value={label} name="label">
         <MenuItem value="all">All</MenuItem>
