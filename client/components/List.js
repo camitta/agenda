@@ -40,7 +40,8 @@ const List = props => {
     description: '',
     type: status,
     dueDate: new Date(),
-    label: ''
+    label: '',
+    index: 0
   }
 
   const [state, setState] = useState(defaultState)
@@ -110,7 +111,7 @@ const List = props => {
             </div>
 
             {tasks && tasks.length
-              ? tasks.map((task, index) => {
+              ? tasks.sort((a, b) => a.index - b.index).map((task, index) => {
                   return (
                     <Task
                       task={task}

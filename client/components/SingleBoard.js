@@ -16,7 +16,6 @@ import styled from 'styled-components'
 import {withStyles} from '@material-ui/core/styles'
 import GroupIcon from '@material-ui/icons/Group'
 import Typography from '@material-ui/core/Typography'
-import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
@@ -93,13 +92,16 @@ const SingleBoard = props => {
     }
     props.getTasksNoDB([
       ...tasks,
-      {...taskInUse, type: destination.droppableId}
+      {...taskInUse, type: destination.droppableId, index: destination.index}
     ])
     updateDB(draggableId, destination)
   }
 
   async function updateDB(draggableId, destination) {
-    await props.editSingleTask(draggableId, {type: destination.droppableId})
+    await props.editSingleTask(draggableId, {
+      type: destination.droppableId,
+      index: destination.index
+    })
     await props.getAllTasks(boardId)
   }
 
