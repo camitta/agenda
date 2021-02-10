@@ -102,7 +102,12 @@ const Checklist = props => {
                 name={item.id.toString()}
                 onChange={handleCheck}
               />
-              <IconButton onClick={handleDelete} type="button" id={item.id}>
+              <IconButton
+                onClick={handleDelete}
+                type="button"
+                id={item.id}
+                fontSize="small"
+              >
                 <DeleteIcon id={item.id} fontSize="small" />
               </IconButton>
             </div>
