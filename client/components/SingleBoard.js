@@ -23,7 +23,10 @@ import Button from '@material-ui/core/Button'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
-import {StyledAccordion} from './CustomMUI/GradientAccordion'
+import {
+  StyledAccordion,
+  WhiteAccordionSummary
+} from './CustomMUI/GradientAccordion'
 
 const ListsContainer = styled.div`
   justify-content: space-around;
@@ -116,14 +119,14 @@ const SingleBoard = props => {
   return (
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
-        <StyledAccordion>
-          <AccordionSummary expandIcon={<GroupIcon />}>
+        <Accordion>
+          <StyledAccordion expandIcon={<GroupIcon />}>
             {/* <Title>Team Members</Title> */}
-          </AccordionSummary>
+          </StyledAccordion>
           <AccordionDetails>
             <AddUserToBoard currentBoard={props.singleBoard} />
           </AccordionDetails>
-        </StyledAccordion>
+        </Accordion>
       ) : null}
       <Title variant="h3">{props.singleBoard.name}</Title>
       <div className={classes.filterContainer}>
