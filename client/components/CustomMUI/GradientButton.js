@@ -6,11 +6,12 @@ export const StyledButton = withStyles({
     height: 40,
     padding: '1em',
     margin: '10px',
+    color: 'black',
     boxShadow: '0px 3px #000000',
     background: '#fff',
     '&:hover': {
       background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
-      color: '#FFF'
+      color: '#fff'
     }
   },
   outlined: {

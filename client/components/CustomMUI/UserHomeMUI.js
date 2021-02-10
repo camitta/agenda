@@ -13,23 +13,22 @@ export const homeStyles = makeStyles(theme => ({
       [theme.breakpoints.up('lg')]: {
         fontSize: 20
       }
-    },
-    paddingBottom: '80px'
+    }
   },
   root: {
     padding: theme,
-    display: 'flex',
+    display: 'inline-flex',
     flexDirection: 'column',
-    paddingBottom: '80px'
+    paddingBottom: '50px'
   },
   container: {
-    minHeight: '150px',
-    spacing: 2
+    justifyContent: 'flex-end'
   },
   boardItem: {
     padding: '5px 9px 5px 5px',
-    minHeight: '100px',
-    minWidth: '100px',
+    minHeight: '110px',
+    minWidth: '110px',
+    display: 'inline-flex',
     background: '#fff',
     '&:hover': {
       background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
@@ -38,11 +37,12 @@ export const homeStyles = makeStyles(theme => ({
     boxShadow: '0px 3px #000000',
     color: 'black',
     borderRadius: 1,
-    alignSelf: 'flex-end',
+
     fontWeight: 500
   },
   gridItem: {
-    margin: '10px'
+    margin: '10px',
+    direction: 'row'
   },
   title: {
     marginTop: '15px',

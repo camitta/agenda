@@ -12,7 +12,7 @@ export const generateErrorMessage = errMessage => {
 
   for (let nameType of types) {
     if (errMessage.includes('password')) {
-      return `Your password needs to have 6-12 characters!`
+      return `Your password needs to have 6-20 characters!`
     } else if (errMessage.includes(nameType)) {
       nameType = nameType.replace(/(\w+)([A-Z]\w+)/g, '$1 $2')
       nameType = nameType[0].toUpperCase() + nameType.slice(1)

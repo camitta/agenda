@@ -16,13 +16,13 @@ import styled from 'styled-components'
 import {withStyles} from '@material-ui/core/styles'
 import GroupIcon from '@material-ui/icons/Group'
 import Typography from '@material-ui/core/Typography'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
+import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
-import {StyledAccordion} from './CustomMUI/GradientAccordion'
+import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
 
 const ListsContainer = styled.div`
   justify-content: space-around;
@@ -118,14 +118,14 @@ const SingleBoard = props => {
   return (
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
-        <StyledAccordion>
-          <AccordionSummary expandIcon={<GroupIcon />}>
-            {/* <Title>Team Members</Title> */}
-          </AccordionSummary>
+        <Accordion>
+          <StyledAccordionSummary expandIcon={<GroupIcon />}>
+            {/* <Typography>team</Typography> */}
+          </StyledAccordionSummary>
           <AccordionDetails>
             <AddUserToBoard currentBoard={props.singleBoard} />
           </AccordionDetails>
-        </StyledAccordion>
+        </Accordion>
       ) : null}
       <Title variant="h3">{props.singleBoard.name}</Title>
       <div className={classes.filterContainer}>

@@ -9,15 +9,15 @@ import {Droppable} from 'react-beautiful-dnd'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import AddIcon from '@material-ui/icons/Add'
-import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
+import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
 
 // Custom MUI
 import {listStyles} from './CustomMUI/listMUI'
-import {StyledAccordion} from './CustomMUI/GradientAccordion'
+import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
 
 // Redux
 import {addSingleTask} from '../store/tasks'
@@ -45,14 +45,6 @@ const List = props => {
   }
 
   const [state, setState] = useState(defaultState)
-
-  useEffect(() => {
-    let isMounted = false
-    if (!isMounted) setState(defaultState)
-    return () => {
-      isMounted = true
-    }
-  }, [])
 
   // Date picker event returns only the date - this extra function is required.
   const handleDateChange = date => {
@@ -84,8 +76,8 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <StyledAccordion>
-                <AccordionSummary
+              <Accordion>
+                <StyledAccordionSummary
                   expandIcon={<AddIcon />}
                   id="panel1a-header"
                 />
@@ -107,7 +99,7 @@ const List = props => {
                     </IconButton>
                   </div>
                 </AccordionDetails>
-              </StyledAccordion>
+              </Accordion>
             </div>
 
             {tasks && tasks.length
