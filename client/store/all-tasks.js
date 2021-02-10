@@ -8,7 +8,7 @@ const GET_NON_DB_TASKS = 'GET_NON_DB_TASKS'
 const initialState = []
 
 // Action Creators
-const fetchAllTasks = tasks => ({type: GET_TASKS, tasks})
+export const fetchAllTasks = tasks => ({type: GET_TASKS, tasks})
 const removedUserfromBoardTasks = tasks => ({
   type: REMOVE_USERS_FROM_BOARD_TASKS,
   tasks
