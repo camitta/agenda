@@ -117,7 +117,7 @@ const SingleBoard = props => {
       {boardType === 'team' ? (
         <Accordion>
           <StyledAccordionSummary expandIcon={<GroupIcon />}>
-            {/* <Title>Team Members</Title> */}
+            {/* <Typography>team</Typography> */}
           </StyledAccordionSummary>
           <AccordionDetails>
             <AddUserToBoard currentBoard={props.singleBoard} />
