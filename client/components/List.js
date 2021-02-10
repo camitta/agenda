@@ -40,8 +40,7 @@ const List = props => {
     description: '',
     type: status,
     dueDate: new Date(),
-    label: '',
-    index: 0
+    label: ''
   }
 
   const [state, setState] = useState(defaultState)
@@ -56,7 +55,12 @@ const List = props => {
   }
 
   const handleSubmit = async () => {
-    await props.add(boardId, state)
+    let length = 0
+    if (tasks && tasks.length) {
+      length = tasks.length
+    }
+    console.log('REACT', {...state, index: length})
+    await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
   }

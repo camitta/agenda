@@ -50,7 +50,9 @@ export const deleteSingleTask = id => {
 export const addSingleTask = (boardId, task) => {
   return async dispatch => {
     try {
+      console.log('REDUX:', task)
       const {data} = await axios.post(`/api/tasks/boards/${boardId}`, task)
+      console.log('REDUX DATA RETURN', data)
       dispatch(addedSingleTask(data))
     } catch (err) {
       dispatch(addedSingleTask({error: err}))
