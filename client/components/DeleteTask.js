@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {getAllTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
 import {deleteSingleTask} from '../store/tasks'
@@ -13,14 +13,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 const DeleteTask = props => {
   const {taskId, boardId, taskName} = props
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    let isMounted = false
-    if (!isMounted) setOpen(false)
-    return () => {
-      isMounted = true
-    }
-  }, [])
 
   const handleClickOpen = () => {
     setOpen(true)

@@ -50,11 +50,6 @@ const Task = props => {
 
   useEffect(() => {
     checkDueDate(task.dueDate, task.id)
-    let isMounted = false
-    if (!isMounted) setState(defaultState)
-    return () => {
-      isMounted = true
-    }
   }, [])
 
   // Date picker event returns only the date - this extra function is required.
