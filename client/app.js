@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import theme from './theme/theme'
 import Routes from './routes'
-
+import CustomThemeProvider from './components/CustomMUI/CustomThemeProvider'
 const dark = createMuiTheme({
   palette: {
     type: 'dark'
