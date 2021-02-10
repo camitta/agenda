@@ -1,8 +1,6 @@
-import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
-import AccordionDetails from '@material-ui/core/AccordionDetails'
 import {withStyles} from '@material-ui/core/styles'
-export const StyledAccordion = withStyles({
+export const StyledAccordionSummary = withStyles({
   root: {
     background: '#fff',
     '&:hover': {
