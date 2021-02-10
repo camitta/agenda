@@ -120,7 +120,7 @@ const theme = createMuiTheme({
     },
     MuiInputBase: {
       root: {
-        fontFamily: 'Inter, sans-serif'
+        fontFamily: 'freight-text-pro, serif'
       }
     },
     MuiInputLabel: {

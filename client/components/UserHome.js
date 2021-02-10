@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 // Material UI
 import Grid from '@material-ui/core/Grid'
-import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
 
 // Custom MUI
 import {homeStyles} from './CustomMUI/UserHomeMUI'
@@ -44,44 +44,93 @@ const UserHome = props => {
     props.boards.filter(item => item.type === 'personal') || []
 
   return (
-    <Container>
-      <StyledButton
-        variant="outlined"
-        type="button"
-        className={classes.addBoard}
-        onClick={handleOpen}
-      >
-        <AddIcon />
-        <Typography variant="button" className={classes.textHover}>
-          New Board
-        </Typography>
-      </StyledButton>
-      <CreateBoard getBoards={props.getBoards} open={open} setOpen={setOpen} />
-      <Checklist />
-      <Grid container spacing={3}>
-        <Grid item xs={3}>
-          <Grid container>
-            <Grid item xs={12} />
-            <Grid item xs={12} />
-          </Grid>
+    <Container style={{display: 'flex'}} xs={12} spacing={3}>
+      <Grid container className={classes.container} spacing={3}>
+        <Grid item>
+          <StyledButton
+            variant="outlined"
+            type="button"
+            className={classes.addBoard}
+            onClick={handleOpen}
+          >
+            <AddIcon />
+            <Typography variant="button" className={classes.textHover}>
+              New Board
+            </Typography>
+          </StyledButton>
+          <CreateBoard
+            getBoards={props.getBoards}
+            open={open}
+            setOpen={setOpen}
+          />
         </Grid>
-        {/* load all personal boards */}
-        <Grid item xs={9}>
-          <Grid container spacing={3} className={classes.boards}>
-            <Grid item xs={12}>
-              <Typography variant="h3" className={classes.title}>
-                Personal Boards
-              </Typography>
-            </Grid>
 
-            <Grid container spacing={3} className={classes.boards}>
-              <Grid item xs={12}>
-                <Grid container>
+        <Grid
+          item
+          xs={12}
+          container
+          style={{
+            padding: '10px',
+            marginLeft: '4rem',
+            marginRight: '4rem'
+          }}
+        >
+          <Grid
+            item
+            xs
+            container
+            direction="row"
+            spacing={3}
+            style={{justifyContent: 'space-between'}}
+          >
+            <Grid item xs={4}>
+              <Checklist />
+            </Grid>
+            <Grid item xs={8}>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs={12} style={{marginLeft: '6rem'}}>
+                  <Typography variant="h3" style={{marginBottom: '1em'}}>
+                    Personal Boards
+                  </Typography>
                   {personalBoards.length ? (
                     personalBoards
                       .filter(item => item.type === 'personal')
                       .map(item => (
-                        <Grid item className={classes.gridItem} key={item.id}>
+                        <Grid
+                          item
+                          xs
+                          container
+                          direction="row"
+                          key={item.id}
+                          spacing={2}
+                          style={{paddingBottom: '1em'}}
+                        >
+                          <Grid item xs={6}>
+                            <Button
+                              variant="outlined"
+                              className={classes.boardItem}
+                              href={`/boards/${item.id}`}
+                            >
+                              {item.name}
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      ))
+                  ) : (
+                    <Typography variant="h3" style={{marginBottom: '1em'}}>
+                      Add a new board!
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid item xs={12} style={{marginLeft: '6rem'}}>
+                  <Typography variant="h3" style={{marginBottom: '1em'}}>
+                    Team Boards
+                  </Typography>
+                  {teamBoards.length ? (
+                    teamBoards
+                      .filter(item => item.type === 'team')
+                      .map(item => (
+                        <Grid item xs container direction="row" key={item.id}>
                           <Button
                             variant="outlined"
                             className={classes.boardItem}
@@ -92,35 +141,10 @@ const UserHome = props => {
                         </Grid>
                       ))
                   ) : (
-                    <p>Add a new board!</p>
-                  )}
-                </Grid>
-                {/* load all team boards */}
-                <Grid container className={classes.container}>
-                  <Grid item>
-                    <Typography className={classes.title} variant="h3">
-                      Team Boards
+                    <Typography variant="h3" style={{marginBottom: '1em'}}>
+                      Add a new board!
                     </Typography>
-                  </Grid>
-                  <Grid container>
-                    {teamBoards.length ? (
-                      teamBoards
-                        .filter(item => item.type === 'team')
-                        .map(item => (
-                          <Grid item className={classes.gridItem} key={item.id}>
-                            <Button
-                              variant="outlined"
-                              className={classes.boardItem}
-                              href={`/boards/${item.id}`}
-                            >
-                              {item.name}
-                            </Button>
-                          </Grid>
-                        ))
-                    ) : (
-                      <p>Add a new board!</p>
-                    )}
-                  </Grid>
+                  )}
                 </Grid>
               </Grid>
             </Grid>

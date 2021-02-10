@@ -98,7 +98,7 @@ const Checklist = props => {
                 className={classes.formItem}
                 checked={Boolean(item.completed)}
                 value={item.completed}
-                variant="body2"
+                variant="body1"
                 name={item.id.toString()}
                 onChange={handleCheck}
               />
