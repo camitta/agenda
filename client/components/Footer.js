@@ -32,7 +32,7 @@ const Footer = props => {
                 style={{
                   fontSize: 24,
                   fontFamily: 'pinyon script, cursive',
-                  padding: '.4em'
+                  padding: '.65em'
                 }}
               >
                 {mantras[Math.floor(Math.random() * mantras.length)].mantra}
