@@ -1,19 +1,16 @@
 import React, {useState} from 'react'
 import {ThemeProvider} from '@material-ui/core/styles'
 import getTheme from '../ThemeToggle'
-
-// eslint-disable-next-line no-unused-vars
 export const CustomThemeContext = React.createContext({
   currentTheme: 'normal',
   setTheme: null
 })
 
 const CustomThemeProvider = props => {
-  // eslint-disable-next-line react/prop-types
   const {children} = props
 
-  // Read current theme from localStorage or maybe from an api
-  const currentTheme = localStorage.getItem('appTheme') || 'normal'
+  // Read current theme from localStorage
+  const currentTheme = localStorage.getItem('appTheme') || 'light'
 
   // State to hold the selected theme name
   const [themeName, _setThemeName] = useState(currentTheme)
