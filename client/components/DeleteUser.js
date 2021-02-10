@@ -1,7 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import {connect} from 'react-redux'
-import {unassignUserFromTask} from '../store/tasks'
-import {getAllTasks} from '../store/all-tasks'
+import React from 'react'
 
 // Material UI
 import Avatar from '@material-ui/core/Avatar'
@@ -12,35 +9,15 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 
 const DeleteUser = props => {
-  const {firstName, lastName, userId, boardId, taskId} = props
-
-  const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    let isMounted = false
-    if (!isMounted) setOpen(false)
-    return () => {
-      isMounted = true
-    }
-  }, [])
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleDelete = async () => {
-    try {
-      await props.unassignUser(taskId, boardId, userId)
-      await props.fetchTasks(boardId)
-      setOpen(false)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  const {
+    firstName,
+    lastName,
+    userId,
+    handleClickOpen,
+    handleClose,
+    handleDelete,
+    open
+  } = props
 
   return (
     <>
@@ -59,7 +36,7 @@ const DeleteUser = props => {
             No
           </Button>
           <Button
-            onClick={() => handleDelete()}
+            onClick={() => handleDelete(userId)}
             style={{color: 'green'}}
             autoFocus
           >
@@ -71,10 +48,4 @@ const DeleteUser = props => {
   )
 }
 
-const mapDispatch = dispatch => ({
-  unassignUser: (taskId, boardId, userId) =>
-    dispatch(unassignUserFromTask(taskId, boardId, userId)),
-  fetchTasks: boardId => dispatch(getAllTasks(boardId))
-})
-
-export default connect(null, mapDispatch)(DeleteUser)
+export default DeleteUser
