@@ -1,4 +1,5 @@
 import axios from 'axios'
+import socket from '../socket'
 
 // Action Types
 const GET_SINGLE_BOARD = 'GET_SINGLE_BOARD'
@@ -11,12 +12,12 @@ const REMOVE_USER_FROM_BOARD = 'REMOVE_USER_FROM_BOARD'
 const initialState = {}
 
 // Action Creators
-const fetchSingleBoard = board => ({type: GET_SINGLE_BOARD, board})
+export const fetchSingleBoard = board => ({type: GET_SINGLE_BOARD, board})
 const removeSingleBoard = () => ({type: REMOVE_SINGLE_BOARD})
 const addedSingleBoard = board => ({type: ADD_SINGLE_BOARD, board})
 const editedSingleBoard = board => ({type: EDIT_SINGLE_BOARD, board})
-const addedUsersSingleBoard = board => ({type: ADD_USER_TO_BOARD, board})
-const removedUserSingleBoard = board => ({
+export const addedUsersSingleBoard = board => ({type: ADD_USER_TO_BOARD, board})
+export const removedUserSingleBoard = board => ({
   type: REMOVE_USER_FROM_BOARD,
   board
 })
@@ -26,6 +27,7 @@ export const getSingleBoard = boardId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/boards/${boardId}`)
     dispatch(fetchSingleBoard(data))
+    socket.emit('singleBoard', data)
   } catch (err) {
     console.error(err)
   }
@@ -70,6 +72,7 @@ export const addUserSingleBoard = (id, userEmail) => {
       await axios.put(`/api/boards/${id}/add/user`, {email: userEmail})
       const {data} = await axios.get(`/api/boards/${id}`)
       dispatch(addedUsersSingleBoard(data))
+      socket.emit('add-user', data)
     } catch (err) {
       console.error(err)
       const {data} = await axios.get(`/api/boards/${id}`)
@@ -84,6 +87,7 @@ export const removeUserSingleBoard = (boardId, userId) => {
       await axios.put(`/api/boards/${boardId}/delete/user`, {id: userId})
       const {data} = await axios.get(`/api/boards/${boardId}`)
       dispatch(removedUserSingleBoard(data))
+      socket.emit('remove-user', data)
     } catch (err) {
       console.error(err)
     }

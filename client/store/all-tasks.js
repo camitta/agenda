@@ -1,4 +1,5 @@
 import axios from 'axios'
+import socket from '../socket'
 
 // Action Types
 const GET_TASKS = 'GET_TASKS'
@@ -20,6 +21,7 @@ export const getAllTasks = boardId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/tasks/allTasks/${boardId}`)
     dispatch(fetchAllTasks(data))
+    socket.emit('all-tasks', data)
   } catch (err) {
     console.log(err)
   }
