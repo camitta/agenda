@@ -1,19 +1,15 @@
-const dark = {
+import {createMuiTheme} from '@material-ui/core/styles'
+import {red} from '@material-ui/core/colors'
+
+// Dark theme
+const theme = createMuiTheme({
   palette: {
     type: 'dark',
-    common: {
-      black: '#000',
-      white: '#fff'
-    },
-    background: {
-      paper: '#fff',
-      default: '#fafafa'
-    },
     primary: {
-      light: 'rgba(195, 241, 207, 1)',
-      main: '#000',
-      dark: 'rgba(0, 56, 51, 1)',
-      contrastText: '#fff'
+      main: '#26292C',
+      light: 'rgb(81, 91, 95)',
+      dark: 'rgb(26, 35, 39)',
+      contrastText: '#ffffff'
     },
     secondary: {
       light: 'rgba(252, 248, 244, 1)',
@@ -21,19 +17,14 @@ const dark = {
       dark: 'rgba(98, 18, 68, 1)',
       contrastText: 'rgba(255, 255, 255, 1)'
     },
-    error: {
-      light: '#e57373',
-      main: 'rgba(193, 2, 48, 1)',
-      dark: 'rgba(193, 2, 48, 1)',
-      contrastText: '#fff'
+    titleBar: {
+      main: '#555555',
+      contrastText: '#ffffff'
     },
-    text: {
-      primary: 'rgba(0, 0, 0, 0.87)',
-      secondary: 'rgba(0, 0, 0, 0.54)',
-      disabled: 'rgba(0, 0, 0, 0.38)',
-      hint: 'rgba(0, 0, 0, 0.38)'
+    error: {
+      main: red.A400
     }
   }
-}
+})
 
-export default dark
+export default theme

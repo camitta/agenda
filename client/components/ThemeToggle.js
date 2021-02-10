@@ -6,13 +6,17 @@ import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
 import {ToggleButtonGroup} from '@material-ui/lab'
 import {CustomToggle} from './CustomMUI/ToggleButtonMUI'
 import dark from '../theme/darkTheme'
+import light from '../theme/theme'
 
 const useStyles = makeStyles(theme => ({}))
 
-export const light = {
-  palette: {
-    type: 'light'
-  }
+const themes = {
+  light,
+  dark
+}
+
+export default function getTheme(theme) {
+  return themes[theme]
 }
 
 const handleChange = event => {

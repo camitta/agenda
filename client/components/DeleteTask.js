@@ -34,7 +34,7 @@ const DeleteTask = props => {
   return (
     <>
       <IconButton onClick={handleClickOpen}>
-        <DeleteIcon />
+        <DeleteIcon fontSize="small" />
       </IconButton>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle id="alert-dialog-description">

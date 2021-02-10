@@ -53,8 +53,9 @@ const UserHome = props => {
             type="button"
             className={classes.addBoard}
             onClick={handleOpen}
+            fontSize="small"
           >
-            <AddIcon />
+            <AddIcon fontSize="small" />
             <Typography variant="button" className={classes.textHover}>
               New Board
             </Typography>

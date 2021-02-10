@@ -158,7 +158,7 @@ const Task = props => {
               <IconButton
                 onClick={() => setState({...state, edit: !state.edit})}
               >
-                <EditIcon />
+                <EditIcon fontSize="small" />
               </IconButton>
             ) : (
               <IconButton onClick={() => handleSubmit()}>

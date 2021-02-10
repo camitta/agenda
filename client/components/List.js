@@ -77,7 +77,7 @@ const List = props => {
             <div>
               <Accordion>
                 <StyledAccordionSummary
-                  expandIcon={<AddIcon />}
+                  expandIcon={<AddIcon fontSize="small" />}
                   id="panel1a-header"
                 />
                 <AccordionDetails>
