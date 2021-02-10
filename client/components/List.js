@@ -59,7 +59,6 @@ const List = props => {
     if (tasks && tasks.length) {
       length = tasks.length
     }
-    console.log('REACT', {...state, index: length})
     await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
