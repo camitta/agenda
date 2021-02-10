@@ -12,11 +12,17 @@ export const taskStyles = makeStyles(() => ({
     justifyContent: 'space-evenly'
   },
   dueDate: {
-    color: '#3f51b5'
+    color: '#9954c8'
   },
   cardLayout: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
+  },
+  description: {
+    alignSelf: 'flex-start',
+    paddingBottom: '30px',
+    whiteSpace: 'pre-wrap',
+    textAlign: 'left'
   }
 }))
