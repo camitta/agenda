@@ -118,11 +118,8 @@ const Task = props => {
                       </AccordionSummary>
                       <AccordionDetails className={classes.cardLayout}>
                         <Typography
-                          variant="body2"
-                          style={{
-                            alignSelf: 'flex-start',
-                            paddingBottom: '30px'
-                          }}
+                          variant="body1"
+                          className={classes.description}
                         >
                           {task.description}
                         </Typography>

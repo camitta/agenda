@@ -15,9 +15,9 @@ export const generateErrorMessage = errMessage => {
       return `Your password needs to have 6-20 characters!`
     } else if (errMessage.includes(nameType)) {
       nameType = nameType.replace(/(\w+)([A-Z]\w+)/g, '$1 $2')
-      nameType = nameType[0].toUpperCase() + nameType.slice(1)
+      nameType = nameType[0].toLowerCase() + nameType.slice(1)
       if (errMessage.includes('notEmpty')) {
-        return `Did you fill out ${nameType}?`
+        return `Did you fill out the ${nameType}?`
       } else {
         return `Did you fill out ${nameType} correctly?`
       }

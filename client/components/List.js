@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
@@ -9,7 +9,6 @@ import {Droppable} from 'react-beautiful-dnd'
 import Typography from '@material-ui/core/Typography'
 import styled from 'styled-components'
 import AddIcon from '@material-ui/icons/Add'
-import AccordionSummary from '@material-ui/core/AccordionSummary'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
@@ -85,7 +84,7 @@ const List = props => {
                   id="panel1a-header"
                 />
                 <AccordionDetails>
-                  <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <div className={classes.addTaskForm}>
                     <TaskForm
                       state={state}
                       handleChange={handleChange}
@@ -93,9 +92,9 @@ const List = props => {
                     />
                     {props.error &&
                       props.error.response && (
-                        <div>
+                        <Typography variant="body1" style={{padding: '10px'}}>
                           {generateErrorMessage(props.error.response.data)}
-                        </div>
+                        </Typography>
                       )}
                     <IconButton onClick={handleSubmit}>
                       <DoneIcon />
