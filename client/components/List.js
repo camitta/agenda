@@ -13,6 +13,7 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 // Custom MUI
 import {listStyles} from './CustomMUI/listMUI'
@@ -63,6 +64,17 @@ const List = props => {
     setState(defaultState)
   }
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   const classes = listStyles()
 
   return (
@@ -78,30 +90,33 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <Accordion>
-                <StyledAccordionSummary
-                  expandIcon={<AddIcon fontSize="small" />}
-                  id="panel1a-header"
-                />
-                <AccordionDetails>
+              <ClickAwayListener onClickAway={handleAccordionChange}>
+                <Accordion expanded={expanded}>
+                  <StyledAccordionSummary
+                    expandIcon={<AddIcon fontSize="small" />}
+                    id="panel1a-header"
+                    onClick={onAccordionClick}
+                  />
+               <AccordionDetails>
                   <div className={classes.addTaskForm}>
                     <TaskForm
                       state={state}
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
-                    {props.error &&
+                      {props.error &&
                       props.error.response && (
                         <Typography variant="body1" style={{padding: '10px'}}>
                           {generateErrorMessage(props.error.response.data)}
                         </Typography>
                       )}
-                    <IconButton onClick={handleSubmit}>
-                      <DoneIcon />
-                    </IconButton>
-                  </div>
-                </AccordionDetails>
-              </Accordion>
+                      <IconButton onClick={handleSubmit}>
+                        <DoneIcon />
+                      </IconButton>
+                    </div>
+                  </AccordionDetails>
+                </Accordion>
+              </ClickAwayListener>
             </div>
 
             {tasks && tasks.length

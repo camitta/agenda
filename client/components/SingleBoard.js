@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Button from '@material-ui/core/Button'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
@@ -153,19 +154,33 @@ const SingleBoard = props => {
     doneTasks = tasks.filter(task => task.type === 'done')
   }
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   const classes = singleBoardStyles()
 
   return (
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
-        <Accordion>
-          <StyledAccordionSummary expandIcon={<GroupIcon />}>
-            {/* <Typography>team</Typography> */}
-          </StyledAccordionSummary>
-          <AccordionDetails>
-            <AddUserToBoard currentBoard={props.singleBoard} />
-          </AccordionDetails>
-        </Accordion>
+        <ClickAwayListener onClickAway={handleAccordionChange}>
+          <Accordion expanded={expanded}>
+            <StyledAccordionSummary
+              expandIcon={<GroupIcon />}
+              onClick={onAccordionClick}
+            />
+            <AccordionDetails>
+              <AddUserToBoard currentBoard={props.singleBoard} />
+            </AccordionDetails>
+          </Accordion>
+        </ClickAwayListener>
       ) : null}
       <div className={classes.filterContainer}>
         <div />

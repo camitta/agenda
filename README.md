@@ -47,6 +47,7 @@ Agenda was created with:
 * PostgreSQL
 * Sequelize
 * PassportJS
+* Socket.io
 * Google OAuth
 * Material UI
 * React Beautiful DND
