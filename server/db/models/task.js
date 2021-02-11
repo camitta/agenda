@@ -24,15 +24,7 @@ const Task = db.define('task', {
     allowNull: false
   },
   label: {
-    type: Sequelize.ENUM(
-      'red',
-      'orange',
-      'yellow',
-      'green',
-      'blue',
-      'purple',
-      ''
-    )
+    type: Sequelize.ENUM('red', 'orange', 'yellow', 'pink', 'purple', '')
   },
   index: {
     type: Sequelize.INTEGER

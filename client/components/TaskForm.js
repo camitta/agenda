@@ -57,8 +57,7 @@ export const TaskForm = props => {
             <MenuItem value="red">Red</MenuItem>
             <MenuItem value="orange">Orange</MenuItem>
             <MenuItem value="yellow">Yellow</MenuItem>
-            <MenuItem value="green">Green</MenuItem>
-            <MenuItem value="blue">Blue</MenuItem>
+            <MenuItem value="pink">Pink</MenuItem>
             <MenuItem value="purple">Purple</MenuItem>
           </Select>
         </div>
