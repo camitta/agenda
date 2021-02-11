@@ -80,7 +80,7 @@ const Task = props => {
   const onAccordionClick = () => {
     setExpanded(prev => !prev)
   }
-  const handleAccordionChange = event => {
+  const handleAccordionChange = () => {
     if (expanded === true) {
       setExpanded(false)
     }
@@ -121,13 +121,13 @@ const Task = props => {
                             <Typography
                               variant="h6"
                               style={{textAlign: 'left'}}
-                              id={'taskName' + task.id}
                             >
                               {task.name}
                             </Typography>
                             <Typography
                               variant="caption"
-                              className={classes.dueDate}
+                              style={{fontWeight: 'bold'}}
+                              id={'taskName' + task.id}
                             >
                               Due Date: {moment(task.dueDate).format('LL')}
                             </Typography>

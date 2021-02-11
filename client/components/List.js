@@ -45,6 +45,17 @@ const List = props => {
 
   const [state, setState] = useState(defaultState)
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   // Date picker event returns only the date - this extra function is required.
   const handleDateChange = date => {
     setState({...state, dueDate: date})
@@ -62,17 +73,7 @@ const List = props => {
     await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
-  }
-
-  //Manage expanded accordion state
-  const [expanded, setExpanded] = useState(false)
-  const onAccordionClick = () => {
-    setExpanded(prev => !prev)
-  }
-  const handleAccordionChange = event => {
-    if (expanded === true) {
-      setExpanded(false)
-    }
+    handleAccordionChange()
   }
 
   const classes = listStyles()
@@ -84,7 +85,7 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
-          <ListContainer>
+          <ListContainer xs={12}>
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
@@ -96,20 +97,20 @@ const List = props => {
                     id="panel1a-header"
                     onClick={onAccordionClick}
                   />
-               <AccordionDetails>
-                  <div className={classes.addTaskForm}>
-                    <TaskForm
-                      state={state}
-                      handleChange={handleChange}
-                      handleDateChange={handleDateChange}
-                    />
+                  <AccordionDetails>
+                    <div className={classes.addTaskForm}>
+                      <TaskForm
+                        state={state}
+                        handleChange={handleChange}
+                        handleDateChange={handleDateChange}
+                      />
                       {props.error &&
-                      props.error.response && (
-                        <Typography variant="body1" style={{padding: '10px'}}>
-                          {typeof props.error.response.data === 'string' &&
-                            generateErrorMessage(props.error.response.data)}
-                        </Typography>
-                      )}
+                        props.error.response && (
+                          <Typography variant="body1" style={{padding: '10px'}}>
+                            {typeof props.error.response.data === 'string' &&
+                              generateErrorMessage(props.error.response.data)}
+                          </Typography>
+                        )}
                       <IconButton onClick={handleSubmit}>
                         <DoneIcon />
                       </IconButton>

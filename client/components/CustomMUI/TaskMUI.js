@@ -11,9 +11,6 @@ export const taskStyles = makeStyles(() => ({
     flexDirection: 'row',
     justifyContent: 'space-evenly'
   },
-  dueDate: {
-    color: '#3360b5'
-  },
   cardLayout: {
     display: 'flex',
     flexDirection: 'column',
