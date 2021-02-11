@@ -24,8 +24,6 @@ const isLoggedInUser = async (req, res, next) => {
     } else {
       const err = new Error('Uh oh.')
       res.status(401).send(err)
-      // err.status = 401
-      // next(err)
     }
   }
 }

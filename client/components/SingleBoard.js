@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import List from './List'
 import AddUserToBoard from './AddUserToBoard'
 import {DragDropContext} from 'react-beautiful-dnd'
-import {FilterTasksByLabel, DeleteBoard} from './index'
+import {FilterTasksByLabel, DeleteBoard, ErrorPage} from './index'
 
 //Redux store items
 import {connect} from 'react-redux'
@@ -23,6 +23,7 @@ import Button from '@material-ui/core/Button'
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
 import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
+import {PersonPinSharp} from '@material-ui/icons'
 
 const ListsContainer = styled.div`
   justify-content: space-around;
@@ -155,6 +156,9 @@ const SingleBoard = props => {
 
   const classes = singleBoardStyles()
 
+  if (props.error) {
+    return <ErrorPage {...props} />
+  }
   return (
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
@@ -223,6 +227,7 @@ const filterFunc = (tasks, label) => {
 const mapState = state => {
   return {
     singleBoard: state.singleBoard,
+    error: state.singleBoard.error,
     tasks: filterFunc(state.allTasks, state.filter)
   }
 }
