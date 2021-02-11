@@ -12,7 +12,6 @@ const useStyles = makeStyles(() => ({
 
 export default function ErrorPage(props) {
   const classes = useStyles()
-  console.log('props from Error', props)
   return (
     <div className={classes.page}>
       <Typography>Something went wrong...</Typography>

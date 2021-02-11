@@ -7,11 +7,7 @@ const {isLoggedInUser} = require('./routerMiddleware')
 router.get('/:taskId', async (req, res, next) => {
   try {
     const {taskId} = req.params
-    const tasks = await Task.findByPk(taskId, {
-      include: {
-        model: User
-      }
-    })
+    const tasks = await Task.findByPk(taskId)
     res.send(tasks)
   } catch (err) {
     next(err)
@@ -75,7 +71,7 @@ router.delete('/:taskId', async (req, res, next) => {
         }
       ]
     })
-    res.status(204).end()
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }
@@ -94,9 +90,6 @@ router.put(
         where: {
           id: taskId,
           boardId
-        },
-        include: {
-          model: User
         }
       })
       const userToBeAssignedId = req.body.id
@@ -168,9 +161,15 @@ router.get('/allTasks/:boardId', isLoggedInUser, async (req, res, next) => {
           where: {
             id: boardId
           },
-          include: User
+          include: {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }
         },
-        {model: User}
+        {
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
+        }
       ]
     })
     res.send(tasks)
