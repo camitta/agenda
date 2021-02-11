@@ -72,7 +72,7 @@ const Task = props => {
     })
     await props.getAllTasks(props.boardId)
     setState({...state, edit: !state.edit})
-    checkDueDate(task.dueDate, task.id)
+    checkDueDate(state.dueDate, task.id)
   }
 
   //Manage expanded accordion state
@@ -134,12 +134,12 @@ const Task = props => {
                           </div>
                         </AccordionSummary>
                         <AccordionDetails className={classes.cardLayout}>
-                        <Typography
-                          variant="body1"
-                          className={classes.description}
-                        >
-                          {task.description}
-                        </Typography>
+                          <Typography
+                            variant="body1"
+                            className={classes.description}
+                          >
+                            {task.description}
+                          </Typography>
                           {boardType === 'team' ? (
                             <>
                               <Typography variant="subtitle1">
