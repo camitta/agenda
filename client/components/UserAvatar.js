@@ -37,7 +37,7 @@ const UserAvatar = props => {
   }
 
   return (
-    <>
+    <div style={{display: 'flex', flexDirection: 'row'}}>
       {users.length
         ? users.map(user => (
             <Avatar
@@ -68,7 +68,7 @@ const UserAvatar = props => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   )
 }
 

@@ -73,8 +73,8 @@ const UserHome = props => {
           container
           style={{
             padding: '10px',
-            marginLeft: '4rem',
-            marginRight: '4rem'
+            marginLeft: '2rem',
+            marginRight: '2rem'
           }}
         >
           <Grid
@@ -94,59 +94,63 @@ const UserHome = props => {
                   <Typography variant="h3" style={{marginBottom: '1em'}}>
                     Personal Boards
                   </Typography>
-                  {personalBoards.length ? (
-                    personalBoards
-                      .filter(item => item.type === 'personal')
-                      .map(item => (
-                        <Grid
-                          item
-                          xs
-                          container
-                          direction="row"
-                          key={item.id}
-                          spacing={2}
-                          style={{paddingBottom: '1em'}}
-                        >
-                          <Grid item xs={6}>
-                            <Button
-                              variant="outlined"
-                              className={classes.boardItem}
-                              href={`/boards/${item.id}`}
-                            >
-                              {item.name}
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      ))
-                  ) : (
-                    <Typography variant="h3" style={{marginBottom: '1em'}}>
-                      Add a new board!
-                    </Typography>
-                  )}
-                </Grid>
-                <Grid item xs={12} style={{marginLeft: '6rem'}}>
-                  <Typography variant="h3" style={{marginBottom: '1em'}}>
-                    Team Boards
-                  </Typography>
-                  {teamBoards.length ? (
-                    teamBoards
-                      .filter(item => item.type === 'team')
-                      .map(item => (
-                        <Grid item xs container direction="row" key={item.id}>
+                  <Grid
+                    item
+                    xs
+                    container
+                    direction="row"
+                    style={{marginBottom: '2rem'}}
+                  >
+                    {personalBoards.length ? (
+                      personalBoards
+                        .filter(item => item.type === 'personal')
+                        .map(item => (
                           <Button
+                            key={item.id}
                             variant="outlined"
                             className={classes.boardItem}
                             href={`/boards/${item.id}`}
                           >
                             {item.name}
                           </Button>
-                        </Grid>
-                      ))
-                  ) : (
-                    <Typography variant="h3" style={{marginBottom: '1em'}}>
-                      Add a new board!
-                    </Typography>
-                  )}
+                        ))
+                    ) : (
+                      <Typography variant="body1" style={{marginBottom: '2em'}}>
+                        Add a new board!
+                      </Typography>
+                    )}
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} style={{marginLeft: '6rem'}}>
+                  <Typography variant="h3" style={{marginBottom: '1em'}}>
+                    Team Boards
+                  </Typography>
+                  <Grid
+                    item
+                    xs
+                    container
+                    direction="row"
+                    style={{marginBottom: '2rem'}}
+                  >
+                    {teamBoards.length ? (
+                      teamBoards
+                        .filter(item => item.type === 'team')
+                        .map(item => (
+                          <Button
+                            key={item.id}
+                            variant="outlined"
+                            className={classes.boardItem}
+                            href={`/boards/${item.id}`}
+                          >
+                            {item.name}
+                          </Button>
+                        ))
+                    ) : (
+                      <Typography variant="body1" style={{marginBottom: '2em'}}>
+                        Add a new board!
+                      </Typography>
+                    )}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
