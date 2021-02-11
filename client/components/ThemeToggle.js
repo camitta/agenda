@@ -5,9 +5,31 @@ import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
 import {ToggleButtonGroup} from '@material-ui/lab'
 import {CustomToggle} from './CustomMUI/ToggleButtonMUI'
 import {CustomThemeContext} from '../theme/components/CustomThemeProvider'
+import {makeStyles} from '@material-ui/core/styles'
 
-export const ThemeToggle = props => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex'
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1
+  },
+  title: {
+    flexGrow: 1
+  },
+  drawerContainer: {
+    overflow: 'auto'
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  }
+}))
+
+export default function ThemeToggle() {
+  const classes = useStyles()
   const {currentTheme, setTheme} = useContext(CustomThemeContext)
+  const isThemed = Boolean(currentTheme === 'dark')
 
   const handleThemeChange = (event, newTheme) => {
     setTheme(newTheme)

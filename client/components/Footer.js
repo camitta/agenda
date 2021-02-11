@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import {fetchMantras} from '../store/mantras'
 import {StyledBox} from './CustomMUI/FooterMUI'
-import {ThemeToggle} from './ThemeToggle'
+import ThemeToggle from './ThemeToggle'
 
 const Footer = props => {
   useEffect(() => {
