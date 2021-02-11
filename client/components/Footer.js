@@ -17,7 +17,7 @@ const Footer = props => {
       console.log(err)
     }
   }
-  const mantras = props.mantras || []
+  const mantras = props.mantras || {}
 
   return (
     <StyledBox>
@@ -28,8 +28,7 @@ const Footer = props => {
       >
         <Grid container align="left" style={{maxWidth: '100%'}}>
           <Grid item xs={10}>
-            {/* get a random mantra */}
-            {mantras.length ? (
+            {mantras.mantra ? (
               <Typography
                 style={{
                   fontSize: 24,
@@ -37,7 +36,7 @@ const Footer = props => {
                   padding: '.65em'
                 }}
               >
-                {mantras[Math.floor(Math.random() * mantras.length)].mantra}
+                {mantras.mantra}
               </Typography>
             ) : (
               <Typography

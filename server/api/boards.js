@@ -16,7 +16,8 @@ router.get('/', async (req, res, next) => {
         }
       }
     })
-    const mantras = await Mantra.findAll()
+    let randomNum = Math.floor(Math.random() * 17)
+    const mantras = await Mantra.findByPk(randomNum)
     res.send({boards, mantras})
   } catch (err) {
     next(err)

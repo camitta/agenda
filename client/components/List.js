@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
-import {TaskForm} from './index'
+import {TaskForm, TaskFormAccordion} from './index'
 import {generateErrorMessage, generateListTypeName} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
@@ -90,8 +90,8 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              //
-              <ClickAwayListener onClickAway={handleAccordionChange}>
+              <TaskFormAccordion />
+              {/* <ClickAwayListener onClickAway={handleAccordionChange}>
                 <Accordion expanded={expanded}>
                   <StyledAccordionSummary
                     expandIcon={<AddIcon fontSize="small" />}
@@ -118,8 +118,7 @@ const List = props => {
                     </div>
                   </AccordionDetails>
                 </Accordion>
-              </ClickAwayListener>
-              //
+              </ClickAwayListener> */}
             </div>
 
             {tasks && tasks.length
