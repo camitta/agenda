@@ -15,7 +15,7 @@ export const TaskForm = props => {
   const classes = taskStyles()
 
   return (
-    <form className={classes.card}>
+    <form className={classes.card} autoComplete="off">
       <TextField
         style={{width: '100%'}}
         label="Name"
@@ -23,6 +23,7 @@ export const TaskForm = props => {
         variant="filled"
         value={props.state.name}
         onChange={props.handleChange}
+        required="true"
       />
       <TextField
         multiline
@@ -32,6 +33,8 @@ export const TaskForm = props => {
         variant="filled"
         value={props.state.description}
         onChange={props.handleChange}
+        rowsMax="100"
+        required="true"
       />
       <div>
         <KeyboardDatePicker

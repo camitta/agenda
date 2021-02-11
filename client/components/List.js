@@ -73,7 +73,6 @@ const List = props => {
     await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
-    handleAccordionChange()
   }
 
   const classes = listStyles()
