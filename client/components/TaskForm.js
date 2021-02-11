@@ -33,19 +33,22 @@ export const TaskForm = props => {
         value={props.state.description}
         onChange={props.handleChange}
       />
-      <KeyboardDatePicker
-        disableToolbar
-        variant="inline"
-        format="MM/dd/yyyy"
-        margin="normal"
-        name="dueDate"
-        disablePast={true}
-        minDateMessage="Warning: this date has already passed."
-        onChange={props.handleDateChange}
-        label="Due Date"
-        value={props.state.dueDate}
-        KeyboardButtonProps={{}}
-      />
+      <div>
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          name="dueDate"
+          disablePast={true}
+          minDateMessage="Warning: this date has already passed."
+          onChange={props.handleDateChange}
+          label="Due Date"
+          value={props.state.dueDate}
+          KeyboardButtonProps={{}}
+          autoOk="true"
+        />
+      </div>
       <div className={classes.inputs}>
         <div>
           <InputLabel>Label</InputLabel>
