@@ -9,7 +9,6 @@ export const generateErrorMessage = errMessage => {
     'name',
     'description'
   ]
-
   for (let nameType of types) {
     if (errMessage.includes('password')) {
       return `Your password needs to have 6-20 characters!`

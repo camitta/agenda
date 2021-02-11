@@ -76,7 +76,6 @@ const List = props => {
   }
 
   const classes = listStyles()
-
   return (
     <Droppable droppableId={status}>
       {provided => (
@@ -107,7 +106,8 @@ const List = props => {
                       {props.error &&
                       props.error.response && (
                         <Typography variant="body1" style={{padding: '10px'}}>
-                          {generateErrorMessage(props.error.response.data)}
+                          {typeof props.error.response.data === 'string' &&
+                            generateErrorMessage(props.error.response.data)}
                         </Typography>
                       )}
                       <IconButton onClick={handleSubmit}>

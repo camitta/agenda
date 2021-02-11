@@ -23,7 +23,7 @@ export const getAllTasks = boardId => async dispatch => {
     dispatch(fetchAllTasks(data))
     socket.emit('all-tasks', data)
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 
