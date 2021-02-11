@@ -64,14 +64,15 @@ const List = props => {
     setState(defaultState)
   }
 
-  //Handle click/click away are used to close accordion when user clicks around it
-  const [open, setOpen] = useState(false)
-  const handleClickAccordion = () => {
-    setOpen(prev => !prev)
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
   }
-  const handleClickAwayAccordion = () => {
-    console.log('HANDLE CLICK AWAY')
-    setOpen(false)
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
   }
 
   const classes = listStyles()
@@ -89,31 +90,36 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <ClickAwayListener onClickAway={handleClickAway}>
-                <Accordion onClick={handleClickAwayAccordion}>
+              <ClickAwayListener onClickAway={handleAccordionChange}>
+                <Accordion expanded={expanded}>
                   <StyledAccordionSummary
                     expandIcon={<AddIcon fontSize="small" />}
                     id="panel1a-header"
+                    onClick={onAccordionClick}
                   />
                   {open ? (
-                    <AccordionDetails>
-                      <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <TaskForm
-                          state={state}
-                          handleChange={handleChange}
-                          handleDateChange={handleDateChange}
-                        />
-                        {props.error &&
-                          props.error.response && (
-                            <div>
-                              {generateErrorMessage(props.error.response.data)}
-                            </div>
-                          )}
-                        <IconButton onClick={handleSubmit}>
-                          <DoneIcon />
-                        </IconButton>
-                      </div>
-                    </AccordionDetails>
+                    <div>
+                      <AccordionDetails>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                          <TaskForm
+                            state={state}
+                            handleChange={handleChange}
+                            handleDateChange={handleDateChange}
+                          />
+                          {props.error &&
+                            props.error.response && (
+                              <div>
+                                {generateErrorMessage(
+                                  props.error.response.data
+                                )}
+                              </div>
+                            )}
+                          <IconButton onClick={handleSubmit}>
+                            <DoneIcon />
+                          </IconButton>
+                        </div>
+                      </AccordionDetails>
+                    </div>
                   ) : null}
                 </Accordion>
               </ClickAwayListener>

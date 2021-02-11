@@ -15,6 +15,7 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 // Custom MUI
 import {taskStyles} from './CustomMUI/TaskMUI'
@@ -74,6 +75,17 @@ const Task = props => {
     checkDueDate(task.dueDate, task.id)
   }
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   return (
     <Draggable key={task.id} draggableId={String(task.id)} index={index}>
       {provided => (
@@ -87,58 +99,64 @@ const Task = props => {
               <CardContent>
                 {state.edit === false ? (
                   <div>
-                    <Accordion style={{boxShadow: 'none', margin: 'auto'}}>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        id="panel1a-header"
+                    <ClickAwayListener onClickAway={handleAccordionChange}>
+                      <Accordion
+                        expanded={expanded}
+                        style={{boxShadow: 'none', margin: 'auto'}}
                       >
-                        <div>
-                          {task.label &&
-                            task.label.length && (
-                              <Chips
-                                label={task.label}
-                                boardId={boardId}
-                                taskId={task.id}
-                              />
-                            )}
-                          <Typography
-                            variant="h6"
-                            style={{textAlign: 'left'}}
-                            id={'taskName' + task.id}
-                          >
-                            {task.name}
-                          </Typography>
-                          <Typography
-                            variant="caption"
-                            className={classes.dueDate}
-                          >
-                            Due Date: {moment(task.dueDate).format('LL')}
-                          </Typography>
-                        </div>
-                      </AccordionSummary>
-                      <AccordionDetails className={classes.cardLayout}>
-                        <Typography
-                          variant="body2"
-                          style={{
-                            alignSelf: 'flex-start',
-                            paddingBottom: '30px'
-                          }}
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          id="panel1a-header"
+                          onClick={onAccordionClick}
                         >
-                          {task.description}
-                        </Typography>
-                        {boardType === 'team' ? (
-                          <>
-                            <Typography variant="subtitle1">
-                              Assign user to task:
+                          <div>
+                            {task.label &&
+                              task.label.length && (
+                                <Chips
+                                  label={task.label}
+                                  boardId={boardId}
+                                  taskId={task.id}
+                                />
+                              )}
+                            <Typography
+                              variant="h6"
+                              style={{textAlign: 'left'}}
+                              id={'taskName' + task.id}
+                            >
+                              {task.name}
                             </Typography>
-                            <AddUserToTask
-                              task={task}
-                              board={props.task.board}
-                            />
-                          </>
-                        ) : null}
-                      </AccordionDetails>
-                    </Accordion>
+                            <Typography
+                              variant="caption"
+                              className={classes.dueDate}
+                            >
+                              Due Date: {moment(task.dueDate).format('LL')}
+                            </Typography>
+                          </div>
+                        </AccordionSummary>
+                        <AccordionDetails className={classes.cardLayout}>
+                          <Typography
+                            variant="body2"
+                            style={{
+                              alignSelf: 'flex-start',
+                              paddingBottom: '30px'
+                            }}
+                          >
+                            {task.description}
+                          </Typography>
+                          {boardType === 'team' ? (
+                            <>
+                              <Typography variant="subtitle1">
+                                Assign user to task:
+                              </Typography>
+                              <AddUserToTask
+                                task={task}
+                                board={props.task.board}
+                              />
+                            </>
+                          ) : null}
+                        </AccordionDetails>
+                      </Accordion>
+                    </ClickAwayListener>
                   </div>
                 ) : (
                   <TaskForm
