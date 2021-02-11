@@ -1,7 +1,21 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import {fonts, backupFonts} from './fonts'
-//default 'normal' theme
+
+// 'star' theme
 const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ffa500'
+    },
+    secondary: {
+      main: '#FEF6D3'
+    },
+    error: {
+      main: '#C10230',
+      dark: '#C10230',
+      contrastText: '#ffffff'
+    }
+  },
   typography: {
     fontSize: 16,
     fontFamily: `${fonts.body}, ${backupFonts.sans}`,
@@ -123,30 +137,7 @@ const theme = createMuiTheme({
   fontWeight: 400,
   spacing: 2,
   alignItems: 'center',
-  justify: 'center',
-  palette: {
-    primary: {
-      main: '#000000'
-    },
-    secondary: {
-      main: '#FEF6D3'
-    },
-    error: {
-      main: '#C10230',
-      dark: '#C10230',
-      contrastText: '#ffffff'
-    },
-    text: {
-      primary: '#000000',
-      secondary: '#000000',
-      disabled: '#A69B95',
-      hint: '#FABA91'
-    },
-    background: {
-      paper: '#ffffff',
-      default: '#ffffff'
-    }
-  }
+  justify: 'center'
 })
 
 export default theme

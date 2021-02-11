@@ -29,10 +29,14 @@ const useStyles = makeStyles(theme => ({
 export default function ThemeToggle() {
   const classes = useStyles()
   const {currentTheme, setTheme} = useContext(CustomThemeContext)
-  const isThemed = Boolean(currentTheme === 'dark')
+  const isNormal = Boolean(currentTheme === 'normal')
 
   const handleThemeChange = (event, newTheme) => {
-    setTheme(newTheme)
+    if (isNormal) {
+      setTheme(newTheme)
+    } else {
+      setTheme('normal')
+    }
   }
   return (
     <ToggleButtonGroup
@@ -46,7 +50,7 @@ export default function ThemeToggle() {
         paddingRight: '.4em'
       }}
     >
-      <CustomToggle value="normal" style={{borderRadius: '50%'}}>
+      <CustomToggle value="star" style={{borderRadius: '50%'}}>
         <StarIcon fontSize="small" />
       </CustomToggle>
       <CustomToggle value="dark" style={{borderRadius: '50%'}}>
