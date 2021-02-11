@@ -158,7 +158,7 @@ router.post('/boards/:boardId', isLoggedInUser, async (req, res, next) => {
 })
 
 //get all tasks for a specific board
-router.get('/allTasks/:boardId', async (req, res, next) => {
+router.get('/allTasks/:boardId', isLoggedInUser, async (req, res, next) => {
   try {
     const {boardId} = req.params
     const tasks = await Task.findAll({
