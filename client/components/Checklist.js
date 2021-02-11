@@ -121,7 +121,7 @@ const Checklist = props => {
 }
 
 const mapState = state => ({
-  checklist: state.checklist
+  checklist: state.checklist.sort((a, b) => a.completed - b.completed)
 })
 
 const mapDispatch = dispatch => ({

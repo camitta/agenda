@@ -21,8 +21,12 @@ const Footer = props => {
 
   return (
     <StyledBox>
-      <Grid container spacing={0} style={{borderTop: '1px solid black'}}>
-        <Grid container align="left">
+      <Grid
+        container
+        spacing={0}
+        style={{borderTop: '1px solid black', maxWidth: '100%'}}
+      >
+        <Grid container align="left" style={{maxWidth: '100%'}}>
           <Grid item xs={10}>
             {/* get a random mantra */}
             {mantras.length ? (
