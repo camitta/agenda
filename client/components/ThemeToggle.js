@@ -1,57 +1,30 @@
-import React, {useState, useEffect} from 'react'
+import React, {useContext} from 'react'
 import {default as StarIcon} from '@material-ui/icons/Star'
 import {default as FlareIcon} from '@material-ui/icons/Flare'
 import {default as Brightness3Icon} from '@material-ui/icons/Brightness3'
-import {createMuiTheme, makeStyles} from '@material-ui/core/styles'
 import {ToggleButtonGroup} from '@material-ui/lab'
 import {CustomToggle} from './CustomMUI/ToggleButtonMUI'
-import dark from '../theme/darkTheme'
-import light from '../theme/theme'
-
-const useStyles = makeStyles(theme => ({}))
-
-const themes = {
-  light,
-  dark
-}
-
-export default function getTheme(theme) {
-  return themes[theme]
-}
-
-const handleChange = event => {
-  setState({...state, [event.target.name]: event.target.value})
-}
+import {CustomThemeContext} from '../theme/components/CustomThemeProvider'
 
 export const ThemeToggle = props => {
-  const [theme, setTheme] = useState('light')
-  useEffect(() => {
-    setTheme(localStorage.getItem('theme'))
-  }, [])
-  const handleClick = theme => {
-    localStorage.setItem('theme', theme)
-    setTheme(theme)
-  }
+  const {currentTheme, setTheme} = useContext(CustomThemeContext)
 
-  const classes = useStyles()
-  const appliedTheme = createMuiTheme(theme ? light : dark)
-  const [formats, setFormats] = React.useState(() => ['bold', 'italic'])
-  const handleFormat = (event, newFormats) => {
-    setFormats(newFormats)
+  const handleThemeChange = (event, newTheme) => {
+    setTheme(newTheme)
   }
   return (
     <ToggleButtonGroup
-      value={theme}
+      value={currentTheme}
       exclusive
       size="small"
-      onChange={handleFormat}
+      onChange={handleThemeChange}
       style={{
         justifyContent: 'flex-end',
         alignItems: 'center',
         paddingRight: '.4em'
       }}
     >
-      <CustomToggle value="light" style={{borderRadius: '50%'}}>
+      <CustomToggle value="normal" style={{borderRadius: '50%'}}>
         <StarIcon fontSize="small" />
       </CustomToggle>
       <CustomToggle value="dark" style={{borderRadius: '50%'}}>
