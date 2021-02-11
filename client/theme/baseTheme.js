@@ -3,7 +3,6 @@ import {fonts, backupFonts} from './fonts'
 
 const theme = createMuiTheme({
   typography: {
-    htmlFontSize: 16,
     fontSize: 16,
     fontFamily: `${fonts.body}, ${backupFonts.sans}`,
     body1: {
@@ -73,30 +72,6 @@ const theme = createMuiTheme({
       color: '#000000'
     }
   },
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#000000'
-    },
-    secondary: {
-      main: '#FEF6D3'
-    },
-    error: {
-      main: '#C10230',
-      dark: '#C10230',
-      contrastText: '#ffffff'
-    },
-    text: {
-      primary: '#000000',
-      secondary: '#000000',
-      disabled: '#A69B95',
-      hint: '#FABA91'
-    },
-    background: {
-      paper: '#ffffff',
-      default: '#ffffff'
-    }
-  },
   overrides: {
     MuiButton: {
       containedSecondary: {
@@ -145,7 +120,7 @@ const theme = createMuiTheme({
       disableRipple: true
     }
   },
-  fontWeight: 300,
+  fontWeight: 400,
   spacing: 2,
   alignItems: 'center',
   justify: 'center'

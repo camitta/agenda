@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {ThemeProvider} from '@material-ui/core/styles'
-import getTheme from '../ThemeToggle'
+import getTheme from '../index'
+
 export const CustomThemeContext = React.createContext({
   currentTheme: 'normal',
   setTheme: null
@@ -9,13 +10,13 @@ export const CustomThemeContext = React.createContext({
 const CustomThemeProvider = props => {
   const {children} = props
 
-  // Read current theme from localStorage
-  const currentTheme = localStorage.getItem('appTheme') || 'light'
+  // Get current theme from localStorage
+  const currentTheme = localStorage.getItem('appTheme') || 'normal'
 
-  // State to hold the selected theme name
+  // State to hold selected theme name
   const [themeName, _setThemeName] = useState(currentTheme)
 
-  // Retrieve the theme object by theme name
+  // Retrieve theme object by theme name
   const theme = getTheme(themeName)
 
   // Wrap _setThemeName to store new theme names in localStorage
