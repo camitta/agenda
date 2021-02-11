@@ -62,6 +62,7 @@ const List = props => {
     await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
+    setExpanded(false)
   }
 
   //Manage expanded accordion state
@@ -89,6 +90,7 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
+              //
               <ClickAwayListener onClickAway={handleAccordionChange}>
                 <Accordion expanded={expanded}>
                   <StyledAccordionSummary
@@ -96,20 +98,20 @@ const List = props => {
                     id="panel1a-header"
                     onClick={onAccordionClick}
                   />
-               <AccordionDetails>
-                  <div className={classes.addTaskForm}>
-                    <TaskForm
-                      state={state}
-                      handleChange={handleChange}
-                      handleDateChange={handleDateChange}
-                    />
+                  <AccordionDetails>
+                    <div className={classes.addTaskForm}>
+                      <TaskForm
+                        state={state}
+                        handleChange={handleChange}
+                        handleDateChange={handleDateChange}
+                      />
                       {props.error &&
-                      props.error.response && (
-                        <Typography variant="body1" style={{padding: '10px'}}>
-                          {typeof props.error.response.data === 'string' &&
-                            generateErrorMessage(props.error.response.data)}
-                        </Typography>
-                      )}
+                        props.error.response && (
+                          <Typography variant="body1" style={{padding: '10px'}}>
+                            {typeof props.error.response.data === 'string' &&
+                              generateErrorMessage(props.error.response.data)}
+                          </Typography>
+                        )}
                       <IconButton onClick={handleSubmit}>
                         <DoneIcon />
                       </IconButton>
@@ -117,6 +119,7 @@ const List = props => {
                   </AccordionDetails>
                 </Accordion>
               </ClickAwayListener>
+              //
             </div>
 
             {tasks && tasks.length
