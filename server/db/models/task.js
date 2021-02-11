@@ -24,13 +24,13 @@ const Task = db.define('task', {
     allowNull: false
   },
   label: {
+    //                        red,     orange,    yellow,    pink,     purple
     type: Sequelize.ENUM(
-      'red',
-      'orange',
-      'yellow',
-      'green',
-      'blue',
-      'purple',
+      '#EE7674',
+      '#FDC577',
+      '#F0E76A',
+      '#FF85A1',
+      '#B681D9',
       ''
     )
   },
