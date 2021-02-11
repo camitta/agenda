@@ -20,7 +20,7 @@ const Footer = props => {
   const mantras = props.mantras || []
 
   return (
-    <StyledBox>
+    <StyledBox style={{width: '100%'}}>
       <Grid container spacing={0} style={{borderTop: '1px solid black'}}>
         <Grid container align="left">
           <Grid item xs={10}>

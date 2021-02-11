@@ -73,8 +73,8 @@ const UserHome = props => {
           container
           style={{
             padding: '10px',
-            marginLeft: '4rem',
-            marginRight: '4rem'
+            marginLeft: '2rem',
+            marginRight: '2rem'
           }}
         >
           <Grid
