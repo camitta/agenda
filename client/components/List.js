@@ -97,30 +97,24 @@ const List = props => {
                     id="panel1a-header"
                     onClick={onAccordionClick}
                   />
-                  {open ? (
-                    <div>
-                      <AccordionDetails>
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                          <TaskForm
-                            state={state}
-                            handleChange={handleChange}
-                            handleDateChange={handleDateChange}
-                          />
-                          {props.error &&
-                            props.error.response && (
-                              <div>
-                                {generateErrorMessage(
-                                  props.error.response.data
-                                )}
-                              </div>
-                            )}
-                          <IconButton onClick={handleSubmit}>
-                            <DoneIcon />
-                          </IconButton>
-                        </div>
-                      </AccordionDetails>
+                  <AccordionDetails>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                      <TaskForm
+                        state={state}
+                        handleChange={handleChange}
+                        handleDateChange={handleDateChange}
+                      />
+                      {props.error &&
+                        props.error.response && (
+                          <div>
+                            {generateErrorMessage(props.error.response.data)}
+                          </div>
+                        )}
+                      <IconButton onClick={handleSubmit}>
+                        <DoneIcon />
+                      </IconButton>
                     </div>
-                  ) : null}
+                  </AccordionDetails>
                 </Accordion>
               </ClickAwayListener>
             </div>
