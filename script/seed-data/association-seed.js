@@ -26,7 +26,7 @@ const taskOne = {
     "Mom is nagging me that I haven't called her in dacades (such a lie).  But I need to call her tonight to keep her happy and quiet.",
   dueDate: '2020-01-30',
   type: 'todo',
-  label: 'red'
+  label: '#EE7674'
 }
 
 const taskTwo = {
@@ -35,7 +35,7 @@ const taskTwo = {
     "Cody and I need to go grocery shopping because Cody's food is out",
   dueDate: '2020-02-02',
   type: 'done',
-  label: 'orange'
+  label: '#FDC577'
 }
 
 const checkListOne = {description: 'Water plants', completed: false}
