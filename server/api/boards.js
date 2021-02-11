@@ -50,9 +50,9 @@ router.post('/', async (req, res, next) => {
   try {
     const {name, type} = req.body
     const userId = req.user.id
-    const currentUser = await User.findByPk(userId)
+    // const currentUser = await User.findByPk(userId)
     const newBoard = await Board.create({name, type})
-    await newBoard.addUser(currentUser)
+    await newBoard.addUser(userId)
     res.send(newBoard)
   } catch (err) {
     next(err)
