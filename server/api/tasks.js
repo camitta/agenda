@@ -150,7 +150,7 @@ router.post('/boards/:boardId', isLoggedInUser, async (req, res, next) => {
     res.send(newTask)
   } catch (err) {
     if (err.name === 'SequelizeValidationError') {
-      res.status(412).send(err.errors[0].message)
+      res.status(401).send(err.errors[0].message)
     } else {
       next(err)
     }

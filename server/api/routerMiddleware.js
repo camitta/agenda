@@ -23,8 +23,8 @@ const isLoggedInUser = async (req, res, next) => {
       next()
     } else {
       const err = new Error('Uh oh.')
-      err.status = 401
-      next(err)
+      console.log(err)
+      res.status(401).send(err)
     }
   }
 }
