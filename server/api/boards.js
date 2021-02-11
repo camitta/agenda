@@ -10,6 +10,7 @@ router.get('/', async (req, res, next) => {
     const boards = await Board.findAll({
       include: {
         model: User,
+        attributes: ['id', 'email'],
         where: {
           id
         }
@@ -30,13 +31,9 @@ router.get('/:boardId', isLoggedInUser, async (req, res, next) => {
         id
       },
       include: [
-        // {
-        //   model: Task
-        // },
         {
-          model: User
-          // attributes: [],
-          // required: true
+          model: User,
+          attributes: ['id', 'firstName', 'lastName']
         }
       ]
     })
