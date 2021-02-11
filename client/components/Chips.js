@@ -11,17 +11,18 @@ import CancelIcon from '@material-ui/icons/Cancel'
 const Chips = props => {
   const {label, fetchTasks, boardId, taskId, removeChips} = props
 
-  const classes = ChipClass()
+  const classes = ChipClass(label)
 
   const handleDelete = async () => {
     await removeChips(taskId)
     await fetchTasks(boardId)
   }
-  console.log('label', label)
+  console.log('Beforelabel', label)
+
   return (
     <Chip
       style={{
-        backgroundColor: '#B681D9',
+        backgroundColor: label,
         width: 100,
         justifyContent: 'flex-end'
       }}

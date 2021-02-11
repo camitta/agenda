@@ -54,11 +54,11 @@ export const TaskForm = props => {
             onChange={props.handleChange}
             name="label"
           >
-            <MenuItem value="red">Red</MenuItem>
-            <MenuItem value="orange">Orange</MenuItem>
-            <MenuItem value="yellow">Yellow</MenuItem>
-            <MenuItem value="pink">Pink</MenuItem>
-            <MenuItem value="purple">Purple</MenuItem>
+            <MenuItem value="#EE7674">Red</MenuItem>
+            <MenuItem value="#FDC577">Orange</MenuItem>
+            <MenuItem value="#F0E76A">Yellow</MenuItem>
+            <MenuItem value="#FF85A1">Pink</MenuItem>
+            <MenuItem value="#B681D9">Purple</MenuItem>
           </Select>
         </div>
         <div>
