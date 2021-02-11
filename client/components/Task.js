@@ -134,15 +134,12 @@ const Task = props => {
                           </div>
                         </AccordionSummary>
                         <AccordionDetails className={classes.cardLayout}>
-                          <Typography
-                            variant="body2"
-                            style={{
-                              alignSelf: 'flex-start',
-                              paddingBottom: '30px'
-                            }}
-                          >
-                            {task.description}
-                          </Typography>
+                        <Typography
+                          variant="body1"
+                          className={classes.description}
+                        >
+                          {task.description}
+                        </Typography>
                           {boardType === 'team' ? (
                             <>
                               <Typography variant="subtitle1">

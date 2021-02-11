@@ -182,8 +182,11 @@ const SingleBoard = props => {
           </Accordion>
         </ClickAwayListener>
       ) : null}
-      <Title variant="h3">{props.singleBoard.name}</Title>
       <div className={classes.filterContainer}>
+        <div />
+        <Title variant="h3" className={classes.title}>
+          {props.singleBoard.name}
+        </Title>
         <FilterTasksByLabel boardId={boardId} />
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>

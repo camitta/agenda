@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
@@ -97,19 +97,19 @@ const List = props => {
                     id="panel1a-header"
                     onClick={onAccordionClick}
                   />
-                  <AccordionDetails>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                      <TaskForm
-                        state={state}
-                        handleChange={handleChange}
-                        handleDateChange={handleDateChange}
-                      />
+               <AccordionDetails>
+                  <div className={classes.addTaskForm}>
+                    <TaskForm
+                      state={state}
+                      handleChange={handleChange}
+                      handleDateChange={handleDateChange}
+                    />
                       {props.error &&
-                        props.error.response && (
-                          <div>
-                            {generateErrorMessage(props.error.response.data)}
-                          </div>
-                        )}
+                      props.error.response && (
+                        <Typography variant="body1" style={{padding: '10px'}}>
+                          {generateErrorMessage(props.error.response.data)}
+                        </Typography>
+                      )}
                       <IconButton onClick={handleSubmit}>
                         <DoneIcon />
                       </IconButton>

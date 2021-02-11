@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import Grid from '@material-ui/core/Grid'
-import ListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
-import {Container} from '@material-ui/core'
 import {fetchMantras} from '../store/mantras'
-import {StyledBox, StyledList} from './CustomMUI/FooterMUI'
+import {StyledBox} from './CustomMUI/FooterMUI'
 import {ThemeToggle} from './ThemeToggle'
 
 const Footer = props => {
