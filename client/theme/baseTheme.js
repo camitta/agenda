@@ -1,6 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import {fonts, backupFonts} from './fonts'
-
+// base theme (colors excluded)
 const theme = createMuiTheme({
   typography: {
     fontSize: 16,
