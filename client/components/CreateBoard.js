@@ -37,6 +37,7 @@ export const CreateBoard = props => {
   async function handleSubmit() {
     await props.addBoard(state)
     await props.getBoards()
+    setState({...state, name: ''})
     handleClose()
   }
 

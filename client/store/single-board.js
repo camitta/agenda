@@ -32,7 +32,7 @@ export const getSingleBoard = boardId => async dispatch => {
     dispatch(fetchSingleBoard(data))
     socket.emit('singleBoard', data)
   } catch (err) {
-    console.error(err)
+    dispatch(fetchSingleBoard({error: err}))
   }
 }
 
