@@ -1,5 +1,4 @@
 import {createMuiTheme} from '@material-ui/core/styles'
-import {indigo} from '@material-ui/core/colors'
 import {fonts, backupFonts} from './fonts'
 // Dark theme
 const theme = createMuiTheme({
