@@ -4,15 +4,6 @@ export const singleBoardStyles = makeStyles(() => ({
   singleBoardContainer: {
     marginBottom: '15%'
   },
-  deleteButton: {
-    textAlign: 'center',
-    backgroundColor: '#e6766e',
-    color: '#FFF',
-    '&:hover': {
-      backgroundColor: '#eb4034',
-      color: '#FFF'
-    }
-  },
   deleteContainer: {
     textAlign: 'right',
     margin: 'auto 5%'

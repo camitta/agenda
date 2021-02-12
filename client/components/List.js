@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateErrorMessage, generateListTypeName} from '../functions'
+import {generateListTypeName, validateForm} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -14,6 +14,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
+import Container from '@material-ui/core/Container'
 
 // Custom MUI
 import {listStyles} from './CustomMUI/listMUI'
@@ -23,14 +24,14 @@ import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
 import {addSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 
-const ListContainer = styled.div`
-  background-color: #dfe3e6;
-  border-radius: 3px;
-  align-content: center;
-  justify-content: center;
-  padding: 8px;
-  margin: 0 8px 0 0;
-`
+// const ListContainer = styled.div`
+//   background-color: #dfe3e6;
+//   border-radius: 3px;
+//   align-content: center;
+//   justify-content: center;
+//   padding: 8px;
+//   margin: 0 8px 0 0;
+// `
 
 const List = props => {
   const {tasks, boardId, status, boardType} = props
@@ -40,7 +41,12 @@ const List = props => {
     description: '',
     type: status,
     dueDate: new Date(),
-    label: ''
+    label: '',
+    errors: {
+      name: true,
+      description: true
+    },
+    errorHandling: false
   }
 
   const [state, setState] = useState(defaultState)
@@ -50,7 +56,10 @@ const List = props => {
   const onAccordionClick = () => {
     setExpanded(prev => !prev)
   }
-  const handleAccordionChange = event => {
+  const onAccordionSummaryClick = () => {
+    setExpanded(true)
+  }
+  const handleAccordionChange = () => {
     if (expanded === true) {
       setExpanded(false)
     }
@@ -62,7 +71,20 @@ const List = props => {
   }
 
   const handleChange = event => {
-    setState({...state, [event.target.name]: event.target.value})
+    const {name, value} = event.target
+
+    let errors = state.errors
+    switch (name) {
+      case 'name':
+        errors.name = !value.length
+        break
+      case 'description':
+        errors.description = !value.length
+        break
+      default:
+        break
+    }
+    setState({...state, errors, [event.target.name]: event.target.value})
   }
 
   const handleSubmit = async () => {
@@ -73,9 +95,21 @@ const List = props => {
     await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
+    if (validateForm(state.errors)) {
+      await props.add(boardId, {...state, index: length})
+      await props.getAllTasks(boardId)
+      setState(defaultState)
+      handleAccordionChange()
+    } else {
+      setState({
+        ...state,
+        errorHandling: true
+      })
+    }
   }
 
   const classes = listStyles()
+
   return (
     <Droppable droppableId={status}>
       {provided => (
@@ -84,11 +118,16 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
+
+          <Container className={classes.container}>
+
           <ListContainer xs={12}>
+
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
             <div>
+
               <ClickAwayListener onClickAway={handleAccordionChange}>
                 <Accordion expanded={expanded}>
                   <StyledAccordionSummary
@@ -117,6 +156,27 @@ const List = props => {
                   </AccordionDetails>
                 </Accordion>
               </ClickAwayListener>
+
+              <Accordion expanded={expanded}>
+                <StyledAccordionSummary
+                  expandIcon={<AddIcon fontSize="small" />}
+                  id="panel1a-header"
+                  onClick={onAccordionClick}
+                />
+                <AccordionDetails onClick={onAccordionSummaryClick}>
+                  <div className={classes.addTaskForm}>
+                    <TaskForm
+                      state={state}
+                      handleChange={handleChange}
+                      handleDateChange={handleDateChange}
+                    />
+                    <IconButton onClick={handleSubmit}>
+                      <DoneIcon />
+                    </IconButton>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+
             </div>
 
             {tasks && tasks.length
@@ -132,17 +192,13 @@ const List = props => {
                   )
                 })
               : null}
-          </ListContainer>
+          </Container>
           {provided.placeholder}
         </div>
       )}
     </Droppable>
   )
 }
-
-const mapState = state => ({
-  error: state.singleTask.error
-})
 
 const mapDispatch = dispatch => {
   return {
@@ -151,4 +207,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(List)
+export default connect(null, mapDispatch)(List)

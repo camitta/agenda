@@ -5,7 +5,7 @@ import {fonts, backupFonts} from './fonts'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#ffa500'
+      main: '#336699'
     },
     secondary: {
       main: '#FEF6D3'
@@ -14,6 +14,10 @@ const theme = createMuiTheme({
       main: '#C10230',
       dark: '#C10230',
       contrastText: '#ffffff'
+    },
+    background: {
+      paper: '#e0fbfc',
+      default: '#86bbd8'
     }
   },
   typography: {

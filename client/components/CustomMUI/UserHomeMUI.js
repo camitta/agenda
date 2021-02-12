@@ -29,15 +29,13 @@ export const homeStyles = makeStyles(theme => ({
     minHeight: '110px',
     minWidth: '110px',
     display: 'inline-flex',
-    background: '#fff',
+    background: theme.palette.primary.light,
     '&:hover': {
       background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
       color: '#FFF'
     },
     boxShadow: '0px 3px #000000',
-    color: 'black',
     borderRadius: 1,
-
     fontWeight: 500
   },
   gridItem: {
@@ -46,7 +44,8 @@ export const homeStyles = makeStyles(theme => ({
   },
   title: {
     marginTop: '15px',
-    padding: '5px'
+    padding: '5px',
+    color: theme.palette.text.secondary
   },
   addBoard: {
     display: 'flex',

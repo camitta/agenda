@@ -18,8 +18,8 @@ import GroupIcon from '@material-ui/icons/Group'
 import Typography from '@material-ui/core/Typography'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
-import Button from '@material-ui/core/Button'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
+import {StyledButton} from './CustomMUI/GradientButton'
 
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
@@ -175,7 +175,7 @@ const SingleBoard = props => {
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
         <ClickAwayListener onClickAway={handleAccordionChange}>
-          <Accordion expanded={expanded}>
+          <Accordion color="primary" expanded={expanded}>
             <StyledAccordionSummary
               expandIcon={<GroupIcon />}
               onClick={onAccordionClick}
@@ -216,13 +216,9 @@ const SingleBoard = props => {
         </ListsContainer>
       </DragDropContext>
       <div className={classes.deleteContainer}>
-        <Button
-          className={classes.deleteButton}
-          variant="contained"
-          onClick={handleOpen}
-        >
+        <StyledButton variant="outlined" onClick={handleOpen}>
           Delete board
-        </Button>
+        </StyledButton>
         <DeleteBoard
           handleCancel={handleCancel}
           handleDelete={handleDelete}

@@ -23,6 +23,7 @@ const Footer = props => {
     <StyledBox>
       <Grid
         container
+        color="primary"
         spacing={0}
         style={{borderTop: '1px solid black', maxWidth: '100%'}}
       >
