@@ -6,7 +6,7 @@ const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#badef2',
+      main: '#e9edc9',
       light: '#badef2',
       dark: '#e3eff7',
       contrastText: '#e9edc9'
@@ -94,20 +94,6 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
-    MuiButton: {
-      root: {
-        backgroundColor: '#badef2'
-      },
-      containedSecondary: {
-        backgroundColor: '#badef2',
-        '&:hover': {
-          backgroundColor: '#fff'
-        }
-      },
-      outlined: {
-        borderColor: 'black'
-      }
-    },
     MuiFormLabel: {
       root: {
         fontFamily: 'unset',

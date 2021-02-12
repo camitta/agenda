@@ -92,7 +92,11 @@ const UserHome = props => {
             <Grid item xs={8}>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs={12} style={{marginLeft: '6rem'}}>
-                  <Typography variant="h3" style={{marginBottom: '1em'}}>
+                  <Typography
+                    className={classes.boardTitles}
+                    variant="h3"
+                    style={{marginBottom: '1em'}}
+                  >
                     Personal Boards
                   </Typography>
                   <Grid
@@ -123,7 +127,11 @@ const UserHome = props => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} style={{marginLeft: '6rem'}}>
-                  <Typography variant="h3" style={{marginBottom: '1em'}}>
+                  <Typography
+                    variant="h3"
+                    style={{marginBottom: '1em'}}
+                    className={classes.boardTitles}
+                  >
                     Team Boards
                   </Typography>
                   <Grid
