@@ -27,17 +27,11 @@ export const generateErrorMessage = errMessage => {
 // Change color of task title if today is on, approaching, or past the due date.
 export const checkDueDate = (dueDate, id) => {
   const taskName = document.getElementById('taskName' + id)
-  const relativeDate = moment(dueDate)
-    .startOf('day')
-    .fromNow()
-  const dateRegEx = /(hour|minute|second)s/i
   if (
     moment(dueDate).isSame(new Date(), 'day') ||
     moment(dueDate).isBefore(new Date(), 'day')
   ) {
-    taskName.style.color = 'red'
-  } else if (dateRegEx.test(relativeDate)) {
-    taskName.style.color = 'orange'
+    taskName.style.backgroundColor = '#EE7674'
   } else {
     taskName.style.color = 'black'
   }
