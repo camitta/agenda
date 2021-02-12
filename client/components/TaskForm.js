@@ -24,7 +24,7 @@ export const TaskForm = props => {
         variant="filled"
         value={props.state.name}
         onChange={props.handleChange}
-        required="true"
+        required={true}
       />
       {props.state.errorHandling &&
         props.state.errors.name && (
@@ -41,7 +41,7 @@ export const TaskForm = props => {
         value={props.state.description}
         onChange={props.handleChange}
         rowsMax="100"
-        required="true"
+        required={true}
       />
       {props.state.errorHandling &&
         props.state.errors.description && (
