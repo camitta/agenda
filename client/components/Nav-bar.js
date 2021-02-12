@@ -9,7 +9,8 @@ import Link from '@material-ui/core/Link'
 import {navStyles} from './CustomMUI/NavBarMUI'
 import {StyledButton} from './CustomMUI/GradientButton'
 
-const Navbar = function({handleClick, isLoggedIn}) {
+// Navbar
+const Navbar = ({handleClick, isLoggedIn}) => {
   const classes = navStyles()
   return (
     <AppBar position="static" color="default" className={classes.root}>
