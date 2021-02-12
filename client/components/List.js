@@ -45,6 +45,17 @@ const List = props => {
 
   const [state, setState] = useState(defaultState)
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   // Date picker event returns only the date - this extra function is required.
   const handleDateChange = date => {
     setState({...state, dueDate: date})
@@ -88,7 +99,7 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
-          <ListContainer>
+          <ListContainer xs={12}>
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
