@@ -24,7 +24,7 @@ const DeleteUserFromBoardDialog = props => {
             No
           </IconButton>
           <IconButton
-            onClick={() => handleDelete(userId)}
+            onClick={() => handleDelete()}
             style={{color: 'green'}}
             autoFocus
             href="/home"
@@ -49,7 +49,7 @@ const DeleteUserFromBoardDialog = props => {
           No
         </IconButton>
         <IconButton
-          onClick={() => handleDelete(userId)}
+          onClick={() => handleDelete()}
           style={{color: 'green'}}
           autoFocus
         >
