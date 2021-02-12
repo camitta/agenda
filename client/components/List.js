@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateErrorMessage, generateListTypeName} from '../functions'
+import {generateListTypeName} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -13,7 +13,6 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 // Custom MUI
 import {listStyles} from './CustomMUI/listMUI'
@@ -40,7 +39,11 @@ const List = props => {
     description: '',
     type: status,
     dueDate: new Date(),
-    label: ''
+    label: '',
+    errors: {
+      name: null,
+      description: null
+    }
   }
 
   const [state, setState] = useState(defaultState)
@@ -51,7 +54,35 @@ const List = props => {
   }
 
   const handleChange = event => {
-    setState({...state, [event.target.name]: event.target.value})
+    const {name, value} = event.target
+
+    let errors = state.errors
+    switch (name) {
+      case 'name':
+        errors.name = value.length ? null : 'Did you fill out name?'
+        break
+      case 'description':
+        errors.description = value.length
+          ? null
+          : 'Did you fill out description'
+        break
+      default:
+        break
+    }
+    setState({...state, errors, [event.target.name]: event.target.value})
+  }
+
+  useEffect(
+    () => {
+      console.log(state.errors)
+    },
+    [state]
+  )
+
+  const validateForm = (name, description) => {
+    let valid = true
+    if (!name.length || !description.length) valid = false
+    return valid
   }
 
   const handleSubmit = async () => {
@@ -59,23 +90,19 @@ const List = props => {
     if (tasks && tasks.length) {
       length = tasks.length
     }
-    await props.add(boardId, {...state, index: length})
-    await props.getAllTasks(boardId)
-    setState(defaultState)
-  }
 
-  //Manage expanded accordion state
-  const [expanded, setExpanded] = useState(false)
-  const onAccordionClick = () => {
-    setExpanded(prev => !prev)
-  }
-  const handleAccordionChange = event => {
-    if (expanded === true) {
-      setExpanded(false)
+    if (validateForm(state.name, state.description)) {
+      await props.add(boardId, {...state, index: length})
+      await props.getAllTasks(boardId)
+      setState(defaultState)
+    } else {
+      console.log(state.errors)
     }
   }
 
   const classes = listStyles()
+
+  // console.log('state from List: ', state)
   return (
     <Droppable droppableId={status}>
       {provided => (
@@ -89,34 +116,24 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <ClickAwayListener onClickAway={handleAccordionChange}>
-                <Accordion expanded={expanded}>
-                  <StyledAccordionSummary
-                    expandIcon={<AddIcon fontSize="small" />}
-                    id="panel1a-header"
-                    onClick={onAccordionClick}
-                  />
-               <AccordionDetails>
+              <Accordion>
+                <StyledAccordionSummary
+                  expandIcon={<AddIcon fontSize="small" />}
+                  id="panel1a-header"
+                />
+                <AccordionDetails>
                   <div className={classes.addTaskForm}>
                     <TaskForm
                       state={state}
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
-                      {props.error &&
-                      props.error.response && (
-                        <Typography variant="body1" style={{padding: '10px'}}>
-                          {typeof props.error.response.data === 'string' &&
-                            generateErrorMessage(props.error.response.data)}
-                        </Typography>
-                      )}
-                      <IconButton onClick={handleSubmit}>
-                        <DoneIcon />
-                      </IconButton>
-                    </div>
-                  </AccordionDetails>
-                </Accordion>
-              </ClickAwayListener>
+                    <IconButton onClick={handleSubmit}>
+                      <DoneIcon />
+                    </IconButton>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
             </div>
 
             {tasks && tasks.length

@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import {KeyboardDatePicker} from '@material-ui/pickers'
+import Typography from '@material-ui/core/Typography'
 
 // Custom MUI
 import {taskStyles} from './CustomMUI/TaskMUI'
@@ -24,6 +25,11 @@ export const TaskForm = props => {
         value={props.state.name}
         onChange={props.handleChange}
       />
+      {props.state.errors.name && (
+        <Typography variant="body1" style={{padding: '10px'}}>
+          {props.state.errors.name}
+        </Typography>
+      )}
       <TextField
         multiline
         style={{width: '100%'}}
@@ -33,6 +39,11 @@ export const TaskForm = props => {
         value={props.state.description}
         onChange={props.handleChange}
       />
+      {props.state.errors.description && (
+        <Typography variant="body1" style={{padding: '10px'}}>
+          {props.state.errors.description}
+        </Typography>
+      )}
       <div>
         <KeyboardDatePicker
           disableToolbar
