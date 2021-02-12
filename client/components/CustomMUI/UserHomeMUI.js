@@ -45,6 +45,9 @@ export const homeStyles = makeStyles(theme => ({
     margin: '10px',
     direction: 'row'
   },
+  boardTitles: {
+    color: theme.palette.text.secondary
+  },
   title: {
     marginTop: '15px',
     padding: '5px'

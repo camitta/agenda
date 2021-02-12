@@ -2,7 +2,8 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const navStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: theme.palette.secondary.main
   },
   menuButton: {
     borderRadius: '1px',
