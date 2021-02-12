@@ -69,13 +69,13 @@ const theme = createMuiTheme({
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       textTransform: 'lowercase',
       textDecoration: 'none',
-      color: '#000000'
+      color: '#9d4edd'
     }
   },
   overrides: {
     MuiButton: {
       containedSecondary: {
-        backgroundColor: '#fff',
+        backgroundColor: '#9d4edd',
         '&:hover': {
           backgroundColor: '#fff'
         }
@@ -126,10 +126,12 @@ const theme = createMuiTheme({
   justify: 'center',
   palette: {
     primary: {
-      main: '#000000'
+      main: '#000000',
+      light: '#ffffff',
+      dark: ''
     },
     secondary: {
-      main: '#FEF6D3'
+      main: '#e5e5e5'
     },
     error: {
       main: '#C10230',
@@ -144,7 +146,7 @@ const theme = createMuiTheme({
     },
     background: {
       paper: '#ffffff',
-      default: '#ffffff'
+      default: '#e5e5e5'
     }
   }
 })

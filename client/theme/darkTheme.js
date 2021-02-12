@@ -1,28 +1,27 @@
 import {createMuiTheme} from '@material-ui/core/styles'
-import {red} from '@material-ui/core/colors'
+import {indigo} from '@material-ui/core/colors'
 import {fonts, backupFonts} from './fonts'
 // Dark theme
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: 'rgba(187, 161, 193, 1)',
-      light: 'rgb(81, 91, 95)',
-      dark: 'rgb(26, 35, 39)',
-      contrastText: '#ffffff'
+      main: '#badef2',
+      light: '#badef2',
+      dark: '#e3eff7',
+      contrastText: '#e9edc9'
     },
     secondary: {
-      light: 'rgba(252, 248, 244, 1)',
-      main: 'rgba(187, 161, 193, 1)',
-      dark: 'rgba(98, 18, 68, 1)',
-      contrastText: 'rgba(255, 255, 255, 1)'
+      main: '#badef2',
+      contrastText: '#06d6a0'
     },
-    titleBar: {
-      main: '#555555',
-      contrastText: '#ffffff'
+    text: {
+      primary: '#eaf0ce',
+      secondary: '#badef2'
     },
-    error: {
-      main: red.A400
+    background: {
+      paper: '#292f33',
+      default: '#616a70'
     }
   },
   typography: {
@@ -97,8 +96,11 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
+      root: {
+        backgroundColor: '#badef2'
+      },
       containedSecondary: {
-        backgroundColor: '#fff',
+        backgroundColor: '#badef2',
         '&:hover': {
           backgroundColor: '#fff'
         }
@@ -146,7 +148,12 @@ const theme = createMuiTheme({
   fontWeight: 400,
   spacing: 2,
   alignItems: 'center',
-  justify: 'center'
+  justify: 'center',
+  contrastThreshold: 3,
+  // Used by the functions below to shift a color's luminance by approximately
+  // two indexes within its tonal palette.
+  // E.g., shift from Red 500 to Red 300 or Red 700.
+  tonalOffset: 0.2
 })
 
 export default theme
