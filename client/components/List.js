@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateErrorMessage, generateListTypeName} from '../functions'
+import {generateListTypeName, validateForm} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -41,7 +41,12 @@ const List = props => {
     description: '',
     type: status,
     dueDate: new Date(),
-    label: ''
+    label: '',
+    errors: {
+      name: true,
+      description: true
+    },
+    errorHandling: false
   }
 
   const [state, setState] = useState(defaultState)
@@ -51,7 +56,10 @@ const List = props => {
   const onAccordionClick = () => {
     setExpanded(prev => !prev)
   }
-  const handleAccordionChange = event => {
+  const onAccordionSummaryClick = () => {
+    setExpanded(true)
+  }
+  const handleAccordionChange = () => {
     if (expanded === true) {
       setExpanded(false)
     }
@@ -63,7 +71,20 @@ const List = props => {
   }
 
   const handleChange = event => {
-    setState({...state, [event.target.name]: event.target.value})
+    const {name, value} = event.target
+
+    let errors = state.errors
+    switch (name) {
+      case 'name':
+        errors.name = !value.length
+        break
+      case 'description':
+        errors.description = !value.length
+        break
+      default:
+        break
+    }
+    setState({...state, errors, [event.target.name]: event.target.value})
   }
 
   const handleSubmit = async () => {
@@ -71,27 +92,21 @@ const List = props => {
     if (tasks && tasks.length) {
       length = tasks.length
     }
-    await props.add(boardId, {...state, index: length})
-    await props.getAllTasks(boardId)
-    setState(defaultState)
-    setExpanded(false)
-  }
-
-  //Manage expanded accordion state
-  const [expanded, setExpanded] = useState(false)
-  const onAccordionClick = () => {
-    setExpanded(prev => !prev)
-  }
-  const onAccordionSummaryClick = () => {
-    setExpanded(true)
-  }
-  const handleAccordionChange = event => {
-    if (expanded === true) {
-      setExpanded(false)
+    if (validateForm(state.errors)) {
+      await props.add(boardId, {...state, index: length})
+      await props.getAllTasks(boardId)
+      setState(defaultState)
+      handleAccordionChange()
+    } else {
+      setState({
+        ...state,
+        errorHandling: true
+      })
     }
   }
 
   const classes = listStyles()
+
   return (
     <Droppable droppableId={status}>
       {provided => (
@@ -152,13 +167,6 @@ const List = props => {
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
-                    {props.error &&
-                      props.error.response && (
-                        <Typography variant="body1" style={{padding: '10px'}}>
-                          {typeof props.error.response.data === 'string' &&
-                            generateErrorMessage(props.error.response.data)}
-                        </Typography>
-                      )}
                     <IconButton onClick={handleSubmit}>
                       <DoneIcon />
                     </IconButton>
@@ -189,10 +197,6 @@ const List = props => {
   )
 }
 
-const mapState = state => ({
-  error: state.singleTask.error
-})
-
 const mapDispatch = dispatch => {
   return {
     add: (boardId, task) => dispatch(addSingleTask(boardId, task)),
@@ -200,4 +204,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(List)
+export default connect(null, mapDispatch)(List)

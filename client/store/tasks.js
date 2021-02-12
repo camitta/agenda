@@ -54,7 +54,7 @@ export const addSingleTask = (boardId, task) => {
       const {data} = await axios.post(`/api/tasks/boards/${boardId}`, task)
       dispatch(addedSingleTask(data))
     } catch (err) {
-      dispatch(addedSingleTask({error: err}))
+      console.log(err)
     }
   }
 }
