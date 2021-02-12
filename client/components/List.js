@@ -90,7 +90,6 @@ const List = props => {
     if (tasks && tasks.length) {
       length = tasks.length
     }
-
     if (validateForm(state.errors)) {
       await props.add(boardId, {...state, index: length})
       await props.getAllTasks(boardId)
