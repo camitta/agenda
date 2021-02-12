@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const taskStyles = makeStyles(() => ({
+export const taskStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -20,7 +20,8 @@ export const taskStyles = makeStyles(() => ({
     alignSelf: 'flex-start',
     paddingBottom: '30px',
     whiteSpace: 'pre-wrap',
-    textAlign: 'left'
+    textAlign: 'left',
+    color: theme.palette.text.secondary
   },
   summary: {
     display: 'flex',
