@@ -8,9 +8,9 @@ module.exports = io => {
       console.log(`Connection ${socket.id} has left the building`)
     })
 
-    socket.on('all-tasks', tasks => {
-      socket.broadcast.emit('all-tasks', tasks)
-    })
+    // socket.on('all-tasks', tasks => {
+    //   socket.broadcast.emit('all-tasks', tasks)
+    // })
 
     socket.on('singleBoard', board => {
       socket.broadcast.emit('singleBoard', board)
