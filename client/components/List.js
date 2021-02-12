@@ -118,16 +118,11 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
-
           <Container className={classes.container}>
-
-          <ListContainer xs={12}>
-
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
             <div>
-
               <ClickAwayListener onClickAway={handleAccordionChange}>
                 <Accordion expanded={expanded}>
                   <StyledAccordionSummary
@@ -176,7 +171,6 @@ const List = props => {
                   </div>
                 </AccordionDetails>
               </Accordion>
-
             </div>
 
             {tasks && tasks.length
