@@ -181,7 +181,7 @@ const SingleBoard = props => {
               onClick={onAccordionClick}
             />
             <AccordionDetails>
-              <AddUserToBoard currentBoard={props.singleBoard} />
+              <AddUserToBoard currentBoard={props.singleBoard} {...props} />
             </AccordionDetails>
           </Accordion>
         </ClickAwayListener>

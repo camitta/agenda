@@ -60,6 +60,9 @@ const AddUserToBoard = props => {
       await props.removeUserFromBoard(boardId, userId)
       await props.fetchTasks(boardId)
       handleClose()
+      if (userId === props.userState.id) {
+        props.history.push('/home')
+      }
     } catch (error) {
       console.log(error)
     }
