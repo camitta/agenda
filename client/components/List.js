@@ -7,7 +7,6 @@ import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
 import Typography from '@material-ui/core/Typography'
-import styled from 'styled-components'
 import AddIcon from '@material-ui/icons/Add'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
@@ -119,7 +118,7 @@ const List = props => {
           ref={provided.innerRef}
         >
           <Container className={classes.container}>
-            <Typography variant="h3" className={classes.status}>
+            <Typography variant="h6" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
             <div>
