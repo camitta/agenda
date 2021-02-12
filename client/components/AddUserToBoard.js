@@ -5,6 +5,7 @@ import React, {useState} from 'react'
 import {addUserSingleBoard, removeUserSingleBoard} from '../store/single-board'
 import {getAllTasks, removeUserfromBoardTasks} from '../store/all-tasks'
 import {connect} from 'react-redux'
+import {DeleteUserFromBoardDialog} from './index'
 
 //Material UI
 import TextField from '@material-ui/core/TextField'
@@ -18,10 +19,6 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import IconButton from '@material-ui/core/Button'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import CloseIcon from '@material-ui/icons/Close'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 
 const AddUserToBoard = props => {
   const users = props.currentBoard.users || []
@@ -29,8 +26,12 @@ const AddUserToBoard = props => {
 
   const [email, setEmail] = useState('')
   const [open, setOpen] = useState(false)
+  const [userId, setUserId] = useState(null)
+  const [userName, setUserName] = useState('')
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (currentId, currentName) => {
+    setUserId(currentId)
+    setUserName(currentName)
     setOpen(true)
   }
 
@@ -53,11 +54,12 @@ const AddUserToBoard = props => {
     }
   }
 
-  const handleDelete = async userId => {
+  const handleDelete = async () => {
     try {
-      await props.removeUserFromBoard(boardId, userId)
       await props.removeUserfromBoardTasks(boardId, userId)
+      await props.removeUserFromBoard(boardId, userId)
       await props.fetchTasks(boardId)
+      handleClose()
     } catch (error) {
       console.log(error)
     }
@@ -80,11 +82,7 @@ const AddUserToBoard = props => {
                 <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
-                    onClick={
-                      user.id === props.userState.id
-                        ? () => handleClickOpen()
-                        : () => handleDelete(user.id)
-                    }
+                    onClick={() => handleClickOpen(user.id, user.firstName)}
                   >
                     <CloseIcon />
                   </IconButton>
@@ -96,27 +94,13 @@ const AddUserToBoard = props => {
           <ListItem>No current members</ListItem>
         )}
       </List>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to remove yourself from this board? You will
-            also be removed from all tasks on this board.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <IconButton onClick={handleClose} style={{color: 'red'}}>
-            No
-          </IconButton>
-          <IconButton
-            onClick={() => handleDelete(props.userState.id)}
-            style={{color: 'green'}}
-            autoFocus
-            href="/home"
-          >
-            Yes
-          </IconButton>
-        </DialogActions>
-      </Dialog>
+      <DeleteUserFromBoardDialog
+        open={open}
+        handleClose={handleClose}
+        handleDelete={handleDelete}
+        userId={userId}
+        userName={userName}
+      />
       <form onSubmit={handleSubmit}>
         <TextField
           id="filled-disabled"
