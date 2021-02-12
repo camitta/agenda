@@ -19,9 +19,9 @@ script:
   - npm run build-client # make the bundle
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+deploy:
+  # skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  # app: YOUR-HEROKU-APP-NAME-HERE # see README
+  api_key:
+    secure: '633e87db936e6dd9f08747b8303403510f932045' # see README
