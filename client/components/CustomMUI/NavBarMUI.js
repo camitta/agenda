@@ -6,7 +6,7 @@ export const navStyles = makeStyles(theme => ({
   },
   menuButton: {
     borderRadius: '1px',
-    color: 'black',
+    color: '#C10230',
     height: 40,
     padding: '1em',
     margin: '10px',
@@ -20,6 +20,7 @@ export const navStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    color: theme.palette.secondary,
     alignSelf: 'flex-end',
     fontFamily: 'pinyon script',
     fontWeight: '300',

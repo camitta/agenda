@@ -75,7 +75,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       containedSecondary: {
-        backgroundColor: '#fff',
+        backgroundColor: '#9d4edd',
         '&:hover': {
           backgroundColor: '#fff'
         }

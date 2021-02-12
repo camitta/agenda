@@ -14,6 +14,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
+import Container from '@material-ui/core/Container'
 
 // Custom MUI
 import {listStyles} from './CustomMUI/listMUI'
@@ -23,14 +24,14 @@ import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
 import {addSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 
-const ListContainer = styled.div`
-  background-color: #dfe3e6;
-  border-radius: 3px;
-  align-content: center;
-  justify-content: center;
-  padding: 8px;
-  margin: 0 8px 0 0;
-`
+// const ListContainer = styled.div`
+//   background-color: #dfe3e6;
+//   border-radius: 3px;
+//   align-content: center;
+//   justify-content: center;
+//   padding: 8px;
+//   margin: 0 8px 0 0;
+// `
 
 const List = props => {
   const {tasks, boardId, status, boardType} = props
@@ -84,7 +85,7 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
-          <ListContainer>
+          <Container className={classes.container}>
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
@@ -96,20 +97,20 @@ const List = props => {
                     id="panel1a-header"
                     onClick={onAccordionClick}
                   />
-               <AccordionDetails>
-                  <div className={classes.addTaskForm}>
-                    <TaskForm
-                      state={state}
-                      handleChange={handleChange}
-                      handleDateChange={handleDateChange}
-                    />
+                  <AccordionDetails>
+                    <div className={classes.addTaskForm}>
+                      <TaskForm
+                        state={state}
+                        handleChange={handleChange}
+                        handleDateChange={handleDateChange}
+                      />
                       {props.error &&
-                      props.error.response && (
-                        <Typography variant="body1" style={{padding: '10px'}}>
-                          {typeof props.error.response.data === 'string' &&
-                            generateErrorMessage(props.error.response.data)}
-                        </Typography>
-                      )}
+                        props.error.response && (
+                          <Typography variant="body1" style={{padding: '10px'}}>
+                            {typeof props.error.response.data === 'string' &&
+                              generateErrorMessage(props.error.response.data)}
+                          </Typography>
+                        )}
                       <IconButton onClick={handleSubmit}>
                         <DoneIcon />
                       </IconButton>
@@ -132,7 +133,7 @@ const List = props => {
                   )
                 })
               : null}
-          </ListContainer>
+          </Container>
           {provided.placeholder}
         </div>
       )}

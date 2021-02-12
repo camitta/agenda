@@ -12,9 +12,14 @@ import {StyledButton} from './CustomMUI/GradientButton'
 const Navbar = function({handleClick, isLoggedIn}) {
   const classes = navStyles()
   return (
-    <AppBar position="static" style={{backgroundColor: '#ffff'}}>
-      <Toolbar className={classes.toolbar}>
-        <Typography className={classes.title} variant="h5" noWrap>
+    <AppBar position="static" color="testo" className={classes.root}>
+      <Toolbar color="primary" className={classes.toolbar}>
+        <Typography
+          className={classes.title}
+          variant="h5"
+          color="textSecondary"
+          noWrap
+        >
           <Link href={isLoggedIn ? '/home' : '/login'}>Agenda</Link>
         </Typography>
 

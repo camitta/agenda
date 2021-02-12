@@ -18,7 +18,6 @@ import GroupIcon from '@material-ui/icons/Group'
 import Typography from '@material-ui/core/Typography'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
-import Button from '@material-ui/core/Button'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import {StyledButton} from './CustomMUI/GradientButton'
 
