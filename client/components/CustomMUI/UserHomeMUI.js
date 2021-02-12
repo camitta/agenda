@@ -28,6 +28,8 @@ export const homeStyles = makeStyles(theme => ({
     padding: '5px 9px 5px 5px',
     minHeight: '110px',
     minWidth: '110px',
+    width: '20%',
+    textAlign: 'center',
     display: 'inline-flex',
     color: theme.palette.text.secondary,
     background: theme.palette.primary.light,

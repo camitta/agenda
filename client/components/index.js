@@ -2,7 +2,7 @@
 `components/index.js` exists as a 'central export' for our components.
  */
 
-export {default as Navbar} from './Navbar'
+export {default as Navbar} from './Nav-bar'
 export {default as UserHome} from './UserHome'
 export {Login, Signup} from './AuthForm'
 export {default as SingleBoard} from './SingleBoard'

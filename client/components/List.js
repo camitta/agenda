@@ -110,7 +110,7 @@ const List = props => {
     <Droppable droppableId={status}>
       {provided => (
         <div
-          style={{width: '100%'}}
+          style={{width: '100%', margin: '10px'}}
           {...provided.droppableProps}
           ref={provided.innerRef}
         >

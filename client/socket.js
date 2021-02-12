@@ -13,9 +13,9 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
-socket.on('all-tasks', tasks => {
-  store.dispatch(fetchAllTasks(tasks))
-})
+// socket.on('all-tasks', tasks => {
+//   store.dispatch(fetchAllTasks(tasks))
+// })
 
 socket.on('singleBoard', board => {
   store.dispatch(fetchSingleBoard(board))
