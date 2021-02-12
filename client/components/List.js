@@ -136,13 +136,6 @@ const List = props => {
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
-                    {props.error &&
-                      props.error.response && (
-                        <Typography variant="body1" style={{padding: '10px'}}>
-                          {typeof props.error.response.data === 'string' &&
-                            generateErrorMessage(props.error.response.data)}
-                        </Typography>
-                      )}
                     <IconButton onClick={handleSubmit}>
                       <DoneIcon />
                     </IconButton>
