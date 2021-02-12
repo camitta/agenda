@@ -78,7 +78,7 @@ const List = props => {
       setExpanded(false)
     }
   }
-  console.log('EXPANDED STATE', expanded)
+
   const classes = listStyles()
   return (
     <Droppable droppableId={status}>
