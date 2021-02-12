@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
-import {TaskForm, TaskFormAccordion} from './index'
+import {TaskForm} from './index'
 import {generateErrorMessage, generateListTypeName} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
@@ -70,12 +70,15 @@ const List = props => {
   const onAccordionClick = () => {
     setExpanded(prev => !prev)
   }
+  const onAccordionSummaryClick = () => {
+    setExpanded(true)
+  }
   const handleAccordionChange = event => {
     if (expanded === true) {
       setExpanded(false)
     }
   }
-
+  console.log('EXPANDED STATE', expanded)
   const classes = listStyles()
   return (
     <Droppable droppableId={status}>
@@ -90,35 +93,32 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <TaskFormAccordion />
-              {/* <ClickAwayListener onClickAway={handleAccordionChange}>
-                <Accordion expanded={expanded}>
-                  <StyledAccordionSummary
-                    expandIcon={<AddIcon fontSize="small" />}
-                    id="panel1a-header"
-                    onClick={onAccordionClick}
-                  />
-                  <AccordionDetails>
-                    <div className={classes.addTaskForm}>
-                      <TaskForm
-                        state={state}
-                        handleChange={handleChange}
-                        handleDateChange={handleDateChange}
-                      />
-                      {props.error &&
-                        props.error.response && (
-                          <Typography variant="body1" style={{padding: '10px'}}>
-                            {typeof props.error.response.data === 'string' &&
-                              generateErrorMessage(props.error.response.data)}
-                          </Typography>
-                        )}
-                      <IconButton onClick={handleSubmit}>
-                        <DoneIcon />
-                      </IconButton>
-                    </div>
-                  </AccordionDetails>
-                </Accordion>
-              </ClickAwayListener> */}
+              <Accordion expanded={expanded}>
+                <StyledAccordionSummary
+                  expandIcon={<AddIcon fontSize="small" />}
+                  id="panel1a-header"
+                  onClick={onAccordionClick}
+                />
+                <AccordionDetails onClick={onAccordionSummaryClick}>
+                  <div className={classes.addTaskForm}>
+                    <TaskForm
+                      state={state}
+                      handleChange={handleChange}
+                      handleDateChange={handleDateChange}
+                    />
+                    {props.error &&
+                      props.error.response && (
+                        <Typography variant="body1" style={{padding: '10px'}}>
+                          {typeof props.error.response.data === 'string' &&
+                            generateErrorMessage(props.error.response.data)}
+                        </Typography>
+                      )}
+                    <IconButton onClick={handleSubmit}>
+                      <DoneIcon />
+                    </IconButton>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
             </div>
 
             {tasks && tasks.length
