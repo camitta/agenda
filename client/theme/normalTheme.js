@@ -69,7 +69,7 @@ const theme = createMuiTheme({
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       textTransform: 'lowercase',
       textDecoration: 'none',
-      color: '#000000'
+      color: '#9d4edd'
     }
   },
   overrides: {
@@ -126,10 +126,11 @@ const theme = createMuiTheme({
   justify: 'center',
   palette: {
     primary: {
-      main: '#000000'
+      main: '#000000',
+      light: '#ffffff'
     },
     secondary: {
-      main: '#FEF6D3'
+      main: '#e5e5e5'
     },
     error: {
       main: '#C10230',

@@ -70,7 +70,7 @@ const Checklist = props => {
         To-Do List
       </Typography>
       <form className={classes.add} onSubmit={handleSubmit}>
-        <IconButton fontSize="small" type="submit">
+        <IconButton fontSize="small" type="submit" color="secondary">
           <AddIcon />
         </IconButton>
         <TextField
@@ -107,6 +107,7 @@ const Checklist = props => {
                 type="button"
                 id={item.id}
                 fontSize="small"
+                color="secondary"
               >
                 <DeleteIcon id={item.id} fontSize="small" />
               </IconButton>

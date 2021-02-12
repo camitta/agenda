@@ -50,6 +50,7 @@ const UserHome = props => {
         <Grid item>
           <StyledButton
             variant="outlined"
+            color="secondary"
             type="button"
             className={classes.addBoard}
             onClick={handleOpen}

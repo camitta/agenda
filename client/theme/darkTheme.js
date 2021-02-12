@@ -6,18 +6,22 @@ const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: indigo[500],
-      light: '#06d6a0',
-      dark: '#06d6a0',
+      main: '#badef2',
+      light: '#badef2',
+      dark: '#e3eff7',
       contrastText: '#e9edc9'
     },
     secondary: {
-      main: '#bdb2ff',
+      main: '#badef2',
       contrastText: '#06d6a0'
     },
     text: {
       primary: '#eaf0ce',
-      secondary: '#eaf0ce'
+      secondary: '#badef2'
+    },
+    background: {
+      paper: '#292f33',
+      default: '#616a70'
     }
   },
   typography: {
@@ -92,8 +96,11 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
+      root: {
+        backgroundColor: '#badef2'
+      },
       containedSecondary: {
-        backgroundColor: '#fff',
+        backgroundColor: '#badef2',
         '&:hover': {
           backgroundColor: '#fff'
         }

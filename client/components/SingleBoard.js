@@ -175,7 +175,7 @@ const SingleBoard = props => {
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
         <ClickAwayListener onClickAway={handleAccordionChange}>
-          <Accordion expanded={expanded}>
+          <Accordion color="primary" expanded={expanded}>
             <StyledAccordionSummary
               expandIcon={<GroupIcon />}
               onClick={onAccordionClick}
