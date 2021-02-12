@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
@@ -41,9 +41,10 @@ const List = props => {
     dueDate: new Date(),
     label: '',
     errors: {
-      name: null,
-      description: null
-    }
+      name: true,
+      description: true
+    },
+    errorHandling: false
   }
 
   const [state, setState] = useState(defaultState)
@@ -59,12 +60,10 @@ const List = props => {
     let errors = state.errors
     switch (name) {
       case 'name':
-        errors.name = value.length ? null : 'Did you fill out name?'
+        errors.name = !value.length
         break
       case 'description':
-        errors.description = value.length
-          ? null
-          : 'Did you fill out description'
+        errors.description = !value.length
         break
       default:
         break
@@ -72,16 +71,10 @@ const List = props => {
     setState({...state, errors, [event.target.name]: event.target.value})
   }
 
-  useEffect(
-    () => {
-      console.log(state.errors)
-    },
-    [state]
-  )
-
-  const validateForm = (name, description) => {
+  const validateForm = errors => {
     let valid = true
-    if (!name.length || !description.length) valid = false
+    // checking if any of the errors are true.
+    valid = !Object.values(errors).filter(err => err).length
     return valid
   }
 
@@ -91,18 +84,20 @@ const List = props => {
       length = tasks.length
     }
 
-    if (validateForm(state.name, state.description)) {
+    if (validateForm(state.errors)) {
       await props.add(boardId, {...state, index: length})
       await props.getAllTasks(boardId)
       setState(defaultState)
     } else {
-      console.log(state.errors)
+      setState({
+        ...state,
+        errorHandling: true
+      })
     }
   }
 
   const classes = listStyles()
 
-  // console.log('state from List: ', state)
   return (
     <Droppable droppableId={status}>
       {provided => (
@@ -128,6 +123,7 @@ const List = props => {
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
+
                     <IconButton onClick={handleSubmit}>
                       <DoneIcon />
                     </IconButton>
@@ -157,10 +153,6 @@ const List = props => {
   )
 }
 
-const mapState = state => ({
-  error: state.singleTask.error
-})
-
 const mapDispatch = dispatch => {
   return {
     add: (boardId, task) => dispatch(addSingleTask(boardId, task)),
@@ -168,4 +160,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(List)
+export default connect(null, mapDispatch)(List)

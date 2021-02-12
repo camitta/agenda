@@ -25,11 +25,12 @@ export const TaskForm = props => {
         value={props.state.name}
         onChange={props.handleChange}
       />
-      {props.state.errors.name && (
-        <Typography variant="body1" style={{padding: '10px'}}>
-          {props.state.errors.name}
-        </Typography>
-      )}
+      {props.state.errorHandling &&
+        props.state.errors.name && (
+          <Typography variant="body1" style={{padding: '10px'}}>
+            Did you fill out name?
+          </Typography>
+        )}
       <TextField
         multiline
         style={{width: '100%'}}
@@ -39,11 +40,12 @@ export const TaskForm = props => {
         value={props.state.description}
         onChange={props.handleChange}
       />
-      {props.state.errors.description && (
-        <Typography variant="body1" style={{padding: '10px'}}>
-          {props.state.errors.description}
-        </Typography>
-      )}
+      {props.state.errorHandling &&
+        props.state.errors.description && (
+          <Typography variant="body1" style={{padding: '10px'}}>
+            Did you fill out description?
+          </Typography>
+        )}
       <div>
         <KeyboardDatePicker
           disableToolbar
