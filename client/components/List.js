@@ -123,35 +123,6 @@ const List = props => {
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <ClickAwayListener onClickAway={handleAccordionChange}>
-                <Accordion expanded={expanded}>
-                  <StyledAccordionSummary
-                    expandIcon={<AddIcon fontSize="small" />}
-                    id="panel1a-header"
-                    onClick={onAccordionClick}
-                  />
-                  <AccordionDetails>
-                    <div className={classes.addTaskForm}>
-                      <TaskForm
-                        state={state}
-                        handleChange={handleChange}
-                        handleDateChange={handleDateChange}
-                      />
-                      {props.error &&
-                        props.error.response && (
-                          <Typography variant="body1" style={{padding: '10px'}}>
-                            {typeof props.error.response.data === 'string' &&
-                              generateErrorMessage(props.error.response.data)}
-                          </Typography>
-                        )}
-                      <IconButton onClick={handleSubmit}>
-                        <DoneIcon />
-                      </IconButton>
-                    </div>
-                  </AccordionDetails>
-                </Accordion>
-              </ClickAwayListener>
-
               <Accordion expanded={expanded}>
                 <StyledAccordionSummary
                   expandIcon={<AddIcon fontSize="small" />}
@@ -165,6 +136,13 @@ const List = props => {
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
+                    {props.error &&
+                      props.error.response && (
+                        <Typography variant="body1" style={{padding: '10px'}}>
+                          {typeof props.error.response.data === 'string' &&
+                            generateErrorMessage(props.error.response.data)}
+                        </Typography>
+                      )}
                     <IconButton onClick={handleSubmit}>
                       <DoneIcon />
                     </IconButton>
