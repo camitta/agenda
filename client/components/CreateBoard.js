@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContentText from '@material-ui/core/DialogContentText'
 import TextField from '@material-ui/core/TextField'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -43,24 +43,23 @@ export const CreateBoard = props => {
 
   return (
     <Dialog open={props.open} onClose={handleClose}>
-      <DialogTitle>Create New Board</DialogTitle>
-      <DialogContent>
-        <form className={classes.paper}>
-          <TextField
-            autoFocus
-            id="filled-basic"
-            label="Name"
-            name="name"
-            variant="filled"
-            value={state.name}
-            onChange={handleChange}
-          />
-          <InputLabel>Type</InputLabel>
-          <Select value={state.type} name="type" onChange={handleChange}>
-            <MenuItem value="personal">Personal</MenuItem>
-            <MenuItem value="team">Team</MenuItem>
-          </Select>
-        </form>
+      <DialogContent className={classes.paper}>
+        <DialogContentText>Create a new board:</DialogContentText>
+        <TextField
+          autoFocus
+          id="filled-basic"
+          label="Name"
+          name="name"
+          variant="filled"
+          value={state.name}
+          onChange={handleChange}
+          style={{paddingBottom: '10px'}}
+        />
+        <InputLabel>Type</InputLabel>
+        <Select value={state.type} name="type" onChange={handleChange}>
+          <MenuItem value="personal">Personal</MenuItem>
+          <MenuItem value="team">Team</MenuItem>
+        </Select>
       </DialogContent>
       <DialogActions>
         <Button type="submit" onClick={handleSubmit}>
