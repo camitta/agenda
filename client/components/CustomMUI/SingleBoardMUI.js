@@ -28,7 +28,6 @@ export const singleBoardStyles = makeStyles(() => ({
   },
   title: {
     flex: '0 1 auto',
-    width: '150px',
     height: '100px',
     position: 'absolute',
     left: '50%',

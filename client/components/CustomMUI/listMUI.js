@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const listStyles = makeStyles(theme => ({
   status: {
-    margin: '5%'
+    fontWeight: 'bold'
   },
   addTaskForm: {
     display: 'flex',
