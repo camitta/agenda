@@ -49,6 +49,20 @@ const List = props => {
 
   const [state, setState] = useState(defaultState)
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const onAccordionSummaryClick = () => {
+    setExpanded(true)
+  }
+  const handleAccordionChange = () => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   // Date picker event returns only the date - this extra function is required.
   const handleDateChange = date => {
     setState({...state, dueDate: date})
@@ -81,6 +95,7 @@ const List = props => {
       await props.add(boardId, {...state, index: length})
       await props.getAllTasks(boardId)
       setState(defaultState)
+      handleAccordionChange()
     } else {
       setState({
         ...state,
@@ -99,24 +114,24 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
-          <ListContainer>
+          <ListContainer xs={12}>
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
             <div>
-              <Accordion>
+              <Accordion expanded={expanded}>
                 <StyledAccordionSummary
                   expandIcon={<AddIcon fontSize="small" />}
                   id="panel1a-header"
+                  onClick={onAccordionClick}
                 />
-                <AccordionDetails>
+                <AccordionDetails onClick={onAccordionSummaryClick}>
                   <div className={classes.addTaskForm}>
                     <TaskForm
                       state={state}
                       handleChange={handleChange}
                       handleDateChange={handleDateChange}
                     />
-
                     <IconButton onClick={handleSubmit}>
                       <DoneIcon />
                     </IconButton>
