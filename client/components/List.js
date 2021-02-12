@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateListTypeName} from '../functions'
+import {generateListTypeName, validateForm} from '../functions'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components
@@ -69,13 +69,6 @@ const List = props => {
         break
     }
     setState({...state, errors, [event.target.name]: event.target.value})
-  }
-
-  const validateForm = errors => {
-    let valid = true
-    // checking if any of the errors are true.
-    valid = !Object.values(errors).filter(err => err).length
-    return valid
   }
 
   const handleSubmit = async () => {

@@ -1,14 +1,7 @@
 import moment from 'moment'
 
 export const generateErrorMessage = errMessage => {
-  const types = [
-    'firstName',
-    'lastName',
-    'email',
-    'password',
-    'name',
-    'description'
-  ]
+  const types = ['firstName', 'lastName', 'email', 'password']
   for (let nameType of types) {
     if (errMessage.includes('password')) {
       return `Your password needs to have 6-20 characters!`
@@ -49,4 +42,11 @@ export const generateListTypeName = status => {
   else {
     return 'Done'
   }
+}
+
+export const validateForm = errors => {
+  let valid = true
+  // checking if any of the errors are true.
+  valid = !Object.values(errors).filter(err => err).length
+  return valid
 }
