@@ -42,10 +42,10 @@ const DeleteTask = props => {
         </DialogTitle>
         <DialogActions>
           <IconButton onClick={handleClose} style={{color: 'red'}}>
-            Changed My Mind
+            no
           </IconButton>
           <IconButton onClick={handleDelete} style={{color: 'green'}} autoFocus>
-            Yes I Do
+            yes
           </IconButton>
         </DialogActions>
       </Dialog>

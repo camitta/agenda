@@ -46,6 +46,17 @@ const List = props => {
 
   const [state, setState] = useState(defaultState)
 
+  //Manage expanded accordion state
+  const [expanded, setExpanded] = useState(false)
+  const onAccordionClick = () => {
+    setExpanded(prev => !prev)
+  }
+  const handleAccordionChange = event => {
+    if (expanded === true) {
+      setExpanded(false)
+    }
+  }
+
   // Date picker event returns only the date - this extra function is required.
   const handleDateChange = date => {
     setState({...state, dueDate: date})
@@ -63,12 +74,16 @@ const List = props => {
     await props.add(boardId, {...state, index: length})
     await props.getAllTasks(boardId)
     setState(defaultState)
+    setExpanded(false)
   }
 
   //Manage expanded accordion state
   const [expanded, setExpanded] = useState(false)
   const onAccordionClick = () => {
     setExpanded(prev => !prev)
+  }
+  const onAccordionSummaryClick = () => {
+    setExpanded(true)
   }
   const handleAccordionChange = event => {
     if (expanded === true) {
@@ -85,11 +100,16 @@ const List = props => {
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
+
           <Container className={classes.container}>
+
+          <ListContainer xs={12}>
+
             <Typography variant="h3" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
             <div>
+
               <ClickAwayListener onClickAway={handleAccordionChange}>
                 <Accordion expanded={expanded}>
                   <StyledAccordionSummary
@@ -118,6 +138,34 @@ const List = props => {
                   </AccordionDetails>
                 </Accordion>
               </ClickAwayListener>
+
+              <Accordion expanded={expanded}>
+                <StyledAccordionSummary
+                  expandIcon={<AddIcon fontSize="small" />}
+                  id="panel1a-header"
+                  onClick={onAccordionClick}
+                />
+                <AccordionDetails onClick={onAccordionSummaryClick}>
+                  <div className={classes.addTaskForm}>
+                    <TaskForm
+                      state={state}
+                      handleChange={handleChange}
+                      handleDateChange={handleDateChange}
+                    />
+                    {props.error &&
+                      props.error.response && (
+                        <Typography variant="body1" style={{padding: '10px'}}>
+                          {typeof props.error.response.data === 'string' &&
+                            generateErrorMessage(props.error.response.data)}
+                        </Typography>
+                      )}
+                    <IconButton onClick={handleSubmit}>
+                      <DoneIcon />
+                    </IconButton>
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+
             </div>
 
             {tasks && tasks.length
