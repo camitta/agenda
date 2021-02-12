@@ -21,5 +21,9 @@ export const taskStyles = makeStyles(() => ({
     paddingBottom: '30px',
     whiteSpace: 'pre-wrap',
     textAlign: 'left'
+  },
+  summary: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 }))

@@ -109,7 +109,7 @@ const Task = props => {
                           id="panel1a-header"
                           onClick={onAccordionClick}
                         >
-                          <div>
+                          <div className={classes.summary}>
                             {task.label &&
                               task.label.length && (
                                 <Chips
@@ -126,7 +126,11 @@ const Task = props => {
                             </Typography>
                             <Typography
                               variant="caption"
-                              style={{fontWeight: 'bold'}}
+                              style={{
+                                fontWeight: 'bold',
+                                textAlign: 'left',
+                                width: 'fit-content'
+                              }}
                               id={'taskName' + task.id}
                             >
                               Due Date: {moment(task.dueDate).format('LL')}
