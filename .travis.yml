@@ -19,9 +19,11 @@ script:
   - npm run build-client # make the bundle
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-deploy:
-  # skip_cleanup: true # prevents travis from deleting the build
+deploy: # see README for details on these keys
+  skip_cleanup: true
   provider: heroku
-  # app: YOUR-HEROKU-APP-NAME-HERE # see README
+  app: your-agenda
   api_key:
-    secure: '633e87db936e6dd9f08747b8303403510f932045' # see README
+    secure: Igk0fUU+2Gr72a7FuT+bq8+Z3GbrzePbMwOaFe+vhX6qDfMz9JMwNDs03m/FiQPxhrxLVM3B7z2r8VBTggVNXceuJx/i7XnxjepQGwbT61EK8Xc0X6GItcPfSCqnsKdR+mW1CdP8+MMauI+NW9IPEnyWu2qOAZMSKjcGA+XVUINze8ydLSYYtvdgqrLFJuRr4/h/2xakuaq5Vo/ZrTvqnUgN4Bg+pWSTtagNB6S1LYQoM0B7FnyBDTl98fDU9ntX1ytcjcZ6U6RTf6taeHU/9SkYhW8xWdnkx0vY+3N49glgsA0hpS8gcHtttMbR351cQB4aEz4iYYSTZoBgejQc3SlNCEWaRfODkDbTxJRRLsa3LjXmnOlqzLKsb7FMz4oJljN+MfUtOHdyojP/dv8Nwk9WcPbsxMao8clcfxWZqZ9Jmf6+/AXJYKRJMgPQe9aLplMvaLSY3fQdICmJ6Xg/cMQvMkPCCWj4iZ7hLPY6MM29OB+mWVEuoA1pB67uScrf3e8QIh3JJNK4oYHnLUykQF00rVSqEHf9+TgLKvRnKJvbjSABHzGkqBokmzaI7AjfnIWjwgfkdlJ4CkLU4hMiIvaNWgQz7V1hWfVXIkG3zgvVRhk2SWweRDZRmmYntTZoJqY8MhOxwAZNXLqvb0L2ksxDV2zGhK9tbdevLni936A=
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
