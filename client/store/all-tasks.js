@@ -21,7 +21,7 @@ export const getAllTasks = boardId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/tasks/allTasks/${boardId}`)
     dispatch(fetchAllTasks(data))
-    // socket.emit('all-tasks', data)
+    socket.emit('all-tasks', data)
   } catch (err) {
     console.error(err)
   }
