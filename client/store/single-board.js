@@ -30,7 +30,7 @@ export const getSingleBoard = boardId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/boards/${boardId}`)
     dispatch(fetchSingleBoard(data))
-    socket.emit('singleBoard', data)
+    // socket.emit('singleBoard', data)
   } catch (err) {
     dispatch(fetchSingleBoard({error: err}))
   }
