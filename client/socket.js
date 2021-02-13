@@ -6,6 +6,8 @@ import {
   removedUserSingleBoard
 } from './store/single-board'
 
+//FRONTEND
+
 const socket = io(window.location.origin)
 
 socket.on('connect', () => {
