@@ -45,8 +45,18 @@ const AddUserToBoard = props => {
 
   const handleSubmit = async event => {
     try {
+      if (!email.length) {
+        document.getElementById('addUserError').innerText =
+          'Please provide a valid email.'
+        return
+      }
       event.preventDefault()
-      await props.addUserToBoard(boardId, email)
+      const data = await props.addUserToBoard(boardId, email)
+      if (data) {
+        document.getElementById('addUserError').innerText =
+          'User not registered with Agenda.'
+        return
+      }
       await props.fetchTasks(boardId)
       setEmail('')
     } catch (error) {
@@ -117,13 +127,7 @@ const AddUserToBoard = props => {
         <IconButton onClick={handleSubmit}>
           <PersonAddIcon style={{fontSize: 40}} color="action" />
         </IconButton>
-        <>
-          {props.boardState.error ? (
-            <div>User not registered with Agenda</div>
-          ) : (
-            <></>
-          )}
-        </>
+        <div id="addUserError" />
       </form>
     </div>
   )

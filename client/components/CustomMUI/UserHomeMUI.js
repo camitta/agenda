@@ -59,7 +59,7 @@ export const homeStyles = makeStyles(theme => ({
     float: 'right',
     padding: '5px 5px 5px 5px',
     margin: '10px 10px 10px 10px',
-    color: 'black'
+    color: theme.palette.primary.main
   },
   boards: {
     display: 'flex',
@@ -68,7 +68,7 @@ export const homeStyles = makeStyles(theme => ({
     padding: '5px'
   },
   textHover: {
-    color: '#000000',
+    color: theme.palette.primary.main,
     '&:hover': {
       color: '#FFF'
     }
