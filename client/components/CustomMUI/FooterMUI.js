@@ -10,7 +10,7 @@ export const StyledBox = withStyles(theme => ({
     width: '100%',
     fontFamily: 'FreightTextProBook, sans-serif',
     fontWeight: 'normal',
-    color: '#000000',
+    color: theme.palette.primary.main,
     letterSpacing: '1.5px',
     fontSize: 18
   }

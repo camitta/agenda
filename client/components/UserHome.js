@@ -50,7 +50,6 @@ const UserHome = props => {
         <Grid item>
           <StyledButton
             variant="outlined"
-            color="secondary"
             type="button"
             className={classes.addBoard}
             onClick={handleOpen}
@@ -115,6 +114,7 @@ const UserHome = props => {
                             variant="outlined"
                             className={classes.boardItem}
                             href={`/boards/${item.id}`}
+                            style={{textTransform: 'none'}}
                           >
                             {item.name}
                           </Button>
