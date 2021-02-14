@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {login, signup} from '../store'
 import Button from '@material-ui/core/Button'
 import {generateErrorMessage} from '../functions'
+import google from '../../public/google.png'
 
 // Material UI
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -88,9 +89,11 @@ const AuthForm = props => {
             </div>
             {error && error.response && <div> {error.response.data} </div>}
           </form>
-          <a style={{textDecoration: 'none'}} href="/auth/google">
-            Log In with Google
-          </a>
+          <div className="googleButton">
+            <Button href="/auth/google" style={{padding: '0'}}>
+              <img src={google} alt="google" style={{maxHeight: '40px'}} />
+            </Button>
+          </div>
         </div>
       </Container>
     )
