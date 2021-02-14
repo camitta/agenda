@@ -1,29 +1,25 @@
 language: node_js
 node_js:
-  - 12 # uses version 12
+  - 12
 services:
-  - postgresql # starts up postgres
+  - postgresql
 addons:
-  postgresql: '10' # recent postgres version on Travis
-dist: xenial # uses xenial environment
+  postgresql: '10'
+dist: xenial
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
-# before_script:
-# - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - npm ci
+before_script:
 script:
-  # - npm test # test the code
-  - npm run build-client # make the bundle
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-deploy: # see README for details on these keys
+  - npm run build-client
+deploy:
   skip_cleanup: true
   provider: heroku
   app: your-agenda
   api_key:
-    secure: Igk0fUU+2Gr72a7FuT+bq8+Z3GbrzePbMwOaFe+vhX6qDfMz9JMwNDs03m/FiQPxhrxLVM3B7z2r8VBTggVNXceuJx/i7XnxjepQGwbT61EK8Xc0X6GItcPfSCqnsKdR+mW1CdP8+MMauI+NW9IPEnyWu2qOAZMSKjcGA+XVUINze8ydLSYYtvdgqrLFJuRr4/h/2xakuaq5Vo/ZrTvqnUgN4Bg+pWSTtagNB6S1LYQoM0B7FnyBDTl98fDU9ntX1ytcjcZ6U6RTf6taeHU/9SkYhW8xWdnkx0vY+3N49glgsA0hpS8gcHtttMbR351cQB4aEz4iYYSTZoBgejQc3SlNCEWaRfODkDbTxJRRLsa3LjXmnOlqzLKsb7FMz4oJljN+MfUtOHdyojP/dv8Nwk9WcPbsxMao8clcfxWZqZ9Jmf6+/AXJYKRJMgPQe9aLplMvaLSY3fQdICmJ6Xg/cMQvMkPCCWj4iZ7hLPY6MM29OB+mWVEuoA1pB67uScrf3e8QIh3JJNK4oYHnLUykQF00rVSqEHf9+TgLKvRnKJvbjSABHzGkqBokmzaI7AjfnIWjwgfkdlJ4CkLU4hMiIvaNWgQz7V1hWfVXIkG3zgvVRhk2SWweRDZRmmYntTZoJqY8MhOxwAZNXLqvb0L2ksxDV2zGhK9tbdevLni936A=
-before_deploy: # omit node_modules, since we set skip_cleanup below
+    secure: Y0dBPieAOWOOFni+3SDNu2GwbuJlEPeiTYu9/b0aMJlCruraWPZBbSNh1uoBsy17tdLVcDSpjEW0nTXxSvdsLvpsta+ZQzSsQj46x0JIskcQOoGnO3rLB+PPYOF7wtjnbmfmOitmzQrE0IZRh+IllQpuoVS3ZxfrtfkMsTFsm0zUNh4yDMFytcJvrh1k1Acnpwq4uVrfP5WvljhMklbDLpdhEw58Ufuzg81tAon902E9fTddqFabWtEMC4lGFaYDJmFaZK1eliT4sFyJRYhSqQCkNFBzayM7p48lv3aDgi74zedj04uZNV7d/CPDUGWQV5AXgI2DJFR+q1HheqVJQZsFGmZphvHZz7PNhbZF8gNtfPfFI7D/ignO7iP3g54Yvin7Bg2sK1cYukCJAnen0h6vt+ivYOD9pREa1dED7N9n/Xx9bC/MdNe9VdqdVqOr2kUJBx7JZukr9TVuh5wXAEP7G2JpH9UexoBUoJItI+bkj/LhT1e6qDARPjQfbYx6yQeE4BUvSmsRSP1gWH0/utBjfmv1jhesg+IGS97YuNb1EO8PHFK/eWtUeDEEEMHmWyuNg8YgQ8+uvAYhLDbWv9JpRQeeKX6g42yaiy0iUzt7iHXPamq0ljNvX4FivNOgKmsSbJTwWXYPkVoH2/KL5HiBK3aee14rKrBuaxD83PA=
+before_deploy:
   - rm -rf node_modules
