@@ -188,7 +188,7 @@ const SingleBoard = props => {
       ) : null}
       <div className={classes.filterContainer}>
         <div />
-        <Title variant="h3" color="textSecondary" className={classes.title}>
+        <Title variant="h2" color="textSecondary" className={classes.title}>
           {props.singleBoard.name}
         </Title>
         <FilterTasksByLabel boardId={boardId} />

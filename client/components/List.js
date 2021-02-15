@@ -115,7 +115,7 @@ const List = props => {
           ref={provided.innerRef}
         >
           <Container className={classes.container}>
-            <Typography variant="h6" className={classes.status}>
+            <Typography variant="h5" className={classes.status}>
               {generateListTypeName(status)}
             </Typography>
             <div>

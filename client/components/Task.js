@@ -119,8 +119,11 @@ const Task = props => {
                                 />
                               )}
                             <Typography
-                              variant="h6"
-                              style={{textAlign: 'left'}}
+                              variant="h4"
+                              style={{
+                                textAlign: 'left',
+                                padding: '5px 0px 5px 0px'
+                              }}
                             >
                               {task.name}
                             </Typography>
