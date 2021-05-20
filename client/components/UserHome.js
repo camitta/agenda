@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+
 // Material UI
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -50,15 +51,11 @@ const UserHome = props => {
         <Grid item>
           <StyledButton
             variant="outlined"
-            type="button"
-            className={classes.addBoard}
             onClick={handleOpen}
             fontSize="small"
           >
-            <AddIcon fontSize="small" />
-            <Typography variant="button" className={classes.textHover}>
-              New Board
-            </Typography>
+            <AddIcon fontSize="small" style={{marginRight: '5px'}} />
+            New Board
           </StyledButton>
           <CreateBoard
             getBoards={props.getBoards}

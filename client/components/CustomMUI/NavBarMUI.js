@@ -5,14 +5,6 @@ export const navStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.secondary.main
   },
-  menuButton: {
-    borderRadius: '1px',
-    color: theme.palette.primary,
-    height: 40,
-    padding: '1em',
-    margin: '10px',
-    boxShadow: '0px 3px #000000'
-  },
   toolbar: {
     minHeight: 128,
     alignItems: 'flex-start',

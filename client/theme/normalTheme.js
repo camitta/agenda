@@ -68,18 +68,11 @@ const theme = createMuiTheme({
     button: {
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       textTransform: 'lowercase',
-      textDecoration: 'none',
-      color: '#9d4edd'
+      textDecoration: 'none'
     }
   },
   overrides: {
     MuiButton: {
-      containedSecondary: {
-        backgroundColor: '#9d4edd',
-        '&:hover': {
-          backgroundColor: '#fff'
-        }
-      },
       outlined: {
         borderColor: 'black'
       }

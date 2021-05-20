@@ -21,11 +21,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
 
         {isLoggedIn ? (
           <div>
-            <StyledButton
-              variant="outlined"
-              className={classes.menuButton}
-              href="/home"
-            >
+            <StyledButton variant="outlined" href="/home">
               Home
             </StyledButton>
             <StyledButton

@@ -54,7 +54,6 @@ export const homeStyles = makeStyles(theme => ({
   },
   addBoard: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
     float: 'right',
     padding: '5px 5px 5px 5px',
