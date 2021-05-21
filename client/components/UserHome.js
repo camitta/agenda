@@ -48,22 +48,20 @@ const UserHome = props => {
   return (
     <Container style={{display: 'flex'}} xs={12} spacing={3}>
       <Grid container className={classes.container} spacing={3}>
-        <Grid item>
-          <StyledButton
-            variant="outlined"
-            onClick={handleOpen}
-            fontSize="small"
-          >
-            <AddIcon fontSize="small" style={{marginRight: '5px'}} />
-            New Board
-          </StyledButton>
+        <StyledButton
+          item="true"
+          style={{display: 'flex'}}
+          onClick={handleOpen}
+        >
+          <AddIcon fontSize="small" style={{marginRight: '5px'}} />
+          <span>New Board</span>
+
           <CreateBoard
             getBoards={props.getBoards}
             open={open}
             setOpen={setOpen}
           />
-        </Grid>
-
+        </StyledButton>
         <Grid
           item
           xs={12}

@@ -15,33 +15,24 @@ const Navbar = ({handleClick, isLoggedIn}) => {
   return (
     <AppBar position="static" color="default" className={classes.root}>
       <Toolbar color="secondaryMain" className={classes.toolbar}>
-        <Typography className={classes.title} variant="h5" noWrap>
+        <Typography
+          className={classes.title}
+          variant="h5"
+          style={{justifyContent: 'flex-start'}}
+        >
           <Link href={isLoggedIn ? '/home' : '/login'}>Agenda</Link>
         </Typography>
 
         {isLoggedIn ? (
-          <div>
-            <StyledButton variant="outlined" href="/home">
-              Home
-            </StyledButton>
-            <StyledButton
-              variant="outlined"
-              className={classes.menuButton}
-              href="#"
-              onClick={handleClick}
-            >
+          <div className={classes.buttonContainer}>
+            <StyledButton href="/home">Home</StyledButton>
+            <StyledButton href="#" onClick={handleClick}>
               Log Out
             </StyledButton>
           </div>
         ) : (
           <div>
-            <StyledButton
-              variant="outlined"
-              className={classes.menuButton}
-              href="/login"
-            >
-              Log In
-            </StyledButton>
+            <StyledButton href="/login">Log In</StyledButton>
             <StyledButton variant="outlined" href="/signup">
               Sign Up
             </StyledButton>

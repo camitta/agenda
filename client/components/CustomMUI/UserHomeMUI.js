@@ -37,7 +37,7 @@ export const homeStyles = makeStyles(theme => ({
       background: 'linear-gradient(45deg, #9954c8 0%, #fcb045 100%)',
       color: '#FFF'
     },
-    boxShadow: '0px 3px #000000',
+    boxShadow: `0px 3px ${theme.palette.primary.main}`,
     borderRadius: 1,
     fontWeight: 500
   },
