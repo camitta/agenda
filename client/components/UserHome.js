@@ -46,8 +46,17 @@ const UserHome = props => {
     props.boards.filter(item => item.type === 'personal') || []
 
   return (
-    <Container style={{display: 'flex'}} xs={12} spacing={3}>
-      <Grid container className={classes.container} spacing={3}>
+    <Container
+      style={{display: 'flex', paddingTop: '128px'}}
+      xs={12}
+      spacing={3}
+    >
+      <Grid
+        container
+        className={classes.container}
+        spacing={3}
+        style={{margin: '1em 1em 0 0'}}
+      >
         <StyledButton
           item="true"
           style={{display: 'flex'}}
@@ -69,7 +78,8 @@ const UserHome = props => {
           style={{
             padding: '10px',
             marginLeft: '2rem',
-            marginRight: '2rem'
+            marginRight: '2rem',
+            marginTop: '5em'
           }}
         >
           <Grid

@@ -15,14 +15,13 @@ import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(8),
+    paddingTop: '128px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
   form: {
-    width: '100%',
-    marginTop: theme.spacing(1)
+    width: '100%'
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -42,7 +41,7 @@ const AuthForm = props => {
       return (
         <Container key={nameType} component="main" maxWidth="xs">
           <CssBaseline />
-          <div key={nameType} className={classes.paper}>
+          <div key={nameType}>
             <TextField
               type={type}
               variant="outlined"
@@ -62,49 +61,9 @@ const AuthForm = props => {
 
   if (name === 'login') {
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Log in
-          </Typography>
-          <form
-            onSubmit={handleSubmit}
-            name={name}
-            className={classes.form}
-            noValidate
-          >
-            {inputColumn(['Email', 'Password'])}
-            <div>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                style={{marginBottom: '2rem', marginTop: '2rem'}}
-              >
-                {displayName}
-              </Button>
-            </div>
-            {error && error.response && <div> {error.response.data} </div>}
-          </form>
-          <div className="googleButton">
-            <Button href="/auth/google" style={{padding: '0'}}>
-              <img src={google} alt="google" style={{maxHeight: '40px'}} />
-            </Button>
-          </div>
-        </div>
-      </Container>
-    )
-  }
-
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Sign Up
+      <Container component="main" maxWidth="xs" className={classes.paper}>
+        <Typography component="h1" variant="h5" style={{marginTop: '1em'}}>
+          Log in
         </Typography>
         <form
           onSubmit={handleSubmit}
@@ -112,7 +71,7 @@ const AuthForm = props => {
           className={classes.form}
           noValidate
         >
-          {inputColumn(['First Name', 'Last Name', 'Email', 'Password'])}
+          {inputColumn(['Email', 'Password'])}
           <div>
             <Button
               type="submit"
@@ -120,17 +79,51 @@ const AuthForm = props => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              style={{marginBottom: '4rem', marginTop: '2rem'}}
+              style={{marginBottom: '2rem', marginTop: '2rem'}}
             >
               {displayName}
             </Button>
           </div>
-          {error &&
-            error.response && (
-              <div> {generateErrorMessage(error.response.data)} </div>
-            )}
+          {error && error.response && <div> {error.response.data} </div>}
         </form>
-      </div>
+        <div className="googleButton">
+          <Button href="/auth/google" style={{padding: '0'}}>
+            <img src={google} alt="google" style={{maxHeight: '40px'}} />
+          </Button>
+        </div>
+      </Container>
+    )
+  }
+
+  return (
+    <Container component="main" maxWidth="xs" className={classes.paper}>
+      <Typography component="h1" variant="h5" style={{marginTop: '1em'}}>
+        Sign Up
+      </Typography>
+      <form
+        onSubmit={handleSubmit}
+        name={name}
+        className={classes.form}
+        noValidate
+      >
+        {inputColumn(['First Name', 'Last Name', 'Email', 'Password'])}
+        <div>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            style={{marginBottom: '4rem', marginTop: '2rem'}}
+          >
+            {displayName}
+          </Button>
+        </div>
+        {error &&
+          error.response && (
+            <div> {generateErrorMessage(error.response.data)} </div>
+          )}
+      </form>
     </Container>
   )
 }

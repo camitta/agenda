@@ -20,8 +20,10 @@ export const navStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
     color: theme.palette.secondary.main,
+    fontFamily: "'Source Serif Pro', serif",
     display: 'flex',
-    fontFamily: 'pinyon script',
+    transform: 'scaleX(1.2)',
+    transformOrigin: '0 0',
     fontWeight: '300',
     fontSize: '3em',
     position: 'relative',

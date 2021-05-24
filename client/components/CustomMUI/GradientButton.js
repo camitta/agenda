@@ -3,6 +3,7 @@ import {withStyles} from '@material-ui/core/styles'
 export const StyledButton = withStyles(theme => ({
   root: {
     borderRadius: '1px',
+    height: '3em',
     position: 'relative',
     lineHeight: 'normal',
     display: 'inline-block',

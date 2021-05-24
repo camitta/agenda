@@ -45,6 +45,7 @@ const theme = createMuiTheme({
       fontFamily: `${fonts.header}, ${backupFonts.sans}`,
       fontSize: '1.25rem',
       fontWeight: 400,
+      fonstStretch: 'expanded',
       lineHeight: '1.875rem'
     },
     h6: {

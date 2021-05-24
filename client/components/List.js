@@ -23,15 +23,6 @@ import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
 import {addSingleTask} from '../store/tasks'
 import {getAllTasks} from '../store/all-tasks'
 
-// const ListContainer = styled.div`
-//   background-color: #dfe3e6;
-//   border-radius: 3px;
-//   align-content: center;
-//   justify-content: center;
-//   padding: 8px;
-//   margin: 0 8px 0 0;
-// `
-
 const List = props => {
   const {tasks, boardId, status, boardType} = props
 

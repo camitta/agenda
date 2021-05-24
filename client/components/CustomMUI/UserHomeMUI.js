@@ -16,13 +16,14 @@ export const homeStyles = makeStyles(theme => ({
     }
   },
   root: {
-    padding: theme,
     display: 'inline-flex',
     flexDirection: 'column',
+    marginTop: '128px',
     paddingBottom: '50px'
   },
   container: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    height: '100vh'
   },
   boardItem: {
     padding: '5px 9px 5px 5px',
