@@ -8,7 +8,7 @@
 
 ## Demo
 
-**_Check us out at your-agenda.herokuapp.com_**
+**_Visit my-agenda.herokuapp.com_**
 
 ![Animated GIF-downsized_large (3)](https://user-images.githubusercontent.com/68130489/108550046-fd5b4500-72bb-11eb-85b6-40b4e8ed54d9.gif)
 
