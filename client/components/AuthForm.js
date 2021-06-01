@@ -8,6 +8,7 @@ import google from '../../public/google.png'
 
 // Material UI
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Link from '@material-ui/core/Link'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
@@ -75,7 +76,6 @@ const AuthForm = props => {
           <div>
             <Button
               type="submit"
-              fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
@@ -83,6 +83,7 @@ const AuthForm = props => {
             >
               {displayName}
             </Button>
+            <Link href="/auth/google">log in with google</Link>
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
@@ -110,7 +111,6 @@ const AuthForm = props => {
         <div>
           <Button
             type="submit"
-            fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -118,6 +118,7 @@ const AuthForm = props => {
           >
             {displayName}
           </Button>
+          <Link href="/auth/google">log in with google</Link>
         </div>
         {error &&
           error.response && (
