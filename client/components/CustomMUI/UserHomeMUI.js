@@ -19,8 +19,8 @@ export const homeStyles = makeStyles(theme => ({
   container: {
     display: 'grid',
     padding: '3em 5em 0 5em',
-    gridTemplateColumns: '40% 55%',
-    columnGap: '5%'
+    gridTemplateColumns: '32% 62%',
+    columnGap: '6%'
   },
   leftColumn: {},
   rightColumn: {

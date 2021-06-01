@@ -50,6 +50,19 @@ const UserHome = props => {
         <Checklist />
       </Grid>
       <Grid item container className={classes.rightColumn}>
+        <StyledButton
+          item="true"
+          style={{position: 'absolute', display: 'flex', right: '3em'}}
+          onClick={handleOpen}
+        >
+          <AddIcon fontSize="small" style={{marginRight: '5px'}} />
+          <span>New Board</span>
+          <CreateBoard
+            getBoards={props.getBoards}
+            open={open}
+            setOpen={setOpen}
+          />
+        </StyledButton>
         <Typography className={classes.boardTitles} variant="h3">
           Personal Boards
         </Typography>

@@ -2,11 +2,14 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const singleBoardStyles = makeStyles(() => ({
   singleBoardContainer: {
-    marginBottom: '15%'
+    display: 'block',
+    paddingTop: '128',
+    marginTop: '8em'
   },
   deleteContainer: {
-    textAlign: 'right',
-    margin: 'auto 5%'
+    position: 'absolute',
+    margin: 'auto 2em 2em 2em',
+    right: '1em'
   },
   filterContainer: {
     display: 'flex',

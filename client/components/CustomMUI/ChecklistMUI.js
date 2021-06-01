@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 export const ChecklistClasses = makeStyles(() => ({
   checklist: {
     display: 'inline-flex',
+    width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'column',
     padding: '.5rem',
