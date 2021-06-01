@@ -73,24 +73,21 @@ const AuthForm = props => {
           noValidate
         >
           {inputColumn(['Email', 'Password'])}
-          <div>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              style={{marginBottom: '2rem', marginTop: '2rem'}}
-            >
-              {displayName}
-            </Button>
-            <Link href="/auth/google">log in with google</Link>
-          </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-        <div className="googleButton">
-          <Button href="/auth/google" style={{padding: '0'}}>
-            <img src={google} alt="google" style={{maxHeight: '40px'}} />
+        <div>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            style={{marginBottom: '2rem', marginTop: '2rem'}}
+          >
+            {displayName}
           </Button>
+        </div>
+        <div className="googleButton">
+          <Link href="/auth/google">log in with google</Link>
         </div>
       </Container>
     )
@@ -108,23 +105,25 @@ const AuthForm = props => {
         noValidate
       >
         {inputColumn(['First Name', 'Last Name', 'Email', 'Password'])}
-        <div>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            style={{marginBottom: '4rem', marginTop: '2rem'}}
-          >
-            {displayName}
-          </Button>
-          <Link href="/auth/google">log in with google</Link>
-        </div>
         {error &&
           error.response && (
             <div> {generateErrorMessage(error.response.data)} </div>
           )}
       </form>
+      <div>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          style={{marginBottom: '2rem', marginTop: '2rem'}}
+        >
+          {displayName}
+        </Button>
+      </div>
+      <div className="googleButton" style={{marginBottom: '2rem'}}>
+        <Link href="/auth/google">log in with google</Link>
+      </div>
     </Container>
   )
 }
