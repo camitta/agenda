@@ -12,26 +12,36 @@ export const homeStyles = makeStyles(theme => ({
       },
       [theme.breakpoints.up('lg')]: {
         fontSize: 20
-      }
+      },
+      paddingTop: '128px'
     }
   },
-  root: {
-    display: 'inline-flex',
-    flexDirection: 'column',
-    marginTop: '128px',
-    paddingBottom: '50px'
-  },
   container: {
-    justifyContent: 'flex-end',
-    height: '100vh'
+    display: 'grid',
+    padding: '3em 5em 0 5em',
+    gridTemplateColumns: '40% 55%',
+    columnGap: '5%'
+  },
+  leftColumn: {},
+  rightColumn: {
+    display: 'block',
+    width: '100%'
+  },
+  content: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   boardItem: {
-    padding: '5px 9px 5px 5px',
-    minHeight: '110px',
-    minWidth: '110px',
-    width: '20%',
+    position: 'relative',
+    boxSizing: 'border-box',
+    padding: '3em 3em 3em 3em',
     textAlign: 'center',
-    display: 'inline-flex',
     color: theme.palette.text.secondary,
     background: theme.palette.primary.light,
     '&:hover': {
@@ -42,12 +52,26 @@ export const homeStyles = makeStyles(theme => ({
     borderRadius: 1,
     fontWeight: 500
   },
-  gridItem: {
-    margin: '10px',
-    direction: 'row'
-  },
   boardTitles: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    margin: '.8em 0 .8em 0'
+  },
+  boardsContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(30%, 1fr))',
+    gridGap: '10px',
+    gridTemplateRows: 'repeat(auto-fill, minmax(30%, 1fr))'
+    // gridAutoRows: '1fr',
+    // "&:before": {
+    //   content: '',
+    //   width: '0',
+    //   display: 'block',
+    //   paddingTop: '100%'
+    // },
+    // "&:first-child": {
+    //   gridRow: '1 / 1',
+    //   gridColumn: '1 / 1'
+    // }
   },
   title: {
     marginTop: '15px',

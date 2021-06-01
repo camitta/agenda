@@ -7,8 +7,7 @@ export const navStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     position: 'fixed',
     top: '0',
-    display: 'flex',
-    alignItems: 'space-between'
+    display: 'flex'
   },
   toolbar: {
     minHeight: 128,

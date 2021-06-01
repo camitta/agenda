@@ -47,7 +47,7 @@ const Checklist = props => {
 
   async function handleCheck(event) {
     let completed
-    if (event.target.value == 'true') {
+    if (event.target.value === 'true') {
       completed = false
     } else {
       completed = true

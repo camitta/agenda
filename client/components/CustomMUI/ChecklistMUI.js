@@ -5,11 +5,7 @@ export const ChecklistClasses = makeStyles(() => ({
     display: 'inline-flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    marginLeft: '3rem',
-    marginRight: '2rem',
     padding: '.5rem',
-    width: '25vmax',
-    maxWidth: '100%',
     boxShadow: '2px 2px 4px 2px #9c9c9c'
   },
   formItem: {

@@ -27,17 +27,19 @@ const Footer = props => {
         spacing={0}
         style={{borderTop: '1px solid black', maxWidth: '100%'}}
       >
-        <Grid container align="left" style={{maxWidth: '100%'}}>
+        <Grid
+          container
+          align="left"
+          style={{maxWidth: '100%'}}
+          className="quote"
+        >
           <Grid item xs={10}>
             {mantras.mantra ? (
               <Typography
-                style={{
-                  fontSize: 24,
-                  fontFamily: 'pinyon script, cursive',
-                  padding: '.65em'
-                }}
+                variant="subtitle1"
+                style={{padding: '1em 0 1em 1em', fontFamily: 'inherit'}}
               >
-                {mantras.mantra}
+                what's on your agenda?
               </Typography>
             ) : (
               <Typography
