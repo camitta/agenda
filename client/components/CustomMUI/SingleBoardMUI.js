@@ -17,6 +17,14 @@ export const singleBoardStyles = makeStyles(() => ({
     position: 'relative',
     alignContent: 'center'
   },
+  listsContainer: {
+    justifyVontent: 'space-around',
+    padding: '1em 4em 4em 4em',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space around',
+    textAlign: 'center'
+  },
   modal: {
     display: 'flex',
     flexDirection: 'column',

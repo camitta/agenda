@@ -90,10 +90,12 @@ const Checklist = props => {
               style={{justifyContent: 'space-between'}}
             >
               <FormControlLabel
-                style={{justifyContent: 'space-between'}}
+                className={classes.checklistItem}
                 control={<Checkbox size="small" color="primary" />}
                 label={
-                  <Typography variant="body1">{item.description}</Typography>
+                  <Typography color="primary" variant="body1">
+                    {item.description}
+                  </Typography>
                 }
                 className={classes.formItem}
                 checked={Boolean(item.completed)}

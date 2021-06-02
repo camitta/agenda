@@ -11,8 +11,7 @@ import {getSingleBoard, deleteSingleBoard} from '../store/single-board'
 import {getAllTasks, getTasksNoDB} from '../store/all-tasks'
 import {editSingleTask} from '../store/tasks'
 
-//Material-UI items
-import styled from 'styled-components'
+//Material-UI
 import {withStyles} from '@material-ui/core/styles'
 import GroupIcon from '@material-ui/icons/Group'
 import Typography from '@material-ui/core/Typography'
@@ -24,16 +23,6 @@ import {StyledButton} from './CustomMUI/GradientButton'
 // Custom MUI
 import {singleBoardStyles} from './CustomMUI/SingleBoardMUI'
 import {StyledAccordionSummary} from './CustomMUI/GradientAccordion'
-import {PersonPinSharp} from '@material-ui/icons'
-
-const ListsContainer = styled.div`
-  justify-content: space-around;
-  padding: 1em 4em 4em 4em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space around;
-  text-align: center;
-`
 
 const Title = withStyles({
   root: {
@@ -62,7 +51,7 @@ const SingleBoard = props => {
     }
   }
 
-  // Opens the 'delete board' dialog box.
+  // Opens the 'delete board' dialog box
   function handleOpen(event) {
     event.preventDefault()
     setOpen(true)
@@ -194,7 +183,7 @@ const SingleBoard = props => {
         <FilterTasksByLabel boardId={boardId} />
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <ListsContainer>
+        <div className={classes.listsContainer}>
           <List
             status="todo"
             boardId={boardId}
@@ -213,7 +202,7 @@ const SingleBoard = props => {
             boardType={boardType}
             tasks={doneTasks}
           />
-        </ListsContainer>
+        </div>
       </DragDropContext>
       <div className={classes.deleteContainer}>
         <StyledButton variant="outlined" onClick={handleOpen}>

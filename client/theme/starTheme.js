@@ -5,10 +5,16 @@ import {fonts, backupFonts} from './fonts'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#336699'
+      main: '#336699',
+      light: '#FEF6D3',
+      contrastText: '#FEF6D3'
     },
     secondary: {
       main: '#FEF6D3'
+    },
+    text: {
+      primary: '#336699',
+      secondary: '#336699'
     },
     error: {
       main: '#C10230',
