@@ -68,19 +68,20 @@ const AuthForm = props => {
           noValidate
         >
           {inputColumn(['Email', 'Password'])}
+          <div style={{width: '100%'}}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
+            >
+              {displayName}
+            </Button>
+          </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-        <div style={{width: '100%'}}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
-          >
-            {displayName}
-          </Button>
-        </div>
+
         <div>
           <Link href="/auth/google" style={{display: 'block'}}>
             log in with google
@@ -102,22 +103,22 @@ const AuthForm = props => {
         noValidate
       >
         {inputColumn(['First Name', 'Last Name', 'Email', 'Password'])}
+        <div style={{width: '100%'}}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
+          >
+            {displayName}
+          </Button>
+        </div>
         {error &&
           error.response && (
             <div> {generateErrorMessage(error.response.data)} </div>
           )}
       </form>
-      <div style={{width: '100%'}}>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
-        >
-          {displayName}
-        </Button>
-      </div>
     </Container>
   )
 }
