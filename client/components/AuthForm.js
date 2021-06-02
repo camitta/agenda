@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   paper: {
     paddingTop: '128px',
     marginTop: '1em',
@@ -23,8 +23,16 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: '100%'
   },
+  formHeader: {
+    marginTop: '1em'
+  },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    marginBottom: '2rem',
+    marginTop: '2rem',
+    width: '100%'
+  },
+  googleLink: {
+    display: 'block'
   }
 }))
 
@@ -58,8 +66,8 @@ const AuthForm = props => {
   if (name === 'login') {
     return (
       <Container component="main" maxWidth="xs" className={classes.paper}>
-        <Typography component="h1" variant="h5" style={{marginTop: '1em'}}>
-          Log in
+        <Typography component="h1" variant="h5" className={classes.formHeader}>
+          Log In
         </Typography>
         <form
           onSubmit={handleSubmit}
@@ -68,22 +76,18 @@ const AuthForm = props => {
           noValidate
         >
           {inputColumn(['Email', 'Password'])}
-          <div style={{width: '100%'}}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
-            >
-              {displayName}
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            {displayName}
+          </Button>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-
         <div>
-          <Link href="/auth/google" style={{display: 'block'}}>
+          <Link href="/auth/google" className={classes.googleLink}>
             log in with google
           </Link>
         </div>
@@ -93,7 +97,7 @@ const AuthForm = props => {
 
   return (
     <Container component="main" maxWidth="xs" className={classes.paper}>
-      <Typography component="h1" variant="h5" style={{marginTop: '1em'}}>
+      <Typography component="h1" variant="h5" className={classes.formHeader}>
         Sign Up
       </Typography>
       <form
@@ -103,17 +107,15 @@ const AuthForm = props => {
         noValidate
       >
         {inputColumn(['First Name', 'Last Name', 'Email', 'Password'])}
-        <div style={{width: '100%'}}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
-          >
-            {displayName}
-          </Button>
-        </div>
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          {displayName}
+        </Button>
         {error &&
           error.response && (
             <div> {generateErrorMessage(error.response.data)} </div>
