@@ -19,7 +19,6 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 
 // Custom MUI
 import {taskStyles} from './CustomMUI/TaskMUI'
-import styled from 'styled-components'
 
 // Redux
 import {editSingleTask} from '../store/tasks'
