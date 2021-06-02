@@ -98,20 +98,14 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiButton: {
-      containedSecondary: {
-        backgroundColor: '#fff',
-        '&:hover': {
-          backgroundColor: '#fff'
-        }
-      },
       outlined: {
-        borderColor: 'black'
+        borderColor: '#336699'
       }
     },
     MuiFormLabel: {
       root: {
         fontFamily: 'unset',
-        color: '#979797'
+        color: '#336699'
       },
       filled: {
         color: '#000000'

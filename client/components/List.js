@@ -13,7 +13,6 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 import IconButton from '@material-ui/core/Button'
 import DoneIcon from '@material-ui/icons/Done'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import Container from '@material-ui/core/Container'
 
 // Custom MUI

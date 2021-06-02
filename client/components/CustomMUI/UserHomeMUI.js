@@ -22,7 +22,6 @@ export const homeStyles = makeStyles(theme => ({
     gridTemplateColumns: '32% 62%',
     columnGap: '6%'
   },
-  leftColumn: {},
   rightColumn: {
     display: 'block',
     width: '100%'

@@ -5,7 +5,8 @@ import {fonts, backupFonts} from './fonts'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#bdb2ff'
+      main: '#bdb2ff',
+      light: '#9bf6ff'
     },
     secondary: {
       main: '#FEF6D3'
@@ -101,15 +102,12 @@ const theme = createMuiTheme({
         '&:hover': {
           backgroundColor: '#fff'
         }
-      },
-      outlined: {
-        borderColor: 'black'
       }
     },
     MuiFormLabel: {
       root: {
         fontFamily: 'unset',
-        color: '#979797'
+        color: '#25439a'
       },
       filled: {
         color: '#000000'

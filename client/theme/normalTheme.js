@@ -81,7 +81,7 @@ const theme = createMuiTheme({
     MuiFormLabel: {
       root: {
         fontFamily: 'unset',
-        color: '#979797'
+        color: '#000000'
       },
       filled: {
         color: '#000000'

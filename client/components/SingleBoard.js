@@ -136,7 +136,7 @@ const SingleBoard = props => {
     await props.getAllTasks(boardId)
   }
 
-  // Separate the tasks based on completion type.
+  // Separate the tasks based on completion type
   let todoTasks, progressTasks, doneTasks
   if (tasks && tasks.length) {
     todoTasks = tasks.filter(task => task.type === 'todo')
@@ -164,7 +164,11 @@ const SingleBoard = props => {
     <div className={classes.singleBoardContainer}>
       {boardType === 'team' ? (
         <ClickAwayListener onClickAway={handleAccordionChange}>
-          <Accordion color="primary" expanded={expanded}>
+          <Accordion
+            color="primary"
+            expanded={expanded}
+            style={{width: '100%'}}
+          >
             <StyledAccordionSummary
               expandIcon={<GroupIcon />}
               onClick={onAccordionClick}

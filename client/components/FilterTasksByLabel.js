@@ -26,7 +26,7 @@ const FilterTasksByLabel = props => {
         paddingTop: '20px'
       }}
     >
-      <InputLabel>Filter By</InputLabel>
+      <InputLabel color="primary">Filter By</InputLabel>
       <Select onChange={handleFilter} value={label} name="label">
         <MenuItem value="all">All</MenuItem>
         <MenuItem value="#EE7674">Red</MenuItem>
