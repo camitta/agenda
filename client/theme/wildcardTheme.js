@@ -1,5 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles'
 import {fonts, backupFonts} from './fonts'
+
 // 'wildcard' theme
 const theme = createMuiTheme({
   palette: {

@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import Task from './Task'
 import {TaskForm} from './index'
-import {generateListTypeName, validateForm} from '../functions'
+import {generateListTypeName} from '../utilities/taskValidation'
+import {validateForm} from '../utilities/formValidation'
 import {Droppable} from 'react-beautiful-dnd'
 
 // Material UI components

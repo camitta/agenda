@@ -27,8 +27,6 @@ const deleteChecklistItem = checklist => ({
   checklist
 })
 
-const defaultState = []
-
 // Thunks
 export const fetchChecklist = () => async dispatch => {
   try {
@@ -70,7 +68,7 @@ export const deleteItem = itemId => async dispatch => {
 }
 
 // Reducer
-export default function(state = defaultState, action) {
+export default function(state = [], action) {
   switch (action.type) {
     case GET_CHECKLIST:
     case ADD_TO_CHECKLIST:

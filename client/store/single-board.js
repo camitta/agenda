@@ -9,8 +9,6 @@ const EDIT_SINGLE_BOARD = 'EDIT_SINGLE_BOARD'
 const ADD_USER_TO_BOARD = 'ADD_USER_TO_BOARD '
 const REMOVE_USER_FROM_BOARD = 'REMOVE_USER_FROM_BOARD'
 
-const initialState = {}
-
 // Action Creators
 export const fetchSingleBoard = board => ({type: GET_SINGLE_BOARD, board})
 const removeSingleBoard = () => ({type: REMOVE_SINGLE_BOARD})
@@ -30,7 +28,6 @@ export const getSingleBoard = boardId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/boards/${boardId}`)
     dispatch(fetchSingleBoard(data))
-    // socket.emit('singleBoard', data)
   } catch (err) {
     dispatch(fetchSingleBoard({error: err}))
   }
@@ -96,6 +93,8 @@ export const removeUserSingleBoard = (boardId, userId) => {
     }
   }
 }
+
+const initialState = {}
 
 // Reducer
 export default function(state = initialState, action) {

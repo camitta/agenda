@@ -10,7 +10,7 @@ import history from './history'
 import store from './store'
 import App from './app'
 
-// establishes socket connection
+//establishes socket connection
 import './socket'
 
 ReactDOM.render(

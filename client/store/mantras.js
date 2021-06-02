@@ -9,8 +9,6 @@ const getMantras = mantras => ({
   mantras
 })
 
-const defaultState = []
-
 // Thunks
 export const fetchMantras = () => async dispatch => {
   try {
@@ -22,7 +20,7 @@ export const fetchMantras = () => async dispatch => {
 }
 
 // Reducer
-export default function(state = defaultState, action) {
+export default function(state = [], action) {
   switch (action.type) {
     case GET_MANTRAS:
       return action.mantras

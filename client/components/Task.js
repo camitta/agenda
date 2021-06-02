@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import {Draggable} from 'react-beautiful-dnd'
-import {checkDueDate} from '../functions'
+import {checkDueDate} from '../utilities/taskValidation'
 
 // Material UI
 import Card from '@material-ui/core/Card'

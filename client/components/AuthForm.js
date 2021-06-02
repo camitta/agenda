@@ -3,11 +3,9 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {login, signup} from '../store'
 import Button from '@material-ui/core/Button'
-import {generateErrorMessage} from '../functions'
-import google from '../../public/google.png'
+import {generateErrorMessage} from '../utilities/formValidation'
 
 // Material UI
-import CssBaseline from '@material-ui/core/CssBaseline'
 import Link from '@material-ui/core/Link'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
@@ -17,6 +15,7 @@ import Container from '@material-ui/core/Container'
 const useStyles = makeStyles(theme => ({
   paper: {
     paddingTop: '128px',
+    marginTop: '1em',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -40,22 +39,18 @@ const AuthForm = props => {
       const type = nameType === 'password' ? 'password' : 'text'
 
       return (
-        <Container key={nameType} component="main" maxWidth="xs">
-          <CssBaseline />
-          <div key={nameType}>
-            <TextField
-              type={type}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id={nameType}
-              label={columnName}
-              name={nameType}
-              autoComplete={nameType}
-            />
-          </div>
-        </Container>
+        <TextField
+          key={nameType}
+          type={type}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id={nameType}
+          label={columnName}
+          name={nameType}
+          autoComplete={nameType}
+        />
       )
     })
   }
@@ -75,19 +70,21 @@ const AuthForm = props => {
           {inputColumn(['Email', 'Password'])}
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-        <div>
+        <div style={{width: '100%'}}>
           <Button
             type="submit"
             variant="contained"
             color="primary"
             className={classes.submit}
-            style={{marginBottom: '2rem', marginTop: '2rem'}}
+            style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
           >
             {displayName}
           </Button>
         </div>
-        <div className="googleButton">
-          <Link href="/auth/google">log in with google</Link>
+        <div>
+          <Link href="/auth/google" style={{display: 'block'}}>
+            log in with google
+          </Link>
         </div>
       </Container>
     )
@@ -110,19 +107,16 @@ const AuthForm = props => {
             <div> {generateErrorMessage(error.response.data)} </div>
           )}
       </form>
-      <div>
+      <div style={{width: '100%'}}>
         <Button
           type="submit"
           variant="contained"
           color="primary"
           className={classes.submit}
-          style={{marginBottom: '2rem', marginTop: '2rem'}}
+          style={{marginBottom: '2rem', marginTop: '2rem', width: '100%'}}
         >
           {displayName}
         </Button>
-      </div>
-      <div className="googleButton" style={{marginBottom: '2rem'}}>
-        <Link href="/auth/google">log in with google</Link>
       </div>
     </Container>
   )
@@ -138,7 +132,7 @@ const AuthForm = props => {
 const mapLogin = state => {
   return {
     name: 'login',
-    displayName: 'Login',
+    displayName: 'Log In',
     error: state.user.error
   }
 }

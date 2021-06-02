@@ -1,5 +1,4 @@
 import axios from 'axios'
-import socket from '../socket'
 
 // Action Types
 const GET_SINGLE_TASK = 'GET_SINGLE_TASK'
@@ -9,8 +8,6 @@ const EDIT_SINGLE_TASK = 'EDIT_SINGLE_TASK'
 const ADD_USER_TO_TASK = 'ADD_USER_TO_TASK'
 const REMOVE_USER_FROM_TASK = 'REMOVE_USER_FROM_TASK'
 const REMOVE_CHIPS_FROM_TASK = 'REMOVE_CHIPS_FROM_TASK'
-
-const initialState = {}
 
 // Action Creators
 const fetchSingleTask = singleTask => ({type: GET_SINGLE_TASK, singleTask})
@@ -109,6 +106,8 @@ export const removeChipsFromSingleTask = taskId => {
     }
   }
 }
+
+const initialState = {}
 
 // Reducer
 export default function(state = initialState, action) {
